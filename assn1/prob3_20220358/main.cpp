@@ -3,6 +3,7 @@
 #include <string>
 #include <cmath>
 #include <iomanip>
+#include <cctype>
 
 int get_base(std::string s) {
     if (s.find("0b") == 0) return 2;
@@ -11,15 +12,11 @@ int get_base(std::string s) {
     return 10;
 }
 
-bool is_digit(char c) {
-    return c >= '0' && c <= '9';
-}
-
 int to_int(std::string s) {
     int base = get_base(s);
     int num = 0, idx = 0;
     for (auto cit = s.crbegin(); cit != s.crend() && *cit != 'b' && *cit != 'X'; cit++) {
-        int cur = is_digit(*cit) ? *cit - '0' : *cit - 'A' + 10;
+        int cur = isdigit(*cit) ? *cit - '0' : *cit - 'A' + 10;
         num += cur * pow(base, idx++);
     }
     return num;
