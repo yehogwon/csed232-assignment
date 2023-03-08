@@ -18,6 +18,7 @@ int main() {
 
     std::cin >> op;
     std::cout << std::fixed << std::setprecision(3);
+    // TODO: Deal with the fixed decimal point
     if (!std::strcmp(op, "+")) {
         std::cin >> a >> b;
         std::cout << a + b << std::endl;
