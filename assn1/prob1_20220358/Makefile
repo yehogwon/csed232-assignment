@@ -1,5 +1,6 @@
 CC = g++
 CXXFLAGS = -Wall -O2
+STD = c++11
 SRC = main.cpp
 TARGET = main.out
 
@@ -10,4 +11,4 @@ clean:
 	rm $(TARGET)
 
 $(TARGET) : $(SRC)
-	$(CC) $(CXXFLAGS) --std=c++11 -o $(TARGET) $(SRC)
+	$(CC) $(CXXFLAGS) --std=$(STD) -o $(TARGET) $(SRC)
