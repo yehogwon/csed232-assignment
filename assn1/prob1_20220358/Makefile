@@ -1,11 +1,13 @@
 CC = g++
+CXXFLAGS = -Wall -O2
+SRC = main.cpp
 TARGET = main.out
 
-all: 
-	$(TARGET)
+.PHONY: all clean
+
+all: $(TARGET)
 clean: 
 	rm $(TARGET)
 
-main.out : main.cpp
-	$(CC) -o
-
+$(TARGET) : $(SRC)
+	$(CC) $(CXXFLAGS) --std=c++11 -o $(TARGET) $(SRC)
