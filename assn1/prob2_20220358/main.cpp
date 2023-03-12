@@ -1,24 +1,16 @@
 #include <iostream>
 #include <cstring>
 #include <cmath>
-#include <iomanip>
-
-/* Example IO
- * + 1.35 2.47       ->      3.820
- * * 3.986 2.515     ->      10.025
- * / 24.999 3.900    ->      6.410
- * - -101.35 2.47    ->      -103.820
- * square 4          ->      16
- * sqrt 4            ->      2
- */
 
 int main() {
     char op[10];
     float a, b;
 
     std::cin >> op;
-    std::cout << std::fixed << std::setprecision(3);
-    // TODO: Deal with the fixed decimal point
+
+    std::cout << std::fixed;
+    std::cout.precision(3);
+    std::cout.setf(std::ios_base::showpoint);
     if (!std::strcmp(op, "+")) {
         std::cin >> a >> b;
         std::cout << a + b << std::endl;
