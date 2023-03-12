@@ -1,9 +1,13 @@
+/*
+ * Author: Yeho Gwon (20220358)
+ * Date: 2023/03/00
+ * ASSN1, Prob #3
+ */
+
 #include <iostream>
-#include <cstring>
 #include <string>
-#include <cmath>
-#include <iomanip>
-#include <cctype>
+#include <cmath> // for pow()
+#include <cctype> // for isdigit()
 
 int get_base(std::string s) {
     if (s.find("0b") == 0) return 2;
@@ -15,8 +19,8 @@ int get_base(std::string s) {
 int to_int(std::string s) {
     int base = get_base(s);
     int num = 0, idx = 0;
-    for (auto cit = s.crbegin(); cit != s.crend() && *cit != 'b' && *cit != 'X'; cit++) {
-        int cur = isdigit(*cit) ? *cit - '0' : *cit - 'A' + 10;
+    for (int i = s.length() - 1; i >= 0 && s[i] != 'b' && s[i] != 'X'; i--) {
+        int cur = isdigit(s[i]) ? s[i] - '0' : s[i] - 'A' + 10;
         num += cur * pow(base, idx++);
     }
     return num;
@@ -27,7 +31,12 @@ int main() {
     std::string a, b;
 
     std::cin >> op >> a >> b;
-    std::cout << std::fixed << std::setprecision(3);
+
+    // Specify the output format; 
+    // always show the decimal point at the third digit
+    std::cout << std::fixed;
+    std::cout.precision(3);
+    std::cout.setf(std::ios_base::showpoint);
 
     switch (op) {
         case '+': 
