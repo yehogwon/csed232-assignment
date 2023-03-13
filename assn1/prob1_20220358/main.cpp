@@ -7,16 +7,16 @@
 #include <iostream>
 
 /**
- * @brief print the number `n` in the notation of `notation`
+ * @brief print the number `n` in the base of `base`
  * @param n: integer number to be converted
- * @param notation: notation of the conversion
+ * @param base: base of the conversion
  * @return none
 */
-void convert(int n, int notation) {
+void convert(int n, int base) {
     if (n == 0) return; // exit condition (the conversion has ended)
-    convert(n / notation, notation); // call the function recursively
+    convert(n / base, base); // call the function recursively
 
-    int rest = n % notation; // current digit
+    int rest = n % base; // current digit
     if (rest < 10)
         std::cout << rest; // print the digit as it is
     else
@@ -24,10 +24,10 @@ void convert(int n, int notation) {
 }
 
 int main() {
-    int num, notation; // num: integer number to be converted, notation: notation (진법) of the conversion
-    std::cin >> num >> notation; // get the two numbers from the user
+    int num, base; // num: integer number to be converted, base: base (진법) of the conversion
+    std::cin >> num >> base; // get the two numbers from the user
     
-    convert(num, notation); // call convert() to convert the 
+    convert(num, base); // call convert() to convert the 
     std::cout << std::endl;
 
     return 0; // Successfully terminated

@@ -10,11 +10,11 @@
 #include <cctype> // for isdigit()
 
 /**
- * @brief Get the notation (진법) of input string (focus on the prefix)
- * @param s: string of number to check the notation
- * @return: the notation of the input string
+ * @brief Get the base (진법) of input string (focus on the prefix)
+ * @param s: string of number to check the base
+ * @return: the base of the input string
 */
-int get_notation(std::string s) {
+int get_base(std::string s) {
     if (s.find("0b") == 0) return 2; // If the string starts with "0b" -> binary
     else if (s.find("0X") == 0) return 16; // If the string starts with "0X" -> hexadecimal
     else if (s[0] == '0') return 8; // If the string starts with '0' -> octal
@@ -23,16 +23,16 @@ int get_notation(std::string s) {
 
 /**
  * @brief convert input string to a integer number
- * @param s: string of number to check the notation
+ * @param s: string of number to check the base
  * @return: converted integer value
 */
 int to_int(std::string s) {
-    int notation = get_notation(s); // the notation of the input string
+    int base = get_base(s); // the base of the input string
     int num = 0, idx = 0; // num: the resultant integer value, idx: the index of the digit
     for (int i = s.length() - 1; i >= 0 && s[i] != 'b' && s[i] != 'X'; i--) {
-        // Repeat until the index reaches the beginning of the string or the prefix of the notation
+        // Repeat until the index reaches the beginning of the string or the prefix of the base
         int cur = isdigit(s[i]) ? s[i] - '0' : s[i] - 'A' + 10; // current digit; convert if it is a character (hex)
-        num += cur * pow(notation, idx++); // add the current digit to the result
+        num += cur * pow(base, idx++); // add the current digit to the result
     }
     return num; // return the result
 }
