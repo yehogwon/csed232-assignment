@@ -4,12 +4,12 @@
 #include <string>
 
 class Student {
-private: 
+public: 
     std::string dept, name, gender;
     int age;
-public: 
 
     void input_info();
+    bool operator==(const Student &s);
 };
 
 #endif
