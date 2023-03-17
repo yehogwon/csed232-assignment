@@ -27,7 +27,10 @@ int main() {
     int num, base; // num: integer number to be converted, base: base (진법) of the conversion
     std::cin >> num >> base; // get the two numbers from the user
     
-    convert(num, base); // call convert() to convert the 
+    if (num == 0)
+        std::cout << 0; // if the number is 0, print 0 (not empty)
+    else
+        convert(num, base); // call convert() to convert the 
     std::cout << std::endl;
 
     return 0; // Successfully terminated
