@@ -36,5 +36,7 @@
 *.pdf
 *.zip
 
+*.py
+
 !csed232_assn*.pdf
 
