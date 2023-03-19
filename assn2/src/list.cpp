@@ -4,6 +4,7 @@ Node::Node(const Student &data, Node *next)
     : data(data), next(next) {}
 
 void List::sort(std::string metric) {
+    // TODO: Check how to implement it; lack of instructions
     throw std::runtime_error("List::sort() not implemented");
 }
 
@@ -16,6 +17,8 @@ void save_node(List &list, Node *node) {
         }
         prev = prev->next;
     }
+    list.count++;
+    // TODO: call list.sort() here
 }
 
 void delete_node(List &list, Node *node) {
@@ -28,6 +31,7 @@ void delete_node(List &list, Node *node) {
         }
         prev = prev->next;
     }
+    list.count--;
 }
 
 bool operator<(const Student &s, const List &list) {

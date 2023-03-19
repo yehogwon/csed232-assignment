@@ -6,7 +6,7 @@
 class Student {
 public: 
     std::string dept, name, gender;
-    int age;
+    int age; // 0: Male, 1: Female
 
     void input_info();
 };
