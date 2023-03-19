@@ -21,7 +21,7 @@ void save_node(List &list, Node *node) {
 void delete_node(List &list, Node *node) {
     Node *prev = list.head;
     for (int i = 0; i < list.count; i++) {
-        if (prev->next == node) {
+        if (prev->next->data == node->data) {
             prev->next = node->next;
             delete node;
             break;

@@ -65,7 +65,15 @@ bool add_student(List &student_list) {
 }
 
 void delete_student(List &student_list) {
+    Student s;
+    s.input_info();
 
+    if (s < student_list) {
+        delete_node(&student_list, Node(s));
+        std::cout << "Deleted!" << std::endl;
+    } else {
+        std::cout << "Can't Delete it" << std::endl;
+    }
 }
 
 void print(List &student_list) {
