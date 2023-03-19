@@ -7,21 +7,19 @@ void List::sort(std::string metric) {
     throw std::runtime_error("List::sort() not implemented");
 }
 
-Node& List::operator[](int i) {
-    if (i < 0 || i >= count)
-        throw std::out_of_range("List index out of range");
-    Node *node = head->next;
-    for (int j = 0; j < i; j++)
-        node = node->next;
-    return node;
-}
-
 void save_node(List &list, Node *node) {
-    list[list.count - 1].next = node;
+    Node *prev = (list.head)->next;
+    for (int i = 0; i < list.count; i++) {
+        if (prev->next == nullptr) {
+            prev->next = node;
+            break;
+        }
+        prev = prev->next;
+    }
 }
 
 void delete_node(List &list, Node *node) {
-    Node *prev = &list[0];
+    Node *prev = list.head;
     for (int i = 0; i < list.count; i++) {
         if (prev->next == node) {
             prev->next = node->next;
@@ -33,8 +31,11 @@ void delete_node(List &list, Node *node) {
 }
 
 bool operator<(const Student &s, const List &list) {
-    for (int i = 0; i < list.dept_cnt; i++)
-        if (s[i] == list[i].data)
+    Node *cur = list.head->next;
+    for (int i = 0; i < list.count; i++) {
+        if (s == cur->data)
             return true;
+        cur = cur->next;
+    }
     return false
 }

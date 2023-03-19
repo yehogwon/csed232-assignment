@@ -19,12 +19,11 @@ public:
     Node *head; // the first node is a dummy node
 
     void sort(std::string metric);
-    Node& operator[](int i);
 };
 
 void save_node(List &list, Node *node);
 void delete_node(List &list, Node *node);
 
-bool operator<(const Student &s, const List &list);
+bool operator<(const Student &s, const List &list); // Check if the student exists in the list
 
 #endif
