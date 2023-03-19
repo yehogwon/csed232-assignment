@@ -77,9 +77,31 @@ void delete_student(List &student_list) {
 }
 
 void print(List &student_list) {
-
+    std::cout << "Dept\tGender\tName\tAge" << std::endl;
+    Node *cur = student_list.head->next;
+    for (int i = 0; i < student_list.count; i++) {
+        Student s = cur->data;
+        std::cout << s.dept << "\t" << s.gender << "\t" << s.name << "\t" << s.age << std::endl;
+    }
 }
 
 void pivot_table(List &student_list) {
+    int category, function;
+    std::cout << "-----------Category-----------" << std::endl;
+    std::cout << "1. Dept" << std::endl;
+    std::cout << "2. Gender" << std::endl;
+    std::cout << "3. Dept and Gender" << std::endl;
+    std::cout << "------------------------------" << std::endl;
+    std::cout << "Selection: ";
+    std::cin >> category;
 
+    std::cout << "-----------Function-----------" << std::endl;
+    std::cout << "1. Average" << std::endl;
+    std::cout << "2. Max" << std::endl;
+    std::cout << "3. Min" << std::endl;
+    std::cout << "------------------------------" << std::endl;
+    std::cout << "Selection: ";
+    std::cin >> function;
+
+    throw std::runtime_error("Not implemented perfectly");
 }
