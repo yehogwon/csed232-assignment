@@ -4,7 +4,7 @@
 
 void show_menu();
 bool add_student(List &student_list);
-void delete_student(List &student_list);
+bool delete_student(List &student_list);
 void print(List &student_list);
 void pivot_table(List &student_list);
 
@@ -58,21 +58,27 @@ bool add_student(List &student_list) {
         std::cout << "The student already exists." << std::endl;
         return false;
     } else {
+        Node *node = new Node(s);
+        node->next = nullptr;
+        save_node(student_list, node);
         std::cout << "A student is added in table!" << std::endl;
-        save_node(&student_list, Node(s));
         return true;
     }
 }
 
-void delete_student(List &student_list) {
+bool delete_student(List &student_list) {
     Student s;
     s.input_info();
 
     if (s < student_list) {
-        delete_node(&student_list, Node(s));
+        Node *node = new Node(s);
+        node->next = nullptr;
+        delete_node(student_list, node);
         std::cout << "Deleted!" << std::endl;
+        return true;
     } else {
         std::cout << "Can't Delete it" << std::endl;
+        return false;
     }
 }
 

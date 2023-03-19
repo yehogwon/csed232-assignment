@@ -1,3 +1,6 @@
+#include <iostream>
+#include "student.hpp"
+
 void Student::input_info() {
     std::cout << "Dept: "; std::cin >> dept;
     std::cout << "Gender: "; std::cin >> gender;
@@ -5,6 +8,6 @@ void Student::input_info() {
     std::cout << "Age: "; std::cin >> age;
 }
 
-bool Student::operator==(const Student &s) {
-    return dept == s.dept && gender == s.gender && name == s.name && age == s.age;
+bool operator==(const Student &s1, const Student &s2) {
+    return s1.dept == s2.dept && s1.gender == s2.gender && s1.name == s2.name && s1.age == s2.age;
 }

@@ -9,7 +9,8 @@ public:
     int age;
 
     void input_info();
-    bool operator==(const Student &s);
 };
+
+bool operator==(const Student &s1, const Student &s2);
 
 #endif

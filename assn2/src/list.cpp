@@ -37,5 +37,5 @@ bool operator<(const Student &s, const List &list) {
             return true;
         cur = cur->next;
     }
-    return false
+    return false;
 }
