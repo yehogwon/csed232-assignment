@@ -16,7 +16,7 @@ class List {
 private: 
     int count, dept_cnt;
     std::string dept[9];
-    Node *head;
+    Node *head; // the first node is a dummy node
 
 public: 
     void sort(std::string metric);
