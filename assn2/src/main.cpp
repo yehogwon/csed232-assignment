@@ -1,6 +1,7 @@
 #include <iostream>
 #include "student.hpp"
 #include "list.hpp"
+#include "node.hpp"
 
 void show_menu();
 bool add_student(List &student_list);

@@ -3,15 +3,7 @@
 
 #include <string>
 #include "student.hpp"
-
-class Node {
-public: 
-    Student data;
-    Node *next;
-
-    Node(Node *next = nullptr);
-    Node(const Student &data, Node *next = nullptr);
-};
+#include "node.hpp"
 
 class List {
 public: 
