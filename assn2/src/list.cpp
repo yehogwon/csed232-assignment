@@ -10,7 +10,12 @@ List::List() : count(0), dept_cnt(0) {
 }
 
 List::~List() {
-    // TODO: Free all nodes
+    Node *cur = head;
+    while (cur != nullptr) {
+        Node *tmp = cur;
+        cur = cur->next;
+        delete tmp;
+    }
 }
 
 void List::sort(std::string metric) {

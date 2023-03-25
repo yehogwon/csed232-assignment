@@ -86,6 +86,7 @@ void print(List &student_list) {
     for (int i = 0; i < student_list.count; i++) {
         Student s = cur->data;
         std::cout << s.dept << "\t" << s.gender << "\t" << s.name << "\t" << s.age << std::endl;
+        cur = cur->next;
     }
 }
 
