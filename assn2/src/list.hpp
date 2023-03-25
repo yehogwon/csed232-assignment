@@ -9,6 +9,7 @@ public:
     Student data;
     Node *next;
 
+    Node(Node *next = nullptr);
     Node(const Student &data, Node *next = nullptr);
 };
 
@@ -18,6 +19,7 @@ public:
     std::string dept[9];
     Node *head; // the first node is a dummy node
 
+    List();
     void sort(std::string metric);
 };
 

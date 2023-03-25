@@ -1,7 +1,11 @@
 #include "list.hpp"
 
+Node::Node(Node *next) : next(next) {}
+
 Node::Node(const Student &data, Node *next)
     : data(data), next(next) {}
+
+List::List() : count(0), dept_cnt(0), head() {}
 
 void List::sort(std::string metric) {
     // TODO: Check how to implement it; lack of instructions
