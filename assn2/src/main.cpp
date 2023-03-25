@@ -53,16 +53,12 @@ void show_menu() {
 bool add_student(List &student_list) {
     Student s;
     s.input_info();
-
-    std::cout << " ::::: INPUT ::::: " << s << std::endl;
     
     if (s < student_list) {
         std::cout << "The student already exists." << std::endl;
         return false;
     } else {
-        Node *node = new Node(s);
-        node->next = nullptr;
-        save_node(student_list, node);
+        save_node(student_list, new Node(s));
         std::cout << "A student is added in table!" << std::endl;
         return true;
     }
@@ -86,7 +82,7 @@ bool delete_student(List &student_list) {
 
 void print(List &student_list) {
     std::cout << "Dept\tGender\tName\tAge" << std::endl;
-    Node *cur = student_list.head->next;
+    Node *cur = (student_list.head)->next;
     for (int i = 0; i < student_list.count; i++) {
         Student s = cur->data;
         std::cout << s.dept << "\t" << s.gender << "\t" << s.name << "\t" << s.age << std::endl;

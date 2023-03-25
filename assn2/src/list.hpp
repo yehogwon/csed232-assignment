@@ -20,6 +20,7 @@ public:
     Node *head; // the first node is a dummy node
 
     List();
+    ~List();
     void sort(std::string metric);
 };
 

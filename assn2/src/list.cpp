@@ -5,7 +5,13 @@ Node::Node(Node *next) : next(next) {}
 Node::Node(const Student &data, Node *next)
     : data(data), next(next) {}
 
-List::List() : count(0), dept_cnt(0), head() {}
+List::List() : count(0), dept_cnt(0) {
+    head = new Node();
+}
+
+List::~List() {
+    // TODO: Free all nodes
+}
 
 void List::sort(std::string metric) {
     // TODO: Check how to implement it; lack of instructions
@@ -13,7 +19,8 @@ void List::sort(std::string metric) {
 }
 
 void save_node(List &list, Node *node) {
-    Node *prev = (list.head)->next;
+    Node *prev = list.head;
+    list.count++;
     for (int i = 0; i < list.count; i++) {
         if (prev->next == nullptr) {
             prev->next = node;
@@ -21,7 +28,6 @@ void save_node(List &list, Node *node) {
         }
         prev = prev->next;
     }
-    list.count++;
     // TODO: call list.sort() here
 }
 
