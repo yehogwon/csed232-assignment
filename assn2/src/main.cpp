@@ -53,6 +53,8 @@ void show_menu() {
 bool add_student(List &student_list) {
     Student s;
     s.input_info();
+
+    std::cout << " ::::: INPUT ::::: " << s << std::endl;
     
     if (s < student_list) {
         std::cout << "The student already exists." << std::endl;

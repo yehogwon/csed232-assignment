@@ -11,3 +11,8 @@ void Student::input_info() {
 bool operator==(const Student &s1, const Student &s2) {
     return s1.dept == s2.dept && s1.gender == s2.gender && s1.name == s2.name && s1.age == s2.age;
 }
+
+std::ostream& operator<<(std::ostream &os, const Student &s) {
+    os << "{" << s.dept << ", " << s.gender << ", " << s.name << ", " << s.age << "}";
+    return os;
+}

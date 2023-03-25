@@ -12,5 +12,6 @@ public:
 };
 
 bool operator==(const Student &s1, const Student &s2);
+std::ostream& operator<<(std::ostream &os, const Student &s);
 
 #endif
