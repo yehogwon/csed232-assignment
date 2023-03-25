@@ -13,9 +13,16 @@ List::~List() {
     }
 }
 
-void List::sort(std::string metric) {
-    // TODO: Check how to implement it; lack of instructions
-    throw std::runtime_error("List::sort() not implemented");
+void List::sort() {
+    for (int i = 0; i < count; i++) {
+        Node *cur = head->next;
+        for (int j = 0; j < count - i - 1; j++) {
+            if (cur->data > cur->next->data) {
+                swap_node(cur, cur->next);
+            }
+            cur = cur->next;
+        }
+    }
 }
 
 void save_node(List &list, Node *node) {
@@ -28,7 +35,7 @@ void save_node(List &list, Node *node) {
         }
         prev = prev->next;
     }
-    // TODO: call list.sort() here
+    list.sort();
 }
 
 void delete_node(List &list, Node *node) {
@@ -42,6 +49,12 @@ void delete_node(List &list, Node *node) {
         prev = prev->next;
     }
     list.count--;
+}
+
+void swap_node(Node *node1, Node *node2) {
+    Student tmp = node1->data;
+    node1->data = node2->data;
+    node2->data = tmp;
 }
 
 bool operator<(const Student &s, const List &list) {

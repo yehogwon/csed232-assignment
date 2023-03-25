@@ -13,11 +13,13 @@ public:
 
     List();
     ~List();
-    void sort(std::string metric);
+    
+    void sort();
 };
 
 void save_node(List &list, Node *node);
 void delete_node(List &list, Node *node);
+void swap_node(Node *node1, Node *node2);
 
 bool operator<(const Student &s, const List &list); // Check if the student exists in the list
 
