@@ -48,7 +48,7 @@ void List::remove(Node *node) {
     Node *prev = head;
     while (prev != nullptr) {
         if (prev->next->data == node->data) {
-            prev->next = node->next;
+            prev->next = prev->next->next;
             delete node;
             break;
         }
