@@ -17,6 +17,15 @@ List::~List() {
     }
 }
 
+std::string List::to_string(Operator op) {
+    switch (op) {
+        case AVG: return "Average";
+        case MAX: return "Max";
+        case MIN: return "Min";
+        default: return "Unknown Operator";
+    }
+}
+
 void List::sort() { // sort algorithm: selection sort
     Node *cur = head->next;
     while (cur != nullptr) {
@@ -71,7 +80,7 @@ void List::remove(Node *node) {
     }
 }
 
-void List::pivot_dept(int op) {
+void List::pivot_dept(Operator op) {
     sort(comp_dept);
 
     Pivot pivots[MAX_DEPT];
@@ -98,18 +107,25 @@ void List::pivot_dept(int op) {
     }
 
     // TODO: Print them
-    std::cout << "Dept\t???" << std::endl;
-    for (int i = 0; i < num_of_depts; i++)
-        std::cout << depts[i] << "\t" << "CAL_RESULT" << std::endl;
+    std::cout << "Dept\t" << to_string(op) << std::endl;
+    for (int i = 0; i < num_of_depts; i++) {
+        std::cout << depts[i] << "\t";
+        switch (op) {
+            case AVG: std::cout << (double) pivots[i].sum / pivots[i].cnt << std::endl; break;
+            case MAX: std::cout << pivots[i].max << std::endl; break;
+            case MIN: std::cout << pivots[i].min << std::endl; break;
+            default: std::cout << "Unknown Operator" << std::endl; break;
+        }
+    }
 
     sort();
 }
 
-void List::pivot_gender(int op) {
+void List::pivot_gender(Operator op) {
     throw "Not implemented yet";
 }
 
-void List::pivot_dept_gender(int op) {
+void List::pivot_dept_gender(Operator op) {
     // without sorting (already sorted)
     throw "Not implemented yet";
 }

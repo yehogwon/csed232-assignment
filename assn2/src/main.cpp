@@ -111,13 +111,13 @@ void pivot_table(List &student_list) {
 
     switch (category) {
         case 1: // Dept
-            student_list.pivot_dept(category);
+            student_list.pivot_dept(static_cast<Operator>(function));
             break;
         case 2: // Gender
-            student_list.pivot_gender(category);
+            student_list.pivot_gender(static_cast<Operator>(function));
             break;
         case 3: // Dept + Gender
-            student_list.pivot_dept_gender(category);
+            student_list.pivot_dept_gender(static_cast<Operator>(function));
             break;
         default: 
             std::cout << "Unexpected Input" << std::endl;

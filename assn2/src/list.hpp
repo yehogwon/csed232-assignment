@@ -15,16 +15,18 @@ struct Node {
     Node *next;
 };
 
-struct Pivot {
-    int max, min, cnt, sum;
-};
-
 bool operator==(const Node &n1, const Node &n2);
+
+enum Operator { AVG = 1, MAX = 2, MIN = 3 };
 
 // TODO: Mark const methods
 class List {
 private: 
-    // TODO: Declare some necessary private member variables for performing pivot table operations
+    struct Pivot {
+        int max, min, cnt, sum;
+    };
+
+    std::string to_string(Operator op);
 
 public: 
     Node *head; // the first node is a dummy node
@@ -38,9 +40,9 @@ public:
     void sort();
     void sort(Comp comp);
 
-    void pivot_dept(int op);
-    void pivot_gender(int op);
-    void pivot_dept_gender(int op);
+    void pivot_dept(Operator op);
+    void pivot_gender(Operator op);
+    void pivot_dept_gender(Operator op);
 };
 
 template <typename T>
