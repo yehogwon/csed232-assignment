@@ -5,8 +5,7 @@
 #include <string>
 #include "student.hpp"
 
-// TODO: Update these constants
-// #define INT_MAX 10000000
+#define MAX_AGE 30
 #define MAX_DEPT 9
 #define MAX_GENDER 2
 #define MAX_DEPT_GENDER MAX_DEPT * MAX_GENDER

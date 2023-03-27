@@ -88,7 +88,7 @@ void List::pivot_dept(Operator op) {
     int num_of_pivots = 0;
 
     for (int i = 0; i < MAX_DEPT; i++) {
-        pivots[i] = {0, INT_MAX, 0, 0};
+        pivots[i] = {0, MAX_AGE, 0, 0};
     }
 
     Node *cur = head->next;
@@ -128,7 +128,7 @@ void List::pivot_gender(Operator op) {
     int num_of_pivots = 0;
 
     for (int i = 0; i < MAX_GENDER; i++) {
-        pivots[i] = {0, INT_MAX, 0, 0};
+        pivots[i] = {0, MAX_AGE, 0, 0};
     }
 
     Node *cur = head->next;
@@ -167,7 +167,7 @@ void List::pivot_dept_gender(Operator op) {
     int num_of_pivots = 0;
 
     for (int i = 0; i < MAX_DEPT_GENDER; i++) {
-        pivots[i] = {0, INT_MAX, 0, 0};
+        pivots[i] = {0, MAX_AGE, 0, 0};
     }
 
     Node *cur = head->next;
