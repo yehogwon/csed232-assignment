@@ -1,5 +1,9 @@
 #include "list.hpp"
 
+bool operator==(Node &n1, Node &n2) {
+    return n1.data == n2.data;
+}
+
 List::List() {
     head = new Node{Student(), nullptr};
 }
@@ -17,8 +21,8 @@ void List::sort() {
     throw std::runtime_error("Not Implemented");
 }
 
-void save_node(List &list, Node *node) {
-    Node *prev = list.head;
+void List::add(Node *node) {
+    Node *prev = head;
     while (prev != nullptr) {
         if (prev->next == nullptr) {
             prev->next = node;
@@ -29,8 +33,8 @@ void save_node(List &list, Node *node) {
     // TODO: Call sort() here
 }
 
-void delete_node(List &list, Node *node) {
-    Node *prev = list.head;
+void List::remove(Node *node) {
+    Node *prev = head;
     while (prev != nullptr) {
         if (prev->next->data == node->data) {
             prev->next = node->next;

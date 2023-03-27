@@ -9,6 +9,8 @@ struct Node {
     Node *next;
 };
 
+bool operator==(const Node &n1, const Node &n2);
+
 class List {
 private: 
     // TODO: Declare some necessary private member variables
@@ -18,13 +20,13 @@ public:
 
     List();
     ~List();
+
+    void add(Node *node);
+    void remove(Node *node);
     
     void sort();
 };
 
-// TODO: Get them into the class
-void save_node(List &list, Node *node);
-void delete_node(List &list, Node *node);
 void swap_node(Node *node1, Node *node2);
 
 bool operator<(const Student &s, const List &list); // Check if the student exists in the list
