@@ -1,4 +1,5 @@
-// TODO: Handle Some Exceptions
+// TODO: Handle some exceptions
+// TODO: Update error messages
 #include <iostream>
 #include <cmath>
 #include "student.hpp"

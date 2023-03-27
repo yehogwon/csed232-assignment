@@ -5,7 +5,8 @@
 #include <string>
 #include "student.hpp"
 
-// #define INT_MAX 10000000 // TODO: Update this line
+// TODO: Update these constants
+// #define INT_MAX 10000000
 #define MAX_DEPT 9
 #define MAX_GENDER 2
 #define MAX_DEPT_GENDER MAX_DEPT * MAX_GENDER
@@ -41,6 +42,7 @@ public:
     void sort();
     void sort(Comp comp);
 
+    // Optimize the pivot table functions
     void pivot_dept(Operator op);
     void pivot_gender(Operator op);
     void pivot_dept_gender(Operator op);
