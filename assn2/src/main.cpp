@@ -1,4 +1,6 @@
+// TODO: Handle Some Exceptions
 #include <iostream>
+#include <cmath>
 #include "student.hpp"
 #include "list.hpp"
 #include "node.hpp"
@@ -108,6 +110,18 @@ void pivot_table(List &student_list) {
     std::cout << "------------------------------" << std::endl;
     std::cout << "Selection: ";
     std::cin >> function;
+
+    switch (category) {
+        case 1: // Dept
+            break;
+        case 2: // Gender
+            break;
+        case 3: // Dept + Gender
+            break;
+        default: 
+            std::cout << "Unexpected Input" << std::endl;
+            throw std::runtime_error("Unexpected Input");
+    }
 
     throw std::runtime_error("Not implemented perfectly");
 }
