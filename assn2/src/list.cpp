@@ -32,6 +32,21 @@ void List::sort() { // sort algorithm: selection sort
     }
 }
 
+void List::sort(Comp comp) {
+    Node *cur = head->next;
+    while (cur != nullptr) {
+        Node *min = cur;
+        Node *tmp = cur->next;
+        while (tmp != nullptr) {
+            if (!comp(min->data, tmp->data))
+                min = tmp;
+            tmp = tmp->next;
+        }
+        swap_node(cur, min);
+        cur = cur->next;
+    }
+}
+
 void List::add(Node *node) {
     Node *prev = head;
     while (prev != nullptr) {

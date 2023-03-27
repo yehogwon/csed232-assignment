@@ -11,10 +11,19 @@ private:
 public: 
     void input_info();
 
+    friend bool comp_dept(const Student &s1, const Student &s2);
+    friend bool comp_gender(const Student &s1, const Student &s2);
+
     friend bool operator==(const Student &s1, const Student &s2);
     friend bool operator>(const Student &s1, const Student &s2);
     friend std::ostream& operator<<(std::ostream &os, const Student &s);
 };
+
+bool comp_dept(const Student &s1, const Student &s2);
+bool comp_gender(const Student &s1, const Student &s2);
+
+struct CompDept;
+struct CompGender;
 
 bool operator==(const Student &s1, const Student &s2);
 bool operator>(const Student &s1, const Student &s2);
