@@ -53,7 +53,6 @@ void show_menu() {
     std::cout << "------------------------" << std::endl;
 }
 
-// TODO: Check if duplication check works properly
 bool add_student(List &student_list) {
     Student s;
     s.input_info();
