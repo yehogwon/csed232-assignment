@@ -17,8 +17,19 @@ List::~List() {
     }
 }
 
-void List::sort() {
-    throw std::runtime_error("Not Implemented");
+void List::sort() { // sort algorithm: selection sort
+    Node *cur = head->next;
+    while (cur != nullptr) {
+        Node *min = cur;
+        Node *tmp = cur->next;
+        while (tmp != nullptr) {
+            if (tmp->data < min->data)
+                min = tmp;
+            tmp = tmp->next;
+        }
+        swap_node(cur, min);
+        cur = cur->next;
+    }
 }
 
 void List::add(Node *node) {
@@ -30,7 +41,7 @@ void List::add(Node *node) {
         }
         prev = prev->next;
     }
-    // TODO: Call sort() here
+    sort();
 }
 
 void List::remove(Node *node) {

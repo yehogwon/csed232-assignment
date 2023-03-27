@@ -19,6 +19,10 @@ bool operator>(const Student &s1, const Student &s2) {
     else return s1.age > s2.age;
 }
 
+bool operator<(const Student &s1, const Student &s2) {
+    return !(s1 > s2) && !(s1 == s2);
+}
+
 std::ostream& operator<<(std::ostream &os, const Student &s) {
     os << s.dept << "\t" << s.gender << "\t" << s.name << "\t" << s.age;
     return os;
