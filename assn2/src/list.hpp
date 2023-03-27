@@ -13,7 +13,7 @@ bool operator==(const Node &n1, const Node &n2);
 
 class List {
 private: 
-    // TODO: Declare some necessary private member variables
+    // TODO: Declare some necessary private member variables for performing pivot table operations
 
 public: 
     Node *head; // the first node is a dummy node
