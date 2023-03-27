@@ -52,6 +52,7 @@ void show_menu() {
     std::cout << "------------------------" << std::endl;
 }
 
+// TODO: Check if duplication check works properly
 bool add_student(List &student_list) {
     Student s;
     s.input_info();
@@ -110,15 +111,16 @@ void pivot_table(List &student_list) {
 
     switch (category) {
         case 1: // Dept
+            student_list.pivot_dept(category);
             break;
         case 2: // Gender
+            student_list.pivot_gender(category);
             break;
         case 3: // Dept + Gender
+            student_list.pivot_dept_gender(category);
             break;
         default: 
             std::cout << "Unexpected Input" << std::endl;
             throw std::runtime_error("Unexpected Input");
     }
-
-    throw std::runtime_error("Not implemented perfectly");
 }

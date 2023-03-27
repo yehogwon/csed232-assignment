@@ -3,13 +3,18 @@
 
 #include <string>
 
+// TODO: Mark const methods
 class Student {
 private: 
-    std::string dept, name, gender;
+    std::string dept, gender, name;
     int age;
 
 public: 
     void input_info();
+
+    std::string get_dept() const;
+    std::string get_gender() const;
+    int get_age() const;
 
     friend bool comp_dept(const Student &s1, const Student &s2);
     friend bool comp_gender(const Student &s1, const Student &s2);

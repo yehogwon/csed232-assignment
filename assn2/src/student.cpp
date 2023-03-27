@@ -8,6 +8,18 @@ void Student::input_info() {
     std::cout << "Age: "; std::cin >> age;
 }
 
+std::string Student::get_dept() const {
+    return dept;
+}
+
+std::string Student::get_gender() const {
+    return gender;
+}
+
+int Student::get_age() const {
+    return age;
+}
+
 bool comp_dept(const Student &s1, const Student &s2) {
     return s1.dept >= s2.dept;
 }
