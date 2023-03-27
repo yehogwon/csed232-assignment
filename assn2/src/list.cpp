@@ -85,7 +85,7 @@ void List::pivot_dept(Operator op) {
 
     Pivot pivots[MAX_DEPT];
     std::string depts[MAX_DEPT];
-    int num_of_depts = 0;
+    int num_of_pivots = 0;
 
     for (int i = 0; i < MAX_DEPT; i++) {
         pivots[i] = {0, INT_MAX, 0, 0};
@@ -94,20 +94,20 @@ void List::pivot_dept(Operator op) {
     Node *cur = head->next;
     while (cur != nullptr) {
         Student s = cur->data;
-        if (num_of_depts - 1 < 0 || depts[num_of_depts - 1] != s.get_dept()) {
-            depts[num_of_depts++] = s.get_dept();
+        if (num_of_pivots - 1 < 0 || depts[num_of_pivots - 1] != s.get_dept()) {
+            depts[num_of_pivots++] = s.get_dept();
         }
         
-        pivots[num_of_depts - 1].min = min(pivots[num_of_depts - 1].min, s.get_age());
-        pivots[num_of_depts - 1].max = max(pivots[num_of_depts - 1].max, s.get_age());
-        pivots[num_of_depts - 1].sum += s.get_age();
-        pivots[num_of_depts - 1].cnt++;
+        pivots[num_of_pivots - 1].min = min(pivots[num_of_pivots - 1].min, s.get_age());
+        pivots[num_of_pivots - 1].max = max(pivots[num_of_pivots - 1].max, s.get_age());
+        pivots[num_of_pivots - 1].sum += s.get_age();
+        pivots[num_of_pivots - 1].cnt++;
         
         cur = cur->next;
     }
 
     std::cout << "Dept\t" << to_string(op) << std::endl;
-    for (int i = 0; i < num_of_depts; i++) {
+    for (int i = 0; i < num_of_pivots; i++) {
         std::cout << depts[i] << "\t";
         switch (op) {
             case AVG: std::cout << (double) pivots[i].sum / pivots[i].cnt << std::endl; break;
@@ -121,12 +121,81 @@ void List::pivot_dept(Operator op) {
 }
 
 void List::pivot_gender(Operator op) {
-    throw "Not implemented yet";
+    sort(comp_gender);
+
+    Pivot pivots[MAX_GENDER];
+    std::string genders[MAX_GENDER];
+    int num_of_pivots = 0;
+
+    for (int i = 0; i < MAX_GENDER; i++) {
+        pivots[i] = {0, INT_MAX, 0, 0};
+    }
+
+    Node *cur = head->next;
+    while (cur != nullptr) {
+        Student s = cur->data;
+        if (num_of_pivots - 1 < 0 || genders[num_of_pivots - 1] != s.get_gender()) {
+            genders[num_of_pivots++] = s.get_gender();
+        }
+        
+        pivots[num_of_pivots - 1].min = min(pivots[num_of_pivots - 1].min, s.get_age());
+        pivots[num_of_pivots - 1].max = max(pivots[num_of_pivots - 1].max, s.get_age());
+        pivots[num_of_pivots - 1].sum += s.get_age();
+        pivots[num_of_pivots - 1].cnt++;
+        
+        cur = cur->next;
+    }
+
+    std::cout << "Gender\t" << to_string(op) << std::endl;
+    for (int i = 0; i < num_of_pivots; i++) {
+        std::cout << genders[i] << "\t";
+        switch (op) {
+            case AVG: std::cout << (double) pivots[i].sum / pivots[i].cnt << std::endl; break;
+            case MAX: std::cout << pivots[i].max << std::endl; break;
+            case MIN: std::cout << pivots[i].min << std::endl; break;
+            default: std::cout << "Unknown Operator" << std::endl; break;
+        }
+    }
+
+    sort();
 }
 
 void List::pivot_dept_gender(Operator op) {
-    // without sorting (already sorted)
-    throw "Not implemented yet";
+    Pivot pivots[MAX_DEPT_GENDER];
+    std::string depts[MAX_DEPT_GENDER];
+    std::string genders[MAX_DEPT_GENDER];
+    int num_of_pivots = 0;
+
+    for (int i = 0; i < MAX_DEPT_GENDER; i++) {
+        pivots[i] = {0, INT_MAX, 0, 0};
+    }
+
+    Node *cur = head->next;
+    while (cur != nullptr) {
+        Student s = cur->data;
+        if (num_of_pivots - 1 < 0 || depts[num_of_pivots - 1] != s.get_dept() || genders[num_of_pivots - 1] != s.get_gender()) {
+            depts[num_of_pivots] = s.get_dept();
+            genders[num_of_pivots++] = s.get_gender();
+        }
+        
+        pivots[num_of_pivots - 1].min = min(pivots[num_of_pivots - 1].min, s.get_age());
+        pivots[num_of_pivots - 1].max = max(pivots[num_of_pivots - 1].max, s.get_age());
+        pivots[num_of_pivots - 1].sum += s.get_age();
+        pivots[num_of_pivots - 1].cnt++;
+        
+        cur = cur->next;
+    }
+
+    std::cout << "Dept\tGender\t" << to_string(op) << std::endl;
+    for (int i = 0; i < num_of_pivots; i++) {
+        std::cout << depts[i] << "\t" << genders[i] << "\t";
+        switch (op) {
+            case AVG: std::cout << (double) pivots[i].sum / pivots[i].cnt << std::endl; break;
+            case MAX: std::cout << pivots[i].max << std::endl; break;
+            case MIN: std::cout << pivots[i].min << std::endl; break;
+            default: std::cout << "Unknown Operator" << std::endl; break;
+        }
+    }
 }
 
 template <typename T>
