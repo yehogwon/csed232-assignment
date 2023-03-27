@@ -19,7 +19,6 @@ bool operator==(const Node &n1, const Node &n2);
 
 enum Operator { AVG = 1, MAX = 2, MIN = 3 };
 
-// TODO: Mark const methods
 class List {
 private: 
     struct Pivot {

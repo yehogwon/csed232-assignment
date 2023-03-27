@@ -3,7 +3,6 @@
 
 #include <string>
 
-// TODO: Mark const methods
 class Student {
 private: 
     std::string dept, gender, name;
