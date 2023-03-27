@@ -26,7 +26,7 @@ private:
         int max, min, cnt, sum;
     };
 
-    std::string to_string(Operator op);
+    std::string to_string(Operator op) const;
 
 public: 
     Node *head; // the first node is a dummy node

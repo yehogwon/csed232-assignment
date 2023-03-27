@@ -17,7 +17,7 @@ List::~List() {
     }
 }
 
-std::string List::to_string(Operator op) {
+std::string List::to_string(Operator op) const {
     switch (op) {
         case AVG: return "Average";
         case MAX: return "Max";
@@ -106,7 +106,6 @@ void List::pivot_dept(Operator op) {
         cur = cur->next;
     }
 
-    // TODO: Print them
     std::cout << "Dept\t" << to_string(op) << std::endl;
     for (int i = 0; i < num_of_depts; i++) {
         std::cout << depts[i] << "\t";
