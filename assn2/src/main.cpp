@@ -3,7 +3,6 @@
 #include <cmath>
 #include "student.hpp"
 #include "list.hpp"
-#include "node.hpp"
 
 void show_menu();
 bool add_student(List &student_list);
@@ -61,7 +60,7 @@ bool add_student(List &student_list) {
         std::cout << "The student already exists." << std::endl;
         return false;
     } else {
-        save_node(student_list, new Node(s));
+        save_node(student_list, new Node{s, nullptr});
         std::cout << "A student is added in table!" << std::endl;
         return true;
     }
@@ -72,9 +71,7 @@ bool delete_student(List &student_list) {
     s.input_info();
 
     if (s < student_list) {
-        Node *node = new Node(s);
-        node->next = nullptr;
-        delete_node(student_list, node);
+        delete_node(student_list, new Node{s, nullptr});
         std::cout << "Deleted!" << std::endl;
         return true;
     } else {

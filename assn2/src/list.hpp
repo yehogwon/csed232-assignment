@@ -3,7 +3,11 @@
 
 #include <string>
 #include "student.hpp"
-#include "node.hpp"
+
+struct Node {
+    Student data;
+    Node *next;
+};
 
 class List {
 public: 
