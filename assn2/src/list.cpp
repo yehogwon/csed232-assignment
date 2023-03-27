@@ -1,7 +1,7 @@
 #include "list.hpp"
 
-List::List() : count(0), dept_cnt(0) {
-    head = new Node();
+List::List() {
+    head = new Node{Student(), nullptr};
 }
 
 List::~List() {
@@ -14,33 +14,24 @@ List::~List() {
 }
 
 void List::sort() {
-    for (int i = 0; i < count; i++) {
-        Node *cur = head->next;
-        for (int j = 0; j < count - i - 1; j++) {
-            if (cur->data > cur->next->data) {
-                swap_node(cur, cur->next);
-            }
-            cur = cur->next;
-        }
-    }
+    throw std::runtime_error("Not Implemented");
 }
 
 void save_node(List &list, Node *node) {
     Node *prev = list.head;
-    list.count++;
-    for (int i = 0; i < list.count; i++) {
+    while (prev != nullptr) {
         if (prev->next == nullptr) {
             prev->next = node;
             break;
         }
         prev = prev->next;
     }
-    list.sort();
+    // TODO: Call sort() here
 }
 
 void delete_node(List &list, Node *node) {
     Node *prev = list.head;
-    for (int i = 0; i < list.count; i++) {
+    while (prev != nullptr) {
         if (prev->next->data == node->data) {
             prev->next = node->next;
             delete node;
@@ -48,7 +39,6 @@ void delete_node(List &list, Node *node) {
         }
         prev = prev->next;
     }
-    list.count--;
 }
 
 void swap_node(Node *node1, Node *node2) {
@@ -59,7 +49,7 @@ void swap_node(Node *node1, Node *node2) {
 
 bool operator<(const Student &s, const List &list) {
     Node *cur = list.head->next;
-    for (int i = 0; i < list.count; i++) {
+    while (cur != nullptr) {
         if (s == cur->data)
             return true;
         cur = cur->next;

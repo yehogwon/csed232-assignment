@@ -10,9 +10,10 @@ struct Node {
 };
 
 class List {
+private: 
+    // TODO: Declare some necessary private member variables
+
 public: 
-    int count, dept_cnt;
-    std::string dept[9];
     Node *head; // the first node is a dummy node
 
     List();
@@ -21,6 +22,7 @@ public:
     void sort();
 };
 
+// TODO: Get them into the class
 void save_node(List &list, Node *node);
 void delete_node(List &list, Node *node);
 void swap_node(Node *node1, Node *node2);

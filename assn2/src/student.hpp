@@ -4,11 +4,16 @@
 #include <string>
 
 class Student {
-public: 
+private: 
     std::string dept, name, gender;
     int age;
 
+public: 
     void input_info();
+
+    friend bool operator==(const Student &s1, const Student &s2);
+    friend bool operator>(const Student &s1, const Student &s2);
+    friend std::ostream& operator<<(std::ostream &os, const Student &s);
 };
 
 bool operator==(const Student &s1, const Student &s2);

@@ -83,9 +83,9 @@ bool delete_student(List &student_list) {
 void print(List &student_list) {
     std::cout << "Dept\tGender\tName\tAge" << std::endl;
     Node *cur = (student_list.head)->next;
-    for (int i = 0; i < student_list.count; i++) {
+    while (cur != nullptr) {
         Student s = cur->data;
-        std::cout << s.dept << "\t" << s.gender << "\t" << s.name << "\t" << s.age << std::endl;
+        std::cout << s << std::endl;
         cur = cur->next;
     }
 }
