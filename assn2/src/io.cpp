@@ -1,33 +1,45 @@
 #include "io.hpp"
 
-bool no_space(const std::string &str) {
+bool Format::gender(std::string &str) {
+    return str == "M" || str == "F";
+}
+
+bool Format::nospace(std::string &str) {
     for (char ch : str)
-        if (isspace(ch))
+        if (ch == ' ')
             return false;
     return true;
 }
 
-bool no_lower(const std::string &str) {
+bool Format::nolower(std::string &str) {
     for (char ch : str)
-        if (islower(ch))
+        if (ch >= 'a' && ch <= 'z')
             return false;
     return true;
 }
 
-void input_int(std::istream &is, std::ostream &os, const char *prompt, int &i, CheckInt check) {
+bool Format::all(std::string &str, check_bit check) {
+    bool out = true;
+    if (check & GENDER) out = out && Format::gender(str);
+    if (check & NOSPACE) out = out && Format::nospace(str);
+    if (check & NOLOWER) out = out && Format::nolower(str);
+    return out;
+}
+
+void Format::strict_input(std::istream &is, std::ostream &os, const char *prompt, std::string &str, check_bit check) {
     os << prompt;
-    is >> i;
-    if (!check(i)) {
+    is >> str;
+    if (!all(str, check)) {
         os << "Invalid input. Input again. " << std::endl;
-        input_int(is, os, prompt, i, check);
+        strict_input(is, os, prompt, str, check);
     }
 }
 
-void input_str(std::istream &is, std::ostream &os, const char *prompt, std::string &str, CheckStr check) {
+void Format::range_input(std::istream &is, std::ostream &os, const char *prompt, int &i, int min, int max) {
     os << prompt;
-    is >> str;
-    if (!check(str)) {
+    is >> i;
+    if (i < min || i > max) {
         os << "Invalid input. Input again. " << std::endl;
-        input_str(is, os, prompt, str, check);
+        range_input(is, os, prompt, i, min, max);
     }
 }
