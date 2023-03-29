@@ -1,9 +1,5 @@
 #include "list.hpp"
 
-bool operator==(Node &n1, Node &n2) {
-    return n1.data == n2.data;
-}
-
 List::List() {
     head = new Node{Student(), nullptr};
 }

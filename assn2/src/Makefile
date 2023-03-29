@@ -3,9 +3,9 @@ D ?=
 CXXFLAGS = -Wall -O2 $(D)
 STD = c++14
 
-SRC = main.cpp student.cpp list.cpp
+SRC = main.cpp student.cpp node.cpp list.cpp
 OUT = main.out
-TARGET = main.o student.o list.o
+TARGET = main.o student.o node.o list.o
 
 .PHONY: all clean run
 
@@ -22,6 +22,9 @@ main.o : main.cpp
 
 student.o : student.cpp student.hpp
 	$(CC) $(CXXFLAGS) --std=$(STD) -o student.o -c student.cpp
+
+node.o: node.cpp node.hpp
+	$(CC) $(CXXFLAGS) --std=$(STD) -o node.o -c node.cpp
 
 list.o : list.cpp list.hpp
 	$(CC) $(CXXFLAGS) --std=$(STD) -o list.o -c list.cpp

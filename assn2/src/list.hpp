@@ -1,9 +1,10 @@
 #ifndef __LIST_HPP__
 #define __LIST_HPP__
 
-#include <iostream>
+#include <iostream> // Only for pivot table functions
 #include <string>
 #include "student.hpp"
+#include "node.hpp"
 
 #define MAX_AGE 30
 #define MAX_DEPT 9
@@ -11,13 +12,6 @@
 #define MAX_DEPT_GENDER MAX_DEPT * MAX_GENDER
 
 typedef bool (*Comp)(const Student &s1, const Student &s2);
-
-struct Node {
-    Student data;
-    Node *next;
-};
-
-bool operator==(const Node &n1, const Node &n2);
 
 enum Operator { AVG = 1, MAX = 2, MIN = 3 };
 
