@@ -1,9 +1,8 @@
-// TODO: Handle some exceptions
-// TODO: Update error messages
 #include <iostream>
 #include <cmath>
 #include "student.hpp"
 #include "list.hpp"
+#include "io.hpp"
 
 void show_menu();
 bool add_student(List &student_list);
@@ -18,8 +17,7 @@ int main() {
     bool stop = false;
     do {
         show_menu();
-        std::cout << "Selection: ";
-        std::cin >> menu;
+        Format::range_input(std::cin, std::cout, "Selection: ", menu, 1, 5);
 
         switch (menu) {
             case 1: // Add
@@ -98,16 +96,14 @@ void pivot_table(List &student_list) {
     std::cout << "2. Gender" << std::endl;
     std::cout << "3. Dept and Gender" << std::endl;
     std::cout << "------------------------------" << std::endl;
-    std::cout << "Selection: ";
-    std::cin >> category;
+    Format::range_input(std::cin, std::cout, "Selection: ", category, 1, 3);
 
     std::cout << "-----------Function-----------" << std::endl;
     std::cout << "1. Average" << std::endl;
     std::cout << "2. Max" << std::endl;
     std::cout << "3. Min" << std::endl;
     std::cout << "------------------------------" << std::endl;
-    std::cout << "Selection: ";
-    std::cin >> function;
+    Format::range_input(std::cin, std::cout, "Selection: ", function, 1, 3);
 
     switch (category) {
         case 1: // Dept
@@ -119,8 +115,5 @@ void pivot_table(List &student_list) {
         case 3: // Dept + Gender
             student_list.pivot_dept_gender(static_cast<Operator>(function));
             break;
-        default: 
-            std::cout << "Unexpected Input" << std::endl;
-            throw std::runtime_error("Unexpected Input");
     }
 }

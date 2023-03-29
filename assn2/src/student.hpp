@@ -2,6 +2,10 @@
 #define __STUDENT_HPP__
 
 #include <string>
+#include "io.hpp"
+
+#define MIN_AGE 18
+#define MAX_AGE 30
 
 class Student {
 private: 

@@ -18,7 +18,6 @@ std::string List::to_string(Operator op) const {
         case AVG: return "Average";
         case MAX: return "Max";
         case MIN: return "Min";
-        default: return "Unknown Operator";
     }
 }
 
@@ -109,7 +108,6 @@ void List::pivot_dept(Operator op) {
             case AVG: std::cout << (double) pivots[i].sum / pivots[i].cnt << std::endl; break;
             case MAX: std::cout << pivots[i].max << std::endl; break;
             case MIN: std::cout << pivots[i].min << std::endl; break;
-            default: std::cout << "Unknown Operator" << std::endl; break;
         }
     }
 
@@ -149,7 +147,6 @@ void List::pivot_gender(Operator op) {
             case AVG: std::cout << (double) pivots[i].sum / pivots[i].cnt << std::endl; break;
             case MAX: std::cout << pivots[i].max << std::endl; break;
             case MIN: std::cout << pivots[i].min << std::endl; break;
-            default: std::cout << "Unknown Operator" << std::endl; break;
         }
     }
 
@@ -189,7 +186,6 @@ void List::pivot_dept_gender(Operator op) {
             case AVG: std::cout << (double) pivots[i].sum / pivots[i].cnt << std::endl; break;
             case MAX: std::cout << pivots[i].max << std::endl; break;
             case MIN: std::cout << pivots[i].min << std::endl; break;
-            default: std::cout << "Unknown Operator" << std::endl; break;
         }
     }
 }

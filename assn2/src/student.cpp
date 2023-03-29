@@ -2,10 +2,10 @@
 #include "student.hpp"
 
 void Student::input_info() {
-    std::cout << "Dept: "; std::cin >> dept;
-    std::cout << "Gender: "; std::cin >> gender;
-    std::cout << "Name: "; std::cin >> name;
-    std::cout << "Age: "; std::cin >> age;
+    Format::strict_input(std::cin, std::cout, "Dept: ", dept, Format::NOSPACE | Format::NOLOWER);
+    Format::strict_input(std::cin, std::cout, "Gender: ", gender, Format::NOSPACE | Format::GENDER);
+    Format::strict_input(std::cin, std::cout, "Name: ", gender, Format::NOSPACE);
+    Format::range_input(std::cin, std::cout, "Age: ", age, MIN_AGE, MAX_AGE);
 }
 
 std::string Student::get_dept() const {
