@@ -21,4 +21,6 @@ public: // TODO: What about use struct instead of class?
     static void range_input(std::istream &is, std::ostream &os, const char *prompt, int &i, int min, int max); // inclusive
 };
 
+void clear_buffer(std::istream &is);
+
 #endif

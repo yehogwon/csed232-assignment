@@ -28,7 +28,8 @@ bool Format::all(std::string &str, check_bit check) {
 
 void Format::strict_input(std::istream &is, std::ostream &os, const char *prompt, std::string &str, check_bit check) {
     os << prompt;
-    is >> str;
+    // clear_buffer(is); // FIXME: Skip the first input due to the buffer
+    std::getline(is, str);
     if (!all(str, check)) {
         os << "Invalid input. Input again. " << std::endl;
         strict_input(is, os, prompt, str, check); // TODO: Analyze the complexity of recursion
@@ -42,4 +43,9 @@ void Format::range_input(std::istream &is, std::ostream &os, const char *prompt,
         os << "Invalid input. Input again. " << std::endl;
         range_input(is, os, prompt, i, min, max);
     }
+}
+
+void clear_buffer(std::istream &is) {
+    is.clear();
+    is.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
