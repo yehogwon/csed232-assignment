@@ -26,9 +26,6 @@ public:
 bool comp_dept(const Student &s1, const Student &s2);
 bool comp_gender(const Student &s1, const Student &s2);
 
-struct CompDept;
-struct CompGender;
-
 bool operator==(const Student &s1, const Student &s2);
 bool operator>(const Student &s1, const Student &s2);
 bool operator<(const Student &s1, const Student &s2);
