@@ -105,7 +105,7 @@ void List::pivot_dept(Operator op) {
     for (int i = 0; i < num_of_pivots; i++) {
         std::cout << depts[i] << "\t";
         switch (op) {
-            case AVG: std::cout << (double) pivots[i].sum / pivots[i].cnt << std::endl; break;
+            case AVG: std::cout << std::fixed << std::setprecision(1) << (double) pivots[i].sum / pivots[i].cnt << std::endl; break;
             case MAX: std::cout << pivots[i].max << std::endl; break;
             case MIN: std::cout << pivots[i].min << std::endl; break;
         }
@@ -144,7 +144,7 @@ void List::pivot_gender(Operator op) {
     for (int i = 0; i < num_of_pivots; i++) {
         std::cout << genders[i] << "\t";
         switch (op) {
-            case AVG: std::cout << (double) pivots[i].sum / pivots[i].cnt << std::endl; break;
+            case AVG: std::cout << std::fixed << std::setprecision(1) << (double) pivots[i].sum / pivots[i].cnt << std::endl; break;
             case MAX: std::cout << pivots[i].max << std::endl; break;
             case MIN: std::cout << pivots[i].min << std::endl; break;
         }
@@ -183,7 +183,7 @@ void List::pivot_dept_gender(Operator op) {
     for (int i = 0; i < num_of_pivots; i++) {
         std::cout << depts[i] << "\t" << genders[i] << "\t";
         switch (op) {
-            case AVG: std::cout << (double) pivots[i].sum / pivots[i].cnt << std::endl; break;
+            case AVG: std::cout << std::fixed << std::setprecision(1) << (double) pivots[i].sum / pivots[i].cnt << std::endl; break;
             case MAX: std::cout << pivots[i].max << std::endl; break;
             case MIN: std::cout << pivots[i].min << std::endl; break;
         }

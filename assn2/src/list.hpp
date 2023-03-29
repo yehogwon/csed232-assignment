@@ -2,6 +2,7 @@
 #define __LIST_HPP__
 
 #include <iostream> // Only for pivot table functions
+#include <iomanip> // FIRE: Check if this is useable
 #include <string>
 #include "student.hpp"
 #include "node.hpp"
@@ -35,7 +36,7 @@ public:
     void sort();
     void sort(Comp comp);
 
-    // Optimize the pivot table functions
+    // TODO: Optimize the pivot table functions
     void pivot_dept(Operator op);
     void pivot_gender(Operator op);
     void pivot_dept_gender(Operator op);
