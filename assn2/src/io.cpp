@@ -31,7 +31,7 @@ void Format::strict_input(std::istream &is, std::ostream &os, const char *prompt
     std::getline(is, str);
     if (!all(str, check)) {
         os << "Invalid input. Input again. " << std::endl;
-        strict_input(is, os, prompt, str, check); // TODO: Analyze the complexity of recursion
+        strict_input(is, os, prompt, str, check);
     }
 }
 
