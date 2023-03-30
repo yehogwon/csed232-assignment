@@ -4,7 +4,7 @@
 void Student::input_info() {
     Format::strict_input(std::cin, std::cout, "Dept: ", dept, Format::NOSPACE | Format::NOLOWER);
     Format::strict_input(std::cin, std::cout, "Gender: ", gender, Format::NOSPACE | Format::GENDER);
-    Format::strict_input(std::cin, std::cout, "Name: ", gender, Format::NOSPACE);
+    Format::strict_input(std::cin, std::cout, "Name: ", name, Format::NOSPACE);
     Format::range_input(std::cin, std::cout, "Age: ", age, MIN_AGE, MAX_AGE);
 }
 
