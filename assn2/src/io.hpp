@@ -22,6 +22,4 @@ private:
     static bool all(std::string &str, check_bit check);
 };
 
-void clear_buffer(std::istream &is);
-
 #endif

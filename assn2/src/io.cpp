@@ -28,7 +28,6 @@ bool Format::all(std::string &str, check_bit check) {
 
 void Format::strict_input(std::istream &is, std::ostream &os, const char *prompt, std::string &str, check_bit check) {
     os << prompt;
-    // clear_buffer(is); // FIXME: Skip the first input due to the buffer
     std::getline(is, str);
     if (!all(str, check)) {
         os << "Invalid input. Input again. " << std::endl;
@@ -39,13 +38,9 @@ void Format::strict_input(std::istream &is, std::ostream &os, const char *prompt
 void Format::range_input(std::istream &is, std::ostream &os, const char *prompt, int &i, int min, int max) {
     os << prompt;
     is >> i;
+    is.ignore(); // This is for std::getline() in the next input
     if (i < min || i > max) {
         os << "Invalid input. Input again. " << std::endl;
         range_input(is, os, prompt, i, min, max);
     }
-}
-
-void clear_buffer(std::istream &is) {
-    is.clear();
-    is.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
