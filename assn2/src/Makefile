@@ -14,7 +14,7 @@ all: $(TARGET) $(OUT)
 clean: 
 	rm -f $(TARGET) $(OUT)
 
-run: $(TARGET) $(OUT)
+run: all
 	./$(OUT)
 
 main.o : main.cpp
@@ -32,5 +32,5 @@ list.o : list.cpp list.hpp
 io.o : io.cpp io.hpp
 	$(CC) $(CXXFLAGS) --std=$(STD) -o io.o -c io.cpp
 
-main.out : main.o list.o student.o
+main.out : main.o student.o node.o list.o io.o
 	$(CC) $(CXXFLAGS) --std=$(STD) -o $(OUT) $(TARGET)
