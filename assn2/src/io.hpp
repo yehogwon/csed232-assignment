@@ -2,7 +2,12 @@
 #define __IO_HPP__
 
 #include <iostream>
+#include <iomanip>
 #include <string>
+#include <cmath>
+
+#define DOUBLE_PRECISION 1
+#define DOUBLE_TOLERANCE 1e-6
 
 class Format { // public comes first following ios convention
 public:
@@ -21,5 +26,7 @@ private:
     static bool nolower(std::string &str);
     static bool all(std::string &str, check_bit check);
 };
+
+std::ostream& operator+(std::ostream &os, double d);
 
 #endif

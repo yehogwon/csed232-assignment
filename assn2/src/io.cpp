@@ -44,3 +44,12 @@ void Format::range_input(std::istream &is, std::ostream &os, const char *prompt,
         range_input(is, os, prompt, i, min, max);
     }
 }
+
+std::ostream& operator+(std::ostream &os, double d) {
+    // check if d has a rational part
+    if (std::abs(d - std::round(d)) < DOUBLE_TOLERANCE)
+        os << std::fixed << std::setprecision(0) << d;
+    else
+    os << std::fixed << std::setprecision(DOUBLE_PRECISION) << d;
+    return os;
+}

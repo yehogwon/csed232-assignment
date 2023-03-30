@@ -6,6 +6,7 @@
 #include <string>
 #include "student.hpp"
 #include "node.hpp"
+#include "io.hpp"
 
 #define MAX_AGE 30
 #define MAX_DEPT 9
