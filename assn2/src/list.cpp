@@ -42,7 +42,7 @@ void List::sort(Comp comp) {
         Node *min = cur;
         Node *tmp = cur->next;
         while (tmp != nullptr) {
-            if (!comp(min->data, tmp->data))
+            if (!comp(tmp->data, min->data))
                 min = tmp;
             tmp = tmp->next;
         }
@@ -106,6 +106,7 @@ void List::pivot_dept(Operator op) {
         if (pivots[i].sum == 0) continue; // There is no student in this pivot. 
         std::cout << depts[i] << "\t";
         switch (op) {
+            // FIXME: The above decimal place modification shows even when it is an integer. 
             case AVG: std::cout << std::fixed << std::setprecision(1) << (double) pivots[i].sum / pivots[i].cnt << std::endl; break;
             case MAX: std::cout << pivots[i].max << std::endl; break;
             case MIN: std::cout << pivots[i].min << std::endl; break;
