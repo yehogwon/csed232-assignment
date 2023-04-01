@@ -2,6 +2,7 @@
 #include "student.hpp"
 
 void Student::input_info() {
+    // TODO: What if Dept, Name, Gender, ... is empty?
     Format::strict_input(std::cin, std::cout, "Dept: ", dept, Format::NOSPACE | Format::NOLOWER);
     Format::strict_input(std::cin, std::cout, "Gender: ", gender, Format::NOSPACE | Format::GENDER);
     Format::strict_input(std::cin, std::cout, "Name: ", name, Format::NOSPACE);
