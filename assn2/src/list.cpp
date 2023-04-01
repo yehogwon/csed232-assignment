@@ -75,6 +75,15 @@ void List::remove(Node *node) {
     }
 }
 
+void List::print(std::string sep) const {
+    Node *cur = head->next;
+    while (cur != nullptr) {
+        Student s = cur->data;
+        std::cout << s << std::endl;
+        cur = cur->next;
+    }
+}
+
 void List::pivot_dept(Operator op) {
     sort(comp_dept);
 

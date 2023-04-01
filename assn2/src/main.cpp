@@ -81,12 +81,7 @@ bool delete_student(List &student_list) {
 
 void print(List &student_list) {
     std::cout << "Dept\tGender\tName\tAge" << std::endl;
-    Node *cur = (student_list.head)->next;
-    while (cur != nullptr) {
-        Student s = cur->data;
-        std::cout << s << std::endl;
-        cur = cur->next;
-    }
+    student_list.print("\n");
 }
 
 void pivot_table(List &student_list) {

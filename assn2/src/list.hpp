@@ -23,16 +23,18 @@ private:
         int max, min, cnt, sum;
     };
 
+    Node *head; // the first node is a dummy node
+
     std::string to_string(Operator op) const;
 
 public: 
-    Node *head; // the first node is a dummy node
-
     List();
     ~List();
 
     void add(Node *node);
     void remove(Node *node);
+
+    void print(std::string sep = "\n") const; // TODO: Is it proper to put the default value here? Not in the source?
     
     void sort();
     void sort(Comp comp);
@@ -41,6 +43,8 @@ public:
     void pivot_dept(Operator op);
     void pivot_gender(Operator op);
     void pivot_dept_gender(Operator op);
+
+    friend bool operator<(const Student &s, const List &list);
 };
 
 template <typename T>
