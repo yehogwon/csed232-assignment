@@ -18,11 +18,16 @@ bool Format::nolower(std::string &str) {
     return true;
 }
 
+bool Format::noempty(std::string &str) {
+    return !str.empty();
+}
+
 bool Format::all(std::string &str, check_bit check) {
     bool out = true;
     if (check & GENDER) out = out && Format::gender(str);
     if (check & NOSPACE) out = out && Format::nospace(str);
     if (check & NOLOWER) out = out && Format::nolower(str);
+    if (check & NOEMPTY) out = out && Format::noempty(str);
     return out;
 }
 
