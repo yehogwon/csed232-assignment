@@ -2,6 +2,10 @@
 
 List::List() {
     head = new Node{Student(), nullptr};
+
+    // TODO: Enhance the initialization
+    for (int i = 0; i < MAX_DEPT; i++)
+        dept_status[i] = {"", 0};
 }
 
 List::~List() {
@@ -19,6 +23,13 @@ std::string List::to_string(Operator op) const {
         case MAX: return "Max";
         case MIN: return "Min";
     }
+}
+
+int List::get_total_dept_cnt() const {
+    int cnt = 0;
+    for (int i = 0; i < MAX_DEPT; i++)
+        cnt += min(dept_status[i].cnt, 1); // 0 or 1
+    return cnt;
 }
 
 void List::sort() { // sort algorithm: selection sort
@@ -51,7 +62,25 @@ void List::sort(Comp comp) {
     }
 }
 
-void List::add(Node *node) {
+// TODO: Check if add() and remove() work properly
+bool List::add(Node *node) {
+    if (node->data < *this) return false;
+    
+    std::string dept = node->data.get_dept();
+    int index = -1;
+    bool full = get_total_dept_cnt() == MAX_DEPT;
+    for (int i = 0; i < MAX_DEPT; i++) {
+        if ((full && dept_status[i].dept == dept) || (!full && dept_status[i].dept == "")) {
+            index = i;
+            break;
+        }
+    }
+
+    if (index < 0) return false;
+    if (!full)
+        dept_status[index].dept = dept;
+    dept_status[index].cnt++;
+
     Node *prev = head;
     while (prev != nullptr) {
         if (prev->next == nullptr) {
@@ -61,9 +90,15 @@ void List::add(Node *node) {
         prev = prev->next;
     }
     sort();
+
+    return true;
 }
 
-void List::remove(Node *node) {
+bool List::remove(Node *node) {
+    if (!(node->data < *this)) return false;
+    
+    std::string dept = node->data.get_dept();
+
     Node *prev = head;
     while (prev != nullptr) {
         if (prev->next->data == node->data) {
@@ -73,6 +108,15 @@ void List::remove(Node *node) {
         }
         prev = prev->next;
     }
+
+    for (int i = 0; i < MAX_DEPT; i++) {
+        if (dept_status[i].dept == dept) {
+            if (--dept_status[i].cnt == 0) dept_status[i].dept = "";
+            break;
+        }
+    }
+
+    return true;
 }
 
 void List::print(std::string sep) const {

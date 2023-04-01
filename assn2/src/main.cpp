@@ -55,13 +55,12 @@ bool add_student(List &student_list) {
     Student s;
     s.input_info();
     
-    if (s < student_list) {
-        std::cout << "The student already exists." << std::endl;
-        return false;
-    } else {
-        student_list.add(new Node{s, nullptr});
+    if (student_list.add(new Node{s, nullptr})) {
         std::cout << "A student is added in table!" << std::endl;
         return true;
+    } else {
+        std::cout << "The student already exists or the department capacity has been full. " << std::endl;
+        return false;
     }
 }
 
@@ -69,8 +68,7 @@ bool delete_student(List &student_list) {
     Student s;
     s.input_info();
 
-    if (s < student_list) {
-        student_list.remove(new Node{s, nullptr});
+    if (student_list.remove(new Node{s, nullptr})) {
         std::cout << "Deleted!" << std::endl;
         return true;
     } else {

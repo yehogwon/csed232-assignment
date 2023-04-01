@@ -23,16 +23,24 @@ private:
         int max, min, cnt, sum;
     };
 
+    struct DeptStatus {
+        std::string dept;
+        int cnt;
+    };
+
     Node *head; // the first node is a dummy node
 
+    DeptStatus dept_status[MAX_DEPT];
+
     std::string to_string(Operator op) const;
+    int get_total_dept_cnt() const;
 
 public: 
     List();
     ~List();
 
-    void add(Node *node);
-    void remove(Node *node);
+    bool add(Node *node);
+    bool remove(Node *node);
 
     void print(std::string sep = "\n") const; // TODO: Is it proper to put the default value here? Not in the source?
     
