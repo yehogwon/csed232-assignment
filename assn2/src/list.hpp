@@ -49,8 +49,6 @@ T max(T a, T b);
 template <typename T>
 T min(T a, T b);
 
-void swap_node(Node *node1, Node *node2);
-
 bool operator<(const Student &s, const List &list); // Check if the student exists in the list
 
 #endif

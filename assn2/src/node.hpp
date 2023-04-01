@@ -10,4 +10,6 @@ struct Node {
 
 bool operator==(const Node &n1, const Node &n2);
 
+void swap_node(Node *node1, Node *node2);
+
 #endif

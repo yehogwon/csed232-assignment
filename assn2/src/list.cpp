@@ -203,12 +203,6 @@ T min(T a, T b) {
     return a < b ? a : b;
 }
 
-void swap_node(Node *node1, Node *node2) {
-    Student tmp = node1->data;
-    node1->data = node2->data;
-    node2->data = tmp;
-}
-
 bool operator<(const Student &s, const List &list) {
     Node *cur = list.head->next;
     while (cur != nullptr) {
