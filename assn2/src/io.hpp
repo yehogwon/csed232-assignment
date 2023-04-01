@@ -17,6 +17,7 @@ public:
     static const check_bit NOSPACE = 0x2;
     static const check_bit NOLOWER = 0x4;
     static const check_bit NOEMPTY = 0x8;
+    static const check_bit NUMBER = 0x10;
 
     static void strict_input(std::istream &is, std::ostream &os, const char *prompt, std::string &str, check_bit check);
     static void range_input(std::istream &is, std::ostream &os, const char *prompt, int &i, int min, int max); // inclusive
@@ -26,6 +27,7 @@ private:
     static bool nospace(std::string &str);
     static bool nolower(std::string &str);
     static bool noempty(std::string &str);
+    static bool number(std::string &str);
     static bool all(std::string &str, check_bit check);
 };
 
