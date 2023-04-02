@@ -55,7 +55,7 @@ bool add_student(List &student_list) {
     Student s;
     s.input_info();
     
-    if (student_list.add(new Node{s, nullptr})) {
+    if (student_list.add(new Node(s, nullptr))) {
         std::cout << "A student is added in table!" << std::endl;
         return true;
     } else {
@@ -68,7 +68,7 @@ bool delete_student(List &student_list) {
     Student s;
     s.input_info();
 
-    if (student_list.remove(new Node{s, nullptr})) {
+    if (student_list.remove(new Node(s, nullptr))) {
         std::cout << "Deleted!" << std::endl;
         return true;
     } else {

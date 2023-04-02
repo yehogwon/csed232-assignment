@@ -3,9 +3,12 @@
 
 #include "student.hpp"
 
-struct Node {
+class Node {
+public: 
     Student data;
     Node *next;
+
+    Node(Student data, Node *next);
 };
 
 bool operator==(const Node &n1, const Node &n2);

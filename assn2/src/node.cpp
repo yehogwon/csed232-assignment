@@ -1,5 +1,7 @@
 #include "node.hpp"
 
+Node::Node(Student data, Node *next) : data(data), next(next) {}
+
 bool operator==(Node &n1, Node &n2) {
     return n1.data == n2.data;
 }
