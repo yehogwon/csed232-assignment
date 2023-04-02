@@ -55,10 +55,14 @@ public:
 };
 
 template <typename T>
-T max(T a, T b);
+T max(T a, T b) {
+    return a > b ? a : b;
+}
 
 template <typename T>
-T min(T a, T b);
+T min(T a, T b) {
+    return a < b ? a : b;
+}
 
 bool operator<(const Student &s, const List &list); // Check if the student exists in the list
 
