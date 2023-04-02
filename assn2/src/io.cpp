@@ -59,11 +59,15 @@ void Format::range_input(std::istream &is, std::ostream &os, const char *prompt,
 }
 
 std::ostream& operator+(std::ostream &os, double d) {
-    // check if d has a rational part
-    // TODO: It will be good to note this as an advanced feature. However, iomanip header should NOT be used. 
-    if (std::abs(d - std::round(d)) < DOUBLE_TOLERANCE)
-        os << std::fixed << std::setprecision(0) << d;
-    else
-        os << std::fixed << std::setprecision(DOUBLE_PRECISION) << d;
+    if (std::abs(d - std::round(d)) < DOUBLE_TOLERANCE) {
+        os.precision(0);
+        os << d;
+    } else {
+        os << std::fixed;
+        os.setf(std::ios_base::showpoint);
+        os.precision(DOUBLE_PRECISION);
+        os << d;
+        os.unsetf(std::ios_base::showpoint);
+    }
     return os;
 }

@@ -2,7 +2,6 @@
 #define __LIST_HPP__
 
 #include <iostream> // Only for pivot table functions
-#include <iomanip> // FIRE: Check if this is useable
 #include <string>
 #include "student.hpp"
 #include "node.hpp"
@@ -42,7 +41,7 @@ public:
     bool add(Node *node);
     bool remove(Node *node);
 
-    void print(std::string sep = "\n") const; // TODO: Is it proper to put the default value here? Not in the source?
+    void print(std::string sep = "\n") const;
     
     void sort();
     void sort(Comp comp);

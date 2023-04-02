@@ -2,7 +2,6 @@
 #define __IO_HPP__
 
 #include <iostream>
-#include <iomanip> // FIRE: Implement without using iomanip
 #include <string>
 #include <cmath>
 
