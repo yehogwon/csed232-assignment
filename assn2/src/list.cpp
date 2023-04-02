@@ -2,8 +2,6 @@
 
 List::List() {
     head = new Node(Student(), nullptr);
-
-    // TODO: Enhance the initialization
     for (int i = 0; i < MAX_DEPT; i++)
         dept_status[i] = {"", 0};
 }
@@ -32,37 +30,6 @@ int List::get_total_dept_cnt() const {
     return cnt;
 }
 
-void List::sort() { // sort algorithm: selection sort
-    Node *cur = head->next;
-    while (cur != nullptr) {
-        Node *min = cur;
-        Node *tmp = cur->next;
-        while (tmp != nullptr) {
-            if (tmp->data < min->data)
-                min = tmp;
-            tmp = tmp->next;
-        }
-        swap_node(cur, min);
-        cur = cur->next;
-    }
-}
-
-void List::sort(Comp comp) {
-    Node *cur = head->next;
-    while (cur != nullptr) {
-        Node *min = cur;
-        Node *tmp = cur->next;
-        while (tmp != nullptr) {
-            if (!comp(tmp->data, min->data))
-                min = tmp;
-            tmp = tmp->next;
-        }
-        swap_node(cur, min);
-        cur = cur->next;
-    }
-}
-
-// TODO: Check if add() and remove() work properly
 bool List::add(Node *node) {
     if (node->data < *this) return false;
     
@@ -119,11 +86,41 @@ bool List::remove(Node *node) {
     return true;
 }
 
-void List::print(std::string sep) const {
+void List::print() const {
     Node *cur = head->next;
     while (cur != nullptr) {
         Student s = cur->data;
-        std::cout << s << std::endl;
+        std::cout << s;
+        cur = cur->next;
+    }
+}
+
+void List::sort() { // sort algorithm: selection sort
+    Node *cur = head->next;
+    while (cur != nullptr) {
+        Node *min = cur;
+        Node *tmp = cur->next;
+        while (tmp != nullptr) {
+            if (tmp->data < min->data)
+                min = tmp;
+            tmp = tmp->next;
+        }
+        swap_node(cur, min);
+        cur = cur->next;
+    }
+}
+
+void List::sort(Comp comp) {
+    Node *cur = head->next;
+    while (cur != nullptr) {
+        Node *min = cur;
+        Node *tmp = cur->next;
+        while (tmp != nullptr) {
+            if (!comp(tmp->data, min->data))
+                min = tmp;
+            tmp = tmp->next;
+        }
+        swap_node(cur, min);
         cur = cur->next;
     }
 }

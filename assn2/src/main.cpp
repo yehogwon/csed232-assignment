@@ -79,7 +79,7 @@ bool delete_student(List &student_list) {
 
 void print(List &student_list) {
     std::cout << "Dept\tGender\tName\tAge" << std::endl;
-    student_list.print("\n");
+    student_list.print();
 }
 
 void pivot_table(List &student_list) {

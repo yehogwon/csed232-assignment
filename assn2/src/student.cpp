@@ -2,7 +2,7 @@
 #include "student.hpp"
 
 void Student::input_info() {
-    // TODO: Handled the empty-exception. check if it is really necessary
+    // TODO: Put that I have checked the empty-input
     Format::strict_input(std::cin, std::cout, "Dept: ", dept, Format::NOSPACE | Format::NOLOWER | Format::NOEMPTY);
     Format::strict_input(std::cin, std::cout, "Gender: ", gender, Format::NOSPACE | Format::GENDER | Format::NOEMPTY);
     Format::strict_input(std::cin, std::cout, "Name: ", name, Format::NOSPACE | Format::NOEMPTY);

@@ -41,12 +41,11 @@ public:
     bool add(Node *node);
     bool remove(Node *node);
 
-    void print(std::string sep = "\n") const;
+    void print() const;
     
     void sort();
     void sort(Comp comp);
 
-    // TODO: Optimize the pivot table functions
     void pivot_dept(Operator op);
     void pivot_gender(Operator op);
     void pivot_dept_gender(Operator op);
