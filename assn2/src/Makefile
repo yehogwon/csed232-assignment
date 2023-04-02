@@ -1,7 +1,7 @@
 CC = g++
 D ?=
 CXXFLAGS = -Wall -O2 $(D)
-STD = c++14
+STD ?= c++14
 
 SRC = main.cpp student.cpp node.cpp list.cpp io.cpp
 OUT = main.out
