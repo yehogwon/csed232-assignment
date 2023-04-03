@@ -59,6 +59,7 @@ void Format::range_input(std::istream &is, std::ostream &os, const char *prompt,
 }
 
 std::ostream& operator+(std::ostream &os, double d) {
+    // TODO: mention this in the report
     if (std::abs(d - std::round(d)) < DOUBLE_TOLERANCE) {
         os.precision(0);
         os << d;

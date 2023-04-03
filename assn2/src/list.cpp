@@ -56,7 +56,7 @@ bool List::add(Node *node) {
         }
         prev = prev->next;
     }
-    sort();
+    sort(); // TODO: Move it to print()?
 
     return true;
 }
