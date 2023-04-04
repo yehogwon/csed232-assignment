@@ -1,5 +1,6 @@
 #include <iostream>
 #include "student.hpp"
+#include "exception.hpp"
 
 void Student::input_info() {
     // TODO: Put that I have checked the empty-input

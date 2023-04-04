@@ -3,6 +3,7 @@
 #include "student.hpp"
 #include "list.hpp"
 #include "io.hpp"
+#include "exception.hpp"
 
 void show_menu();
 bool add_student(List &student_list);
@@ -17,24 +18,27 @@ int main() {
     bool stop = false;
     do {
         show_menu();
-        Format::range_input(std::cin, std::cout, "Selection: ", menu, 1, 5);
-
-        switch (menu) {
-            case 1: // Add
-                add_student(student_list);
-                break;
-            case 2: // Delete
-                delete_student(student_list);
-                break;
-            case 3: // Print
-                print(student_list);
-                break;
-            case 4: // Pivot Table
-                pivot_table(student_list);
-                break;
-            case 5: 
-                stop = true;
-                return 0;
+        try {
+            Format::range_input(std::cin, std::cout, "Selection: ", menu, 1, 5);
+            switch (menu) {
+                case 1: // Add
+                    add_student(student_list);
+                    break;
+                case 2: // Delete
+                    delete_student(student_list);
+                    break;
+                case 3: // Print
+                    print(student_list);
+                    break;
+                case 4: // Pivot Table
+                    pivot_table(student_list);
+                    break;
+                case 5: 
+                    stop = true;
+                    return 0;
+            }
+        } catch (InterruptedInputException) {
+            continue;
         }
     } while (!stop);
 
@@ -84,19 +88,24 @@ void print(List &student_list) {
 
 void pivot_table(List &student_list) {
     int category, function;
-    std::cout << "-----------Category-----------" << std::endl;
-    std::cout << "1. Dept" << std::endl;
-    std::cout << "2. Gender" << std::endl;
-    std::cout << "3. Dept and Gender" << std::endl;
-    std::cout << "------------------------------" << std::endl;
-    Format::range_input(std::cin, std::cout, "Selection: ", category, 1, 3);
 
-    std::cout << "-----------Function-----------" << std::endl;
-    std::cout << "1. Average" << std::endl;
-    std::cout << "2. Max" << std::endl;
-    std::cout << "3. Min" << std::endl;
-    std::cout << "------------------------------" << std::endl;
-    Format::range_input(std::cin, std::cout, "Selection: ", function, 1, 3);
+    try {
+        std::cout << "-----------Category-----------" << std::endl;
+        std::cout << "1. Dept" << std::endl;
+        std::cout << "2. Gender" << std::endl;
+        std::cout << "3. Dept and Gender" << std::endl;
+        std::cout << "------------------------------" << std::endl;
+        Format::range_input(std::cin, std::cout, "Selection: ", category, 1, 3);
+
+        std::cout << "-----------Function-----------" << std::endl;
+        std::cout << "1. Average" << std::endl;
+        std::cout << "2. Max" << std::endl;
+        std::cout << "3. Min" << std::endl;
+        std::cout << "------------------------------" << std::endl;
+        Format::range_input(std::cin, std::cout, "Selection: ", function, 1, 3);
+    } catch (InterruptedInputException) {
+        return;
+    }
 
     switch (category) {
         case 1: // Dept

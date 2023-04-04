@@ -29,6 +29,10 @@ bool Format::number(std::string &str) {
     return true;
 }
 
+bool Format::onechar(std::string &str) {
+    return str.length() == 1;
+}
+
 bool Format::all(std::string &str, check_bit check) {
     bool out = true;
     if (check & GENDER) out = out && Format::gender(str);
@@ -36,15 +40,22 @@ bool Format::all(std::string &str, check_bit check) {
     if (check & NOLOWER) out = out && Format::nolower(str);
     if (check & NOEMPTY) out = out && Format::noempty(str);
     if (check & NUMBER) out = out && Format::number(str);
+    if (check & ONECHAR) out = out && Format::onechar(str);
     return out;
+}
+
+bool Format::input_again(std::istream &is, std::ostream &os) {
+    std::string _str;
+    strict_input(is, os, "Invalid input. Will you input again (y/n) [y]? ", _str, Format::NOEMPTY | Format::NOSPACE | Format::ONECHAR);
+    return _str != "n";
 }
 
 void Format::strict_input(std::istream &is, std::ostream &os, const char *prompt, std::string &str, check_bit check) {
     os << prompt;
     std::getline(is, str);
     if (!all(str, check)) {
-        os << "Invalid input. Input again. " << std::endl;
-        strict_input(is, os, prompt, str, check);
+        if (input_again(is, os)) strict_input(is, os, prompt, str, check);
+        else throw InterruptedInputException();
     }
 }
 
@@ -53,8 +64,8 @@ void Format::range_input(std::istream &is, std::ostream &os, const char *prompt,
     strict_input(is, os, prompt, _str, Format::NUMBER | Format::NOEMPTY | Format::NOSPACE);
     i = std::stoi(_str);
     if (i < min || i > max) {
-        os << "Invalid input. Input again. " << std::endl;
-        range_input(is, os, prompt, i, min, max);
+        if (input_again(is, os)) return range_input(is, os, prompt, i, min, max);
+        else throw InterruptedInputException();
     }
 }
 
