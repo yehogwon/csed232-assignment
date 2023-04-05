@@ -5,21 +5,52 @@
 #include "io.hpp"
 #include "exception.hpp"
 
+
+/**
+ * @brief print the main menu
+ * @return none
+ */
 void show_menu();
+
+/**
+ * @brief add a student to the list unless he/she is in student_list (get student information from user)
+ * @param student_list the list of students to add a student in
+ * @return true if the student is successfully added, false otherwise
+ */
 bool add_student(List &student_list);
+
+/**
+ * @brief delete a student from the list if he/she is in student_list (get student information from user)
+ * @param student_list the list of students to delete a student from
+ * @return true if the student is successfully deleted, false otherwise
+ */
 bool delete_student(List &student_list);
+
+/**
+ * @brief print the list of students
+ * @param student_list the list of students to print
+ * @return none
+ */
 void print(List &student_list);
+
+/**
+ * @brief process and print the pivot table of students
+ * @param student_list the list of students to conduct on
+ * @return none
+ */
 void pivot_table(List &student_list);
 
 int main() {
-    List student_list;
+    List student_list; // the list of students
 
-    int menu;
-    bool stop = false;
+    int menu; // the menu selection from user
+    bool stop = false; // TODO: Is it really necessary?
     do {
         show_menu();
         try {
+            // get the menu selection from user within the range of 1 to 5
             Format::range_input(std::cin, std::cout, "Selection: ", menu, 1, 5);
+            // TODO: utilize the return values of add_student and delete_student; print the message here, not in the functions
             switch (menu) {
                 case 1: // Add
                     add_student(student_list);
@@ -37,7 +68,7 @@ int main() {
                     stop = true;
                     return 0;
             }
-        } catch (InterruptedInputException) {
+        } catch (InterruptedInputException) { // If the user input is interrupted (the user wants to get back to the main menu)
             continue;
         }
     } while (!stop);
@@ -56,24 +87,25 @@ void show_menu() {
 }
 
 bool add_student(List &student_list) {
-    Student s(std::cin, std::cout);
+    Student s(std::cin, std::cout); // get student information from user and create a student
     
-    if (student_list.add(new Node(s))) {
+    // add the student to the list
+    if (student_list.add(new Node(s))) { // if the student is not in the list yet so that he/she has been successfully added
         std::cout << "A student is added in table!" << std::endl;
         return true;
-    } else {
+    } else { // the student is already in the list or the department capacity has been full
         std::cout << "The student already exists or the department capacity has been full. " << std::endl;
         return false;
     }
 }
 
 bool delete_student(List &student_list) {
-    Student s(std::cin, std::cout);
+    Student s(std::cin, std::cout); // get student information from user and create a student
 
-    if (student_list.remove(new Node(s))) {
+    if (student_list.remove(new Node(s))) { // if the student is in the list so that he/she has been successfully deleted
         std::cout << "Deleted!" << std::endl;
         return true;
-    } else {
+    } else { // the student is not in the list
         std::cout << "Can't Delete it" << std::endl;
         return false;
     }
@@ -87,7 +119,9 @@ void print(List &student_list) {
 void pivot_table(List &student_list) {
     int category, function;
 
+    // TODO: This try-catch is unnecessary. 
     try {
+        // get the category and function from user within the range of 1 to 3
         std::cout << "-----------Category-----------" << std::endl;
         std::cout << "1. Dept" << std::endl;
         std::cout << "2. Gender" << std::endl;
@@ -105,6 +139,8 @@ void pivot_table(List &student_list) {
         return;
     }
 
+    // depending on the category, call the corresponding function
+    // Note that function (int) is casted to Operator (enum) for the convenience purpose
     switch (category) {
         case 1: // Dept
             student_list.pivot_dept(static_cast<Operator>(function));
