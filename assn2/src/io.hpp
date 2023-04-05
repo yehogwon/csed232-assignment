@@ -30,11 +30,11 @@ public:
 
     /**
      * @brief get input from user in string type with some format (gender, nospace, ...)
-     * @param is: input stream to get input
-     * @param os: output stream to print prompt
-     * @param prompt: prompt to print
-     * @param str: string to store input
-     * @param check: bit mask for checking input (conditions to check)
+     * @param is input stream to get input
+     * @param os output stream to print prompt
+     * @param prompt prompt to print
+     * @param str string to store input
+     * @param check bit mask for checking input (conditions to check)
      * @return none
      * @throw InterruptedInputException
      */
@@ -42,12 +42,12 @@ public:
 
     /**
      * @brief get numerical input from user in int type with some format (gender, nospace, ...)
-     * @param is: input stream to get input
-     * @param os: output stream to print prompt
-     * @param prompt: prompt to print
-     * @param i: int to store input
-     * @param min: minimum value of input
-     * @param max: maximum value of input
+     * @param is input stream to get input
+     * @param os output stream to print prompt
+     * @param prompt prompt to print
+     * @param i int to store input
+     * @param min minimum value of input
+     * @param max maximum value of input
      * @return none
      * @throw InterruptedInputException
      */
@@ -56,57 +56,57 @@ public:
 private: 
     /**
      * @brief check if a string is a gender
-     * @param str: string to check
+     * @param str string to check
      * @return true if str is "M" or "F", false otherwise
      */
     static bool gender(std::string &str);
 
     /**
      * @brief check if a string has no whitespace
-     * @param str: string to check
+     * @param str string to check
      * @return true if str has no whitespace, false otherwise
      */
     static bool nospace(std::string &str);
 
     /**
      * @brief check if a string has only uppercase
-     * @param str: string to check
+     * @param str string to check
      * @return true if str has only uppercase, false otherwise
      */
     static bool nolower(std::string &str);
 
     /**
      * @brief check if a string is not empty
-     * @param str: string to check
+     * @param str string to check
      * @return true if str is not empty, false otherwise
      */
     static bool noempty(std::string &str);
 
     /**
      * @brief check if a string is a number
-     * @param str: string to check
+     * @param str string to check
      * @return true if str is a number, false otherwise
      */
     static bool number(std::string &str);
 
     /**
      * @brief check if a string consists of only one character
-     * @param str: string to check
+     * @param str string to check
      * @return true if str contains only one character, false otherwise
      */
     static bool onechar(std::string &str);
 
     /**
      * @brief check if a string satisfies all conditions using bit mask
-     * @param str: string to check
+     * @param str string to check
      * @return true if str satisfies all conditions, false otherwise (one or more conditions are not satisfied)
      */
     static bool all(std::string &str, check_bit check);
 
     /**
      * @brief check if user want to input again when the previous one did not satisfy the condition
-     * @param is: input stream to get input
-     * @param os: output stream to print prompt
+     * @param is input stream to get input
+     * @param os output stream to print prompt
      * @return true if user want to input again, false otherwise
      */
     static bool input_again(std::istream &is, std::ostream &os);
