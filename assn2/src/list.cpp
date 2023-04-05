@@ -2,7 +2,7 @@
  * CSED232 ASSN2
  * Author: Yeho Gwon (20220358)
  * Date: 2023/03/05
- * File Name: list.hpp
+ * File Name: list.cpp
  */
 
 #include "list.hpp"
