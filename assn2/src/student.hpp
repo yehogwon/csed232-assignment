@@ -21,9 +21,6 @@ private:
     int age;
 
 public: 
-    /**
-     * @brief Get student information from cin
-     */
     Student();
     Student(std::istream &is, std::ostream &os);
 
