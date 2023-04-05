@@ -15,6 +15,12 @@ public:
     Student data; // data
     Node *next; // pointer to next node
 
+    /**
+     * @brief constructor of Node
+     * @param data data of student type to store in this node
+     * @param next pointer to next node 
+     */
+    // TODO: what about use default argument for next?
     Node(Student data, Node *next);
 };
 
@@ -30,7 +36,7 @@ bool operator==(const Node &n1, const Node &n2);
  * @brief Swap two nodes
  * @param node1 operand 1
  * @param node2 operand 2
- * @return void
+ * @return none
  */
 void swap_node(Node *node1, Node *node2);
 
