@@ -17,7 +17,7 @@
 #define MAX_AGE 30
 #define MAX_DEPT 9
 #define MAX_GENDER 2
-#define MAX_DEPT_GENDER MAX_DEPT * MAX_GENDER
+#define MAX_DEPT_GENDER (MAX_DEPT * MAX_GENDER)
 
 typedef bool (*Comp)(const Student &s1, const Student &s2);
 
