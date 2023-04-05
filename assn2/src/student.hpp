@@ -33,19 +33,17 @@ public:
      */
     Student(std::istream &is, std::ostream &os);
 
-    // TODO: Change the return type to const std::string& (reference)
-
     /**
      * @brief get department (getter; data hiding)
-     * @return dept
+     * @return dept (const std::string&)
      */
-    std::string get_dept() const;
+    const std::string& get_dept() const;
 
     /**
      * @brief get gender (getter; data hiding)
-     * @return gender
+     * @return gender (const std::string&)
      */
-    std::string get_gender() const;
+    const std::string& get_gender() const;
 
     /**
      * @brief get age (getter; data hiding)

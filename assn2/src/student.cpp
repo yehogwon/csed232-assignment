@@ -23,11 +23,11 @@ Student::Student(std::istream &is, std::ostream &os) {
     Format::range_input(is, os, "Age: ", age, MIN_AGE, MAX_AGE);
 }
 
-std::string Student::get_dept() const {
+const std::string& Student::get_dept() const {
     return dept;
 }
 
-std::string Student::get_gender() const {
+const std::string& Student::get_gender() const {
     return gender;
 }
 
