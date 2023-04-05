@@ -119,25 +119,20 @@ void print(List &student_list) {
 void pivot_table(List &student_list) {
     int category, function;
 
-    // TODO: This try-catch is unnecessary. 
-    try {
-        // get the category and function from user within the range of 1 to 3
-        std::cout << "-----------Category-----------" << std::endl;
-        std::cout << "1. Dept" << std::endl;
-        std::cout << "2. Gender" << std::endl;
-        std::cout << "3. Dept and Gender" << std::endl;
-        std::cout << "------------------------------" << std::endl;
-        Format::range_input(std::cin, std::cout, "Selection: ", category, 1, 3);
+    // get the category and function from user within the range of 1 to 3
+    std::cout << "-----------Category-----------" << std::endl;
+    std::cout << "1. Dept" << std::endl;
+    std::cout << "2. Gender" << std::endl;
+    std::cout << "3. Dept and Gender" << std::endl;
+    std::cout << "------------------------------" << std::endl;
+    Format::range_input(std::cin, std::cout, "Selection: ", category, 1, 3);
 
-        std::cout << "-----------Function-----------" << std::endl;
-        std::cout << "1. Average" << std::endl;
-        std::cout << "2. Max" << std::endl;
-        std::cout << "3. Min" << std::endl;
-        std::cout << "------------------------------" << std::endl;
-        Format::range_input(std::cin, std::cout, "Selection: ", function, 1, 3);
-    } catch (InterruptedInputException) {
-        return;
-    }
+    std::cout << "-----------Function-----------" << std::endl;
+    std::cout << "1. Average" << std::endl;
+    std::cout << "2. Max" << std::endl;
+    std::cout << "3. Min" << std::endl;
+    std::cout << "------------------------------" << std::endl;
+    Format::range_input(std::cin, std::cout, "Selection: ", function, 1, 3);
 
     // depending on the category, call the corresponding function
     // Note that function (int) is casted to Operator (enum) for the convenience purpose
