@@ -1,3 +1,10 @@
+/*
+ * CSED232 ASSN2
+ * Author: Yeho Gwon (20220358)
+ * Date: 2023/03/05
+ * File Name: io.hpp
+ */
+
 #ifndef __IO_HPP__
 #define __IO_HPP__
 

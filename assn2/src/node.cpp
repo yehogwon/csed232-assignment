@@ -1,3 +1,10 @@
+/*
+ * CSED232 ASSN2
+ * Author: Yeho Gwon (20220358)
+ * Date: 2023/03/05
+ * File Name: node.hpp
+ */
+
 #include "node.hpp"
 
 Node::Node(Student data, Node *next) : data(data), next(next) {}

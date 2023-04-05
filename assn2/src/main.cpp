@@ -56,8 +56,7 @@ void show_menu() {
 }
 
 bool add_student(List &student_list) {
-    Student s;
-    s.input_info();
+    Student s(std::cin, std::cout);
     
     if (student_list.add(new Node(s, nullptr))) {
         std::cout << "A student is added in table!" << std::endl;
@@ -69,8 +68,7 @@ bool add_student(List &student_list) {
 }
 
 bool delete_student(List &student_list) {
-    Student s;
-    s.input_info();
+    Student s(std::cin, std::cout);
 
     if (student_list.remove(new Node(s, nullptr))) {
         std::cout << "Deleted!" << std::endl;

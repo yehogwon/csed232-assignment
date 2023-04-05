@@ -1,13 +1,22 @@
+/*
+ * CSED232 ASSN2
+ * Author: Yeho Gwon (20220358)
+ * Date: 2023/03/05
+ * File Name: student.cpp
+ */
+
 #include <iostream>
 #include "student.hpp"
 #include "exception.hpp"
 
-void Student::input_info() {
+Student::Student() : dept(""), gender(""), name(""), age(0) { }
+
+Student::Student(std::istream &is, std::ostream &os) {
     // TODO: Put that I have checked the empty-input
-    Format::strict_input(std::cin, std::cout, "Dept: ", dept, Format::NOSPACE | Format::NOLOWER | Format::NOEMPTY);
-    Format::strict_input(std::cin, std::cout, "Gender: ", gender, Format::NOSPACE | Format::GENDER | Format::NOEMPTY);
-    Format::strict_input(std::cin, std::cout, "Name: ", name, Format::NOSPACE | Format::NOEMPTY);
-    Format::range_input(std::cin, std::cout, "Age: ", age, MIN_AGE, MAX_AGE);
+    Format::strict_input(is, os, "Dept: ", dept, Format::NOSPACE | Format::NOLOWER | Format::NOEMPTY);
+    Format::strict_input(is, os, "Gender: ", gender, Format::NOSPACE | Format::GENDER | Format::NOEMPTY);
+    Format::strict_input(is, os, "Name: ", name, Format::NOSPACE | Format::NOEMPTY);
+    Format::range_input(is, os, "Age: ", age, MIN_AGE, MAX_AGE);
 }
 
 std::string Student::get_dept() const {

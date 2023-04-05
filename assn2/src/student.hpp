@@ -1,3 +1,10 @@
+/*
+ * CSED232 ASSN2
+ * Author: Yeho Gwon (20220358)
+ * Date: 2023/03/05
+ * File Name: student.hpp
+ */
+
 #ifndef __STUDENT_HPP__
 #define __STUDENT_HPP__
 
@@ -9,11 +16,16 @@
 
 class Student {
 private: 
+    // student information
     std::string dept, gender, name;
     int age;
 
 public: 
-    void input_info();
+    /**
+     * @brief Get student information from cin
+     */
+    Student();
+    Student(std::istream &is, std::ostream &os);
 
     std::string get_dept() const;
     std::string get_gender() const;
