@@ -54,8 +54,7 @@ bool Format::all(std::string &str, check_bit check) {
 
 bool Format::input_again(std::istream &is, std::ostream &os) {
     std::string _str; // temporary string to store user's choice
-    // TODO: Edit the condition below (default value)
-    strict_input(is, os, "Invalid input. Will you input again (y/n) [y]? ", _str, Format::NOEMPTY | Format::NOSPACE | Format::ONECHAR);
+    strict_input(is, os, "Invalid input. Will you input again (y/n) [y]? ", _str, Format::NOTHING);
     return _str != "n"; // if user's choice is not "n", return true (default choice is "y")
 }
 

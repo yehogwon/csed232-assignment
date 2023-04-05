@@ -20,6 +20,7 @@ class Format { // public comes first following ios convention
 public:
     typedef unsigned int check_bit; // bit mask for checking input
 
+    static const check_bit NOTHING = 0x0;  // 0000 0000 : no condition
     static const check_bit GENDER = 0x1;   // 0000 0001 : string only "M" or "F"
     static const check_bit NOSPACE = 0x2;  // 0000 0010 : string without whitespace
     static const check_bit NOLOWER = 0x4;  // 0000 0100 : string without lowercase (all uppercase)
