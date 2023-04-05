@@ -20,8 +20,7 @@ public:
      * @param data data of student type to store in this node
      * @param next pointer to next node 
      */
-    // TODO: what about use default argument for next?
-    Node(Student data, Node *next);
+    Node(Student data, Node *next = nullptr);
 };
 
 /**

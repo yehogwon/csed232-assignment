@@ -8,7 +8,7 @@
 #include "list.hpp"
 
 List::List() {
-    head = new Node(Student(), nullptr);
+    head = new Node(Student());
     for (int i = 0; i < MAX_DEPT; i++)
         dept_status[i] = {"", 0};
 }
