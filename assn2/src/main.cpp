@@ -50,7 +50,6 @@ int main() {
         try {
             // get the menu selection from user within the range of 1 to 5
             Format::range_input(std::cin, std::cout, "Selection: ", menu, 1, 5);
-            // TODO: utilize the return values of add_student and delete_student; print the message here, not in the functions
             switch (menu) {
                 case 1: // Add
                     add_student(student_list);
