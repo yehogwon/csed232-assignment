@@ -12,7 +12,6 @@
 Student::Student() : dept(""), gender(""), name(""), age(0) { }
 
 Student::Student(std::istream &is, std::ostream &os) {
-    // TODO: Put that I have checked the empty-input
     Format::strict_input(is, os, "Dept: ", dept, Format::NOSPACE | Format::NOLOWER | Format::NOEMPTY);
     Format::strict_input(is, os, "Gender: ", gender, Format::NOSPACE | Format::GENDER | Format::NOEMPTY);
     Format::strict_input(is, os, "Name: ", name, Format::NOSPACE | Format::NOEMPTY);
