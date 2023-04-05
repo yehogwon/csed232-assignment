@@ -44,7 +44,7 @@ int main() {
     List student_list; // the list of students
 
     int menu; // the menu selection from user
-    bool stop = false; // TODO: Is it really necessary?
+    bool stop = false; // the flag to stop the program
     do {
         show_menu();
         try {
@@ -64,7 +64,7 @@ int main() {
                     pivot_table(student_list);
                     break;
                 case 5: 
-                    stop = true;
+                    stop = true; // stop the program
                     return 0;
             }
         } catch (InterruptedInputException) { // If the user input is interrupted (the user wants to get back to the main menu)
