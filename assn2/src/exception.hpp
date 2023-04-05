@@ -10,6 +10,7 @@
 
 #include <iostream>
 
+// Exception to notice that the user stopped to input to get back to the main menu
 class InterruptedInputException : public std::exception { };
 
 #endif
