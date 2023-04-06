@@ -98,7 +98,7 @@ bool List::remove(Node *node) {
     return true; // the node has been removed successfully
 }
 
-void List::print() const {
+void List::print() {
     sort(); // FIXME: Check if it works properly
     Node *cur = head->next; // start from the first node
     while (cur != nullptr) {

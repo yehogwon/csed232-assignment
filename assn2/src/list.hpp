@@ -72,7 +72,7 @@ public:
      * @brief print the list
      * @return none
      */
-    void print() const;
+    void print();
 
     /**
      * @brief sort the list following the instruction using selection sort algorithm (dept > gender > name > age; ascending order)
