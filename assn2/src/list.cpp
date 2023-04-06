@@ -66,7 +66,6 @@ bool List::add(Node *node) {
         }
         prev = prev->next; // move on to the next node
     }
-    sort(); // TODO: Move it to print()?
 
     return true; // the node has been added successfully
 }
@@ -100,6 +99,7 @@ bool List::remove(Node *node) {
 }
 
 void List::print() const {
+    sort(); // FIXME: Check if it works properly
     Node *cur = head->next; // start from the first node
     while (cur != nullptr) {
         Student s = cur->data; // get the student data
