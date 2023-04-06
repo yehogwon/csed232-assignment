@@ -70,6 +70,7 @@ int main() {
                     pivot_table(student_list);
                     break;
                 case 5: 
+                    std::cout << "Exit!" << std::endl;
                     stop = true; // stop the program
                     return 0;
             }
