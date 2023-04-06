@@ -39,12 +39,6 @@ private:
     DeptStatus dept_status[MAX_DEPT]; // store the departments as an array (the name of each department and the number of students in the department)
 
     /**
-     * @brief convert the given operator to string (the name of the operator)
-     * @param op operator to be converted
-     * @return name (Average, Max, Min) of the operator
-     */
-    std::string to_string(Operator op) const; // TODO: move this method outside the class
-    /**
      * @brief return the number of departments in the list
      * @return the total number of departments in the list
      */
@@ -116,6 +110,13 @@ public:
 
     friend bool operator<(const Student &s, const List &list);
 };
+
+/**
+ * @brief convert the given operator to string (the name of the operator)
+ * @param op operator to be converted
+ * @return name (Average, Max, Min) of the operator
+ */
+std::string to_string(Operator op);
 
 /**
  * @brief find the maximum value of two arguments

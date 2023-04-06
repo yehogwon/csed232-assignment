@@ -22,7 +22,7 @@ List::~List() {
     }
 }
 
-std::string List::to_string(Operator op) const {
+std::string to_string(Operator op) {
     switch (op) { // return the name of the corresponding operator
         case AVG: return "Average";
         case MAX: return "Max";
