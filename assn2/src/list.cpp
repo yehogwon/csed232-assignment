@@ -147,8 +147,7 @@ void List::pivot_dept(Operator op) {
 
     // initialize the pivot data
     for (int i = 0; i < MAX_DEPT; i++) {
-        // TODO: Change the max intialized value to the minimum age of the students
-        pivots[i] = {0, MAX_AGE, 0, 0}; // initialize the pivot data
+        pivots[i] = {MIN_AGE, MAX_AGE, 0, 0}; // initialize the pivot data
         // Note that min is initialized to the maximum age and max is initialized to the minimum age.
     }
 
@@ -192,8 +191,7 @@ void List::pivot_gender(Operator op) {
 
     // initialize the pivot data
     for (int i = 0; i < MAX_GENDER; i++) {
-        // TODO: Change the max intialized value to the minimum age of the students
-        pivots[i] = {0, MAX_AGE, 0, 0}; // initialize the pivot data
+        pivots[i] = {MIN_AGE, MAX_AGE, 0, 0}; // initialize the pivot data
         // Note that min is initialized to the maximum age and max is initialized to the minimum age.
     }
 
@@ -238,8 +236,7 @@ void List::pivot_dept_gender(Operator op) {
 
     // initialize the pivot data
     for (int i = 0; i < MAX_DEPT_GENDER; i++) {
-        // TODO: Change the max intialized value to the minimum age of the students
-        pivots[i] = {0, MAX_AGE, 0, 0};
+        pivots[i] = {MIN_AGE, MAX_AGE, 0, 0};
         // Note that min is initialized to the maximum age and max is initialized to the minimum age.
     }
 
