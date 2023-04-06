@@ -18,6 +18,7 @@
 #define MAX_DEPT 9 // maximum number of departments
 #define MAX_GENDER 2 // the number of types of gender ("M" / "F")
 #define MAX_DEPT_GENDER (MAX_DEPT * MAX_GENDER)
+#define MAX_STUDENT 10000 // the maximum number of students in a department
 
 typedef bool (*Comp)(const Student &s1, const Student &s2); // function pointer type (Student, Student) -> bool
 

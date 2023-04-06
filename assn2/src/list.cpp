@@ -53,7 +53,8 @@ bool List::add(Node *node) {
         }
     }
 
-    if (index < 0) return false; // the node cannot be added
+    // TODO: Check if it works properly (restriction on the number of students in a department)
+    if (index < 0 || (full && dept_status[index].cnt == MAX_STUDENT)) return false; // the node cannot be added when there is no palce to be added or the department is full
     if (!full) // if the node can be added and the department is not full
         dept_status[index].dept = dept; // insert the department to the array
     dept_status[index].cnt++; // increment the number of students in the department by 1

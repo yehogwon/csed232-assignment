@@ -100,7 +100,7 @@ bool add_student(List &student_list) {
         std::cout << "A student is added in table!" << std::endl;
         return true;
     } else { // the student is already in the list or the department capacity has been full
-        std::cout << "The student already exists or the department capacity has been full. " << std::endl;
+        std::cout << "The student already exists or the list is full. " << std::endl;
         return false;
     }
 }
