@@ -109,12 +109,6 @@ void List::print() {
         std::cout << s << std::endl; // print the student data
         cur = cur->next; // move on to the next node
     }
-
-    std::cout << "  [ DEPT LIST ] " << std::endl;
-    for (int i = 0; i < MAX_DEPT; i++) {
-        if (dept_status[i].dept != "") // if the department is not empty
-            std::cout << dept_status[i].dept << " : " << dept_status[i].cnt << std::endl; // print the department name and the number of students in the department
-    }
 }
 
 void List::sort() { // sort algorithm: selection sort
