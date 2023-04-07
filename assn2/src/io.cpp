@@ -43,12 +43,12 @@ bool Format::onechar(std::string &str) {
 bool Format::all(std::string &str, check_bit check) {
     bool out = true; // initialize out to true (default value is true)
     // One of them is false, out will be false
-    if (check & GENDER) out = out && Format::gender(str);
-    if (check & NOSPACE) out = out && Format::nospace(str);
-    if (check & NOLOWER) out = out && Format::nolower(str);
-    if (check & NOEMPTY) out = out && Format::noempty(str);
-    if (check & NUMBER) out = out && Format::number(str);
-    if (check & ONECHAR) out = out && Format::onechar(str);
+    if (out && (check & GENDER)) out = out && Format::gender(str);
+    if (out && (check & NOSPACE)) out = out && Format::nospace(str);
+    if (out && (check & NOLOWER)) out = out && Format::nolower(str);
+    if (out && (check & NOEMPTY)) out = out && Format::noempty(str);
+    if (out && (check & NUMBER)) out = out && Format::number(str);
+    if (out && (check & ONECHAR)) out = out && Format::onechar(str);
     return out;
 }
 
