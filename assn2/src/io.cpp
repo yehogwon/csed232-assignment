@@ -89,8 +89,7 @@ void Format::range_input(std::istream &is, std::ostream &os, const char *prompt,
 
 std::ostream& operator+(std::ostream &os, double d) {
     if (std::abs(d - std::round(d)) < DOUBLE_TOLERANCE) { // if d has no decimal part
-        // os.precision(0); // set precision to 0
-        os << (int) std::round(d); // print round(d)
+        os << (int) std::round(d); // print round(d) as an integer
     } else {
         os << std::fixed; // set fixed-point notation
         os.setf(std::ios_base::showpoint); // set showpoint (print decimal point even if it is 0)
