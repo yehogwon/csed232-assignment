@@ -104,7 +104,7 @@ void List::print() {
     Node *cur = head->next; // start from the first node
     while (cur != nullptr) {
         Student s = cur->data; // get the student data
-        std::cout << s; // print the student data
+        std::cout << s << std::endl; // print the student data
         cur = cur->next; // move on to the next node
     }
 }
