@@ -56,7 +56,6 @@ bool List::add(Node *node) {
 
     // 원래 있는 경우 찾는거 잘 안됐는ㄴ데 고침 -> 수정한거 잘 되나 확인!!
 
-    // TODO: Check if it works properly (restriction on the number of students in a department)
     if (index < 0 || (full && dept_status[index].cnt == MAX_STUDENT)) throw MaxDepartmentException(); // the node cannot be added when there is no palce to be added or the department is full
     if (!full) // if the node can be added and the department is not full
         dept_status[index].dept = dept; // insert the department to the array
@@ -103,7 +102,7 @@ bool List::remove(Node *node) {
 }
 
 void List::print() {
-    sort(); // FIXME: Check if it works properly
+    sort(); // sort the list before printing
     Node *cur = head->next; // start from the first node
     while (cur != nullptr) {
         Student s = cur->data; // get the student data

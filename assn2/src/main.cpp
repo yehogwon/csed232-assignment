@@ -105,7 +105,6 @@ bool add_student(List &student_list) {
             return false;
         }
     } catch (MaxDepartmentException &e) { // if the department capacity has been full
-        // TODO: Check if it works properly
         std::cout << "The department capacity of the list is full. " << std::endl;
         return false;
     }
