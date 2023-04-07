@@ -14,11 +14,11 @@ Student::Student() : dept(""), gender(""), name(""), age(0) { }
 Student::Student(std::istream &is, std::ostream &os) {
     // get input from the user under the following conditions:
     // (1) dept should not contain space and should consist only of uppercase. Also, it should not be empty. 
-    Format::strict_input(is, os, "Dept: ", dept, Format::NOSPACE | Format::NOLOWER | Format::NOEMPTY);
+    Format::strict_input(is, os, "Dept: ", dept, Format::ALPHABET | Format::NOSPACE | Format::NOLOWER | Format::NOEMPTY);
     // (2) gender should either "M", "F". So, it should not contain whitespace and be empty.
-    Format::strict_input(is, os, "Gender: ", gender, Format::NOSPACE | Format::GENDER | Format::NOEMPTY);
+    Format::strict_input(is, os, "Gender: ", gender, Format::ALPHABET | Format::NOSPACE | Format::GENDER | Format::NOEMPTY);
     // (3) name should not contain whitespace and be empty. 
-    Format::strict_input(is, os, "Name: ", name, Format::NOSPACE | Format::NOEMPTY);
+    Format::strict_input(is, os, "Name: ", name, Format::ALPHABET | Format::NOSPACE | Format::NOEMPTY);
     // (4) age should be a integer and within the range of MIN_AGE and MAX_AGE (inclusive)
     Format::range_input(is, os, "Age: ", age, MIN_AGE, MAX_AGE);
 }

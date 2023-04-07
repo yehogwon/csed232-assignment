@@ -42,7 +42,7 @@ bool Format::onechar(std::string &str) {
 
 bool Format::alphabet(std::string &str) {
     for (char ch : str)
-        if ((ch < 'A' || ch > 'Z') && (ch < 'a' || ch > 'z')) // str contains at least one non-alphabet character
+        if ((ch < 'A' || ch > 'Z') && (ch < 'a' || ch > 'z') && ch != ' ') // str contains at least one non-alphabet character
             return false; // if so, return false
     return true; // otherwise, return true
 }
