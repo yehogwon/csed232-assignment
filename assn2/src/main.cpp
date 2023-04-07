@@ -74,7 +74,7 @@ int main() {
                     stop = true; // stop the program
                     return 0;
             }
-        } catch (InterruptedInputException) { // If the user input is interrupted (the user wants to get back to the main menu)
+        } catch (InterruptedInputException &e) { // If the user input is interrupted (the user wants to get back to the main menu)
             continue;
         }
     } while (!stop);
@@ -104,7 +104,7 @@ bool add_student(List &student_list) {
             std::cout << "The student already exists. " << std::endl;
             return false;
         }
-    } catch (MaxDepartmentException) { // if the department capacity has been full
+    } catch (MaxDepartmentException &e) { // if the department capacity has been full
         // TODO: Check if it works properly
         std::cout << "The department capacity of the list is full. " << std::endl;
         return false;

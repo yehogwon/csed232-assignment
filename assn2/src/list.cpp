@@ -27,6 +27,7 @@ std::string to_string(Operator op) {
         case AVG: return "Average";
         case MAX: return "Max";
         case MIN: return "Min";
+        default: return "";
     }
 }
 
@@ -47,11 +48,13 @@ bool List::add(Node *node) {
     for (int i = 0; i < MAX_DEPT; i++) { // iterate throughout the array
         // In the case of full department, check if the department is already in the array so that we can just increment the number of students in the department.
         // In the case of not full department, check if the department is not in the array so that we can add the department to the array. 
-        if ((full && dept_status[i].dept == dept) || (!full && dept_status[i].dept == "")) {
+        if (dept_status[i].dept == dept || (!full && dept_status[i].dept == "")) {
             index = i; // save the index where the node can be inserted/added to the list
             break; // stop the loop
         }
     }
+
+    // 원래 있는 경우 찾는거 잘 안됐는ㄴ데 고침 -> 수정한거 잘 되나 확인!!
 
     // TODO: Check if it works properly (restriction on the number of students in a department)
     if (index < 0 || (full && dept_status[index].cnt == MAX_STUDENT)) throw MaxDepartmentException(); // the node cannot be added when there is no palce to be added or the department is full
@@ -106,6 +109,12 @@ void List::print() {
         Student s = cur->data; // get the student data
         std::cout << s << std::endl; // print the student data
         cur = cur->next; // move on to the next node
+    }
+
+    std::cout << "  [ DEPT LIST ] " << std::endl;
+    for (int i = 0; i < MAX_DEPT; i++) {
+        if (dept_status[i].dept != "") // if the department is not empty
+            std::cout << dept_status[i].dept << " : " << dept_status[i].cnt << std::endl; // print the department name and the number of students in the department
     }
 }
 
