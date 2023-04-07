@@ -40,6 +40,13 @@ bool Format::onechar(std::string &str) {
     return str.length() == 1; // return if str has only one character
 }
 
+bool Format::alphabet(std::string &str) {
+    for (char ch : str)
+        if ((ch < 'A' || ch > 'Z') && (ch < 'a' || ch > 'z')) // str contains at least one non-alphabet character
+            return false; // if so, return false
+    return true; // otherwise, return true
+}
+
 bool Format::all(std::string &str, check_bit check) {
     bool out = true; // initialize out to true (default value is true)
     // One of them is false, out will be false
@@ -50,6 +57,7 @@ bool Format::all(std::string &str, check_bit check) {
     if (out && (check & NOEMPTY)) out = out && Format::noempty(str);
     if (out && (check & NUMBER)) out = out && Format::number(str);
     if (out && (check & ONECHAR)) out = out && Format::onechar(str);
+    if (out && (check & ALPHABET)) out = out && Format::alphabet(str);
     return out;
 }
 
@@ -81,8 +89,8 @@ void Format::range_input(std::istream &is, std::ostream &os, const char *prompt,
 
 std::ostream& operator+(std::ostream &os, double d) {
     if (std::abs(d - std::round(d)) < DOUBLE_TOLERANCE) { // if d has no decimal part
-        os.precision(0); // set precision to 0
-        os << d; // print d
+        // os.precision(0); // set precision to 0
+        os << (int) std::round(d); // print round(d)
     } else {
         os << std::fixed; // set fixed-point notation
         os.setf(std::ios_base::showpoint); // set showpoint (print decimal point even if it is 0)

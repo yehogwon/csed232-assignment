@@ -20,13 +20,14 @@ class Format { // public comes first following ios convention
 public:
     typedef unsigned int check_bit; // bit mask for checking input
 
-    static const check_bit NOTHING = 0x0;  // 0000 0000 : no condition
-    static const check_bit GENDER = 0x1;   // 0000 0001 : string only "M" or "F"
-    static const check_bit NOSPACE = 0x2;  // 0000 0010 : string without whitespace
-    static const check_bit NOLOWER = 0x4;  // 0000 0100 : string without lowercase (all uppercase)
-    static const check_bit NOEMPTY = 0x8;  // 0000 1000 : not empty string
-    static const check_bit NUMBER = 0x10;  // 0001 0000 : string only digits
-    static const check_bit ONECHAR = 0x20; // 0010 0000 : string only one character
+    static const check_bit NOTHING = 0x0;   // 0000 0000 : no condition
+    static const check_bit GENDER = 0x1;    // 0000 0001 : string only "M" or "F"
+    static const check_bit NOSPACE = 0x2;   // 0000 0010 : string without whitespace
+    static const check_bit NOLOWER = 0x4;   // 0000 0100 : string without lowercase (all uppercase)
+    static const check_bit NOEMPTY = 0x8;   // 0000 1000 : not empty string
+    static const check_bit NUMBER = 0x10;   // 0001 0000 : string only digits
+    static const check_bit ONECHAR = 0x20;  // 0010 0000 : string only one character
+    static const check_bit ALPHABET = 0x40; // 0100 0000 : string only with alphabets
 
     /**
      * @brief get input from user in string type with some format (gender, nospace, ...)
@@ -95,6 +96,13 @@ private:
      * @return true if str contains only one character, false otherwise
      */
     static bool onechar(std::string &str);
+
+    /**
+     * @brief check if a string consists of only alphabets
+     * @param str string to check
+     * @return true if str contains only alphabets, false otherwise
+     */
+    static bool alphabet(std::string &str);
 
     /**
      * @brief check if a string satisfies all conditions using bit mask
