@@ -13,4 +13,6 @@
 // Exception to notice that the user stopped input process to get back to the main menu
 class InterruptedInputException : public std::exception { };
 
+class MaxDepartmentException : public std::exception { };
+
 #endif
