@@ -43,6 +43,7 @@ bool Format::onechar(std::string &str) {
 bool Format::all(std::string &str, check_bit check) {
     bool out = true; // initialize out to true (default value is true)
     // One of them is false, out will be false
+    // Check when out is true; Once it turns false, it will not be checked anymore
     if (out && (check & GENDER)) out = out && Format::gender(str);
     if (out && (check & NOSPACE)) out = out && Format::nospace(str);
     if (out && (check & NOLOWER)) out = out && Format::nolower(str);
