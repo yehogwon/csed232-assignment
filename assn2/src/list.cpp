@@ -54,7 +54,7 @@ bool List::add(Node *node) {
     }
 
     // TODO: Check if it works properly (restriction on the number of students in a department)
-    if (index < 0 || (full && dept_status[index].cnt == MAX_STUDENT)) return false; // the node cannot be added when there is no palce to be added or the department is full
+    if (index < 0 || (full && dept_status[index].cnt == MAX_STUDENT)) throw MaxDepartmentException(); // the node cannot be added when there is no palce to be added or the department is full
     if (!full) // if the node can be added and the department is not full
         dept_status[index].dept = dept; // insert the department to the array
     dept_status[index].cnt++; // increment the number of students in the department by 1
@@ -228,7 +228,7 @@ void List::pivot_gender(Operator op) {
 }
 
 void List::pivot_dept_gender(Operator op) {
-    // In this case, additional sort is not needed because the list is already sorted by dept > gender. 
+    sort();
 
     Pivot pivots[MAX_DEPT_GENDER]; // array to store the pivots
     std::string depts[MAX_DEPT_GENDER]; // array to store the departments

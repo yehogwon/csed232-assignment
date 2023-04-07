@@ -14,7 +14,6 @@
 #include "node.hpp"
 #include "io.hpp"
 
-#define MAX_AGE 30 // maximum age of students
 #define MAX_DEPT 9 // maximum number of departments
 #define MAX_GENDER 2 // the number of types of gender ("M" / "F")
 #define MAX_DEPT_GENDER (MAX_DEPT * MAX_GENDER)

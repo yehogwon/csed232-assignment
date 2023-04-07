@@ -96,11 +96,17 @@ bool add_student(List &student_list) {
     Student s(std::cin, std::cout); // get student information from user and create a student
     
     // add the student to the list
-    if (student_list.add(new Node(s))) { // if the student is not in the list yet so that he/she has been successfully added
-        std::cout << "A student is added in table!" << std::endl;
-        return true;
-    } else { // the student is already in the list or the department capacity has been full
-        std::cout << "The student already exists or the list is full. " << std::endl;
+    try {
+        if (student_list.add(new Node(s))) { // if the student is not in the list yet so that he/she has been successfully added
+            std::cout << "A student is added in table!" << std::endl;
+            return true;
+        } else { // the student is already in the list
+            std::cout << "The student already exists. " << std::endl;
+            return false;
+        }
+    } catch (MaxDepartmentException) { // if the department capacity has been full
+        // TODO: Check if it works properly
+        std::cout << "The department capacity of the list is full. " << std::endl;
         return false;
     }
 }
