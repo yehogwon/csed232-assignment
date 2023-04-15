@@ -20,14 +20,14 @@ classic::classic(int width, int height, const std::vector<int> &pixels)
  : artist(width, height, pixels) { }
 
 char classic::mapper(int x, int y) {
-    return TOKENS[get_pixel(x, y) / 17];
+    return TOKENS[min(get_pixel(x, y) / 17, 14)];
 }
 
 iclassic::iclassic(int width, int height, const std::vector<int> &pixels)
  : artist(width, height, pixels) { }
 
 char iclassic::mapper(int x, int y) {
-    return TOKENS[14 - get_pixel(x, y) / 17];
+    return TOKENS[max(0, 14 - get_pixel(x, y) / 17)];
 }
 
 sobelx::sobelx(int width, int height, const std::vector<int> &pixels)

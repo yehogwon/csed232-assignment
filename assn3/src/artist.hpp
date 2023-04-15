@@ -16,6 +16,12 @@ private:
 protected: 
     int get_pixel(int x, int y);
 
+    template <typename T>
+    T min(T a, T b) const;
+
+    template <typename T>
+    T max(T a, T b) const;
+
 public: 
     /**
      * @brief A constructor for the artist class
@@ -132,5 +138,15 @@ public:
     */
     char mapper(int x, int y);
 };
+
+template <typename T>
+T artist::min(T a, T b) const {
+    return (a < b) ? a : b;
+}
+
+template <typename T>
+T artist::max(T a, T b) const {
+    return (a > b) ? a : b;
+}
 
 #endif
