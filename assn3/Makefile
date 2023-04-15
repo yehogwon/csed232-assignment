@@ -3,10 +3,10 @@ D ?=
 CXXFLAGS = -Wall -O2 $(D)
 STD ?= c++14
 
-SRC = main.cpp # cpp files
+SRC = src/main.cpp # cpp files
 HEADER = # header files
-OUT = main.out # executable file
-TARGET = main.o # objective files
+TARGET = src/main.o # objective files
+OUT = out/main.out # executable file
 
 .PHONY: all clean run
 
@@ -21,5 +21,5 @@ run: all
 main.o : main.cpp $(HEADER)
 	$(CC) $(CXXFLAGS) --std=$(STD) -o main.o -c main.cpp
 
-main.out : main.o student.o node.o list.o io.o
+main.out : $(TARGET)
 	$(CC) $(CXXFLAGS) --std=$(STD) -o $(OUT) $(TARGET)
