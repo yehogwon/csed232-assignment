@@ -2,6 +2,7 @@
 
 /* Questions
  * Is it fine to append std:: prefix to vector even though it is not allowed to edit main function?
+ * Is it fine to make artist classs abstract?
  */
 
 int main(int argc, char *argv[]) {
