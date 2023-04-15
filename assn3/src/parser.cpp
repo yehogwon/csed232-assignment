@@ -2,9 +2,8 @@
 
 std::vector<int> parser::load_image(const char *input_file) {
     std::ifstream in_file(input_file);
-    if (!in_file.is_open()) {
-        // EXP: Unable to open file
-    }
+    if (!in_file.is_open())
+        throw std::runtime_error("Unable to open file");
 
     std::string _data;
     getline(in_file, _data);
@@ -13,9 +12,8 @@ std::vector<int> parser::load_image(const char *input_file) {
 
 std::vector<std::string> parser::load_config(const char *input_file) {
     std::ifstream in_file(input_file);
-    if (!in_file.is_open()) {
-        // EXP: Unable to open file
-    }
+    if (!in_file.is_open())
+        throw std::runtime_error("Unable to open file");
 
     std::string _data;
     getline(in_file, _data);
