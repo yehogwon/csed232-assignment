@@ -13,7 +13,7 @@ int artist::get_height() const {
 
 int artist::get_pixel(int x, int y) {
     if (x < 0 || x >= width || y < 0 || y >= height) return -1;
-    return pixels[x * width + y];
+    return pixels[x + y * width];
 }
 
 classic::classic(int width, int height, const std::vector<int> &pixels)
