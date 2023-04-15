@@ -17,17 +17,17 @@ clean:
 run: all
 	./$(OUT)
 
-parser.o: src/parser.cpp $(HEADER)
-	$(CC) $(CXXFLAGS) --std=$(STD) -o out/parser.o -c parser.cpp
+out/parser.o: src/parser.cpp $(HEADER)
+	$(CC) $(CXXFLAGS) --std=$(STD) -o out/parser.o -c src/parser.cpp
 
-drawer.o: src/drawer.cpp $(HEADER)
-	$(CC) $(CXXFLAGS) --std=$(STD) -o out/drawer.o -c drawer.cpp
+out/drawer.o: src/drawer.cpp $(HEADER)
+	$(CC) $(CXXFLAGS) --std=$(STD) -o out/drawer.o -c src/drawer.cpp
 
-artist.o: src/artist.cpp $(HEADER)
-	$(CC) $(CXXFLAGS) --std=$(STD) -o out/artist.o -c artist.cpp
+out/artist.o: src/artist.cpp $(HEADER)
+	$(CC) $(CXXFLAGS) --std=$(STD) -o out/artist.o -c src/artist.cpp
 
-main.o : src/main.cpp $(HEADER)
-	$(CC) $(CXXFLAGS) --std=$(STD) -o out/main.o -c main.cpp
+out/main.o : src/main.cpp $(HEADER)
+	$(CC) $(CXXFLAGS) --std=$(STD) -o out/main.o -c src/main.cpp
 
-main.out : $(TARGET)
+out/main.out : $(TARGET)
 	$(CC) $(CXXFLAGS) --std=$(STD) -o $(OUT) $(TARGET)
