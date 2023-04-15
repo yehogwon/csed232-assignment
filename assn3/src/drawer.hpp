@@ -2,9 +2,12 @@
 #define __DRAWER_HPP__
 
 #include <string>
+#include <sstream>
 #include "artist.hpp"
 
 class drawer {
+protected: 
+    artist *artist_;
 public: 
     /**
      * @brief A constructor for the drawer class
@@ -22,6 +25,12 @@ public:
 class downsample : public drawer {
 public: 
     /**
+     * @brief A constructor for the downsample class
+     * @param artist_ A pointer to an artist object
+    */
+    downsample(artist *artist_);
+
+    /**
      * @brief Draw ASCII art and downsample by a factor of 2
      * @return ASCII art as a std::string
     */
@@ -31,6 +40,12 @@ public:
 class upsample : public drawer {
 public: 
     /**
+     * @brief A constructor for the upsample class
+     * @param artist_ A pointer to an artist object
+    */
+    upsample(artist *artist_);
+
+    /**
      * @brief Draw ASCII art and upsample by a factor of 2
      * @return ASCII art as a std::string
     */
@@ -38,6 +53,8 @@ public:
 };
 
 class scale : public drawer {
+private: 
+    int x_ratio, y_ratio;
 public: 
     /**
      * @brief A constructor for the scale class
