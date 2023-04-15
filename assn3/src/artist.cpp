@@ -3,6 +3,14 @@
 artist::artist(int width, int height, const std::vector<int> &pixels)
  : width(width), height(height), pixels(pixels) { }
 
+int artist::get_width() const {
+    return width;
+}
+
+int artist::get_height() const {
+    return height;
+}
+
 int artist::get_pixel(int x, int y) {
     if (x < 0 || x >= width || y < 0 || y >= height) return -1;
     return pixels[x * width + y];

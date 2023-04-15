@@ -24,6 +24,10 @@ public:
      * @param pixels The pixel data of the image
     */
     artist(int width, int height, const std::vector<int> &pixels);
+
+    int get_width() const;
+
+    int get_height() const;
     
     /**
      * @brief Convert pixel to ASCII character
