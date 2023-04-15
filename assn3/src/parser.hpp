@@ -24,6 +24,10 @@ private:
     */
     template <typename T>
     std::vector<T> split(const std::string &s, const char delimiter, const cast<T> cast_ = nullptr) const;
+
+    // FIXME: Solve the error on template specialization
+    template <>
+    std::vector<std::string> split(const std::string &s, const char delimiter, const cast<std::string> cast_) const;
 public: 
     /**
      * @brief Load image from file
