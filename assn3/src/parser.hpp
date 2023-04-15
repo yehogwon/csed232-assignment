@@ -24,10 +24,6 @@ private:
     */
     template <typename T>
     std::vector<T> split(const std::string &s, const char delimiter, const cast<T> cast_ = nullptr) const;
-
-    // FIXME: Solve the error on template specialization
-    template <>
-    std::vector<std::string> split(const std::string &s, const char delimiter, const cast<std::string> cast_) const;
 public: 
     /**
      * @brief Load image from file
@@ -52,7 +48,7 @@ public:
 };
 
 template <typename T>
-std::vector<T> parser::split(const std::string &s, const char delimiter, const cast<T> cast_) const {
+inline std::vector<T> parser::split(const std::string &s, const char delimiter, const cast<T> cast_) const {
     std::vector<std::string> v_ = split<std::string>(s, delimiter, nullptr);
     std::vector<T> v;
     for (const std::string &s_ : v_) v.push_back(cast_(s_));
@@ -60,7 +56,7 @@ std::vector<T> parser::split(const std::string &s, const char delimiter, const c
 }
 
 template <>
-std::vector<std::string> parser::split<std::string>(const std::string &s, const char delimiter, const cast<std::string> cast_) const {
+inline std::vector<std::string> parser::split<std::string>(const std::string &s, const char delimiter, const cast<std::string> cast_) const {
     std::vector<std::string> v;
     
     std::istringstream iss(s);
