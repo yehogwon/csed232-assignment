@@ -7,7 +7,7 @@
 
 class drawer {
 protected: 
-    artist *artist_
+    artist *artist_;
 
     template <typename T>
     T min(T a, T b) const;
@@ -78,12 +78,12 @@ public:
 };
 
 template <typename T>
-T artist::min(T a, T b) const {
+T drawer::min(T a, T b) const {
     return (a < b) ? a : b;
 }
 
 template <typename T>
-T artist::max(T a, T b) const {
+T drawer::max(T a, T b) const {
     return (a > b) ? a : b;
 }
 
