@@ -4,8 +4,8 @@ drawer::drawer(artist *artist_) : artist_(artist_) { }
 
 std::string drawer::draw() {
     std::stringstream oss;
-    for (int i = 0; i < artist_->get_height(); i += 2) {
-        for (int j = 0; j < artist_->get_width(); j += 2)
+    for (int i = 0; i < artist_->get_height(); i++) {
+        for (int j = 0; j < artist_->get_width(); j++)
             oss << artist_->mapper(j, i);
         oss << "\n";
     }
@@ -16,8 +16,8 @@ downsample::downsample(artist *artist_) : drawer(artist_) { }
 
 std::string downsample::draw() {
     std::stringstream oss;
-    for (int i = 0; i < artist_->get_height(); i++) {
-        for (int j = 0; j < artist_->get_width(); j++)
+    for (int i = 0; i < artist_->get_height(); i += 2) {
+        for (int j = 0; j < artist_->get_width(); j += 2)
             oss << artist_->mapper(j, i);
         oss << "\n";
     }
