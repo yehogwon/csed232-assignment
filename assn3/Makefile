@@ -14,9 +14,6 @@ all: $(TARGET) $(OUT)
 clean: 
 	rm -f $(TARGET) $(OUT)
 
-run: all
-	./$(OUT)
-
 out/parser.o: src/parser.cpp $(HEADER)
 	$(CC) $(CXXFLAGS) --std=$(STD) -o out/parser.o -c src/parser.cpp
 
