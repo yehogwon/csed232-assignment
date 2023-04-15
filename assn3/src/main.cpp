@@ -1,4 +1,6 @@
-#include <vector>
+#include "parser.hpp"
+#include "artist.hpp"
+#include "drawer.hpp"
 
 /* Questions
  * Is it fine to append std:: prefix to vector even though it is not allowed to edit main function?
