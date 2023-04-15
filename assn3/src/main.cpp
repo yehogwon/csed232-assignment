@@ -1,3 +1,4 @@
+#include <iostream>
 #include "parser.hpp"
 #include "artist.hpp"
 #include "drawer.hpp"
@@ -10,7 +11,7 @@
 
 int main(int argc, char *argv[]) {
     if (argc != 4) {
-        cout << "argc is not 4, but " << argc << endl;
+        std::cout << "argc is not 4, but " << argc << std::endl;
         throw;
     }
     
@@ -19,9 +20,9 @@ int main(int argc, char *argv[]) {
 
     // LOAD IMAGE AND CONFIG
     std::vector<int> tokens = p.load_image(argv[1]);
-    std::vector<string> configs = p.load_config(argv[2]);
-    4 string style_target = configs[0];
-    string drawer_target = configs[1];
+    std::vector<std::string> configs = p.load_config(argv[2]);
+    std::string style_target = configs[0];
+    std::string drawer_target = configs[1];
     char *path_output = argv[3];
 
     int width = tokens[0];
@@ -61,8 +62,8 @@ int main(int argc, char *argv[]) {
     }
 
     // PERFORM DRAWING
-    string output = d->draw();
-    cout << output;
+    std::string output = d->draw();
+    std::cout << output;
 
     // WRITE OUTPUT
     p.write_result(path_output, output);
