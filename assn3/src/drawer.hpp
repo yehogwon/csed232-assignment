@@ -10,7 +10,7 @@ public:
      * @brief A constructor for the drawer class
      * @param artist_ A pointer to an artist object
     */
-    void drawer(artist *artist_);
+    drawer(artist *artist_);
 
     /**
      * @brief Draw ASCII art
