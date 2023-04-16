@@ -52,13 +52,10 @@ gradient::gradient(int width, int height, const std::vector<int> &pixels)
  : artist(width, height, pixels) { }
 
 char gradient::mapper(int x, int y) {
-    // FIXME: gradient::mapper() does not work properly
     int cur = get_pixel(x, y), right = get_pixel(x + 1, y), bottom = get_pixel(x, y + 1);
     if (right < 0 && bottom < 0) return ' ';
-    // if ((bottom < 0 || (right >= 0 && bottom >= 0)) && std::abs(cur - right) >= THRESHOLD) return '|';
-    if ((bottom < 0 || right >= 0) && std::abs(cur - right) >= THRESHOLD) return '|';
-    // if ((right < 0 || (right >= 0 && bottom >= 0)) && std::abs(cur - bottom) >= THRESHOLD) return '-';
-    if ((right < 0 || bottom >= 0) && std::abs(cur - bottom) >= THRESHOLD) return '-';
     if (right >= 0 && bottom >= 0 && std::abs(cur - right) >= THRESHOLD && std::abs(cur - bottom) >= THRESHOLD) return '+';
+    if ((bottom < 0 || right >= 0) && std::abs(cur - right) >= THRESHOLD) return '|';
+    if ((right < 0 || bottom >= 0) && std::abs(cur - bottom) >= THRESHOLD) return '-';
     return ' ';
 }
