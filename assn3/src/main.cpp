@@ -3,15 +3,11 @@
 #include "artist.hpp"
 #include "drawer.hpp"
 
-/* Questions
- * Is it fine to append std:: prefix to vector even though it is not allowed to edit main function?
- * Is it fine to make artist classs abstract?
- * Is it okay to rename the variables `artist` in drawer class due to the ambiguity?
- */
+using namespace std;
 
 int main(int argc, char *argv[]) {
     if (argc != 4) {
-        std::cout << "argc is not 4, but " << argc << std::endl;
+        cout << "argc is not 4, but " << argc << endl;
         throw;
     }
     
@@ -19,15 +15,15 @@ int main(int argc, char *argv[]) {
     parser p;
 
     // LOAD IMAGE AND CONFIG
-    std::vector<int> tokens = p.load_image(argv[1]);
-    std::vector<std::string> configs = p.load_config(argv[2]);
-    std::string style_target = configs[0];
-    std::string drawer_target = configs[1];
+    vector<int> tokens = p.load_image(argv[1]);
+    vector<string> configs = p.load_config(argv[2]);
+    string style_target = configs[0];
+    string drawer_target = configs[1];
     char *path_output = argv[3];
 
     int width = tokens[0];
     int height = tokens[1];
-    std::vector<int> vals = {tokens.begin() + 2, tokens.end()};
+    vector<int> vals = {tokens.begin() + 2, tokens.end()};
 
     // CREATE ARTIST
     artist *style;
@@ -62,8 +58,8 @@ int main(int argc, char *argv[]) {
     }
 
     // PERFORM DRAWING
-    std::string output = d->draw();
-    std::cout << output;
+    string output = d->draw();
+    cout << output;
 
     // WRITE OUTPUT
     p.write_result(path_output, output);
