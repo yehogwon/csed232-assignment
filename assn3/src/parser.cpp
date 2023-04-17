@@ -1,5 +1,17 @@
 #include "parser.hpp"
 
+template <>
+std::vector<std::string> parser::split<std::string>(const std::string &s, const char delimiter, const cast<std::string> cast_) const {
+    std::vector<std::string> v;
+    
+    std::istringstream iss(s);
+    std::string buf_;
+    while (getline(iss, buf_, delimiter))
+        v.push_back(buf_);
+
+    return v;
+}
+
 std::vector<int> parser::load_image(const char *input_file) {
     std::ifstream in_file(input_file);
     if (!in_file.is_open())

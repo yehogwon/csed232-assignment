@@ -24,6 +24,9 @@ private:
     */
     template <typename T>
     std::vector<T> split(const std::string &s, const char delimiter, const cast<T> cast_ = nullptr) const;
+
+    template <>
+    std::vector<std::string> split<std::string>(const std::string &s, const char delimiter, const cast<std::string> cast_) const;
 public: 
     /**
      * @brief Load image from file
@@ -52,18 +55,6 @@ inline std::vector<T> parser::split(const std::string &s, const char delimiter, 
     std::vector<std::string> v_ = split<std::string>(s, delimiter, nullptr);
     std::vector<T> v;
     for (const std::string &s_ : v_) v.push_back(cast_(s_));
-    return v;
-}
-
-template <>
-inline std::vector<std::string> parser::split<std::string>(const std::string &s, const char delimiter, const cast<std::string> cast_) const {
-    std::vector<std::string> v;
-    
-    std::istringstream iss(s);
-    std::string buf_;
-    while (getline(iss, buf_, delimiter))
-        v.push_back(buf_);
-
     return v;
 }
 
