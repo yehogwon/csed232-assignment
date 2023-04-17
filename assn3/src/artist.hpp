@@ -22,6 +22,9 @@ protected:
     template <typename T>
     T max(T a, T b) const;
 
+    template <typename T>
+    T abs(T a) const;
+
 public: 
     /**
      * @brief A constructor for the artist class
@@ -147,6 +150,11 @@ T artist::min(T a, T b) const {
 template <typename T>
 T artist::max(T a, T b) const {
     return (a > b) ? a : b;
+}
+
+template <typename T>
+T artist::abs(T a) const {
+    return a < 0 ? -a : a;
 }
 
 #endif

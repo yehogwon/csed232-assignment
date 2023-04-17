@@ -42,13 +42,13 @@ scale::scale(artist *artist_, int x_ratio, int y_ratio)
 std::string scale::draw() {
     std::stringstream oss;
     
-    int i_length_factor = std::abs(max(1, y_ratio));
+    int i_length_factor = abs(max(1, y_ratio));
     int i_max = artist_->get_height() * i_length_factor;
-    int i_step = std::abs(max(1, -y_ratio));
+    int i_step = abs(max(1, -y_ratio));
 
-    int j_length_factor = std::abs(max(1, x_ratio));
+    int j_length_factor = abs(max(1, x_ratio));
     int j_max = artist_->get_width() * j_length_factor;
-    int j_step = std::abs(max(1, -x_ratio));
+    int j_step = abs(max(1, -x_ratio));
 
     for (int i = 0; i < i_max; i += i_step) {
         for (int j = 0; j < j_max; j += j_step)
