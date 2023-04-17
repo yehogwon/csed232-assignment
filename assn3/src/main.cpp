@@ -3,6 +3,8 @@
 #include "artist.hpp"
 #include "drawer.hpp"
 
+// TODO: Make destructor of each base class virtual
+
 using namespace std;
 
 int main(int argc, char *argv[]) {
