@@ -2,7 +2,7 @@
 
 drawer::drawer(artist *artist_) : artist_(artist_) { }
 
-std::string drawer::draw() {
+std::string drawer::draw() const {
     std::stringstream oss;
     for (int i = 0; i < artist_->get_height(); i++) {
         for (int j = 0; j < artist_->get_width(); j++)
@@ -14,7 +14,7 @@ std::string drawer::draw() {
 
 downsample::downsample(artist *artist_) : drawer(artist_) { }
 
-std::string downsample::draw() {
+std::string downsample::draw() const {
     std::stringstream oss;
     for (int i = 0; i < artist_->get_height(); i += 2) {
         for (int j = 0; j < artist_->get_width(); j += 2)
@@ -26,7 +26,7 @@ std::string downsample::draw() {
 
 upsample::upsample(artist *artist_) : drawer(artist_) { }
 
-std::string upsample::draw() {
+std::string upsample::draw() const {
     std::stringstream oss;
     for (int i = 0; i < artist_->get_height() * 2; i++) {
         for (int j = 0; j < artist_->get_width() * 2; j++)
@@ -39,7 +39,7 @@ std::string upsample::draw() {
 scale::scale(artist *artist_, int x_ratio, int y_ratio)
  : drawer(artist_), x_ratio(x_ratio), y_ratio(y_ratio) { }
 
-std::string scale::draw() {
+std::string scale::draw() const {
     std::stringstream oss;
     
     int i_length_factor = abs(max(1, y_ratio));

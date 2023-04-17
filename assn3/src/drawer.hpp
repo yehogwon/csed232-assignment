@@ -25,7 +25,7 @@ public:
      * @brief Draw ASCII art
      * @return ASCII art as a std::string
     */
-    virtual std::string draw();
+    virtual std::string draw() const;
 };
 
 class downsample : public drawer {
@@ -40,7 +40,7 @@ public:
      * @brief Draw ASCII art and downsample by a factor of 2
      * @return ASCII art as a std::string
     */
-    std::string draw();
+    std::string draw() const;
 };
 
 class upsample : public drawer {
@@ -55,7 +55,7 @@ public:
      * @brief Draw ASCII art and upsample by a factor of 2
      * @return ASCII art as a std::string
     */
-    std::string draw();
+    std::string draw() const;
 };
 
 class scale : public drawer {
@@ -77,7 +77,7 @@ public:
      * @brief Draw ASCII art and scale to the given ratio
      * @return ASCII art as a std::string
     */
-    std::string draw();
+    std::string draw() const;
 };
 
 template <typename T>

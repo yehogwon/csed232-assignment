@@ -14,7 +14,7 @@ private:
     std::vector<int> pixels;
 
 protected: 
-    int get_pixel(int x, int y);
+    int get_pixel(int x, int y) const;
 
     template <typename T>
     T min(T a, T b) const;
@@ -44,7 +44,7 @@ public:
      * @param y y-coordinate of pixel
      * @return ASCII character to represent pixel
     */
-    virtual char mapper(int x, int y) = 0;
+    virtual char mapper(int x, int y) const = 0;
 };
 
 class classic : public artist {
@@ -63,7 +63,7 @@ public:
      * @param y y-coordinate of pixel
      * @return ASCII character to represent pixel
     */
-    char mapper(int x, int y);
+    char mapper(int x, int y) const;
 };
 
 class iclassic : public artist {
@@ -82,7 +82,7 @@ public:
      * @param y y-coordinate of pixel
      * @return ASCII character to represent pixel
     */
-    char mapper(int x, int y);
+    char mapper(int x, int y) const;
 };
 
 class sobelx : public artist {
@@ -101,7 +101,7 @@ public:
      * @param y y-coordinate of pixel
      * @return ASCII character to represent pixel
     */
-    char mapper(int x, int y);
+    char mapper(int x, int y) const;
 };
 
 class sobely : public artist {
@@ -120,7 +120,7 @@ public:
      * @param y y-coordinate of pixel
      * @return ASCII character to represent pixel
     */
-    char mapper(int x, int y);
+    char mapper(int x, int y) const;
 };
 
 class gradient : public artist {
@@ -139,7 +139,7 @@ public:
      * @param y y-coordinate of pixel
      * @return ASCII character to represent pixel
     */
-    char mapper(int x, int y);
+    char mapper(int x, int y) const;
 };
 
 template <typename T>
