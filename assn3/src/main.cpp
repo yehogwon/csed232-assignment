@@ -64,5 +64,7 @@ int main(int argc, char *argv[]) {
     // WRITE OUTPUT
     p.write_result(path_output, output);
 
+    // FIXME: memory leakage
+
     return 0;
 }
