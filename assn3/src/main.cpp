@@ -3,6 +3,8 @@
 #include "artist.hpp"
 #include "drawer.hpp"
 
+// TODO: make desturctors for all classes to be virtual
+
 using namespace std;
 
 int main(int argc, char *argv[]) {
