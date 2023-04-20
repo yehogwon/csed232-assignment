@@ -15,16 +15,6 @@ private:
 
 protected: 
     int get_pixel(int x, int y) const;
-
-    template <typename T>
-    T min(T a, T b) const;
-
-    template <typename T>
-    T max(T a, T b) const;
-
-    template <typename T>
-    T abs(T a) const;
-
 public: 
     /**
      * @brief A constructor for the artist class
@@ -143,17 +133,17 @@ public:
 };
 
 template <typename T>
-T artist::min(T a, T b) const {
+T min(T a, T b) {
     return (a < b) ? a : b;
 }
 
 template <typename T>
-T artist::max(T a, T b) const {
+T max(T a, T b) {
     return (a > b) ? a : b;
 }
 
 template <typename T>
-T artist::abs(T a) const {
+T abs(T a) {
     return a < 0 ? -a : a;
 }
 

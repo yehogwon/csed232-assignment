@@ -8,12 +8,6 @@
 class drawer {
 protected: 
     artist *artist_;
-
-    template <typename T>
-    T min(T a, T b) const;
-
-    template <typename T>
-    T max(T a, T b) const;;
 public: 
     /**
      * @brief A constructor for the drawer class
@@ -61,9 +55,6 @@ public:
 class scale : public drawer {
 private: 
     int x_ratio, y_ratio;
-
-    template <typename T>
-    T abs(T a) const;
 public: 
     /**
      * @brief A constructor for the scale class
@@ -79,20 +70,5 @@ public:
     */
     std::string draw() const;
 };
-
-template <typename T>
-T drawer::min(T a, T b) const {
-    return (a < b) ? a : b;
-}
-
-template <typename T>
-T drawer::max(T a, T b) const {
-    return (a > b) ? a : b;
-}
-
-template <typename T>
-T scale::abs(T a) const {
-    return a < 0 ? -a : a;
-}
 
 #endif
