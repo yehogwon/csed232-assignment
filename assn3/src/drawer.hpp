@@ -15,6 +15,8 @@ public:
     */
     drawer(artist *artist_);
 
+    virtual ~drawer();
+
     /**
      * @brief Draw ASCII art
      * @return ASCII art as a std::string

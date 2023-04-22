@@ -24,6 +24,8 @@ public:
     */
     artist(int width, int height, const std::vector<int> &pixels);
 
+    virtual ~artist();
+
     int get_width() const;
 
     int get_height() const;

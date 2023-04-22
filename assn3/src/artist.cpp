@@ -3,6 +3,8 @@
 artist::artist(int width, int height, const std::vector<int> &pixels)
  : width(width), height(height), pixels(pixels) { }
 
+artist::~artist() { }
+
 int artist::get_width() const {
     return width;
 }

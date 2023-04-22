@@ -2,6 +2,8 @@
 
 drawer::drawer(artist *artist_) : artist_(artist_) { }
 
+drawer::~drawer() { }
+
 std::string drawer::draw() const {
     std::stringstream oss;
     for (int i = 0; i < artist_->get_height(); i++) {
