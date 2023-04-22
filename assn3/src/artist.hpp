@@ -134,6 +134,25 @@ public:
     char mapper(int x, int y) const;
 };
 
+class digit : public artist {
+public: 
+    /**
+     * @brief A constructor for the digit class
+     * @param width The width of the image
+     * @param height The height of the image
+     * @param pixels The pixel data of the image
+    */
+    digit(int width, int height, const std::vector<int> &pixels);
+
+    /**
+     * @brief convert pixel to ASCII character in a digit style
+     * @param x x-coordinate of pixel
+     * @param y y-coordinate of pixel
+     * @return ASCII character to represent pixel
+    */
+    char mapper(int x, int y) const;
+};
+
 template <typename T>
 T min(T a, T b) {
     return (a < b) ? a : b;

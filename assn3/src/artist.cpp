@@ -61,3 +61,21 @@ char gradient::mapper(int x, int y) const {
     if ((right < 0 || bottom >= 0) && abs(cur - bottom) >= THRESHOLD) return '-';
     return ' ';
 }
+
+digit::digit(int width, int height, const std::vector<int> &pixels)
+ : artist(width, height, pixels) { }
+
+char digit::mapper(int x, int y) const {
+    // {1, 7, 4, 2, 3, 5, 0, 6, 9, 8}
+    int pixel = get_pixel(x, y);
+    if (pixel < 23) return '1';
+    if (pixel < 46) return '7';
+    if (pixel < 69) return '4';
+    if (pixel < 92) return '2';
+    if (pixel < 115) return '3';
+    if (pixel < 138) return '5';
+    if (pixel < 161) return '0';
+    if (pixel < 184) return '6';
+    if (pixel < 207) return '9';
+    else return '8';
+}
