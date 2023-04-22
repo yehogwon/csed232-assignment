@@ -4,6 +4,7 @@
 #include <vector>
 
 const char TOKENS[] = {'@', '&', '%', 'W', 'X', 'A', 'H', 'O', 'T', '*', '^', '+', '-', '.', ' '};
+const char DIGITS[] = {'1', '7', '4', '2', '3', '5', '0', '6', '9', '8'};
 const int THRESHOLD = 50;
 
 // style of ASCII art
