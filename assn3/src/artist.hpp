@@ -183,7 +183,7 @@ public:
  * @return the min of a and b
 */
 template <typename T>
-T min(T a, T b) {
+inline T min(T a, T b) {
     return (a < b) ? a : b;
 }
 
@@ -194,7 +194,7 @@ T min(T a, T b) {
  * @return the max of a and b
 */
 template <typename T>
-T max(T a, T b) {
+inline T max(T a, T b) {
     return (a > b) ? a : b;
 }
 
@@ -204,7 +204,7 @@ T max(T a, T b) {
  * @return the absolute value of a
 */
 template <typename T>
-T abs(T a) {
+inline T abs(T a) {
     return a < 0 ? -a : a;
 }
 
