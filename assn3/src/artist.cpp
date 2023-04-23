@@ -23,13 +23,16 @@ classic::classic(int width, int height, const std::vector<int> &pixels)
 
 char classic::mapper(int x, int y) const {
     return TOKENS[min(get_pixel(x, y) / 17, 14)]; // map pixel value to a character
+    // get_pixel(x, y) may exceed the range of TOKENS, so we use min() to prevent it (due to the responsibility of the last token)
 }
 
 iclassic::iclassic(int width, int height, const std::vector<int> &pixels)
  : artist(width, height, pixels) { }
 
 char iclassic::mapper(int x, int y) const {
+    // FIXME: Check the reversed order of TOKENS works correctly
     return TOKENS[max(0, 14 - get_pixel(x, y) / 17)]; // map pixel value to a character (reversed order)
+    // get_pixel(x, y) may be less than zero, so we use max() to prevent it (due to the responsibility of the first token)
 }
 
 sobelx::sobelx(int width, int height, const std::vector<int> &pixels)
