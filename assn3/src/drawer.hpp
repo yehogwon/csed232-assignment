@@ -9,6 +9,14 @@ class drawer {
 protected: 
     artist *artist_; // pointer to an artist object
 
+    /**
+     * @brief A helper function for the draw() function (gets stretching factors and steps)
+     * @param i_factor The factor to stretch the i-axis (vertical) by
+     * @param i_step The step to take on the i-axis
+     * @param j_factor The factor to stretch the j-axis (horizontal) by
+     * @param j_step The step to take on the j-axis
+     * @return ASCII art as a std::string
+    */
     std::string draw_helper(int i_factor, int i_step, int j_factor, int j_step) const;
 public: 
     /**
