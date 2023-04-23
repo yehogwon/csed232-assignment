@@ -12,9 +12,6 @@ std::vector<std::string> parser::split<std::string>(const std::string &s, const 
 
 std::vector<int> parser::load_image(const char *input_file) const {
     std::ifstream in_file(input_file); // declare input file stream
-    if (!in_file.is_open()) // FIRE: exception handling is not necessary
-        throw std::runtime_error("Unable to open file");
-
     std::string _data; // declare a temporary buffer to store the whole line
     getline(in_file, _data); // read a line from input file
     return split<int>(_data, SEP, [](const std::string &s) {return std::stoi(s);});
@@ -22,9 +19,6 @@ std::vector<int> parser::load_image(const char *input_file) const {
 
 std::vector<std::string> parser::load_config(const char *input_file) const {
     std::ifstream in_file(input_file);
-    if (!in_file.is_open()) // FIRE: exception handling is not necessary
-        throw std::runtime_error("Unable to open file");
-
     std::string _data; // declare a temporary buffer to store the whole line
     getline(in_file, _data); // read a line from input config file
     return split<std::string>(_data, SEP); // split it by SEP and return
