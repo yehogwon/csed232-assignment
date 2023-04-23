@@ -3,19 +3,30 @@
 
 #include <vector>
 
+// 15 tokens (English alphabet + special characters) sorted in order of increasing density
 const char TOKENS[] = {'@', '&', '%', 'W', 'X', 'A', 'H', 'O', 'T', '*', '^', '+', '-', '.', ' '};
+
+// 10 decimal digits sorted in order of increasing density
 const char DIGITS[] = {'1', '7', '4', '2', '3', '5', '0', '6', '9', '8'};
-const int THRESHOLD = 50;
+
+const int THRESHOLD = 50; // threshold for edge detection (sobelx and sobely)
 
 // style of ASCII art
 class artist {
 private: 
-    int width;
-    int height;
-    std::vector<int> pixels;
+    int width; // width of image
+    int height; // height of image
+    std::vector<int> pixels; // pixel values of image
 
 protected: 
+    /**
+     * @brief get pixel value at (x, y) (data hiding)
+     * @param x x-coordinate of pixel
+     * @param y y-coordinate of pixel
+     * @return pixel value at (x, y)
+    */
     int get_pixel(int x, int y) const;
+
 public: 
     /**
      * @brief A constructor for the artist class
@@ -25,10 +36,21 @@ public:
     */
     artist(int width, int height, const std::vector<int> &pixels);
 
+    /**
+     * @brief A destructor for the artist class (virtual)
+    */
     virtual ~artist();
 
+    /**
+     * @brief get width of image (data hiding)
+     * @return width of image
+    */
     int get_width() const;
 
+    /**
+     * @brief get height of image (data hiding)
+     * @return height of image
+    */
     int get_height() const;
     
     /**
@@ -154,16 +176,33 @@ public:
     char mapper(int x, int y) const;
 };
 
+/**
+ * @brief find the min of a and b
+ * @param a
+ * @param b
+ * @return the min of a and b
+*/
 template <typename T>
 T min(T a, T b) {
     return (a < b) ? a : b;
 }
 
+/**
+ * @brief find the max of a and b
+ * @param a
+ * @param b
+ * @return the max of a and b
+*/
 template <typename T>
 T max(T a, T b) {
     return (a > b) ? a : b;
 }
 
+/**
+ * @brief get absolute value of a
+ * @param a number
+ * @return the absolute value of a
+*/
 template <typename T>
 T abs(T a) {
     return a < 0 ? -a : a;
