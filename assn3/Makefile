@@ -3,28 +3,33 @@ D ?=
 CXXFLAGS = -Wall -O2 $(D)
 STD ?= c++14
 
+OUT_PATH = out
 HEADER = src/parser.hpp src/drawer.hpp src/artist.hpp
-TARGET = out/main.o out/parser.o out/drawer.o out/artist.o # objective files
-OUT = out/main.out # executable file
+TARGET = $(OUT_PATH)/main.o $(OUT_PATH)/parser.o $(OUT_PATH)/drawer.o $(OUT_PATH)/artist.o # objective files
+OUT = $(OUT_PATH)/assn3.out # executable file
 
 .PHONY: all clean run
 
 all: $(TARGET) $(OUT)
 
 clean: 
-	rm -f $(TARGET) $(OUT)
+	rm -rf $(OUT_PATH)
 
-out/parser.o: src/parser.cpp $(HEADER)
-	$(CC) $(CXXFLAGS) --std=$(STD) -o out/parser.o -c src/parser.cpp
+$(OUT_PATH)/parser.o: src/parser.cpp $(HEADER)
+	@if [ ! -d "$(OUT_PATH)" ]; then mkdir $(OUT_PATH); fi
+	$(CC) $(CXXFLAGS) --std=$(STD) -o $(OUT_PATH)/parser.o -c src/parser.cpp
 
-out/drawer.o: src/drawer.cpp $(HEADER)
-	$(CC) $(CXXFLAGS) --std=$(STD) -o out/drawer.o -c src/drawer.cpp
+$(OUT_PATH)/drawer.o: src/drawer.cpp $(HEADER)
+	@if [ ! -d "$(OUT_PATH)" ]; then mkdir $(OUT_PATH); fi
+	$(CC) $(CXXFLAGS) --std=$(STD) -o $(OUT_PATH)/drawer.o -c src/drawer.cpp
 
-out/artist.o: src/artist.cpp $(HEADER)
-	$(CC) $(CXXFLAGS) --std=$(STD) -o out/artist.o -c src/artist.cpp
+$(OUT_PATH)/artist.o: src/artist.cpp $(HEADER)
+	@if [ ! -d "$(OUT_PATH)" ]; then mkdir $(OUT_PATH); fi
+	$(CC) $(CXXFLAGS) --std=$(STD) -o $(OUT_PATH)/artist.o -c src/artist.cpp
 
-out/main.o : src/main.cpp $(HEADER)
-	$(CC) $(CXXFLAGS) --std=$(STD) -o out/main.o -c src/main.cpp
+$(OUT_PATH)/main.o : src/main.cpp $(HEADER)
+	@if [ ! -d "$(OUT_PATH)" ]; then mkdir $(OUT_PATH); fi
+	$(CC) $(CXXFLAGS) --std=$(STD) -o $(OUT_PATH)/main.o -c src/main.cpp
 
-out/main.out : $(TARGET)
+$(OUT) : $(TARGET)
 	$(CC) $(CXXFLAGS) --std=$(STD) -o $(OUT) $(TARGET)
