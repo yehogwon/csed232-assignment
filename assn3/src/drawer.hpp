@@ -8,6 +8,8 @@
 class drawer {
 protected: 
     artist *artist_; // pointer to an artist object
+
+    std::string draw_helper(int i_factor, int i_step, int j_factor, int j_step) const;
 public: 
     /**
      * @brief A constructor for the drawer class
