@@ -5,14 +5,13 @@
 #include <sstream>
 #include <string>
 #include <vector>
-#include <cmath>
 
-const char SEP = '|';
+const char SEP = '|'; // delimiter of input file
 
 class parser {
 private: 
     template <typename T>
-    using cast = T (*)(const std::string&);
+    using cast = T (*)(const std::string&); // declare cast function pointer type (const std::string& -> T)
 
     /**
      * @brief split given string by given delimiter
@@ -49,12 +48,13 @@ public:
 
 template <typename T>
 inline std::vector<T> parser::split(const std::string &s, const char delimiter, const cast<T> cast_) const {
-    std::vector<std::string> v_ = split<std::string>(s, delimiter, nullptr);
-    std::vector<T> v;
-    for (const std::string &s_ : v_) v.push_back(cast_(s_));
+    std::vector<std::string> v_ = split<std::string>(s, delimiter, nullptr); // split string by delimiter in std::string type
+    std::vector<T> v; // vector to be returned, type of whose elements is T
+    for (const std::string &s_ : v_) v.push_back(cast_(s_)); // cast each element of v_ to T and push it to v using cast_
     return v;
 }
 
+// explicit specialization of parser::split for std::string
 template <>
 std::vector<std::string> parser::split<std::string>(const std::string &s, const char delimiter, const cast<std::string> cast_) const;
 

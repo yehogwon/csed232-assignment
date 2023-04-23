@@ -2,38 +2,36 @@
 
 template <>
 std::vector<std::string> parser::split<std::string>(const std::string &s, const char delimiter, const cast<std::string> cast_) const {
-    std::vector<std::string> v;
-    
-    std::istringstream iss(s);
-    std::string buf_;
-    while (getline(iss, buf_, delimiter))
-        v.push_back(buf_);
-
+    std::vector<std::string> v; // vector to be returned, type of whose elements is std::string
+    std::istringstream iss(s); // use std::istringstream to split std::string object
+    std::string buf_; // declare a temporary buffer to store each separated string
+    while (getline(iss, buf_, delimiter)) // repeatedly get string separated by delimiter
+        v.push_back(buf_); // push it to v
     return v;
 }
 
 std::vector<int> parser::load_image(const char *input_file) const {
-    std::ifstream in_file(input_file);
-    if (!in_file.is_open())
+    std::ifstream in_file(input_file); // declare input file stream
+    if (!in_file.is_open()) // FIRE: exception handling is not necessary
         throw std::runtime_error("Unable to open file");
 
-    std::string _data;
-    getline(in_file, _data);
+    std::string _data; // declare a temporary buffer to store the whole line
+    getline(in_file, _data); // read a line from input file
     return split<int>(_data, SEP, [](const std::string &s) {return std::stoi(s);});
 }
 
 std::vector<std::string> parser::load_config(const char *input_file) const {
     std::ifstream in_file(input_file);
-    if (!in_file.is_open())
+    if (!in_file.is_open()) // FIRE: exception handling is not necessary
         throw std::runtime_error("Unable to open file");
 
-    std::string _data;
-    getline(in_file, _data);
-    return split<std::string>(_data, SEP);
+    std::string _data; // declare a temporary buffer to store the whole line
+    getline(in_file, _data); // read a line from input config file
+    return split<std::string>(_data, SEP); // split it by SEP and return
 }
 
 void parser::write_result(const char *output_file, const std::string &result) const {
-    std::ofstream out_file(output_file);
-    out_file << result;
-    out_file.close();
+    std::ofstream out_file(output_file); // declare output file stream
+    out_file << result; // write result to output file
+    out_file.close(); // close output file stream
 }
