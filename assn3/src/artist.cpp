@@ -60,8 +60,8 @@ char gradient::mapper(int x, int y) const {
     int cur = get_pixel(x, y), right = get_pixel(x + 1, y), bottom = get_pixel(x, y + 1);
     if (right < 0 && bottom < 0) return ' ';
     if (right >= 0 && bottom >= 0 && abs(cur - right) >= THRESHOLD && abs(cur - bottom) >= THRESHOLD) return '+';
-    if ((bottom < 0 || right >= 0) && abs(cur - right) >= THRESHOLD) return '|';
-    if ((right < 0 || bottom >= 0) && abs(cur - bottom) >= THRESHOLD) return '-';
+    if (right >= 0 && abs(cur - right) >= THRESHOLD) return '|';
+    if (bottom >= 0 && abs(cur - bottom) >= THRESHOLD) return '-';
     return ' ';
 }
 
