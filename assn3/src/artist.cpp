@@ -57,12 +57,12 @@ gradient::gradient(int width, int height, const std::vector<int> &pixels)
  : artist(width, height, pixels) { }
 
 char gradient::mapper(int x, int y) const {
-    int cur = get_pixel(x, y), right = get_pixel(x + 1, y), bottom = get_pixel(x, y + 1);
-    if (right < 0 && bottom < 0) return ' ';
-    if (right >= 0 && bottom >= 0 && abs(cur - right) >= THRESHOLD && abs(cur - bottom) >= THRESHOLD) return '+';
-    if (right >= 0 && abs(cur - right) >= THRESHOLD) return '|';
-    if (bottom >= 0 && abs(cur - bottom) >= THRESHOLD) return '-';
-    return ' ';
+    int cur = get_pixel(x, y), right = get_pixel(x + 1, y), bottom = get_pixel(x, y + 1); // current pixel, right adjacent pixel and bottom adjacent pixel
+    if (right < 0 && bottom < 0) return ' '; // right bottom corner -> ' '
+    if (right >= 0 && bottom >= 0 && abs(cur - right) >= THRESHOLD && abs(cur - bottom) >= THRESHOLD) return '+'; // there are both right and bottom adjacent pixels, and the difference is large enough (THRESHOLD) -> '+'
+    if (right >= 0 && abs(cur - right) >= THRESHOLD) return '|'; // there is only right adjacent pixel, and the difference is large enough (THRESHOLD) -> '|'
+    if (bottom >= 0 && abs(cur - bottom) >= THRESHOLD) return '-'; // there is only bottom adjacent pixel, and the difference is large enough (THRESHOLD) -> '-'
+    return ' '; // otherwise return ' '
 }
 
 digit::digit(int width, int height, const std::vector<int> &pixels)
