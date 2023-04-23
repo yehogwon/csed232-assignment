@@ -7,7 +7,7 @@
 
 class drawer {
 protected: 
-    artist *artist_;
+    artist *artist_; // pointer to an artist object
 public: 
     /**
      * @brief A constructor for the drawer class
@@ -15,6 +15,9 @@ public:
     */
     drawer(artist *artist_);
 
+    /**
+     * @brief A destructor for the drawer class (virtual)
+    */
     virtual ~drawer();
 
     /**
@@ -56,7 +59,7 @@ public:
 
 class scale : public drawer {
 private: 
-    int x_ratio, y_ratio;
+    int x_ratio, y_ratio; // ratio to scale by
 public: 
     /**
      * @brief A constructor for the scale class
