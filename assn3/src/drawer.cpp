@@ -36,5 +36,30 @@ scale::scale(artist *artist_, int x_ratio, int y_ratio)
 std::string scale::draw() const {
     int i_length_factor = abs(max(1, y_ratio)), i_step = abs(max(1, -y_ratio)); // calculate the stretching factor and step for the i-axis (vertical)
     int j_length_factor = abs(max(1, x_ratio)), j_step = abs(max(1, -x_ratio)); // calculate the stretching factor and step for the j-axis (horizontal)
+    /* Examples (1|-2)
+     * x: as it is, y: downsample by a factor of 2
+     * i_length_factor: abs(max(1, -2)) = 1
+     * i_step: abs(max(1, 2)) = 2
+     * j_length_factor: abs(max(1, 1)) = 1
+     * j_step: abs(max(1, -1)) = 1
+    */
+
+    /*
+     * Examples (3|4)
+     * x: upsample by a factor of 3, y: upsample by a factor of 4
+     * i_length_factor: abs(max(1, 4)) = 4
+     * i_step: abs(max(1, -4)) = 1
+     * j_length_factor: abs(max(1, 3)) = 3
+     * j_step: abs(max(1, -3)) = 1
+    */
+
+    /*
+     * Examples (-3|4)
+     * x: downsample by a factor of 3, y: upsample by a factor of 4
+     * i_length_factor: abs(max(1, 4)) = 4
+     * i_step: abs(max(1, -4)) = 1
+     * j_length_factor: abs(max(1, -3)) = 1
+     * j_step: abs(max(1, 3)) = 3
+    */
     return draw_helper(i_length_factor, i_step, j_length_factor, j_step); // call the helper function with the calculated parameters
 }
