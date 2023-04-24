@@ -6,13 +6,8 @@
 // 15 tokens (English alphabet + special characters) sorted in order of decreasing density
 const char TOKENS[] = {'@', '&', '%', 'W', 'X', 'A', 'H', 'O', 'T', '*', '^', '+', '-', '.', ' '};
 
-<<<<<<< HEAD
-// 10 decimal digits sorted in order of increasing density
-const char DIGITS[] = {'1', '7', '4', '2', '3', '5', '0', '6', '9', '8'};
-=======
 // 10 decimal digits sorted in order of decreasing density
 const char DIGITS[] = {'8', '9', '6', '0', '5', '3', '2', '4', '7', '1'};
->>>>>>> 3e6311c (updated a comment)
 
 const int THRESHOLD = 50; // threshold for edge detection (sobelx and sobely)
 
