@@ -10,7 +10,7 @@ protected:
     artist *artist_; // pointer to an artist object
 
     /**
-     * @brief A helper function for the draw() function (gets stretching factors and steps). For both directions, either the factor or the step must be 1 and the other must be greater than 1. If so, the function will throw std::invalid_argument.
+     * @brief A helper function for the draw() function (gets stretching factors and steps). For both directions, at least one of the factor and step must be 1. 
      * @param i_factor The factor to stretch the i-axis (vertical) by
      * @param i_step The step to take on the i-axis
      * @param j_factor The factor to stretch the j-axis (horizontal) by
