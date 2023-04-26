@@ -63,6 +63,6 @@ int main(int argc, char *argv[]) {
 
     // WRITE OUTPUT
     p.write_result(path_output, output);
-
+    delete d;
     return 0;
 }
