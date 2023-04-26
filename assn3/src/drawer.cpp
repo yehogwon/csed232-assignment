@@ -2,7 +2,10 @@
 
 drawer::drawer(artist *artist_) : artist_(artist_) { }
 
-drawer::~drawer() { }
+drawer::~drawer() {
+    if (artist_ != nullptr)
+        delete artist_;
+}
 
 std::string drawer::draw_helper(int i_factor, int i_step, int j_factor, int j_step) const {
     if ((i_factor != 1 && i_step != 1) || (i_factor != 1 && i_step != 1))
