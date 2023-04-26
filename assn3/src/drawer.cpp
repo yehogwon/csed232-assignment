@@ -3,7 +3,7 @@
 drawer::drawer(artist *artist_) : artist_(artist_) { }
 
 drawer::~drawer() {
-    delete artist_; // delete the artist object if it is not deleted yet
+    delete artist_; // delete the artist object
 }
 
 std::string drawer::draw_helper(int i_factor, int i_step, int j_factor, int j_step) const {

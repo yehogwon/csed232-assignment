@@ -26,7 +26,7 @@ public:
     drawer(artist *artist_);
 
     /**
-     * @brief A destructor for the drawer class (virtual)
+     * @brief A destructor for the drawer class (virtual). Deletes the artist object. 
     */
     virtual ~drawer();
 
