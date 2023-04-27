@@ -13,14 +13,14 @@ std::vector<std::string> parser::split<std::string>(const std::string &s, const 
 std::vector<int> parser::load_image(const char *input_file) const {
     std::ifstream in_file(input_file); // declare input file stream
     std::string _data; // declare a temporary buffer to store the whole line
-    getline(in_file, _data); // read a line from input file
+    getline(in_file, _data); // read a line from input file (ignore lines below the first line)
     return split<int>(_data, SEP, [](const std::string &s) {return std::stoi(s);});
 }
 
 std::vector<std::string> parser::load_config(const char *input_file) const {
     std::ifstream in_file(input_file);
     std::string _data; // declare a temporary buffer to store the whole line
-    getline(in_file, _data); // read a line from input config file
+    getline(in_file, _data); // read a line from input config file (ignore lines below the first line)
     return split<std::string>(_data, SEP); // split it by SEP and return
 }
 
