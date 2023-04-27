@@ -69,7 +69,7 @@ public:
 
 class scale : public drawer {
 private: 
-    int x_ratio, y_ratio; // ratio to scale by
+    int i_length_factor, i_step, j_length_factor, j_step; // factors and steps for the i and j axes (more details are explained in scale::scale())
 public: 
     /**
      * @brief A constructor for the scale class
