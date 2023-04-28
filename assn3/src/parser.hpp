@@ -56,6 +56,6 @@ inline std::vector<T> parser::split(const std::string &s, const char delimiter, 
 
 // explicit specialization of parser::split for std::string
 template <>
-std::vector<std::string> parser::split<std::string>(const std::string &s, const char delimiter, const cast<std::string> cast_) const;
+inline std::vector<std::string> parser::split<std::string>(const std::string &s, const char delimiter, const cast<std::string> cast_) const;
 
 #endif
