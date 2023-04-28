@@ -30,7 +30,7 @@ iclassic::iclassic(int width, int height, const std::vector<int> &pixels)
  : artist(width, height, pixels) { }
 
 char iclassic::mapper(int x, int y) const {
-    return TOKENS[(TOKEN_SIZE - 1) - min(get_pixel(x, y) / (PIXEL_MAX / TOKEN_SIZE), TOKEN_SIZE - 1)]; // map pixel value to a character (reversed order of classic::mapper())
+    return TOKENS[(TOKESSN_SIZE - 1) - min(get_pixel(x, y) / (PIXEL_MAX / TOKEN_SIZE), TOKEN_SIZE - 1)]; // map pixel value to a character (reversed order of classic::mapper())
 }
 
 sobelx::sobelx(int width, int height, const std::vector<int> &pixels)
