@@ -3,11 +3,16 @@
 
 #include <vector>
 
+const int PIXEL_MIN = 0; // minimum value of pixel
+const int PIXEL_MAX = 255; // maximum value of pixel
+
 // 15 tokens (English alphabet + special characters) sorted in order of decreasing density
 const char TOKENS[] = {'@', '&', '%', 'W', 'X', 'A', 'H', 'O', 'T', '*', '^', '+', '-', '.', ' '};
+const int TOKEN_SIZE = 15;
 
 // 10 decimal digits sorted in order of decreasing density
 const char DIGITS[] = {'8', '9', '6', '0', '5', '3', '2', '4', '7', '1'};
+const int DIGIT_SIZE = 10;
 
 const int THRESHOLD = 50; // threshold for edge detection (sobelx and sobely)
 
