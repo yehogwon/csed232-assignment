@@ -9,7 +9,7 @@ drawer::~drawer() {
 std::string drawer::draw_helper(int i_factor, int i_step, int j_factor, int j_step) const {
     if ((i_factor != 1 && i_step != 1) || (i_factor != 1 && i_step != 1))
         throw std::invalid_argument("At least one of the parameter in each pair must be 1.");
-    std::stringstream oss; // output string stream to accumulate the output
+    std::ostringstream oss; // output string stream to accumulate the output
     for (int i = 0; i < artist_->get_height() * i_factor; i += i_step) {
         for (int j = 0; j < artist_->get_width() * j_factor; j += j_step)
             oss << artist_->mapper(j / j_factor, i / i_factor); // map the pixel to a character
