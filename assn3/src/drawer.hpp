@@ -17,7 +17,7 @@ protected:
      * @param j_step The step to take on the j-axis
      * @return ASCII art as a std::string
     */
-    std::string draw_helper(int i_factor, int i_step, int j_factor, int j_step) const;
+    inline std::string draw_helper(int i_factor, int i_step, int j_factor, int j_step) const;
 public: 
     /**
      * @brief A constructor for the drawer class
