@@ -14,7 +14,7 @@ std::vector<int> parser::load_image(const char *input_file) const {
     std::ifstream in_file(input_file); // declare input file stream
     std::string _data; // declare a temporary buffer to store the whole line
     getline(in_file, _data); // read a line from input file (ignore lines below the first line)
-    return split<int>(_data, SEP, [](const std::string &s) {return std::stoi(s);});
+    return split<int>(_data, SEP, [](const std::string &s) {return std::stoi(s);}); // pass an anonymous function to cast<std::string> to convert std::string to int
 }
 
 std::vector<std::string> parser::load_config(const char *input_file) const {
