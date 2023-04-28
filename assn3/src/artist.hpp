@@ -16,7 +16,7 @@ class artist {
 private: 
     int width; // width of image
     int height; // height of image
-    std::vector<int> pixels; // pixel values of image
+    const std::vector<int> &pixels; // pixel values of image
 
 protected: 
     /**
