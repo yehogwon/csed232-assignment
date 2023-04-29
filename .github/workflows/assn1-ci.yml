@@ -3,6 +3,8 @@ name: ASSN1 CI
 on:
   push:
     branches: [ "main" ]
+    paths: 
+        - assn1/**
 
 jobs:
   build:
