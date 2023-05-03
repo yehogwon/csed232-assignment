@@ -10,7 +10,7 @@ HEADER = $(SRC_PATH)/SharedPtr.h
 TARGET = $(OUT_PATH)/SharedPtr_test.o $(OUT_PATH)/SharedPtr.o # objective files
 OUT = $(OUT_PATH)/assn4_p1.out # executable file
 
-.PHONY: all clean run
+.PHONY: all clean
 
 all: $(TARGET) $(OUT)
 
