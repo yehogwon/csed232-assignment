@@ -36,16 +36,40 @@ public:
 	// Constructors & destructor
 	////////////////////////////////////////////
 	
-	SharedPtr();
-	explicit SharedPtr(ObjectType *m_object_);
-	SharedPtr(const SharedPtr& shared_ptr);
-	~SharedPtr();
+	SharedPtr() {
+		m_ref_counter = new int(0);
+		m_object = nullptr;
+	}
+
+	explicit SharedPtr(ObjectType *m_object_) {
+		m_ref_counter = new int(1);
+		m_object = m_object_;
+	}
+	
+	SharedPtr(const SharedPtr& shared_ptr) {
+		m_ref_counter = shared_ptr.m_ref_counter;
+		m_object = shared_ptr.m_object;
+		*m_ref_counter++;
+	}
+	
+	~SharedPtr() {
+		*m_ref_counter--;
+		if (*m_ref_counter == 0) {
+			Dealloc(m_object);
+			delete m_ref_counter;
+		}
+	}
 
 	////////////////////////////////////////////
 	// Assignment operator
 	////////////////////////////////////////////
 	
-	SharedPtr& operator=(const SharedPtr& shared_ptr);
+	SharedPtr& operator=(const SharedPtr& shared_ptr) {
+		m_ref_counter = shared_ptr.m_ref_counter;
+		m_object = shared_ptr.m_object;
+		*m_ref_counter++;
+		return *this;
+	}
 	
 	////////////////////////////////////////////
 	// Pointer operators
@@ -53,25 +77,38 @@ public:
 	// operator->
 	// operator*
 
-	ObjectType* operator->();
-	const ObjectType* operator->() const;
+	ObjectType* operator->() {
+		return m_object;
+	}
 
-	ObjectType& operator*();
-	const ObjectType& operator*() const;
+	const ObjectType* operator->() const {
+		return m_object;
+	}
+
+	ObjectType& operator*() {
+		return *m_object;
+	}
+	const ObjectType& operator*() const {
+		return *m_object;
+	}
 	
 	////////////////////////////////////////////
 	// Array element access operators
 	////////////////////////////////////////////
 	// operator[]
 	
-	ObjectType& operator[](const int index_);
+	ObjectType& operator[](const int index_) {
+		return *(m_object + index_);
+	}
 
 	////////////////////////////////////////////
 	// Array element access operators
 	////////////////////////////////////////////
 	// operator[]
 	
-	const ObjectType& operator[](const int index_) const;
+	const ObjectType& operator[](const int index_) const {
+		return *(m_object + index_);
+	}
 
 	////////////////////////////////////////////
 	// Type casting operators
@@ -79,87 +116,16 @@ public:
 	// operator ObjectType const*() const
 	// operator ObjectType*()
 	
-	operator ObjectType*();
-	operator ObjectType* const() const;
+	operator ObjectType*() {
+		return m_object;
+	}
+
+	operator ObjectType* const() const {
+		return m_object;
+	}
 };
 
 template<typename T>
 using SharedArray = SharedPtr<T, ArrayDeallocator<T> >;
-
-template<typename ObjectType, DeallocatorFuncType<ObjectType> Dealloc>
-SharedPtr<ObjectType, Dealloc>::SharedPtr() {
-    m_ref_counter = new int(0);
-    m_object = nullptr;
-}
-
-template<typename ObjectType, DeallocatorFuncType<ObjectType> Dealloc>
-SharedPtr<ObjectType, Dealloc>::SharedPtr(ObjectType *m_object_) {
-    m_ref_counter = new int(1);
-    m_object = m_object_;
-}
-
-template<typename ObjectType, DeallocatorFuncType<ObjectType> Dealloc>
-SharedPtr<ObjectType, Dealloc>::SharedPtr(const SharedPtr& shared_ptr) {
-    m_ref_counter = shared_ptr.m_ref_counter;
-    m_object = shared_ptr.m_object;
-    *m_ref_counter++;
-}
-
-template<typename ObjectType, DeallocatorFuncType<ObjectType> Dealloc>
-SharedPtr<ObjectType, Dealloc>::~SharedPtr() {
-    *m_ref_counter--;
-    if (*m_ref_counter == 0) {
-        Dealloc(m_object);
-        delete m_ref_counter;
-    }
-}
-
-template<typename ObjectType, DeallocatorFuncType<ObjectType> Dealloc>
-SharedPtr<ObjectType, Dealloc>& SharedPtr<ObjectType, Dealloc>::operator=(const SharedPtr<ObjectType, Dealloc>& shared_ptr) {
-    m_ref_counter = shared_ptr.m_ref_counter;
-    m_object = shared_ptr.m_object;
-    *m_ref_counter++;
-	return *this;
-}
-
-template<typename ObjectType, DeallocatorFuncType<ObjectType> Dealloc>
-ObjectType* SharedPtr<ObjectType, Dealloc>::operator->() {
-    return m_object;
-}
-
-template<typename ObjectType, DeallocatorFuncType<ObjectType> Dealloc>
-const ObjectType* SharedPtr<ObjectType, Dealloc>::operator->() const {
-    return m_object;
-}
-
-template<typename ObjectType, DeallocatorFuncType<ObjectType> Dealloc>
-ObjectType& SharedPtr<ObjectType, Dealloc>::operator*() {
-    return *m_object;
-}
-
-template<typename ObjectType, DeallocatorFuncType<ObjectType> Dealloc>
-const ObjectType& SharedPtr<ObjectType, Dealloc>::operator*() const {
-    return *m_object;
-}
-
-template<typename ObjectType, DeallocatorFuncType<ObjectType> Dealloc>
-ObjectType& SharedPtr<ObjectType, Dealloc>::operator[](const int index_) {
-    return *(m_object + index_);
-}
-
-template<typename ObjectType, DeallocatorFuncType<ObjectType> Dealloc>
-const ObjectType& SharedPtr<ObjectType, Dealloc>::operator[](const int index_) const {
-    return *(m_object + index_);
-}
-
-template<typename ObjectType, DeallocatorFuncType<ObjectType> Dealloc>
-SharedPtr<ObjectType, Dealloc>::operator ObjectType*() {
-    return m_object;
-}
-
-template<typename ObjectType, DeallocatorFuncType<ObjectType> Dealloc>
-SharedPtr<ObjectType, Dealloc>::operator ObjectType* const() const {
-    return m_object;
-}
 
 #endif
