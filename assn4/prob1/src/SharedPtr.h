@@ -79,8 +79,8 @@ public:
 	// operator ObjectType const*() const
 	// operator ObjectType*()
 	
-	operator ObjectType const*() const;
 	operator ObjectType*();
+	operator ObjectType* const() const;
 };
 
 template<typename T>
