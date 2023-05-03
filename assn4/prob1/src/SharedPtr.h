@@ -53,8 +53,8 @@ public:
 	// operator->
 	// operator*
 
-	ObjectType& operator->();
-	const ObjectType& operator->() const;
+	ObjectType* operator->();
+	const ObjectType* operator->() const;
 
 	ObjectType& operator*();
 	const ObjectType& operator*() const;
