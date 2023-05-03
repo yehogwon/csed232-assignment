@@ -40,19 +40,47 @@ class Image
 {
 private:
 	// ======= ADD CODE HERE IF NEEDED =========
+	using PixelArray = SharedPtr<PixelType, ArrayDeallocator<PixelType>>;
+
+	size_t m_width, m_height;
+	PixelArray m_buff;
 	
 public:
 	////////////////////////////////////////////
 	// constructors & destructor
 	////////////////////////////////////////////
 	
-	// ======= ADD CODE HERE IF NEEDED =========
+	Image() : m_width(0), m_height(0) { }
+
+	Image(size_t _width, size_t _height) : m_width(_width), m_height(_height), m_buff(new PixelType[_width * _height]) { }
+
+	Image(size_t _width, size_t _height, const PixelType &val) : m_width(_width), m_height(_height), m_buff(new PixelType[_width * _height]) {
+		for (int i = 0; i < m_width * m_height; i++) m_buff[i] = val;
+	}
+
+	Image(const Image<PixelType> &img) : m_width(img.width), m_height(img.height), m_buff(new PixelType[img.width * img.height]) {
+		for (int i = 0; i < m_width * m_height; i++) m_buff[i] = img.m_buff[i];
+	}
+
+	~Image() { }
 
 	////////////////////////////////////////////
 	// assignment operator
 	////////////////////////////////////////////
 	
-	// ======= ADD CODE HERE IF NEEDED =========
+	Image& operator=(const Image &img) {
+		m_width = img.m_width, m_height = img.m_height;
+		m_buff = PixelArray(new PixelType[m_width * m_height]);
+		for (int i = 0; i < m_width * m_height; i++) m_buff[i] = img.m_buff[i];
+		return *this;
+	}
+	
+	const Image& operator=(const Image &img) const {
+		m_width = img.m_width, m_height = img.m_height;
+		m_buff = PixelArray(new PixelType[m_width * m_height]);
+		for (int i = 0; i < m_width * m_height; i++) m_buff[i] = img.m_buff[i];
+		return *this;
+	}
 
 	////////////////////////////////////////////
 	// element access operators
@@ -65,7 +93,13 @@ public:
 	////////////////////////////////////////////
 	//   - width(), height()
 	
-	// ======= ADD CODE HERE IF NEEDED =========
+	size_t width() const {
+		return m_width;
+	}
+
+	size_t height() const {
+		return m_height;
+	}
 };
 
 // ======= ADD CODE HERE IF NEEDED =========
