@@ -1,0 +1,27 @@
+CC = g++
+D ?=
+CXXFLAGS = -Wall -O2 $(D)
+STD ?= c++14
+
+OUT_PATH = out
+HEADER = src/SharedPtr.h
+TARGET = $(OUT_PATH)/SharedPtr_test.o $(OUT_PATH)/SharedPtr.o # objective files
+OUT = $(OUT_PATH)/assn4_p1.out # executable file
+
+.PHONY: all clean run
+
+all: $(TARGET) $(OUT)
+
+clean: 
+	rm -rf $(OUT_PATH)
+
+$(OUT_PATH)/SharedPtr.o: src/SharedPtr.cc $(HEADER)
+	@if [ ! -d "$(OUT_PATH)" ]; then mkdir $(OUT_PATH); fi
+	$(CC) $(CXXFLAGS) --std=$(STD) -o $(OUT_PATH)/SharedPtr.o -c src/SharedPtr.cc
+
+$(OUT_PATH)/SharedPtr_test.o: src/SharedPtr_test.cc $(HEADER)
+	@if [ ! -d "$(OUT_PATH)" ]; then mkdir $(OUT_PATH); fi
+	$(CC) $(CXXFLAGS) --std=$(STD) -o $(OUT_PATH)/SharedPtr_test.o -c src/SharedPtr_test.cc
+
+$(OUT) : $(TARGET)
+	$(CC) $(CXXFLAGS) --std=$(STD) -o $(OUT) $(TARGET)
