@@ -3,8 +3,10 @@ D ?=
 CXXFLAGS = -Wall -O2 $(D)
 STD ?= c++14
 
+SRC_PATH = src
 OUT_PATH = out
-HEADER = src/SharedPtr.h
+
+HEADER = $(SRC_PATH)/SharedPtr.h
 TARGET = $(OUT_PATH)/SharedPtr_test.o $(OUT_PATH)/SharedPtr.o # objective files
 OUT = $(OUT_PATH)/assn4_p1.out # executable file
 
@@ -15,13 +17,13 @@ all: $(TARGET) $(OUT)
 clean: 
 	rm -rf $(OUT_PATH)
 
-$(OUT_PATH)/SharedPtr.o: src/SharedPtr.cc $(HEADER)
+$(OUT_PATH)/SharedPtr.o: $(SRC_PATH)/SharedPtr.cc $(HEADER)
 	@if [ ! -d "$(OUT_PATH)" ]; then mkdir $(OUT_PATH); fi
-	$(CC) $(CXXFLAGS) --std=$(STD) -o $(OUT_PATH)/SharedPtr.o -c src/SharedPtr.cc
+	$(CC) $(CXXFLAGS) --std=$(STD) -o $(OUT_PATH)/SharedPtr.o -c $(SRC_PATH)/SharedPtr.cc
 
-$(OUT_PATH)/SharedPtr_test.o: src/SharedPtr_test.cc $(HEADER)
+$(OUT_PATH)/SharedPtr_test.o: $(SRC_PATH)/SharedPtr_test.cc $(HEADER)
 	@if [ ! -d "$(OUT_PATH)" ]; then mkdir $(OUT_PATH); fi
-	$(CC) $(CXXFLAGS) --std=$(STD) -o $(OUT_PATH)/SharedPtr_test.o -c src/SharedPtr_test.cc
+	$(CC) $(CXXFLAGS) --std=$(STD) -o $(OUT_PATH)/SharedPtr_test.o -c $(SRC_PATH)/SharedPtr_test.cc
 
 $(OUT) : $(TARGET)
 	$(CC) $(CXXFLAGS) --std=$(STD) -o $(OUT) $(TARGET)
