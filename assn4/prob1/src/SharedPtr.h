@@ -39,6 +39,7 @@ public:
 	SharedPtr();
 	SharedPtr(const SharedPtr& shared_ptr);
 	explicit SharedPtr(ObjectType *m_object_);
+	~SharedPtr();
 
 	////////////////////////////////////////////
 	// Assignment operator
