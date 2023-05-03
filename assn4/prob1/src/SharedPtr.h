@@ -49,14 +49,14 @@ public:
 	SharedPtr(const SharedPtr& shared_ptr) {
 		m_ref_counter = shared_ptr.m_ref_counter;
 		m_object = shared_ptr.m_object;
-		*m_ref_counter += 1;
+		(*m_ref_counter)++;
 	}
 	
 	~SharedPtr() {
-		*m_ref_counter -= 1;
+		(*m_ref_counter)--;
 		if (*m_ref_counter == 0) {
-			Dealloc(m_object);
 			delete m_ref_counter;
+			Dealloc(m_object);
 		}
 	}
 
@@ -65,11 +65,15 @@ public:
 	////////////////////////////////////////////
 	
 	SharedPtr& operator=(const SharedPtr& shared_ptr) {
-		if (m_ref_counter == 0 || --m_ref_counter == 0)
+		if (*m_ref_counter == 0)
 			delete m_ref_counter;
+		else if (--(*m_ref_counter) == 0) {
+			delete m_ref_counter;
+			Dealloc(m_object);
+		}
 		m_ref_counter = shared_ptr.m_ref_counter;
 		m_object = shared_ptr.m_object;
-		*m_ref_counter += 1;
+		(*m_ref_counter)++;
 		return *this;
 	}
 	
