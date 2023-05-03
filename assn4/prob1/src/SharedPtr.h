@@ -37,8 +37,8 @@ public:
 	////////////////////////////////////////////
 	
 	SharedPtr();
-	SharedPtr(const SharedPtr& shared_ptr);
 	explicit SharedPtr(ObjectType *m_object_);
+	SharedPtr(const SharedPtr& shared_ptr);
 	~SharedPtr();
 
 	////////////////////////////////////////////
@@ -85,5 +85,81 @@ public:
 
 template<typename T>
 using SharedArray = SharedPtr<T, ArrayDeallocator<T> >;
+
+template<typename ObjectType, DeallocatorFuncType<ObjectType> Dealloc>
+SharedPtr<ObjectType, Dealloc>::SharedPtr() {
+    m_ref_counter = new int(0);
+    m_object = nullptr;
+}
+
+template<typename ObjectType, DeallocatorFuncType<ObjectType> Dealloc>
+SharedPtr<ObjectType, Dealloc>::SharedPtr(ObjectType *m_object_) {
+    m_ref_counter = new int(1);
+    m_object = m_object_;
+}
+
+template<typename ObjectType, DeallocatorFuncType<ObjectType> Dealloc>
+SharedPtr<ObjectType, Dealloc>::SharedPtr(const SharedPtr& shared_ptr) {
+    m_ref_counter = shared_ptr.m_ref_counter;
+    m_object = shared_ptr.m_object;
+    *m_ref_counter++;
+}
+
+template<typename ObjectType, DeallocatorFuncType<ObjectType> Dealloc>
+SharedPtr<ObjectType, Dealloc>::~SharedPtr() {
+    *m_ref_counter--;
+    if (*m_ref_counter == 0) {
+        Dealloc(m_object);
+        delete m_ref_counter;
+    }
+}
+
+template<typename ObjectType, DeallocatorFuncType<ObjectType> Dealloc>
+SharedPtr<ObjectType, Dealloc>& SharedPtr<ObjectType, Dealloc>::operator=(const SharedPtr<ObjectType, Dealloc>& shared_ptr) {
+    m_ref_counter = shared_ptr.m_ref_counter;
+    m_object = shared_ptr.m_object;
+    *m_ref_counter++;
+	return *this;
+}
+
+template<typename ObjectType, DeallocatorFuncType<ObjectType> Dealloc>
+ObjectType* SharedPtr<ObjectType, Dealloc>::operator->() {
+    return m_object;
+}
+
+template<typename ObjectType, DeallocatorFuncType<ObjectType> Dealloc>
+const ObjectType* SharedPtr<ObjectType, Dealloc>::operator->() const {
+    return m_object;
+}
+
+template<typename ObjectType, DeallocatorFuncType<ObjectType> Dealloc>
+ObjectType& SharedPtr<ObjectType, Dealloc>::operator*() {
+    return *m_object;
+}
+
+template<typename ObjectType, DeallocatorFuncType<ObjectType> Dealloc>
+const ObjectType& SharedPtr<ObjectType, Dealloc>::operator*() const {
+    return *m_object;
+}
+
+template<typename ObjectType, DeallocatorFuncType<ObjectType> Dealloc>
+ObjectType& SharedPtr<ObjectType, Dealloc>::operator[](const int index_) {
+    return *(m_object + index_);
+}
+
+template<typename ObjectType, DeallocatorFuncType<ObjectType> Dealloc>
+const ObjectType& SharedPtr<ObjectType, Dealloc>::operator[](const int index_) const {
+    return *(m_object + index_);
+}
+
+template<typename ObjectType, DeallocatorFuncType<ObjectType> Dealloc>
+SharedPtr<ObjectType, Dealloc>::operator ObjectType*() {
+    return m_object;
+}
+
+template<typename ObjectType, DeallocatorFuncType<ObjectType> Dealloc>
+SharedPtr<ObjectType, Dealloc>::operator ObjectType* const() const {
+    return m_object;
+}
 
 #endif
