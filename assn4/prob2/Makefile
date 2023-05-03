@@ -3,8 +3,9 @@ D ?=
 CXXFLAGS = -Wall -O2 $(D)
 STD ?= c++14
 
+SRC_PATH = src
 OUT_PATH = out
-HEADER = src/Image.h
+HEADER = $(SRC_PATH)/Image.h
 TARGET = $(OUT_PATH)/image_test.o $(OUT_PATH)/Image.o # objective files
 OUT = $(OUT_PATH)/assn4_p2.out # executable file
 
@@ -15,13 +16,17 @@ all: $(TARGET) $(OUT)
 clean: 
 	rm -rf $(OUT_PATH)
 
-$(OUT_PATH)/Image.o: src/Image.cc $(HEADER)
+$(OUT_PATH)/Image.o: $(SRC_PATH)/Image.cc $(HEADER)
 	@if [ ! -d "$(OUT_PATH)" ]; then mkdir $(OUT_PATH); fi
-	$(CC) $(CXXFLAGS) --std=$(STD) -o $(OUT_PATH)/Image.o -c src/Image.cc
+	@cp ../prob1/$(SRC_PATH)/SharedPtr.h $(SRC_PATH)/
+	$(CC) $(CXXFLAGS) --std=$(STD) -o $(OUT_PATH)/Image.o -c $(SRC_PATH)/Image.cc
+	@rm -f $(SRC_PATH)/SharedPtr.h
 
-$(OUT_PATH)/image_test.o: src/image_test.cc $(HEADER)
+$(OUT_PATH)/image_test.o: $(SRC_PATH)/image_test.cc $(HEADER)
 	@if [ ! -d "$(OUT_PATH)" ]; then mkdir $(OUT_PATH); fi
-	$(CC) $(CXXFLAGS) --std=$(STD) -o $(OUT_PATH)/image_test.o -c src/image_test.cc
+	@cp ../prob1/$(SRC_PATH)/SharedPtr.h $(SRC_PATH)/
+	$(CC) $(CXXFLAGS) --std=$(STD) -o $(OUT_PATH)/image_test.o -c $(SRC_PATH)/image_test.cc
+	@rm -f $(SRC_PATH)/SharedPtr.h
 
 $(OUT) : $(TARGET)
 	$(CC) $(CXXFLAGS) --std=$(STD) -o $(OUT) $(TARGET)
