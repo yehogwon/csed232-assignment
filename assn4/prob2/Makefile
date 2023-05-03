@@ -1,6 +1,7 @@
 CC = g++
 D ?=
 CXXFLAGS = -Wall -O2 $(D)
+NOWARN = -Wno-unused-variable -Wno-unused-parameter -Wno-unused-but-set-variable
 STD ?= c++14
 
 SRC_PATH = src
@@ -19,13 +20,13 @@ clean:
 $(OUT_PATH)/Image.o: $(SRC_PATH)/Image.cc $(HEADER)
 	@if [ ! -d "$(OUT_PATH)" ]; then mkdir $(OUT_PATH); fi
 	@cp ../prob1/$(SRC_PATH)/SharedPtr.h $(SRC_PATH)/
-	$(CC) $(CXXFLAGS) --std=$(STD) -o $(OUT_PATH)/Image.o -c $(SRC_PATH)/Image.cc
+	$(CC) $(NOWARN) --std=$(STD) -o $(OUT_PATH)/Image.o -c $(SRC_PATH)/Image.cc
 	@rm -f $(SRC_PATH)/SharedPtr.h
 
 $(OUT_PATH)/image_test.o: $(SRC_PATH)/image_test.cc $(HEADER)
 	@if [ ! -d "$(OUT_PATH)" ]; then mkdir $(OUT_PATH); fi
 	@cp ../prob1/$(SRC_PATH)/SharedPtr.h $(SRC_PATH)/
-	$(CC) $(CXXFLAGS) --std=$(STD) -o $(OUT_PATH)/image_test.o -c $(SRC_PATH)/image_test.cc
+	$(CC) $(NOWARN) --std=$(STD) -o $(OUT_PATH)/image_test.o -c $(SRC_PATH)/image_test.cc
 	@rm -f $(SRC_PATH)/SharedPtr.h
 
 $(OUT) : $(TARGET)
