@@ -36,13 +36,15 @@ public:
 	// Constructors & destructor
 	////////////////////////////////////////////
 	
-	// ======= ADD CODE HERE IF NEEDED =========
+	SharedPtr();
+	SharedPtr(const SharedPtr& shared_ptr);
+	explicit SharedPtr(ObjectType *m_object_);
 
 	////////////////////////////////////////////
 	// Assignment operator
 	////////////////////////////////////////////
 	
-	// ======= ADD CODE HERE IF NEEDED =========
+	SharedPtr& operator=(const SharedPtr& shared_ptr);
 	
 	////////////////////////////////////////////
 	// Pointer operators
@@ -50,27 +52,34 @@ public:
 	// operator->
 	// operator*
 
-	// ======= ADD CODE HERE IF NEEDED =========
+	ObjectType& operator->();
+	const ObjectType& operator->() const;
+
+	ObjectType& operator*();
+	const ObjectType& operator*() const;
 	
 	////////////////////////////////////////////
 	// Array element access operators
 	////////////////////////////////////////////
 	// operator[]
 	
-	// ======= ADD CODE HERE IF NEEDED =========
+	ObjectType& operator[](const int index_);
 
 	////////////////////////////////////////////
 	// Array element access operators
 	////////////////////////////////////////////
 	// operator[]
 	
+	const ObjectType& operator[](const int index_) const;
+
 	////////////////////////////////////////////
 	// Type casting operators
 	////////////////////////////////////////////
 	// operator ObjectType const*() const
 	// operator ObjectType*()
 	
-	// ======= ADD CODE HERE IF NEEDED =========
+	operator ObjectType const*() const;
+	operator ObjectType*();
 };
 
 template<typename T>
