@@ -10,5 +10,5 @@ set (CMAKE_CXX_FLAGS "-std=c++14 ${CMAKE_CXX_FLAGS}")
 
 add_subdirectory(assn1)
 add_subdirectory(assn2)
-# add_subdirectory(assn3)
+add_subdirectory(assn3)
 # add_subdirectory(assn4)
