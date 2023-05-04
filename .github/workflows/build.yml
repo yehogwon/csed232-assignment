@@ -28,5 +28,5 @@ jobs:
     - uses: actions/checkout@v3
     - name: build
       run: |
-        cmake . -j 2
+        cmake .
         make
