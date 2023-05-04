@@ -53,3 +53,5 @@ _deps
 !csed232_assn*.pdf
 
 Assign[0-9]_*
+
+build/
