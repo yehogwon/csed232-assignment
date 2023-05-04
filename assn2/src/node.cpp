@@ -9,7 +9,7 @@
 
 Node::Node(Student data, Node *next) : data(data), next(next) { }
 
-bool operator==(Node &n1, Node &n2) {
+bool operator==(const Node &n1, const Node &n2) {
     return n1.data == n2.data; // compare the data of two nodes
 }
 
