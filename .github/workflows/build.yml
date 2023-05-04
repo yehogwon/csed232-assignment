@@ -9,6 +9,7 @@ on:
         - assn3/**
         - assn4/**
         - CMakeLists.txt
+        - .github/workflows/**
   pull_request:
     branches: [ "main" ]
     paths: 
@@ -17,6 +18,7 @@ on:
         - assn3/**
         - assn4/**
         - CMakeLists.txt
+        - .github/workflows/**
 
 jobs:
   build:
