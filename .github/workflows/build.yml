@@ -44,4 +44,6 @@ jobs:
         make
     - name: test
       run: 
+        pwd
+        cd build
         ctest
