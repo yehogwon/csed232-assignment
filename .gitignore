@@ -9,8 +9,6 @@ CMakeScripts
 Testing
 
 Makefile
-!assn3/**/Makefile
-!assn4/Makefile
 
 cmake_install.cmake
 install_manifest.txt
