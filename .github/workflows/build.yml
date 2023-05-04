@@ -43,7 +43,7 @@ jobs:
         cd build
         make
     - name: test
-      run: 
+      run: |
         pwd
         cd build
         ctest
