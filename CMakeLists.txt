@@ -10,9 +10,9 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+enable_testing()
+
 add_subdirectory(assn1)
 add_subdirectory(assn2)
 add_subdirectory(assn3)
 add_subdirectory(assn4)
-
-enable_testing()
