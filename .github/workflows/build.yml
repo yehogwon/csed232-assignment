@@ -30,3 +30,16 @@ jobs:
       run: |
         cmake .
         make
+  
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: build
+      run: |
+        cmake .
+        make
+    - name: test
+      run: 
+        ctest
