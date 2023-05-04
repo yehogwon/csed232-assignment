@@ -1,6 +1,12 @@
+if (POLICY CMP0025)
+cmake_policy(SET CMP0025 NEW)
+endif()
+
 project("CSED232 ASSN")
 cmake_minimum_required(VERSION 3.10)
-set(CXX_STANDARD 14)
+
+# FIXME: This does not work: set(CXX_STANDARD 14)
+set (CMAKE_CXX_FLAGS "-std=c++14 ${CMAKE_CXX_FLAGS}")
 
 add_subdirectory(assn1)
 add_subdirectory(assn2)
