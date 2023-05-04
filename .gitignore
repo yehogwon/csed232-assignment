@@ -9,8 +9,6 @@ CMakeScripts
 Testing
 
 Makefile
-!assn1/**/Makefile
-!assn2/**/Makefile
 !assn3/**/Makefile
 !assn4/Makefile
 
