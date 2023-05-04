@@ -6,16 +6,16 @@ on:
     paths: 
         - assn1/**
         - assn2/**
-        - assn2/**
-        - assn2/**
+        - assn3/**
+        - assn4/**
         - CMakeLists.txt
   pull_request:
     branches: [ "main" ]
     paths: 
         - assn1/**
         - assn2/**
-        - assn2/**
-        - assn2/**
+        - assn3/**
+        - assn4/**
         - CMakeLists.txt
 
 jobs:
