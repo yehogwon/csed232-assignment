@@ -7,7 +7,13 @@ CMakeCache.txt
 CMakeFiles
 CMakeScripts
 Testing
-# Makefile
+
+Makefile
+!assn1/**/Makefile
+!assn2/**/Makefile
+!assn3/**/Makefile
+!assn4/Makefile
+
 cmake_install.cmake
 install_manifest.txt
 compile_commands.json
