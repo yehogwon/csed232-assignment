@@ -43,16 +43,12 @@ _deps
 
 .DS_Store
 
-*.out
-*.o
-
-*.docx
-*.pdf
-*.zip
-
 *.py
 
-!csed232_assn*.pdf
+env/
+
+**/docs
+!**/docs/csed232_assn*.pdf
 
 Assign[0-9]_*
 
