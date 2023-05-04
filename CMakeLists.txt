@@ -5,8 +5,10 @@ endif()
 project("CSED232 ASSN")
 cmake_minimum_required(VERSION 3.10)
 
-# FIXME: This does not work: set(CXX_STANDARD 14)
-set (CMAKE_CXX_FLAGS "-std=c++14 ${CMAKE_CXX_FLAGS}")
+# set (CMAKE_CXX_FLAGS "-std=c++14 ${CMAKE_CXX_FLAGS}")
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_subdirectory(assn1)
 add_subdirectory(assn2)
