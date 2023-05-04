@@ -1,0 +1,30 @@
+name: build-ci
+
+on:
+  push:
+    branches: [ "main" ]
+    paths: 
+        - assn1/**
+        - assn2/**
+        - assn2/**
+        - assn2/**
+        - CMakeLists.txt
+  pull_request:
+    branches: [ "main" ]
+    paths: 
+        - assn1/**
+        - assn2/**
+        - assn2/**
+        - assn2/**
+        - CMakeLists.txt
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: build
+      run: |
+        cmake .
+        make
