@@ -77,31 +77,49 @@ bool remove_test() {
 }
 
 bool in_test() {
-    Student s1 = create_student("MATH", "M", "Kim", 20), 
-            s2 = create_student("MATH", "F", "Katie", 23), 
-            s3 = create_student("MECH", "M", "Kurt", 26),
-            s4 = create_student("PIAI", "M", "Gwon", 21), 
-            s5 = create_student("PIAI", "F", "Kwak", 29);
-    List list = create_list({
+    Student in_list[] = {
         create_student("CS", "M", "John", 20),
         create_student("CS", "F", "Jane", 21),
         create_student("CS", "M", "Jack", 22),
         create_student("BIO", "F", "Jill", 23),
         create_student("BIO", "M", "James", 24),
-        create_student("BIO", "F", "Jenny", 25), 
-        create_student("BIO", "M", "Joe", 26), 
-        s1, 
-        create_student("MATH", "F", "Kathy", 21),
-        create_student("MATH", "M", "Kevin", 22),
-        s2,
+        create_student("MATH", "M", "Kim", 20), 
+        create_student("MATH", "F", "Katie", 23), 
         create_student("MATH", "M", "Karl", 24),
-        create_student("MECH", "F", "Kara", 25),
-        s3,
+        create_student("MECH", "M", "Kurt", 26),
         create_student("MECH", "F", "Kathy", 27),
         create_student("MECH", "M", "Kenny", 28)
-    });
+    };
+
+    Student out_list[] = {
+        create_student("BIO", "F", "Jenny", 25), 
+        create_student("BIO", "M", "Joe", 26), 
+        create_student("MATH", "M", "Kevin", 22),
+        create_student("MATH", "F", "Kathy", 21),
+        create_student("MECH", "F", "Kara", 25),
+        create_student("PIAI", "M", "Gwon", 21), 
+        create_student("PIAI", "M", "Kwak", 29)
+    };
+
+    List list;
+    for (const Student &s : in_list)
+        list.add(new Node(s));
     
-    return s1 < list && s2 < list && s3 < list && !(s4 < list) && !(s5 < list);
+    bool check = true;
+    for (const Student &s : in_list) {
+        if (!check) break;
+        check = check &&
+                s < list;
+    }
+    if (!check) return check;
+
+    for (const Student &s : out_list) {
+        if (!check) break;
+        check = check &&
+                !(s < list);
+    }
+
+    return check;
 }
 
 bool sort_test() {
