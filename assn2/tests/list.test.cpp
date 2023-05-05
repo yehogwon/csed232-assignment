@@ -173,8 +173,6 @@ bool sort_test() {
         if (!check) break;
         check = check &&
                 (students[i] < students[i + 1] || students[i] == students[i + 1]);
-        if (!check)
-            std::cout << "Invalid order: " << students[i] << " vs " << students[i + 1] << std::endl;
     }
 
     return check;
@@ -244,10 +242,6 @@ bool pivot_table_test() {
                 const std::string &token = tokens[std::get<1>(test_case)];
                 check = check && 
                         equal(stod(token), expected[i]);
-                if (!check) {
-                    std::cout << "Invalid pivot table: " << tokens[0] << " " << tokens[1] << " vs " << expected[i] << std::endl;
-                    break;
-                }
             }
         }
     }
