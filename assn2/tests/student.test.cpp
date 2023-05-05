@@ -33,7 +33,7 @@ bool input_test() {
         if (!check) break;
         std::istringstream iss(test_case);
         try {
-            Student s(iss, std::cout);
+            Student s(iss, oss);
         } catch (InterruptedInputException &e) {
             continue;
         }
@@ -44,7 +44,24 @@ bool input_test() {
 }
 
 bool output_test() {
-    return true;
+    std::pair<const char*, const char*> cases[] {
+        std::make_pair("CSE\nM\nKim\n23\n", "CSE\tM\tKim\t23"), 
+        std::make_pair("BIO\nF\nNana\n29\n", "BIO\tF\tNana\t29")
+    };
+
+    bool check = true;
+    for (const auto &test_case : cases) {
+        if (!check) break;
+        std::istringstream iss(test_case.first);
+        std::ostringstream oss;
+        Student s(iss, std::cout);
+        oss << s;
+        std::cout << std::endl << oss.str() << std::endl;
+        check = check && 
+                oss.str() == test_case.second;
+    }
+    
+    return check;
 }
 
 bool equal_test() {
