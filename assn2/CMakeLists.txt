@@ -15,3 +15,8 @@ add_test(
     NAME node_test
     COMMAND build/tests/node.test.out
 )
+
+add_test(
+    NAME student_test
+    COMMAND build/tests/student.test.out
+)

@@ -6,4 +6,10 @@ add_executable(
     node.test.cpp
 )
 
-target_link_libraries(node.test.out assn2_lib)
+add_executable(
+    student.test.out
+    student.test.cpp
+)
+
+target_link_libraries(node.test.out assn2.lib)
+target_link_libraries(student.test.out assn2.lib)
