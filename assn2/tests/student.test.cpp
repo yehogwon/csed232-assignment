@@ -3,6 +3,8 @@
 #include <sstream>
 #include <tuple>
 
+using fp = bool (*)();
+
 bool input_test() {
     std::pair<const char*, std::tuple<const char*, const char*, int>> proper_cases[] {
         std::make_pair("CSE\nM\nKim\n23\n", std::make_tuple("CSE", "M", 23)), 
@@ -98,6 +100,19 @@ bool comp_test() {
     return true;
 }
 
-int main() {
-    return !(input_test() && output_test() && equal_test() && comp_test());
+int main(int argc, char **argv) {
+    std::pair<std::string, fp> tests[] {
+        std::make_pair("Student::Student", input_test), 
+        std::make_pair("Student::operator<<", output_test), 
+        std::make_pair("Student::Equality", equal_test), 
+        std::make_pair("Student::LTGT", comp_test)
+    };
+
+    if (argc != 2) return 1; // invalid arguments (requires test name)
+    for (const auto &test : tests) {
+        if (test.first != argv[1]) continue;
+        return !test.second();
+    }
+
+    return 1; // invalid test name
 }

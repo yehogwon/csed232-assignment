@@ -11,12 +11,22 @@ add_subdirectory(
 )
 
 include(CTest)
-add_test(
-    NAME node_test
-    COMMAND build/tests/node.test.out
-)
 
-add_test(
-    NAME student_test
-    COMMAND build/tests/student.test.out
-)
+function(student_test test_name)
+    add_test(
+        NAME Student::${test_name}
+        COMMAND build/tests/student.test.out Student::${test_name}
+    )
+endfunction(student_test)
+
+function(node_test test_name)
+    add_test(
+        NAME Node::${test_name}
+        COMMAND build/tests/node.test.out Node::${test_name}
+    )
+endfunction(node_test)
+
+student_test(Student)
+student_test(operator<<)
+student_test(Equality)
+student_test(LTGT)
