@@ -65,7 +65,33 @@ bool output_test() {
 }
 
 bool equal_test() {
-    return true;
+    const char *cases[] {
+        "CSE\nM\nKim\n23\n",
+        "BIO\nF\nNana\n29\n", 
+        "MATH\nM\nKim\n20\n", 
+        "CSE\nF\nKim\n23\n",
+        "MECH\nM\nSam\n23\n"
+    };
+    
+    bool check = true;
+    std::ostringstream oss;
+    for (int i = 0; i < 5; i++) {
+        for (int j = i; j < 5; j++) {
+            if (!check) break;
+            std::istringstream iss1(cases[i]);
+            std::istringstream iss2(cases[j]);
+            Student s1(iss1, oss);
+            Student s2(iss2, oss);
+
+            if (i == j) {
+                check = check && (s1 == s2);
+            } else {
+                check = check && !(s1 == s2);
+            }
+        }
+    }
+
+    return check;
 }
 
 bool comp_test() {
