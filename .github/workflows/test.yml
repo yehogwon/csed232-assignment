@@ -21,7 +21,7 @@ on:
         - .github/workflows/**
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -31,3 +31,7 @@ jobs:
         cmake -S . -B build
         cd build
         make -j
+    - name: test
+      run: |
+        cd build
+        ctest
