@@ -2,6 +2,7 @@
 #include "test.h"
 #include <sstream>
 #include <initializer_list>
+#include <tuple>
 
 bool equal(double a, double b) {
     return std::abs(a - b) < 1e-3;
@@ -172,16 +173,80 @@ bool sort_test() {
         if (!check) break;
         check = check &&
                 (students[i] < students[i + 1] || students[i] == students[i + 1]);
-        if (!check)
-            std::cout << "Invalid order: " << students[i] << " vs " << students[i + 1] << std::endl;
     }
 
     return check;
 }
 
 bool pivot_table_test() {
-    // TODO: to be implemented
-    return true;
+    List list = create_list({
+        create_student("MATH", "F", "Katie", 23),
+        create_student("MATH", "M", "Karl", 24),
+        create_student("BIO", "M", "Joe", 26), 
+        create_student("CS", "M", "Jack", 22),
+        create_student("MECH", "F", "Kara", 25), 
+        create_student("BIO", "M", "James", 24),
+        create_student("BIO", "F", "Jenny", 25), 
+        create_student("MECH", "F", "Kathy", 27),
+        create_student("BIO", "F", "Jill", 23),
+        create_student("MATH", "M", "Kevin", 22),
+        create_student("MATH", "F", "Kathy", 21),
+        create_student("MECH", "M", "Kenny", 28), 
+        create_student("MECH", "M", "Kurt", 26),
+        create_student("CS", "M", "John", 20),
+        create_student("CS", "F", "Jane", 21),
+        create_student("MATH", "M", "Kim", 20)
+    });
+
+    std::vector<std::tuple<Operator, std::vector<double>>> dept_test_cases {
+        std::make_tuple(AVG, std::vector<double>{24.5, 21, 22, 26.5}),
+        std::make_tuple(MAX, std::vector<double>{26, 22, 24, 28}),
+        std::make_tuple(MIN, std::vector<double>{23, 20, 20, 25})
+    };
+
+    std::vector<std::tuple<Operator, std::vector<double>>> gender_test_cases {
+        std::make_tuple(AVG, std::vector<double>{23.6, 23.6}), 
+        std::make_tuple(MAX, std::vector<double>{27, 28}),
+        std::make_tuple(MIN, std::vector<double>{21, 20})
+    };
+
+    std::vector<std::tuple<Operator, std::vector<double>>> dept_gender_test_cases {
+        std::make_tuple(AVG, std::vector<double>{24, 25, 21, 21, 22, 22, 26, 27}),
+        std::make_tuple(MAX, std::vector<double>{25, 26, 21, 22, 23, 24, 27, 28}),
+        std::make_tuple(MIN, std::vector<double>{23, 24, 21, 20, 21, 20, 25, 26})
+    };
+
+    std::tuple<void (*)(List&, Operator), int, std::vector<std::tuple<Operator, std::vector<double>>>> test_cases[] {
+        std::make_tuple([](List &list, Operator op) { list.pivot_dept(op); }, 1, dept_test_cases), 
+        std::make_tuple([](List &list, Operator op) { list.pivot_gender(op); }, 1, gender_test_cases), 
+        std::make_tuple([](List &list, Operator op) { list.pivot_dept_gender(op); }, 2, dept_gender_test_cases)
+    };
+    
+    bool check = true;
+
+    for (const auto &test_case : test_cases) {
+        auto pivot_func = std::get<0>(test_case);
+        for (const auto &pivot_test_case : std::get<2>(test_case)) {
+            std::stringstream buffer;
+            std::streambuf *sbuf = std::cout.rdbuf();
+            std::cout.rdbuf(buffer.rdbuf());
+            pivot_func(list, std::get<0>(pivot_test_case));
+            std::cout.rdbuf(sbuf);
+            std::vector<std::string> lines = split(buffer.str(), '\n');
+            lines = {lines.begin() + 1, lines.end()};
+
+            const std::vector<double> &expected = std::get<1>(pivot_test_case);
+            for (int i = 0; i < lines.size(); i++) {
+                if (!check) break;
+                std::vector<std::string> tokens = split(lines[i], '\t');
+                const std::string &token = tokens[std::get<1>(test_case)];
+                check = check && 
+                        equal(stod(token), expected[i]);
+            }
+        }
+    }
+
+    return check;
 }
 
 bool to_string_test() {
