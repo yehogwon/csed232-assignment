@@ -86,6 +86,7 @@ bool remove_test() {
 }
 
 bool in_test() {
+    // FIXME: List::sort(Comp) cannot be tested because List::print() contains List::sort()
     Student in_list[] = {
         create_student("CS", "M", "John", 20),
         create_student("CS", "F", "Jane", 21),
