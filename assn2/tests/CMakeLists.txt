@@ -26,3 +26,5 @@ add_executable(
 
 target_link_libraries(node.test.out assn2.lib)
 target_link_libraries(student.test.out assn2.lib)
+target_link_libraries(list.test.out assn2.lib)
+target_link_libraries(io.test.out assn2.lib)
