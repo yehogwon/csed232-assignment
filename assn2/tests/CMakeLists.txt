@@ -2,13 +2,23 @@ get_filename_component(PARENT_DIR ../ ABSOLUTE)
 include_directories(${PARENT_DIR}/src)
 
 add_executable(
+    student.test.out
+    student.test.cpp
+)
+
+add_executable(
     node.test.out
     node.test.cpp
 )
 
 add_executable(
-    student.test.out
-    student.test.cpp
+    list.test.out
+    list.test.cpp
+)
+
+add_executable(
+    io.test.out
+    io.test.cpp
 )
 
 target_link_libraries(node.test.out assn2.lib)
