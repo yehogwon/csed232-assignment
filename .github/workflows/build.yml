@@ -18,7 +18,7 @@ on:
         - assn3/**
         - assn4/**
         - CMakeLists.txt
-        - .github/workflows/**
+        - .github/workflows/build.yml
 
 jobs:
   build:
