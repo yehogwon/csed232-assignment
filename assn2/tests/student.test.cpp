@@ -2,7 +2,6 @@
 #include <string>
 #include <sstream>
 #include <tuple>
-// #include <utility>
 
 bool input_test() {
     std::pair<const char*, std::tuple<const char*, const char*, int>> proper_cases[] {
