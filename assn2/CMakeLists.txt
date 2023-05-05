@@ -50,3 +50,4 @@ node_test(Swap)
 
 io_test(strict_input)
 io_test(range_input)
+io_test(input_again)

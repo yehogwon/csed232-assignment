@@ -7,6 +7,54 @@ bool strict_test() {
 }
 
 bool range_test() {
+    std::tuple<int, const char*, int, int> proper_cases[] { 
+        std::make_tuple(0, "input: ", 0, 3), 
+        std::make_tuple(1, "input: ", 0, 3), 
+        std::make_tuple(2, "input: ", 0, 3),
+        std::make_tuple(3, "input: ", 0, 3),
+        std::make_tuple(0, "value?: ", -5, 3), 
+        std::make_tuple(1, "value?: ", -5, 3),
+        std::make_tuple(2, "value?: ", -5, 3),
+        std::make_tuple(3, "value?: ", -5, 3)
+    };
+
+    int val;
+    bool check = true;
+    std::ostringstream _os;
+    for (const auto &test_case : proper_cases) {
+        if (!check) break;
+        std::istringstream iss(std::to_string(std::get<0>(test_case)));
+        Format::range_input(iss, _os, std::get<1>(test_case), val, std::get<2>(test_case), std::get<3>(test_case));
+        check = check && 
+                val == std::get<0>(test_case) &&
+                val >= std::get<2>(test_case) &&
+                val <= std::get<3>(test_case);
+    }
+    if (!check) return check;
+
+    std::tuple<int, const char*, int, int> improper_cases[] { 
+        std::make_tuple(-5, "input: ", 0, 3), 
+        std::make_tuple(7, "input: ", 0, 3), 
+        std::make_tuple(-10, "value?: ", -5, 3),
+        std::make_tuple(-2, "value?: ", -5, 3),
+        std::make_tuple(38, "value?: ", -5, 3)
+    };
+
+    for (const auto &test_case: improper_cases) {
+        if (!check) break;
+        std::istringstream iss(std::to_string(std::get<0>(test_case)) + "\nn\n");
+        try {
+            Format::range_input(iss, _os, std::get<1>(test_case), val, std::get<2>(test_case), std::get<3>(test_case));
+        } catch (InterruptedInputException &e) {
+            continue;
+        }
+        check = false;
+    }
+    
+    return check;
+}
+
+bool again_test() {
     return true;
 }
 
@@ -15,7 +63,8 @@ int main(int argc, char **argv) {
 
     std::vector<std::pair<std::string, fp>> tests {
         std::make_pair("Format::strict_input", strict_test), 
-        std::make_pair("Format::range_input", range_test)
+        std::make_pair("Format::range_input", range_test),
+        std::make_pair("Format::input_again", again_test)
     };
     return test(argv[1], tests);
 }
