@@ -30,3 +30,6 @@ student_test(Student)
 student_test(operator<<)
 student_test(Equality)
 student_test(LTGT)
+
+node_test(Equality)
+node_test(Swap)
