@@ -1,29 +1,40 @@
+#include "node.hpp"
 #include <sstream>
 
-#include "node.hpp"
+using fp = bool (*)();
+
+void create_new_student(Student &s) {
+    std::istringstream iss("CSE\nM\nKim\n23\n");
+    std::ostringstream oss;
+    s = Student(iss, oss);
+}
 
 bool equal_test() {
     Student a, b;
-    Node n1(a), n2(b);
-    return !(n1 == n2);
+    create_new_student(a);
+    Node n1(a), n2(b), n3(a);
+    return !(n1 == n2) && (n1 == n3);
 }
 
 bool swap_test() {
     Student a, b;
-    Node n3(a), n4(b);
-    Node n1(a, &n3), n2(b, &n4);
+    create_new_student(a);
+    Node n1(a), n2(b);
     swap_node(&n1, &n2);
-
-    Node n5(a), n6(b, &n5);
-    swap_node(&n5, &n6);
-    
-    return n1.next == &n4 && n2.next == &n3 && n5.next == &n6 && n6.next == nullptr;
+    return n1.data == b && n2.data == a;
 }
 
-int main() {
-    // FIXME: These tests are not working properly
-    // bool t1 = equal_test();
-    // bool t2 = swap_test();
-    bool t1 = true, t2 = true;
-    return !(t1 && t2);
+int main(int argc, char **argv) {
+    std::pair<std::string, fp> tests[] {
+        std::make_pair("Node::Equality", equal_test), 
+        std::make_pair("Node::Swap", swap_test)
+    };
+
+    if (argc != 2) return 1; // invalid arguments (requires test name)
+    for (const auto &test : tests) {
+        if (test.first != argv[1]) continue;
+        return !test.second();
+    }
+
+    return 1; // invalid test name
 }
