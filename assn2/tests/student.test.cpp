@@ -52,13 +52,13 @@ bool output_test() {
     };
 
     bool check = true;
+    std::ostringstream _oos;
     for (const auto &test_case : cases) {
         if (!check) break;
         std::istringstream iss(test_case.first);
         std::ostringstream oss;
-        Student s(iss, std::cout);
+        Student s(iss, _oos);
         oss << s;
-        std::cout << std::endl << oss.str() << std::endl;
         check = check && 
                 oss.str() == test_case.second;
     }
