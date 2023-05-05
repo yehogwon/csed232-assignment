@@ -35,7 +35,7 @@ endfunction(list_test)
 
 function(io_test test_name)
     add_test(
-        NAME Io::${test_name}
+        NAME Format::${test_name}
         COMMAND build/tests/io.test.out Format::${test_name}
     )
 endfunction(io_test)
@@ -47,3 +47,6 @@ student_test(LTGT)
 
 node_test(Equality)
 node_test(Swap)
+
+io_test(strict_input)
+io_test(range_input)
