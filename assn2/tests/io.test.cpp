@@ -1,5 +1,6 @@
 #include "io.hpp"
 #include "test.h"
+#include <tuple>
 #include <sstream>
 
 bool strict_test() {

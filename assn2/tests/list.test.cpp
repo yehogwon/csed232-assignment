@@ -7,6 +7,15 @@ bool equal(double a, double b) {
     return std::abs(a - b) < 1e-3;
 }
 
+std::vector<std::string> split(const std::string &s, const char delimiter) {
+    std::vector<std::string> v;
+    std::istringstream iss(s);
+    std::string buf_;
+    while (getline(iss, buf_, delimiter))
+        v.push_back(buf_);
+    return v;
+}
+
 Student create_student(std::string dept, std::string gender, std::string name, int age) {
     std::istringstream iss(dept + "\n" + gender + "\n" + name + "\n" + std::to_string(age) + "\n");
     std::ostringstream oss;
@@ -123,8 +132,51 @@ bool in_test() {
 }
 
 bool sort_test() {
-    // TODO: to be implemented
-    return true;
+    // FIXME: List::sort(Comp) cannot be tested because List::print() contains List::sort()
+    List list = create_list({
+        create_student("MATH", "F", "Katie", 23),
+        create_student("MATH", "M", "Karl", 24),
+        create_student("BIO", "M", "Joe", 26), 
+        create_student("CS", "M", "Jack", 22),
+        create_student("MECH", "F", "Kara", 25), 
+        create_student("BIO", "M", "James", 24),
+        create_student("BIO", "F", "Jenny", 25), 
+        create_student("MECH", "F", "Kathy", 27),
+        create_student("BIO", "F", "Jill", 23),
+        create_student("MATH", "M", "Kevin", 22),
+        create_student("MATH", "F", "Kathy", 21),
+        create_student("MECH", "M", "Kenny", 28), 
+        create_student("MECH", "M", "Kurt", 26),
+        create_student("CS", "M", "John", 20),
+        create_student("CS", "F", "Jane", 21),
+        create_student("MATH", "M", "Kim", 20)
+    });
+    
+    bool check = true;
+    list.sort();
+
+    std::stringstream buffer;
+    std::streambuf *sbuf = std::cout.rdbuf();
+    std::cout.rdbuf(buffer.rdbuf());
+    list.print();
+    std::cout.rdbuf(sbuf);
+    
+    std::vector<Student> students;
+    std::vector<std::string> lines = split(buffer.str(), '\n');
+    for (const std::string &line : lines) {
+        std::vector<std::string> tokens = split(line, '\t');
+        students.push_back(create_student(tokens[0], tokens[1], tokens[2], stoi(tokens[3])));
+    }
+
+    for (int i = 0; i < students.size() - 1; i++) {
+        if (!check) break;
+        check = check &&
+                (students[i] < students[i + 1] || students[i] == students[i + 1]);
+        if (!check)
+            std::cout << "Invalid order: " << students[i] << " vs " << students[i + 1] << std::endl;
+    }
+
+    return check;
 }
 
 bool pivot_table_test() {
