@@ -1,4 +1,5 @@
 #include "student.hpp"
+#include "test.h"
 #include <string>
 #include <sstream>
 #include <tuple>
@@ -52,13 +53,13 @@ bool output_test() {
     };
 
     bool check = true;
+    std::ostringstream _oos;
     for (const auto &test_case : cases) {
         if (!check) break;
         std::istringstream iss(test_case.first);
         std::ostringstream oss;
-        Student s(iss, std::cout);
+        Student s(iss, _oos);
         oss << s;
-        std::cout << std::endl << oss.str() << std::endl;
         check = check && 
                 oss.str() == test_case.second;
     }
@@ -131,18 +132,13 @@ bool comp_test() {
 }
 
 int main(int argc, char **argv) {
-    std::pair<std::string, fp> tests[] {
+    if (argc != 2) return 1; // invalid arguments (requires test name)
+
+    std::vector<std::pair<std::string, fp>> tests {
         std::make_pair("Student::Student", input_test), 
         std::make_pair("Student::operator<<", output_test), 
         std::make_pair("Student::Equality", equal_test), 
         std::make_pair("Student::LTGT", comp_test)
     };
-
-    if (argc != 2) return 1; // invalid arguments (requires test name)
-    for (const auto &test : tests) {
-        if (test.first != argv[1]) continue;
-        return !test.second();
-    }
-
-    return 1; // invalid test name
+    return test(argv[1], tests);
 }

@@ -1,4 +1,5 @@
 #include "node.hpp"
+#include "test.h"
 #include <sstream>
 
 using fp = bool (*)();
@@ -25,16 +26,11 @@ bool swap_test() {
 }
 
 int main(int argc, char **argv) {
-    std::pair<std::string, fp> tests[] {
+    if (argc != 2) return 1; // invalid arguments (requires test name)
+
+    std::vector<std::pair<std::string, fp>> tests {
         std::make_pair("Node::Equality", equal_test), 
         std::make_pair("Node::Swap", swap_test)
     };
-
-    if (argc != 2) return 1; // invalid arguments (requires test name)
-    for (const auto &test : tests) {
-        if (test.first != argv[1]) continue;
-        return !test.second();
-    }
-
-    return 1; // invalid test name
+    return test(argv[1], tests);
 }

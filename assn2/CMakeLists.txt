@@ -26,6 +26,20 @@ function(node_test test_name)
     )
 endfunction(node_test)
 
+function(list_test test_name)
+    add_test(
+        NAME List::${test_name}
+        COMMAND build/tests/list.test.out List::${test_name}
+    )
+endfunction(list_test)
+
+function(io_test test_name)
+    add_test(
+        NAME Io::${test_name}
+        COMMAND build/tests/io.test.out Format::${test_name}
+    )
+endfunction(io_test)
+
 student_test(Student)
 student_test(operator<<)
 student_test(Equality)
