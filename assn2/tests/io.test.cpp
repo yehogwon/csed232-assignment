@@ -57,7 +57,24 @@ bool range_test() {
 }
 
 bool again_test() {
-    // TODO: to be implemented
+    std::pair<std::string, Format::check_bit> test_cases[] {
+        // std::make_pair("alks alsjkdf\nn\n", Format::NOSPACE),
+        // std::make_pair("JWEjk slkdj\nn\n", Format::NOLOWER),
+        std::make_pair("2993\nn\n", Format::NUMBER | Format::ONECHAR)
+    };
+
+    std::string val;
+    std::ostringstream _os;
+    for (const auto &test_case : test_cases) {
+        std::istringstream iss(test_case.first);
+        try {
+            Format::strict_input(iss, _os, "", val, test_case.second);
+        } catch (InterruptedInputException &e) {
+            continue;
+        }
+        return false;
+    }
+    
     return true;
 }
 
