@@ -97,7 +97,37 @@ bool equal_test() {
 }
 
 bool comp_test() {
-    return true;
+    const char *cases[] { // sorted, no duplicates
+        "BIO\nF\nNana\n29\n", 
+        "BIO\nM\nYou\n24\n", 
+        "CSE\nF\nKim\n23\n",
+        "CSE\nM\nKim\n23\n",
+        "ELEC\nM\nGwon\n29\n", 
+        "MATH\nM\nKim\n20\n", 
+        "MECH\nM\nLia\n29\n", 
+        "MECH\nM\nSam\n23\n", 
+        "MECH\nF\nNuu\28\n"
+    };
+    
+    bool check = true;
+    std::ostringstream oss;
+    for (int i = 0; i < 5; i++) {
+        for (int j = i + 1; j < 5; j++) {
+            if (!check) break;
+            std::istringstream iss1(cases[i]);
+            std::istringstream iss2(cases[j]);
+            Student s1(iss1, oss);
+            Student s2(iss2, oss);
+            
+            if (i < j) {
+                check = check && (s1 < s2);
+            } else {
+                check = check && (s1 > s2);
+            }
+        }
+    }
+
+    return check;
 }
 
 int main(int argc, char **argv) {
