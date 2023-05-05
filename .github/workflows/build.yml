@@ -30,7 +30,7 @@ jobs:
       run: |
         cmake -S . -B build
         cd build
-        make
+        make -j `nproc`
   
   test:
     runs-on: ubuntu-latest
@@ -41,7 +41,7 @@ jobs:
       run: |
         cmake -S . -B build
         cd build
-        make
+        make -j `nproc`
     - name: test
       run: |
         cd build
