@@ -10,10 +10,10 @@ bool input_test() {
     };
 
     bool check = true;
-    for (auto test_case : proper_cases) {
+    std::ostringstream oss;
+    for (const auto &test_case : proper_cases) {
         if (!check) break;
         std::istringstream iss(test_case.first);
-        std::ostringstream oss;
         Student s(iss, oss);
         check = check && 
                 s.get_dept() == std::get<0>(test_case.second) && 
@@ -21,6 +21,24 @@ bool input_test() {
                 s.get_age() == std::get<2>(test_case.second);
     }
     if (!check) return check;
+
+    const char *improper_cases[] {
+        "CS E\nn\n", 
+        "CssE\nn\n", 
+        "BIO\naf\nn\n",
+        "BIO\nF\nj23 a\nn\n",
+        "BIO\nF\nNana\n14\nn\n"
+    };
+    for (const auto &test_case: improper_cases) {
+        if (!check) break;
+        std::istringstream iss(test_case);
+        try {
+            Student s(iss, std::cout);
+        } catch (InterruptedInputException &e) {
+            continue;
+        }
+        check = false;
+    }
     
     return check;
 }
