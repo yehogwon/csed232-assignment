@@ -4,6 +4,7 @@
 #include <fstream>
 #include <cstdlib>
 #include <cstdio>
+#include <ctime>
 
 bool load_image_test() {
     std::pair<std::string, std::vector<int>> test_cases[] {
@@ -45,6 +46,7 @@ bool write_result_test() {
         "saladsf\nasdlalksdf\n"
     };
 
+    std::srand(std::time(nullptr));
     parser p;
     char *file_name;
     for (const std::string &test_case : test_cases) {
