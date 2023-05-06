@@ -3,6 +3,7 @@
 #include <string>
 #include <fstream>
 #include <cstdlib>
+#include <cstdio>
 
 bool load_image_test() {
     std::pair<std::string, std::vector<int>> test_cases[] {
@@ -52,6 +53,7 @@ bool write_result_test() {
         std::ifstream in_file(file_name);
         std::string result;
         std::getline(in_file, result, '\0');
+        std::remove(file_name.c_str());
         if (result != test_case)
             return false;
     }
