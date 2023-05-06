@@ -54,3 +54,5 @@ Assign[0-9]_*
 
 build/
 DartConfiguration.tcl
+
+/*.log

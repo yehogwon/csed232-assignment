@@ -5,20 +5,23 @@
 
 bool strict_test() {
     std::pair<const char*, Format::check_bit> proper_cases[] { 
-        std::make_pair("", Format::NOTHING), 
-        std::make_pair("", Format::GENDER), 
-        std::make_pair("", Format::NOSPACE),
-        std::make_pair("", Format::NOLOWER),
-        std::make_pair("", Format::NOEMPTY), 
-        std::make_pair("", Format::NUMBER),
-        std::make_pair("", Format::ONECHAR),
-        std::make_pair("", Format::ALPHABET), 
-        std::make_pair("", Format::NOSPACE | Format::NOLOWER), 
-        std::make_pair("", Format::NOSPACE | Format::NUMBER), 
-        std::make_pair("", Format::NOSPACE | Format::ALPHABET),
-        std::make_pair("", Format::NOLOWER | Format::NOEMPTY), 
-        std::make_pair("", Format::ONECHAR | Format::ALPHABET), 
-        std::make_pair("", Format::NOSPACE | Format::NOLOWER | Format::ALPHABET)
+        std::make_pair("anything", Format::NOTHING | 0), 
+        std::make_pair("M", Format::GENDER | 0), 
+        std::make_pair("F", Format::GENDER | 0), 
+        std::make_pair("testmsg", Format::NOSPACE | 0),
+        std::make_pair("CAP ITAL", Format::NOLOWER | 0),
+        std::make_pair("something in", Format::NOEMPTY | 0), 
+        std::make_pair("299938", Format::NUMBER | 0),
+        std::make_pair("k", Format::ONECHAR | 0),
+        std::make_pair("9", Format::ONECHAR | 0),
+        std::make_pair("aL phA Bets", Format::ALPHABET | 0), 
+        std::make_pair("CAPITAL", Format::NOSPACE | Format::NOLOWER), 
+        std::make_pair("28749", Format::NOSPACE | Format::NUMBER), 
+        std::make_pair("aLphABets", Format::NOSPACE | Format::ALPHABET),
+        std::make_pair("AL LC API TA L", Format::NOLOWER | Format::NOEMPTY), 
+        std::make_pair("k", Format::ONECHAR | Format::ALPHABET), 
+        std::make_pair("P", Format::ONECHAR | Format::ALPHABET), 
+        std::make_pair("PEWPEW", Format::NOSPACE | Format::NOLOWER | Format::ALPHABET)
     };
 
     bool check = true;
@@ -28,37 +31,49 @@ bool strict_test() {
         if (!check) break;
         std::istringstream iss(test_case.first);
         std::ostringstream oss;
-        Format::strict_input(iss, oss, "prompt", val, test_case.second);
+        try {
+            Format::strict_input(iss, oss, "prompt", val, test_case.second);
+        } catch (InterruptedInputException &e) {
+            check = false;
+            continue;
+        }
         check = check && 
                 val == test_case.first && 
                 oss.str() == "prompt";
-        
     }
     if (!check) return check;
 
     std::pair<const char*, Format::check_bit> improper_cases[] { 
-        std::make_pair("", Format::NOTHING), 
-        std::make_pair("", Format::GENDER), 
-        std::make_pair("", Format::NOSPACE),
-        std::make_pair("", Format::NOLOWER),
-        std::make_pair("", Format::NOEMPTY), 
-        std::make_pair("", Format::NUMBER),
-        std::make_pair("", Format::ONECHAR),
-        std::make_pair("", Format::ALPHABET), 
-        std::make_pair("", Format::NOSPACE | Format::NOLOWER), 
-        std::make_pair("", Format::NOSPACE | Format::NUMBER), 
-        std::make_pair("", Format::NOSPACE | Format::ALPHABET),
+        std::make_pair("m", Format::GENDER | 0), 
+        std::make_pair("f", Format::GENDER | 0), 
+        std::make_pair("white space", Format::NOSPACE | 0),
+        std::make_pair("lOWer", Format::NOLOWER | 0),
+        std::make_pair("", Format::NOEMPTY | 0), 
+        std::make_pair("98aa7", Format::NUMBER | 0),
+        std::make_pair("four", Format::ONECHAR | 0),
+        std::make_pair("d!i!g!it", Format::ALPHABET | 0), 
+        std::make_pair("lowers with space", Format::NOSPACE | Format::NOLOWER), 
+        std::make_pair("UPPER BUT SPACE", Format::NOSPACE | Format::NOLOWER), 
+        std::make_pair("alphanospace", Format::NOSPACE | Format::NUMBER), 
+        std::make_pair("9999 888", Format::NOSPACE | Format::NUMBER), 
+        std::make_pair("digit!!nowspace", Format::NOSPACE | Format::ALPHABET),
+        std::make_pair("alphabets but space", Format::NOSPACE | Format::ALPHABET),
         std::make_pair("", Format::NOLOWER | Format::NOEMPTY), 
-        std::make_pair("", Format::ONECHAR | Format::ALPHABET), 
-        std::make_pair("", Format::NOSPACE | Format::NOLOWER | Format::ALPHABET)
+        std::make_pair("lowerHERE", Format::NOLOWER | Format::NOEMPTY), 
+        std::make_pair("twoalpha", Format::ONECHAR | Format::ALPHABET), 
+        std::make_pair("9", Format::ONECHAR | Format::ALPHABET), 
+        std::make_pair("SAT BUT SPACE", Format::NOSPACE | Format::NOLOWER | Format::ALPHABET), 
+        std::make_pair("99988", Format::NOSPACE | Format::NOLOWER | Format::ALPHABET), 
+        std::make_pair("lowersHERE", Format::NOSPACE | Format::NOLOWER | Format::ALPHABET)
     };
 
     std::ostringstream _os;
     for (const auto &test_case: improper_cases) {
         if (!check) break;
-        std::istringstream iss(test_case.first);
+        std::cout << "Testing: " << test_case.first << std::endl;
+        std::istringstream iss(std::string(test_case.first) + "\nn\n");
         try {
-            Format::strict_input(iss, _os, "prompt", val, test_case.second);
+            Format::strict_input(iss, _os, "", val, test_case.second);
         } catch (InterruptedInputException &e) {
             continue;
         }
@@ -118,7 +133,7 @@ bool range_test() {
 
 bool again_test() {
     std::pair<std::string, Format::check_bit> test_cases[] {
-        // FIXME: These do not work properly; Format::~ | 0 works well. Why?
+        // FIXME: These do not work properly; Format::~ | 0 works well. Why? (also for strict_test())
         // std::make_pair("alks alsjkdf\nn\n", Format::NOSPACE), 
         // std::make_pair("JWEjk slkdj\nn\n", Format::NOLOWER),
         std::make_pair("2993\nn\n", Format::NUMBER | Format::ONECHAR)
