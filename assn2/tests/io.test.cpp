@@ -4,8 +4,68 @@
 #include <sstream>
 
 bool strict_test() {
-    // TODO: to be implemented
-    return true;
+    std::pair<const char*, Format::check_bit> proper_cases[] { 
+        std::make_pair("", Format::NOTHING), 
+        std::make_pair("", Format::GENDER), 
+        std::make_pair("", Format::NOSPACE),
+        std::make_pair("", Format::NOLOWER),
+        std::make_pair("", Format::NOEMPTY), 
+        std::make_pair("", Format::NUMBER),
+        std::make_pair("", Format::ONECHAR),
+        std::make_pair("", Format::ALPHABET), 
+        std::make_pair("", Format::NOSPACE | Format::NOLOWER), 
+        std::make_pair("", Format::NOSPACE | Format::NUMBER), 
+        std::make_pair("", Format::NOSPACE | Format::ALPHABET),
+        std::make_pair("", Format::NOLOWER | Format::NOEMPTY), 
+        std::make_pair("", Format::ONECHAR | Format::ALPHABET), 
+        std::make_pair("", Format::NOSPACE | Format::NOLOWER | Format::ALPHABET)
+    };
+
+    bool check = true;
+    
+    std::string val;
+    for (const auto &test_case : proper_cases) {
+        if (!check) break;
+        std::istringstream iss(test_case.first);
+        std::ostringstream oss;
+        Format::strict_input(iss, oss, "prompt", val, test_case.second);
+        check = check && 
+                val == test_case.first && 
+                oss.str() == "prompt";
+        
+    }
+    if (!check) return check;
+
+    std::pair<const char*, Format::check_bit> improper_cases[] { 
+        std::make_pair("", Format::NOTHING), 
+        std::make_pair("", Format::GENDER), 
+        std::make_pair("", Format::NOSPACE),
+        std::make_pair("", Format::NOLOWER),
+        std::make_pair("", Format::NOEMPTY), 
+        std::make_pair("", Format::NUMBER),
+        std::make_pair("", Format::ONECHAR),
+        std::make_pair("", Format::ALPHABET), 
+        std::make_pair("", Format::NOSPACE | Format::NOLOWER), 
+        std::make_pair("", Format::NOSPACE | Format::NUMBER), 
+        std::make_pair("", Format::NOSPACE | Format::ALPHABET),
+        std::make_pair("", Format::NOLOWER | Format::NOEMPTY), 
+        std::make_pair("", Format::ONECHAR | Format::ALPHABET), 
+        std::make_pair("", Format::NOSPACE | Format::NOLOWER | Format::ALPHABET)
+    };
+
+    std::ostringstream _os;
+    for (const auto &test_case: improper_cases) {
+        if (!check) break;
+        std::istringstream iss(test_case.first);
+        try {
+            Format::strict_input(iss, _os, "prompt", val, test_case.second);
+        } catch (InterruptedInputException &e) {
+            continue;
+        }
+        check = false;
+    }
+    
+    return check;
 }
 
 bool range_test() {
