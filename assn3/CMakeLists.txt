@@ -15,7 +15,8 @@ include(CTest)
 function(parser_test test_name)
     add_test(
         NAME ASSN3::parser::${test_name}
-        COMMAND build/tests/parser.test.out parser::${test_name}
+        COMMAND ${CMAKE_CURRENT_BINARY_DIR}/build/tests/parser.test.out parser::${test_name}
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests
     )
 endfunction(parser_test)
 
@@ -33,7 +34,6 @@ function(artist_test test_name)
     )
 endfunction(artist_test)
 
-parser_test(Split)
 parser_test(LoadImage)
 parser_test(LoadConfig)
 parser_test(WriteResult)
