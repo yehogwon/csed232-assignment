@@ -1,4 +1,5 @@
 #include "test.h"
+#include "artist.hpp"
 
 bool classic_test() {
     return true;

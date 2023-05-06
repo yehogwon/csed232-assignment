@@ -1,4 +1,5 @@
 #include "test.h"
+#include "drawer.hpp"
 
 bool drawer_test() {
     return true;
