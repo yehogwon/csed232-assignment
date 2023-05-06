@@ -43,8 +43,6 @@ _deps
 
 .DS_Store
 
-*.py
-
 env/
 
 **/docs
