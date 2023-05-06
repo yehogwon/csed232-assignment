@@ -5,3 +5,11 @@ add_executable(
     artist.cpp
     main.cpp
 )
+
+add_library(
+    assn3.lib
+    STATIC
+    parser.cpp
+    drawer.cpp
+    artist.cpp
+)
