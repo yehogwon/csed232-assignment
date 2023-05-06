@@ -70,7 +70,6 @@ bool strict_test() {
     std::ostringstream _os;
     for (const auto &test_case: improper_cases) {
         if (!check) break;
-        std::cout << "Testing: " << test_case.first << std::endl;
         std::istringstream iss(std::string(test_case.first) + "\nn\n");
         try {
             Format::strict_input(iss, _os, "", val, test_case.second);
