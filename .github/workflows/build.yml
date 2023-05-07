@@ -3,22 +3,8 @@ name: build
 on:
   push:
     branches: [ "main" ]
-    paths: 
-        - assn1/**
-        - assn2/**
-        - assn3/**
-        - assn4/**
-        - CMakeLists.txt
-        - .github/workflows/**
   pull_request:
     branches: [ "main" ]
-    paths: 
-        - assn1/**
-        - assn2/**
-        - assn3/**
-        - assn4/**
-        - CMakeLists.txt
-        - .github/workflows/build.yml
 
 jobs:
   build:
