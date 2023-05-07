@@ -4,6 +4,10 @@
 #include <string>
 #include <vector>
 
+#ifdef _TEST_COUT__
+#include <iostream>
+#endif
+
 #define START_TEST_COUT__(BUFFER) \
     std::stringstream BUFFER; \
     std::streambuf *sbuf__ = std::cout.rdbuf(); \
