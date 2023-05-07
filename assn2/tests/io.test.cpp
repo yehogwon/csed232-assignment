@@ -133,8 +133,8 @@ bool range_test() {
 bool again_test() {
     std::pair<std::string, Format::check_bit> test_cases[] {
         // FIXME: These do not work properly; Format::~ | 0 works well. Why? (also for strict_test())
-        // std::make_pair("alks alsjkdf\nn\n", Format::NOSPACE), 
-        // std::make_pair("JWEjk slkdj\nn\n", Format::NOLOWER),
+        std::make_pair("alks alsjkdf\nn\n", Format::NOSPACE | 0), 
+        std::make_pair("JWEjk slkdj\nn\n", Format::NOLOWER | 0),
         std::make_pair("2993\nn\n", Format::NUMBER | Format::ONECHAR)
     };
 
