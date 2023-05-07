@@ -1,4 +1,9 @@
+if (POLICY CMP0025)
+cmake_policy(SET CMP0025 NEW)
+endif()
+
 project("ASSN2")
+cmake_minimum_required(VERSION 3.10)
 
 add_subdirectory(
     src
@@ -14,28 +19,28 @@ include(CTest)
 
 function(student_test test_name)
     add_test(
-        NAME Student::${test_name}
+        NAME ASSN2::Student::${test_name}
         COMMAND build/tests/student.test.out Student::${test_name}
     )
 endfunction(student_test)
 
 function(node_test test_name)
     add_test(
-        NAME Node::${test_name}
+        NAME ASSN2::Node::${test_name}
         COMMAND build/tests/node.test.out Node::${test_name}
     )
 endfunction(node_test)
 
 function(list_test test_name)
     add_test(
-        NAME List::${test_name}
+        NAME ASSN2::List::${test_name}
         COMMAND build/tests/list.test.out List::${test_name}
     )
 endfunction(list_test)
 
 function(io_test test_name)
     add_test(
-        NAME Format::${test_name}
+        NAME ASSN2::Format::${test_name}
         COMMAND build/tests/io.test.out Format::${test_name}
     )
 endfunction(io_test)

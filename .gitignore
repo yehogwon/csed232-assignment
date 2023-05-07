@@ -43,8 +43,6 @@ _deps
 
 .DS_Store
 
-*.py
-
 env/
 
 **/docs
@@ -54,3 +52,5 @@ Assign[0-9]_*
 
 build/
 DartConfiguration.tcl
+
+/*.log

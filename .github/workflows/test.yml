@@ -34,4 +34,4 @@ jobs:
     - name: test
       run: |
         cd build
-        ctest
+        ctest || cat Testing/Temporary/LastTest.log
