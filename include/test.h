@@ -4,6 +4,13 @@
 #include <string>
 #include <vector>
 
+#define START_TEST_COUT__(BUFFER) \
+    std::stringstream BUFFER; \
+    std::streambuf *sbuf__ = std::cout.rdbuf(); \
+    std::cout.rdbuf(BUFFER.rdbuf());
+#define STOP_TEST_COUT__ \
+    std::cout.rdbuf(sbuf__);
+
 using fp = bool (*)();
 
 int test(char *test_name, const std::vector<std::pair<std::string, fp>> &tests) {
