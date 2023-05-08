@@ -6,6 +6,7 @@
 
 #ifdef _TEST_COUT__
 #include <iostream>
+#define __IOSTREAM_INCLUDED__
 #endif
 
 #define START_TEST_COUT__(BUFFER) \
@@ -17,9 +18,9 @@
 
 using fp = bool (*)();
 
-#ifdef _GLIBCXX_IOSTREAM
+#ifdef __IOSTREAM_INCLUDED__ // To use this test function, define TEST_COUT__ first
 void show_case(std::string res, std::string ans) {
-    std::cout << "Got: '''\n" << res << "\n'''\nExpected: '''" << ans << "\n'''" << std::endl;
+    std::cout << "Got: '''\n" << res << "\n'''\nExpected: '''\n" << ans << "\n'''" << std::endl;
 }
 #endif
 
