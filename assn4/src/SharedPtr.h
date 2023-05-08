@@ -126,7 +126,7 @@ public:
 		return m_object;
 	}
 
-	operator ObjectType* const() const {
+	operator const ObjectType*() const {
 		return m_object;
 	}
 };
