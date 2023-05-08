@@ -58,7 +58,7 @@ public:
 		for (size_t i = 0; i < m_width * m_height; i++) m_buff[i] = val;
 	}
 
-	Image(const Image<PixelType> &img) : m_width(img.width), m_height(img.height), m_buff(new PixelType[img.width * img.height]) {
+	Image(const Image<PixelType> &img) : m_width(img.width()), m_height(img.height()), m_buff(new PixelType[img.width() * img.height()]) {
 		for (size_t i = 0; i < m_width * m_height; i++) m_buff[i] = img.m_buff[i];
 	}
 
@@ -69,14 +69,14 @@ public:
 	////////////////////////////////////////////
 	
 	Image& operator=(const Image &img) {
-		m_width = img.m_width, m_height = img.m_height;
+		m_width = img.width(), m_height = img.height();
 		m_buff = PixelArray(new PixelType[m_width * m_height]);
 		for (size_t i = 0; i < m_width * m_height; i++) m_buff[i] = img.m_buff[i];
 		return *this;
 	}
 	
 	const Image& operator=(const Image &img) const {
-		m_width = img.m_width, m_height = img.m_height;
+		m_width = img.width(), m_height = img.height();
 		m_buff = PixelArray(new PixelType[m_width * m_height]);
 		for (size_t i = 0; i < m_width * m_height; i++) m_buff[i] = img.m_buff[i];
 		return *this;
