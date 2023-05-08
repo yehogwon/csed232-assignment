@@ -96,18 +96,14 @@ bool construct_test() {
 
 template <typename T>
 bool assign_test_() {
-    std::cout << "Assignment test for " << typeid(T).name() << std::endl;
     Image<T> img = create_image<T>();
     Image<T> img_;
     img_ = img;
-    std::cout << "instantiated" << std::endl;
     if (img.width() != img_.width() || img.height() != img_.height()) return false;
     for (int i = 0; i < img.height(); i++)
-        for (int j = 0; j < img.width(); j++) {
-            std::cout << "(" << i << ", " << j << ")" << std::endl;
+        for (int j = 0; j < img.width(); j++)
             if (img[i][j] != img_[i][j])
                 return false;
-        }
     return true;
 }
 
