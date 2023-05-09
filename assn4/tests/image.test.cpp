@@ -96,18 +96,14 @@ bool construct_test() {
 
 template <typename T>
 bool assign_test_() {
-    std::cout << "Assignment test for " << typeid(T).name() << std::endl;
     Image<T> img = create_image<T>();
     Image<T> img_;
     img_ = img;
-    std::cout << "instantiated" << std::endl;
     if (img.width() != img_.width() || img.height() != img_.height()) return false;
     for (int i = 0; i < img.height(); i++)
-        for (int j = 0; j < img.width(); j++) {
-            std::cout << "(" << i << ", " << j << ")" << std::endl;
+        for (int j = 0; j < img.width(); j++)
             if (img[i][j] != img_[i][j])
                 return false;
-        }
     return true;
 }
 
@@ -115,18 +111,12 @@ bool assign_test() {
     return assign_test_<RGB8b>() && assign_test_<RGBf>();
 }
 
-bool memory_test() {
-    // TODO: to be implemented
-    return true;
-}
-
 int main(int argc, char **argv) {
     if (argc != 2) return 1; // invalid arguments (requires test name)
 
     std::vector<std::pair<std::string, fp>> tests {
         std::make_pair("Image::Image", construct_test), 
-        std::make_pair("Image::operator=", assign_test), 
-        std::make_pair("Image::MemoryManagement", memory_test)
+        std::make_pair("Image::operator=", assign_test)
     };
     return test(argv[1], tests);
 }
