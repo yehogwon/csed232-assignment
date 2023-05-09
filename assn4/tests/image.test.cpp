@@ -111,18 +111,12 @@ bool assign_test() {
     return assign_test_<RGB8b>() && assign_test_<RGBf>();
 }
 
-bool memory_test() {
-    // TODO: to be implemented
-    return true;
-}
-
 int main(int argc, char **argv) {
     if (argc != 2) return 1; // invalid arguments (requires test name)
 
     std::vector<std::pair<std::string, fp>> tests {
         std::make_pair("Image::Image", construct_test), 
-        std::make_pair("Image::operator=", assign_test), 
-        std::make_pair("Image::MemoryManagement", memory_test)
+        std::make_pair("Image::operator=", assign_test)
     };
     return test(argv[1], tests);
 }
