@@ -133,7 +133,6 @@ bool in_test() {
 }
 
 bool sort_test() {
-    // FIXME: List::sort(Comp) cannot be tested because List::print() contains List::sort()
     List list = create_list({
         create_student("MATH", "F", "Katie", 23),
         create_student("MATH", "M", "Karl", 24),
