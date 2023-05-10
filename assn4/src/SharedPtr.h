@@ -42,6 +42,7 @@ public:
 	}
 
 	explicit SharedPtr(ObjectType *m_object_) {
+		// Assume it is the first time that m_object_ is directed by a SharedPtr
 		m_ref_counter = new int(1);
 		m_object = m_object_;
 	}
