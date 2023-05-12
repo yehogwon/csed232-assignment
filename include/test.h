@@ -24,6 +24,11 @@ void show_case(std::string res, std::string ans) {
 }
 #endif
 
+template <typename T>
+std::string typecheck(T const& t) {
+    return __PRETTY_FUNCTION__;
+}
+
 int test(char *test_name, const std::vector<std::pair<std::string, fp>> &tests) {
     for (const auto &test : tests) {
         if (test.first != test_name) continue;
