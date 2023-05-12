@@ -52,9 +52,7 @@ bool sharedptr_test() {
         "Dealloc Object", 
         "DESTRUCTOR 2", 
         "Dealloc Object", 
-        "DESTRUCTOR 1", 
-        // my own test case (2)
-        // TODO: add more test cases here
+        "DESTRUCTOR 1"
     };
 
     START_TEST_COUT__(cout_)
@@ -110,11 +108,17 @@ bool sharedptr_test() {
     return cout_.str() == ans;
 }
 
+bool circular_dependency_test() {
+    // TODO: to be implemented
+    return true;
+}
+
 int main(int argc, char **argv) {
     if (argc != 2) return 1; // invalid arguments (requires test name)
 
     std::vector<std::pair<std::string, fp>> tests {
-        std::make_pair("SharedPtr::SharedPtr", sharedptr_test)
+        std::make_pair("SharedPtr::SharedPtr", sharedptr_test), 
+        std::make_pair("SharedPtr::CircularDependency", circular_dependency_test)
     };
     return test(argv[1], tests);
 }
