@@ -4,17 +4,17 @@
 #include <sstream>
 
 bool strict_test() {
-    std::pair<const char*, Format::check_bit> proper_cases[] { 
-        std::make_pair("anything", Format::NOTHING | 0), 
-        std::make_pair("M", Format::GENDER | 0), 
-        std::make_pair("F", Format::GENDER | 0), 
-        std::make_pair("testmsg", Format::NOSPACE | 0),
-        std::make_pair("CAP ITAL", Format::NOLOWER | 0),
-        std::make_pair("something in", Format::NOEMPTY | 0), 
-        std::make_pair("299938", Format::NUMBER | 0),
-        std::make_pair("k", Format::ONECHAR | 0),
-        std::make_pair("9", Format::ONECHAR | 0),
-        std::make_pair("aL phA Bets", Format::ALPHABET | 0), 
+    std::pair<const char*, Format::check_bit> proper_cases[] {
+        std::make_pair("anything", Format::NOTHING), 
+        std::make_pair("M", Format::GENDER), 
+        std::make_pair("F", Format::GENDER), 
+        std::make_pair("testmsg", Format::NOSPACE),
+        std::make_pair("CAP ITAL", Format::NOLOWER),
+        std::make_pair("something in", Format::NOEMPTY), 
+        std::make_pair("299938", Format::NUMBER),
+        std::make_pair("k", Format::ONECHAR),
+        std::make_pair("9", Format::ONECHAR),
+        std::make_pair("aL phA Bets", Format::ALPHABET), 
         std::make_pair("CAPITAL", Format::NOSPACE | Format::NOLOWER), 
         std::make_pair("28749", Format::NOSPACE | Format::NUMBER), 
         std::make_pair("aLphABets", Format::NOSPACE | Format::ALPHABET),
@@ -44,14 +44,14 @@ bool strict_test() {
     if (!check) return check;
 
     std::pair<const char*, Format::check_bit> improper_cases[] { 
-        std::make_pair("m", Format::GENDER | 0), 
-        std::make_pair("f", Format::GENDER | 0), 
-        std::make_pair("white space", Format::NOSPACE | 0),
-        std::make_pair("lOWer", Format::NOLOWER | 0),
-        std::make_pair("", Format::NOEMPTY | 0), 
-        std::make_pair("98aa7", Format::NUMBER | 0),
-        std::make_pair("four", Format::ONECHAR | 0),
-        std::make_pair("d!i!g!it", Format::ALPHABET | 0), 
+        std::make_pair("m", Format::GENDER), 
+        std::make_pair("f", Format::GENDER), 
+        std::make_pair("white space", Format::NOSPACE),
+        std::make_pair("lOWer", Format::NOLOWER),
+        std::make_pair("", Format::NOEMPTY), 
+        std::make_pair("98aa7", Format::NUMBER),
+        std::make_pair("four", Format::ONECHAR),
+        std::make_pair("d!i!g!it", Format::ALPHABET), 
         std::make_pair("lowers with space", Format::NOSPACE | Format::NOLOWER), 
         std::make_pair("UPPER BUT SPACE", Format::NOSPACE | Format::NOLOWER), 
         std::make_pair("alphanospace", Format::NOSPACE | Format::NUMBER), 
@@ -132,9 +132,8 @@ bool range_test() {
 
 bool again_test() {
     std::pair<std::string, Format::check_bit> test_cases[] {
-        // FIXME: These do not work properly; Format::~ | 0 works well. Why? (also for strict_test())
-        std::make_pair("alks alsjkdf\nn\n", Format::NOSPACE | 0), 
-        std::make_pair("JWEjk slkdj\nn\n", Format::NOLOWER | 0),
+        std::make_pair("alks alsjkdf\nn\n", Format::NOSPACE), 
+        std::make_pair("JWEjk slkdj\nn\n", Format::NOLOWER),
         std::make_pair("2993\nn\n", Format::NUMBER | Format::ONECHAR)
     };
 

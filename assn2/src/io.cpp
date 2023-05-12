@@ -7,6 +7,15 @@
 
 #include "io.hpp"
 
+const Format::check_bit Format::NOTHING;
+const Format::check_bit Format::GENDER;
+const Format::check_bit Format::NOSPACE;
+const Format::check_bit Format::NOLOWER;
+const Format::check_bit Format::NOEMPTY;
+const Format::check_bit Format::NUMBER;
+const Format::check_bit Format::ONECHAR;
+const Format::check_bit Format::ALPHABET;
+
 bool Format::gender(std::string &str) {
     return str == "M" || str == "F"; // check if str is "M" or "F"
 }
