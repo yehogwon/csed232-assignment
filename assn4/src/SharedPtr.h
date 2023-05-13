@@ -29,7 +29,7 @@ private:
 	ObjectType* m_object;
 	int* m_ref_counter;
 
-	void clear() {
+	void clear_() {
 		if (--(*m_ref_counter) == 0) {
 			delete m_ref_counter;
 			Dealloc(m_object);
@@ -52,7 +52,7 @@ public:
 	}
 	
 	~SharedPtr() {
-		clear();
+		clear_();
 	}
 
 	////////////////////////////////////////////
@@ -60,7 +60,7 @@ public:
 	////////////////////////////////////////////
 	
 	SharedPtr& operator=(const SharedPtr &shared_ptr) {
-		clear();
+		clear_();
 		m_ref_counter = shared_ptr.m_ref_counter;
 		m_object = shared_ptr.m_object;
 		if (m_ref_counter != nullptr)
@@ -119,6 +119,10 @@ public:
 
 	operator const ObjectType*() const {
 		return m_object;
+	}
+
+	operator bool() const {
+		return m_object != nullptr;
 	}
 };
 
