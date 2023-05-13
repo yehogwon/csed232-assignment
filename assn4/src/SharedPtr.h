@@ -120,10 +120,6 @@ public:
 	operator const ObjectType*() const {
 		return m_object;
 	}
-
-	operator bool() const {
-		return m_object != nullptr;
-	}
 };
 
 template<typename T>
