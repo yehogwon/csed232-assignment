@@ -29,52 +29,42 @@ private:
 	ObjectType* m_object;
 	int* m_ref_counter;
 
-	// ======= ADD CODE HERE IF NEEDED =========
+	void clear() {
+		if (--(*m_ref_counter) == 0) {
+			delete m_ref_counter;
+			Dealloc(m_object);
+		}
+	}
 				
 public:
 	////////////////////////////////////////////
 	// Constructors & destructor
 	////////////////////////////////////////////
 	
-	SharedPtr() {
-		m_ref_counter = new int(0);
-		m_object = nullptr;
-	}
+	SharedPtr() : m_ref_counter(new int(0)), m_object(nullptr) { }
 
-	explicit SharedPtr(ObjectType *m_object_) {
-		// Assume it is the first time that m_object_ is directed by a SharedPtr
-		m_ref_counter = new int(1);
-		m_object = m_object_;
-	}
+	// Assuming it is the first time that m_object_ is directed by a SharedPtr
+	explicit SharedPtr(ObjectType *m_object_) : m_ref_counter(new int(1)), m_object(m_object_) { }
 	
-	SharedPtr(const SharedPtr& shared_ptr) {
-		m_ref_counter = shared_ptr.m_ref_counter;
-		m_object = shared_ptr.m_object;
-		(*m_ref_counter)++;
+	SharedPtr(const SharedPtr &shared_ptr) : m_ref_counter(shared_ptr.m_ref_counter), m_object(shared_ptr.m_object) {
+		if (m_ref_counter != nullptr)
+			(*m_ref_counter)++;
 	}
 	
 	~SharedPtr() {
-		(*m_ref_counter)--;
-		if (*m_ref_counter == 0) {
-			delete m_ref_counter;
-			Dealloc(m_object);
-		}
+		clear();
 	}
 
 	////////////////////////////////////////////
 	// Assignment operator
 	////////////////////////////////////////////
 	
-	SharedPtr& operator=(const SharedPtr& shared_ptr) {
-		if (*m_ref_counter == 0)
-			delete m_ref_counter;
-		else if (--(*m_ref_counter) == 0) {
-			delete m_ref_counter;
-			Dealloc(m_object);
-		}
+	SharedPtr& operator=(const SharedPtr &shared_ptr) {
+		clear();
 		m_ref_counter = shared_ptr.m_ref_counter;
 		m_object = shared_ptr.m_object;
-		(*m_ref_counter)++;
+		if (m_ref_counter != nullptr)
+			(*m_ref_counter)++;
 		return *this;
 	}
 	
