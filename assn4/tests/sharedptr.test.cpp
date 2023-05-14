@@ -64,20 +64,11 @@ bool sharedptr_test() {
 
         ptr1 = SharedPtr<MyClass>(new MyClass(200));
 
-        // p1 -> 200
-        // p2 -> 100
-        // p3 -> 100
-
         std::cout << ptr1->get_value() << std::endl;
         std::cout << (*ptr2) << std::endl;
         std::cout << ptr3->get_value() << std::endl;
 
         ptr2 = ptr3 = ptr1;
-
-        // 100 is deallocated
-        // p1 -> 200
-        // p2 -> 200
-        // p3 -> 200
 
         std::cout << ptr1->get_value() << std::endl;
         std::cout << (*ptr2).get_value() << std::endl;
@@ -108,7 +99,7 @@ bool sharedptr_test() {
     return cout_.str() == ans;
 }
 
-bool circular_dependency_test() {
+bool array_test() {
     // TODO: to be implemented
     return true;
 }
@@ -118,7 +109,7 @@ int main(int argc, char **argv) {
 
     std::vector<std::pair<std::string, fp>> tests {
         std::make_pair("SharedPtr::SharedPtr", sharedptr_test), 
-        std::make_pair("SharedPtr::CircularDependency", circular_dependency_test)
+        std::make_pair("SharedPtr::SharedPtrArray", array_test)
     };
     return test(argv[1], tests);
 }
