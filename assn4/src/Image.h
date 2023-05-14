@@ -49,7 +49,7 @@ HSV rgb_to_hsv(const RGB<T> &rgb) {
 	else s = delta / max;
 
 	if (delta == 0) h = 0;
-	else if (max == r) h = 60 * std::fmodf((g - b) / delta, 6);
+	else if (max == r) h = 60 * std::fmod((g - b) / delta, 6);
 	else if (max == g) h = 60 * ((b - r) / delta + 2);
 	else h = 60 * ((r - g) / delta + 4);
 
@@ -62,7 +62,7 @@ RGB<T> hsv_to_rgb(const HSV &hsv) {
 	T &r = rgb.r, &g = rgb.g, &b = rgb.b;
 	float h = hsv[0], s = hsv[1], v = hsv[2];
 	float c = v * s;
-	float x = c * (1 - std::abs(std::fmodf(h / 60, 2) - 1));
+	float x = c * (1 - std::abs(std::fmod(h / 60, 2.0f) - 1));
 	float m = v - c;
 	float r_, g_, b_;
 	if (h < 60) {
