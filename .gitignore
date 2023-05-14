@@ -48,6 +48,7 @@ env/
 **/docs
 
 Assign[0-9]_*
+**/20220358
 
 build/
 DartConfiguration.tcl
