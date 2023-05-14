@@ -29,6 +29,9 @@ private:
 	ObjectType* m_object;
 	int* m_ref_counter;
 
+	/**
+	 * @brief Decrease the reference counter and check if there is no reference to the object. If so, deallocate the object. 
+	*/
 	void clear_() {
 		if (--(*m_ref_counter) == 0) {
 			delete m_ref_counter;
@@ -41,17 +44,20 @@ public:
 	// Constructors & destructor
 	////////////////////////////////////////////
 	
+	// Constructor without arguments -> directing nullptr and setting the reference counter to 0
 	SharedPtr() : m_ref_counter(new int(0)), m_object(nullptr) { }
 
 	// Assuming it is the first time that m_object_ is directed by a SharedPtr
 	explicit SharedPtr(ObjectType *m_object_) : m_ref_counter(new int(1)), m_object(m_object_) { }
 	
+	// copy constructor
 	SharedPtr(const SharedPtr &shared_ptr) : m_ref_counter(shared_ptr.m_ref_counter), m_object(shared_ptr.m_object) {
-		if (m_ref_counter != nullptr)
+		if (m_ref_counter != nullptr) // If this SharedPtr is not directed to nullptr, increase the reference counter
 			(*m_ref_counter)++;
 	}
 	
 	~SharedPtr() {
+		// When SharedPtr is destructed, check the reference status. i.e., if there is no reference other than this SharedPtr, deallocate the object. (simply call clear_())
 		clear_();
 	}
 
@@ -60,10 +66,10 @@ public:
 	////////////////////////////////////////////
 	
 	SharedPtr& operator=(const SharedPtr &shared_ptr) {
-		clear_();
-		m_ref_counter = shared_ptr.m_ref_counter;
-		m_object = shared_ptr.m_object;
-		if (m_ref_counter != nullptr)
+		clear_(); // This SharedPtr is about to be assigned to another SharedPtr, so decrease the reference counter and check if there is no reference to the object. If so, deallocate the object. 
+		m_ref_counter = shared_ptr.m_ref_counter; // Copy the reference counter
+		m_object = shared_ptr.m_object; // Copy the object
+		if (m_ref_counter != nullptr) // If this SharedPtr is not directed to nullptr, increase the reference counter
 			(*m_ref_counter)++;
 		return *this;
 	}
@@ -75,18 +81,18 @@ public:
 	// operator*
 
 	ObjectType* operator->() {
-		return m_object;
+		return m_object; // give the address of the object
 	}
 
 	const ObjectType* operator->() const {
-		return m_object;
+		return m_object; // give the address of the object
 	}
 
 	ObjectType& operator*() {
-		return *m_object;
+		return *m_object; // give the object (as a reference)
 	}
 	const ObjectType& operator*() const {
-		return *m_object;
+		return *m_object; // give the object (as a reference)
 	}
 	
 	////////////////////////////////////////////
@@ -95,7 +101,7 @@ public:
 	// operator[]
 	
 	ObjectType& operator[](const int index_) {
-		return *(m_object + index_);
+		return *(m_object + index_); // return the index_(th) element of the array (Notice that array and pointer are equivalent)
 	}
 
 	////////////////////////////////////////////
@@ -104,7 +110,7 @@ public:
 	// operator[]
 	
 	const ObjectType& operator[](const int index_) const {
-		return *(m_object + index_);
+		return *(m_object + index_); // return the index_(th) element of the array (Notice that array and pointer are equivalent)
 	}
 
 	////////////////////////////////////////////
@@ -114,11 +120,11 @@ public:
 	// operator ObjectType*()
 	
 	operator ObjectType*() {
-		return m_object;
+		return m_object; // casting to ObjectType*
 	}
 
 	operator const ObjectType*() const {
-		return m_object;
+		return m_object; // casting to ObjectType* (const version)
 	}
 };
 

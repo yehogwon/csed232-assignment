@@ -1,14 +1,30 @@
 #include "test.h"
 #include "Image.h"
 
+bool comp_(float a, float b) {
+    return std::abs(a - b) < 1e-1;
+}
+
 template <typename T>
 bool operator==(const RGB<T> &lhs, const RGB<T> &rhs) {
     return lhs.r == rhs.r && lhs.g == rhs.g && lhs.b == rhs.b;
 }
 
+template <>
+bool operator==<float>(const RGB<float> &lhs, const RGB<float> &rhs) {
+    return comp_(lhs.r, rhs.r) && comp_(lhs.g, rhs.g) && comp_(lhs.b, rhs.b);
+}
+
 template <typename T>
 bool operator!=(const RGB<T> &lhs, const RGB<T> &rhs) {
     return !(lhs == rhs);
+}
+
+template <typename T>
+bool relative_comp_(const RGB<T> &lhs, const RGB<T> &rhs) {
+    return std::abs(lhs.r - rhs.r) <= 2 && 
+           std::abs(lhs.g - rhs.g) <= 2 &&
+           std::abs(lhs.b - rhs.b) <= 2;
 }
 
 template <typename T>
@@ -111,12 +127,49 @@ bool assign_test() {
     return assign_test_<RGB8b>() && assign_test_<RGBf>();
 }
 
+template <typename T>
+bool conv_test_() {
+    T val(30, 60, 90);
+    HSV hsv = rgb_to_hsv(val);
+    HSV ans(210, 0.6666666, 0.35924);
+    return hsv == ans;
+}
+
+bool conv_test() {
+    return conv_test_<RGB8b>() && conv_test_<RGBf>();
+}
+
+template <typename T>
+std::ostream& operator<<(std::ostream &os, const RGB<T> &rgb) {
+    os << "(" << rgb.r << ", " << rgb.g << ", " << rgb.b << ")";
+    return os;
+}
+
+bool rotation_test() {
+    Image<RGBf> img(2, 2), ans(2, 2);
+    img[0][0] = RGBf(30.0f, 60.0f, 90.0f);
+    ans[0][0] = RGBf(90.0f, 30.0f, 60.0f);
+    img[0][1] = RGBf(120.0f, 38.0f, 200.0f);
+    ans[0][1] = RGBf(200.0f, 119.0f, 38.0f);
+    img[1][0] = RGBf(158.0f, 84.0f, 24.0f);
+    ans[1][0] = RGBf(24.0f, 158.0f, 84.0f);
+    img[1][1] = RGBf(200.0f, 181.0f, 0.0f);
+    ans[1][1] = RGBf(0.0f, 200.0f, 180.0f);
+    img.rotate(120);
+    return relative_comp_(img[0][0], ans[0][0]) && 
+           relative_comp_(img[0][1], ans[0][1]) &&
+           relative_comp_(img[1][0], ans[1][0]) &&
+           relative_comp_(img[1][1], ans[1][1]);
+}
+
 int main(int argc, char **argv) {
     if (argc != 2) return 1; // invalid arguments (requires test name)
 
     std::vector<std::pair<std::string, fp>> tests {
         std::make_pair("Image::Image", construct_test), 
-        std::make_pair("Image::operator=", assign_test)
+        std::make_pair("Image::operator=", assign_test), 
+        std::make_pair("Image::Conversion", conv_test), 
+        std::make_pair("Image::Rotate", rotation_test)
     };
     return test(argv[1], tests);
 }
