@@ -216,6 +216,12 @@ int main()
 
 	std::cout << "2.3. ASCII art drawing" << std::endl;
 	draw_ascii_art(downsampled);
-		
+
+	// 3. Hue rotation
+	std::cout << "3. Hue Rotation" << std::endl;
+	load_bmp("input.bmp", img);
+	img.rotate(60);
+	save_bmp("hue_rotated.bmp", img);
+
 	return 0;
 }
