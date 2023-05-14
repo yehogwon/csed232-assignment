@@ -27,7 +27,7 @@ public:
 
 bool sharedptr_test() {
     std::vector<std::string> ans_set = {
-        // test case given by instruction
+        // test case (1)
         "CONSTRUCTOR 100", 
         "CONSTRUCTOR 200",
         "200",
@@ -46,7 +46,17 @@ bool sharedptr_test() {
         "DESTRUCTOR 300", 
         "Dealloc Object",
         "DESTRUCTOR 200",
-        // my own test case (1)
+        // test case (2)
+        "CONSTRUCTOR 1", 
+        "CONSTRUCTOR 2", 
+        "CONSTRUCTOR 3",
+        "Dealloc Object",
+        "DESTRUCTOR 1",
+        "Dealloc Object",
+        "DESTRUCTOR 3",
+        "Dealloc Object",
+        "DESTRUCTOR 2",
+        // test case (3)
         "CONSTRUCTOR 1", 
         "CONSTRUCTOR 2", 
         "Dealloc Object", 
@@ -80,6 +90,12 @@ bool sharedptr_test() {
 
         const MyClass* pp = (const MyClass*) ptr1;
         std::cout << pp->get_value() << std::endl;
+    }
+    {
+        SharedPtr<MyClass> ptr1(new MyClass(1));
+        SharedPtr<MyClass> ptr2(ptr1);
+        ptr1 = SharedPtr<MyClass>(new MyClass(2));
+        ptr2 = SharedPtr<MyClass>(new MyClass(3));
     }
     {
         SharedPtr<MyClass> ptr1(new MyClass(1));
