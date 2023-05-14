@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cstdint>
 #include <cassert>
+#include <cmath>
 #include "SharedPtr.h"
 
 ///////////////////////////////////////////////////////////////////////////
