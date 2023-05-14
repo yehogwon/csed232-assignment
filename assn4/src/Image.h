@@ -50,37 +50,41 @@ public:
 	// constructors & destructor
 	////////////////////////////////////////////
 	
+	// constructor without argument -> create an empty image (zero by zero)
 	Image() : m_width(0), m_height(0) { }
 
+	// constructor with width and height -> create an image with given width and height
 	Image(size_t _width, size_t _height) : m_width(_width), m_height(_height), m_buff(new PixelType[_width * _height]) { }
 
+	// constructor with width, height, and initial value -> create an image with given width and height, and fill the image with the given value
 	Image(size_t _width, size_t _height, const PixelType &val) : m_width(_width), m_height(_height), m_buff(new PixelType[_width * _height]) {
-		for (size_t i = 0; i < m_width * m_height; i++) m_buff[i] = val;
+		for (size_t i = 0; i < m_width * m_height; i++) m_buff[i] = val; // traverse the image and fill it with the given value
 	}
 
+	// copy constructor -> create an image with the same width, height, and pixel values as the given image
 	Image(const Image<PixelType> &img) : m_width(img.width()), m_height(img.height()), m_buff(new PixelType[img.width() * img.height()]) {
-		for (size_t i = 0; i < m_width * m_height; i++) m_buff[i] = img.m_buff[i];
+		for (size_t i = 0; i < m_width * m_height; i++) m_buff[i] = img.m_buff[i]; // copy the pixel values from the source image
 	}
 
-	~Image() { }
+	~Image() { } // destructor does nothing since SharedPtr automatically handles memory deallocation
 
 	////////////////////////////////////////////
 	// assignment operator
 	////////////////////////////////////////////
 	
 	Image& operator=(const Image &img) {
-		m_width = img.width(), m_height = img.height();
-		if (m_width * m_height == 0) return *this;
-		m_buff = PixelArray(new PixelType[m_width * m_height]);
-		for (size_t i = 0; i < m_width * m_height; i++) m_buff[i] = img.m_buff[i];
+		m_width = img.width(), m_height = img.height(); // copy width and height
+		if (m_width * m_height == 0) return *this; // if the image is empty, return right away
+		m_buff = PixelArray(new PixelType[m_width * m_height]); // allocate memory for the image
+		for (size_t i = 0; i < m_width * m_height; i++) m_buff[i] = img.m_buff[i]; // copy the pixel values from the source image
 		return *this;
 	}
 	
 	const Image& operator=(const Image &img) const {
-		m_width = img.width(), m_height = img.height();
-		if (m_width * m_height == 0) return *this;
-		m_buff = PixelArray(new PixelType[m_width * m_height]);
-		for (size_t i = 0; i < m_width * m_height; i++) m_buff[i] = img.m_buff[i];
+		m_width = img.width(), m_height = img.height(); // copy width and height
+		if (m_width * m_height == 0) return *this; // if the image is empty, return right away
+		m_buff = PixelArray(new PixelType[m_width * m_height]); // allocate memory for the image
+		for (size_t i = 0; i < m_width * m_height; i++) m_buff[i] = img.m_buff[i]; // copy the pixel values from the source image
 		return *this;
 	}
 
@@ -94,11 +98,19 @@ public:
 	// other methods
 	////////////////////////////////////////////
 	//   - width(), height()
-	
+
+	/**
+	 * @brief Get the width of the image
+	 * @return width of the image
+	*/
 	size_t width() const {
 		return m_width;
 	}
 
+	/**
+	 * @brief Get the height of the image
+	 * @return height of the image
+	*/
 	size_t height() const {
 		return m_height;
 	}
