@@ -34,6 +34,46 @@ typedef RGB<float>		RGBf;
 
 typedef RGB<float> HSV;
 
+template <typename T>
+HSV rgb_to_hsv(const T &rgb) {
+	HSV hsv;
+	float r = rgb.r, g = rgb.g, b = rgb.b;
+	float &h = hsv[0], &s = hsv[1], &v = hsv[2];
+	float max = std::max(r, std::max(g, b));
+	float min = std::min(r, std::min(g, b));
+	float delta = max - min;
+	v = max;
+	if (max != 0) s = delta / max;
+	else s = 0;
+	if (s == 0) h = 0;
+	else {
+		if (r == max) h = (g - b) / delta;
+		else if (g == max) h = 2 + (b - r) / delta;
+		else h = 4 + (r - g) / delta;
+		h *= 60;
+		if (h < 0) h += 360;
+	}
+	return hsv;
+}
+
+template <typename T>
+RGB<T> hsv_to_rgb(const HSV &hsv) {
+	RGB<T> rgb;
+	T &r = rgb.r, &g = rgb.g, &b = rgb.b;
+	float h = hsv[0], s = hsv[1], v = hsv[2];
+	float c = v * s;
+	float x = c * (1 - std::abs(std::fmod(h / 60, 2) - 1));
+	float m = v - c;
+	if (h < 60) r = c, g = x, b = 0;
+	else if (h < 120) r = x, g = c, b = 0;
+	else if (h < 180) r = 0, g = c, b = x;
+	else if (h < 240) r = 0, g = x, b = c;
+	else if (h < 300) r = x, g = 0, b = c;
+	else r = c, g = 0, b = x;
+	r += m, g += m, b += m;
+	return rgb;
+}
+
 ///////////////////////////////////////////////////////////////////////////
 // Image class template
 //
@@ -131,45 +171,6 @@ public:
 };
 
 // ======= ADD CODE HERE IF NEEDED =========
-template <typename T>
-HSV rgb_to_hsv(const T &rgb) {
-	HSV hsv;
-	float r = rgb.r, g = rgb.g, b = rgb.b;
-	float &h = hsv[0], &s = hsv[1], &v = hsv[2];
-	float max = std::max(r, std::max(g, b));
-	float min = std::min(r, std::min(g, b));
-	float delta = max - min;
-	v = max;
-	if (max != 0) s = delta / max;
-	else s = 0;
-	if (s == 0) h = 0;
-	else {
-		if (r == max) h = (g - b) / delta;
-		else if (g == max) h = 2 + (b - r) / delta;
-		else h = 4 + (r - g) / delta;
-		h *= 60;
-		if (h < 0) h += 360;
-	}
-	return hsv;
-}
-
-template <typename T>
-RGB<T> hsv_to_rgb(const HSV &hsv) {
-	RGB<T> rgb;
-	T &r = rgb.r, &g = rgb.g, &b = rgb.b;
-	float h = hsv[0], s = hsv[1], v = hsv[2];
-	float c = v * s;
-	float x = c * (1 - std::abs(std::fmod(h / 60, 2) - 1));
-	float m = v - c;
-	if (h < 60) r = c, g = x, b = 0;
-	else if (h < 120) r = x, g = c, b = 0;
-	else if (h < 180) r = 0, g = c, b = x;
-	else if (h < 240) r = 0, g = x, b = c;
-	else if (h < 300) r = x, g = 0, b = c;
-	else r = c, g = 0, b = x;
-	r += m, g += m, b += m;
-	return rgb;
-}
 
 // Miscellaneous functions
 void convert_pixel_type(const Image<RGB8b>& src, Image<RGBf>& dst);
