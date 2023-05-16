@@ -30,7 +30,7 @@ private:
 	int* m_ref_counter;
 
 	/**
-	 * @brief Decrease the reference counter and check if there is no reference to the object. If so, deallocate the object. 
+	 * @brief Decrease the reference counter and check if there is no reference to the object. If so, deallocate the object. This function is called when a SharedPtr instance is destructed or assigned to another one. 
 	*/
 	void clear_() {
 		if (--(*m_ref_counter) == 0) {
