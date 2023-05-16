@@ -45,6 +45,7 @@ public:
 	////////////////////////////////////////////
 	
 	// Constructor without arguments -> directing nullptr and setting the reference counter to 0
+	// TODO: check if here is a memory leakage due to `new int(0)`
 	SharedPtr() : m_ref_counter(new int(0)), m_object(nullptr) { }
 
 	// Assuming it is the first time that m_object_ is directed by a SharedPtr
