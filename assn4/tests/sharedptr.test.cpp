@@ -1,4 +1,3 @@
-#define _TEST_COUT__
 #include <iostream>
 #include <sstream>
 #include "test.h"
@@ -62,6 +61,10 @@ bool sharedptr_test() {
         "Dealloc Object", 
         "DESTRUCTOR 2", 
         "Dealloc Object", 
+        "DESTRUCTOR 1", 
+        // test case (4)
+        "CONSTRUCTOR 1", 
+        "Dealloc Object",
         "DESTRUCTOR 1"
     };
 
@@ -106,12 +109,14 @@ bool sharedptr_test() {
 
         ptr3 = ptr4;
     }
+    {
+        SharedPtr<MyClass> ptr1;
+        ptr1 = SharedPtr<MyClass>(new MyClass(1));
+    }
     STOP_TEST_COUT__
 
     std::string ans;
     for (const auto &s : ans_set) ans += s + "\n";
-    
-    show_case(cout_.str(), ans);
     return cout_.str() == ans;
 }
 

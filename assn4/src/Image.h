@@ -15,7 +15,7 @@
 template<typename ValType>
 struct RGB
 {
-	using Type = ValType;
+	using Type = ValType; // Declare a type alias for ValType (so that it can be accessed from outside of this struct)
 	union {
 		ValType data[3];
 		struct {
@@ -33,13 +33,14 @@ struct RGB
 typedef RGB<uint8_t>	RGB8b;
 typedef RGB<float>		RGBf;
 
-typedef RGB<float> HSV;
+typedef RGB<float> HSV; // alias for HSV pixel type
 
-template <typename T>
+template <typename T> // Template is used to support both RGB8b (i.e., RGB<uint8_t>) and RGBf (i.e., RGB<float>)
 HSV rgb_to_hsv(const RGB<T> &rgb) {
-	HSV hsv;
+	HSV hsv; // HSV to be returned
 	float r = rgb.r / 255.0, g = rgb.g / 255.0, b = rgb.b / 255.0;
-	float &h = hsv[0], &s = hsv[1], &v = hsv[2];
+	float &h = hsv[0], &s = hsv[1], &v = hsv[2]; // decalre references to easily access to h, s, v
+	/* Apply the formula of converting RGB to HSV */
 	float max = std::max(r, std::max(g, b));
 	float min = std::min(r, std::min(g, b));
 	float delta = max - min;
@@ -56,10 +57,11 @@ HSV rgb_to_hsv(const RGB<T> &rgb) {
 	return hsv;
 }
 
-template <typename T>
+template <typename T> // Template is used to support both RGB8b (i.e., RGB<uint8_t>) and RGBf (i.e., RGB<float>)
 RGB<T> hsv_to_rgb(const HSV &hsv) {
-	RGB<T> rgb;
-	T &r = rgb.r, &g = rgb.g, &b = rgb.b;
+	RGB<T> rgb; // RGB to be returned
+	T &r = rgb.r, &g = rgb.g, &b = rgb.b; // decalre references to easily access to r, g, b
+	/* Apply the formula of converting HSV to RGB */
 	float h = hsv[0], s = hsv[1], v = hsv[2];
 	float c = v * s;
 	float x = c * (1 - std::abs(std::fmod(h / 60, 2.0f) - 1));
@@ -185,14 +187,16 @@ public:
 	}
 
 	void rotate(int deg) { // rotate hue
-		if (deg == 0 || m_width * m_height == 0) return;
-		for (size_t i = 0; i < m_width * m_height; i++) {
-			HSV hsv = rgb_to_hsv(m_buff[i]);
-			hsv[0] += deg % 360;
+		deg %= 360; // deg must be in the range [0, 360)
+		if (deg == 0 || m_width * m_height == 0) return; // there is nothing to do (no rotation or no image)
+		for (size_t i = 0; i < m_width * m_height; i++) { // traverse the image pixelwisely
+			HSV hsv = rgb_to_hsv(m_buff[i]); // convert the pixel value to HSV
+			hsv[0] += deg % 360; // rotate the hue (modulo 360 for preventing overflow)
+			/* Fit hue into the range [0, 360] */
 			if (hsv[0] > 360) hsv[0] -= 360;
 			if (hsv[0] < 0) hsv[0] += 360;
-			RGB<typename PixelType::Type> rgb = hsv_to_rgb<typename PixelType::Type>(hsv);
-			for (int j = 0; j < 3; j++) m_buff[i][j] = rgb[j];
+			RGB<typename PixelType::Type> rgb = hsv_to_rgb<typename PixelType::Type>(hsv); // convert the pixel value back to RGB
+			for (int j = 0; j < 3; j++) m_buff[i][j] = rgb[j]; // assign rotated RGB values to the pixel (rotation done)
 		}
 	}
 };
