@@ -187,6 +187,7 @@ public:
 	}
 
 	void rotate(int deg) { // rotate hue
+		deg %= 360; // deg must be in the range [0, 360)
 		if (deg == 0 || m_width * m_height == 0) return; // there is nothing to do (no rotation or no image)
 		for (size_t i = 0; i < m_width * m_height; i++) { // traverse the image pixelwisely
 			HSV hsv = rgb_to_hsv(m_buff[i]); // convert the pixel value to HSV
