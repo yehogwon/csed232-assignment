@@ -33,7 +33,7 @@ private:
 	 * @brief Decrease the reference counter and check if there is no reference to the object. If so, deallocate the object. This function is called when a SharedPtr instance is destructed or assigned to another one. 
 	*/
 	void clear_() {
-		if (--(*m_ref_counter) == 0) {
+		if (m_ref_counter && --(*m_ref_counter) == 0) {
 			delete m_ref_counter;
 			Dealloc(m_object);
 		}
@@ -45,8 +45,7 @@ public:
 	////////////////////////////////////////////
 	
 	// Constructor without arguments -> directing nullptr and setting the reference counter to 0
-	// TODO: check if here is a memory leakage due to `new int(0)`
-	SharedPtr() : m_ref_counter(new int(0)), m_object(nullptr) { }
+	SharedPtr() : m_ref_counter(nullptr), m_object(nullptr) { }
 
 	// Assuming it is the first time that m_object_ is directed by a SharedPtr
 	explicit SharedPtr(ObjectType *m_object_) : m_ref_counter(new int(1)), m_object(m_object_) { }
