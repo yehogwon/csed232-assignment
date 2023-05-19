@@ -35,23 +35,33 @@ typedef RGB<float>		RGBf;
 
 typedef RGB<float> HSV; // alias for HSV pixel type
 
+template <typename T>
+T max(T a, T b, T c) {
+    return a > b ? (a > c ? a : c) : (b > c ? b : c);
+}
+
+template <typename T>
+T min(T a, T b, T c) {
+    return a < b ? (a < c ? a : c) : (b < c ? b : c);
+}
+
 template <typename T> // Template is used to support both RGB8b (i.e., RGB<uint8_t>) and RGBf (i.e., RGB<float>)
 HSV rgb_to_hsv(const RGB<T> &rgb) {
     HSV hsv; // HSV to be returned
-    float r = rgb.r / 255.0, g = rgb.g / 255.0, b = rgb.b / 255.0;
+    float r = rgb.r / 255.0, g = rgb.g / 255.0, b = rgb.b / 255.0; // scaled r, g, b
     float &h = hsv[0], &s = hsv[1], &v = hsv[2]; // decalre references to easily access to h, s, v
     /* Apply the formula of converting RGB to HSV */
-    float max = std::max(r, std::max(g, b));
-    float min = std::min(r, std::min(g, b));
-    float delta = max - min;
+    float max_ = max(r, g, b);
+    float min_ = min(r, g, b);
+    float delta = max_ - min_;
     
-    v = max;
+    v = max_; // v is simply computed by the maximum value of r, g, b
     if (delta == 0) s = 0;
-    else s = delta / max;
+    else s = delta / max_;
 
     if (delta == 0) h = 0;
-    else if (max == r) h = 60 * std::fmod((g - b) / delta, 6);
-    else if (max == g) h = 60 * ((b - r) / delta + 2);
+    else if (max_ == r) h = 60 * std::fmod((g - b) / delta, 6);
+    else if (max_ == g) h = 60 * ((b - r) / delta + 2);
     else h = 60 * ((r - g) / delta + 4);
 
     return hsv;
@@ -63,10 +73,10 @@ RGB<T> hsv_to_rgb(const HSV &hsv) {
     T &r = rgb.r, &g = rgb.g, &b = rgb.b; // decalre references to easily access to r, g, b
     /* Apply the formula of converting HSV to RGB */
     float h = hsv[0], s = hsv[1], v = hsv[2];
-    float c = v * s;
+    float c = v * s; // temporary variable for calculating r, g, b
     float x = c * (1 - std::abs(std::fmod(h / 60, 2.0f) - 1));
-    float m = v - c;
-    float r_, g_, b_;
+    float m = v - c; // temporary variable for calculating r, g, b
+    float r_, g_, b_; // r, g, b value before scaling and shifting (kind of raw)
     if (h < 60) {
         r_ = c;
         g_ = x;
@@ -97,9 +107,9 @@ RGB<T> hsv_to_rgb(const HSV &hsv) {
         g_ = 0;
         b_ = x;
     }
-    r = (r_ + m) * 255;
-    g = (g_ + m) * 255;
-    b = (b_ + m) * 255;
+    r = (r_ + m) * 255; // shift and scale
+    g = (g_ + m) * 255; // shift and scale
+    b = (b_ + m) * 255; // shift and scale
     return rgb;
 }
 
