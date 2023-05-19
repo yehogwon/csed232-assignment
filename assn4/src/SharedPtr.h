@@ -52,7 +52,7 @@ public:
     
     // copy constructor
     SharedPtr(const SharedPtr &shared_ptr) : m_ref_counter(shared_ptr.m_ref_counter), m_object(shared_ptr.m_object) {
-        if (m_ref_counter != nullptr) // If this SharedPtr is not directed to nullptr, increase the reference counter
+        if (m_object != nullptr) // If this SharedPtr is not directed to nullptr, increase the reference counter
             (*m_ref_counter)++;
     }
     
