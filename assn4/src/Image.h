@@ -160,14 +160,6 @@ public:
         for (size_t i = 0; i < m_width * m_height; i++) m_buff[i] = img.m_buff[i]; // copy the pixel values from the source image
         return *this;
     }
-    
-    const Image& operator=(const Image &img) const {
-        m_width = img.width(), m_height = img.height(); // copy width and height
-        if (m_width * m_height == 0) return *this; // if the image is empty, return right away
-        m_buff = PixelArray(new PixelType[m_width * m_height]); // allocate memory for the image
-        for (size_t i = 0; i < m_width * m_height; i++) m_buff[i] = img.m_buff[i]; // copy the pixel values from the source image
-        return *this;
-    }
 
     ////////////////////////////////////////////
     // element access operators
