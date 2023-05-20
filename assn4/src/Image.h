@@ -45,6 +45,11 @@ T min(T a, T b, T c) {
     return a < b ? (a < c ? a : c) : (b < c ? b : c);
 }
 
+/**
+ * @tparam T type of RGB pixel value (e.g., float, int)
+ * @param rgb RGB pixel value
+ * @return HSV pixel value
+*/
 template <typename T> // Template is used to support both RGB8b (i.e., RGB<uint8_t>) and RGBf (i.e., RGB<float>)
 HSV rgb_to_hsv(const RGB<T> &rgb) {
     HSV hsv; // HSV to be returned
@@ -67,6 +72,11 @@ HSV rgb_to_hsv(const RGB<T> &rgb) {
     return hsv;
 }
 
+/**
+ * @tparam T type of HSV pixel value (e.g., float, int)
+ * @param hsv HSV pixel value
+ * @return RGB pixel value
+*/
 template <typename T> // Template is used to support both RGB8b (i.e., RGB<uint8_t>) and RGBf (i.e., RGB<float>)
 RGB<T> hsv_to_rgb(const HSV &hsv) {
     RGB<T> rgb; // RGB to be returned
