@@ -1,5 +1,6 @@
 #include <iostream>
 #include <sstream>
+#include <memory>
 #include "test.h"
 #include "SharedPtr.h"
 
@@ -24,7 +25,7 @@ public:
     }
 };
 
-bool sharedptr_test() {
+bool __sharedptr_test() {
     std::vector<std::string> ans_set = {
         // test case (1)
         "CONSTRUCTOR 100", 
@@ -118,6 +119,71 @@ bool sharedptr_test() {
     std::string ans;
     for (const auto &s : ans_set) ans += s + "\n";
     return cout_.str() == ans;
+}
+
+template <typename T_sharedptr>
+std::string sharedptr_test_() {
+    START_TEST_COUT__(cout_)
+    {
+        T_sharedptr ptr1(new MyClass(100));
+        T_sharedptr ptr2(ptr1);
+        T_sharedptr ptr3;
+        ptr3 = ptr2;
+
+        ptr1 = T_sharedptr(new MyClass(200));
+
+        std::cout << ptr1->get_value() << std::endl;
+        std::cout << (*ptr2) << std::endl;
+        std::cout << ptr3->get_value() << std::endl;
+
+        ptr2 = ptr3 = ptr1;
+
+        std::cout << ptr1->get_value() << std::endl;
+        std::cout << (*ptr2).get_value() << std::endl;
+        std::cout << ptr3->get_value() << std::endl;
+
+        const T_sharedptr const_ptr(new MyClass(300));
+        std::cout << const_ptr->get_value() << std::endl;
+        std::cout << (*const_ptr) << std::endl;
+
+        // FIXME: cast std::shared_ptr<MyClass> to const MyClass*
+        // const MyClass* pp = (const MyClass*) ptr1;
+        // std::cout << pp->get_value() << std::endl;
+    }
+    {
+        T_sharedptr ptr1(new MyClass(1));
+        T_sharedptr ptr2(ptr1);
+        ptr1 = T_sharedptr(new MyClass(2));
+        ptr2 = T_sharedptr(new MyClass(3));
+    }
+    {
+        T_sharedptr ptr1(new MyClass(1));
+        T_sharedptr ptr2(ptr1);
+
+        T_sharedptr ptr3(ptr2);
+        T_sharedptr ptr4(new MyClass(2));
+
+        ptr3 = ptr4;
+    }
+    {
+        T_sharedptr ptr1;
+        ptr1 = T_sharedptr(new MyClass(1));
+    }
+    STOP_TEST_COUT__
+
+    std::string cur_, ret;
+    while (std::getline(cout_, cur_)) {
+        if (cur_ == "Dealloc Object") continue;
+        ret += cur_;
+    }
+
+    return ret;
+}
+
+bool sharedptr_test() {
+    std::string my = sharedptr_test_<SharedPtr<MyClass>>();
+    std::string stl = sharedptr_test_<std::shared_ptr<MyClass>>();
+    return my == stl;
 }
 
 bool array_test() {
