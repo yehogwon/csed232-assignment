@@ -121,6 +121,14 @@ bool __sharedptr_test() {
     return cout_.str() == ans;
 }
 
+MyClass* get_ptr(std::shared_ptr<MyClass>& ptr) {
+    return ptr.get();
+}
+
+MyClass* get_ptr(SharedPtr<MyClass>& ptr) {
+    return ptr;
+}
+
 template <typename T_sharedptr>
 std::string sharedptr_test_() {
     START_TEST_COUT__(cout_)
@@ -146,9 +154,9 @@ std::string sharedptr_test_() {
         std::cout << const_ptr->get_value() << std::endl;
         std::cout << (*const_ptr) << std::endl;
 
-        // FIXME: cast std::shared_ptr<MyClass> to const MyClass*
         // const MyClass* pp = (const MyClass*) ptr1;
-        // std::cout << pp->get_value() << std::endl;
+        const MyClass* pp = get_ptr(ptr1);
+        std::cout << pp->get_value() << std::endl;
     }
     {
         T_sharedptr ptr1(new MyClass(1));
