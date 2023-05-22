@@ -11,8 +11,20 @@ Game::~Game() {
 }
 
 bool Game::is_game_over() {
-    // TODO: to be implemented
-    return false;
+    bool can_move = false;
+    for (int i = 0; i < SIZE && !can_move; i++)
+        for (int j = 0; j < SIZE && !can_move; j++)
+            if ((*board_)[i][j] == 0) can_move = true;
+    
+    for (int i = 0; i < SIZE && !can_move; i++)
+        for (int j = 0; j < SIZE - 1 && !can_move; j++)
+            if ((*board_)[i][j] == (*board_)[i][j + 1]) can_move = true;
+    
+    for (int i = 0; i < SIZE - 1 && !can_move; i++)
+        for (int j = 0; j < SIZE && !can_move; j++)
+            if ((*board_)[i][j] == (*board_)[i + 1][j]) can_move = true;
+
+    return !can_move;
 }
 
 bool Game::create_block() {
