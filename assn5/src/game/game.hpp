@@ -11,6 +11,8 @@
 
 enum Key { UP, DOWN, LEFT, RIGHT };
 
+const int GOAL = 2048;
+
 class Game {
 private: 
     Board *prev_board_;
@@ -32,6 +34,7 @@ public:
     const Board& cur() const;
 
     bool move(Key key);
+    bool is_game_win();
     bool is_game_over();
 
     std::array<Block, SIZE>& operator[](int i);

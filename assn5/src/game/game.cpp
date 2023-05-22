@@ -10,6 +10,13 @@ Game::~Game() {
     delete board_;
 }
 
+bool Game::is_game_win() {
+    for (int i = 0; i < SIZE; i++)
+        for (int j = 0; j < SIZE; j++)
+            if ((*board_)[i][j] == GOAL) return true;
+    return false;
+}
+
 bool Game::is_game_over() {
     bool can_move = false;
     for (int i = 0; i < SIZE && !can_move; i++)
