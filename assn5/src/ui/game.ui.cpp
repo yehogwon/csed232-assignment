@@ -8,7 +8,7 @@ GameUi::GameUi(Game &game_) : game_(game_) {
     restore_button_ = new QPushButton("Restore", this);
     exit_button_ = new QPushButton("Exit", this);
 
-    board_->setSpacing(50);
+    board_->setSpacing(0);
 
     for (int i = 0; i < 4; i++)
         for (int j = 0; j < 4; j++)
