@@ -1,6 +1,8 @@
 #include "game.hpp"
 
-Game::Game() : prev_board_(nullptr), board_(new Board()) { }
+Game::Game() : prev_board_(nullptr), board_(new Board()) {
+    std::srand(std::time(nullptr));
+}
 
 Game::~Game() {
     if (prev_board_)
@@ -12,12 +14,17 @@ bool Game::is_game_over() {
     // TODO: to be implemented
     return false;
 }
-    
+
 bool Game::create_block() {
-    // TODO: to be implemented
-    if (prev_board_) delete prev_board_;
-    prev_board_ = board_;
-    board_ = new Board(*prev_board_);
+    std::vector<std::pair<int, int>> empty_blocks;
+    for (int i = 0; i < SIZE; i++)
+        for (int j = 0; j < SIZE; j++)
+            if ((*board_)[i][j] == 0)
+                empty_blocks.push_back(std::make_pair(i, j));
+    if (empty_blocks.size() == 0) return false;
+    int index = std::rand() % empty_blocks.size();
+    int value = (std::rand() % 2 + 1) * 2;
+    (*board_)[empty_blocks[index].first][empty_blocks[index].second] = value;
     return true;
 }
 
@@ -90,14 +97,24 @@ bool Game::down() {
 }
 
 bool Game::move(Key key) {
+    Board *t_prev_ = new Board(*board_);
+    bool moved = false;
     switch (key) {
-        case UP: up(); break;
-        case DOWN: down(); break;
-        case LEFT: left(); break;
-        case RIGHT: right(); break;
+        case UP: moved = up(); break;
+        case DOWN: moved = down(); break;
+        case LEFT: moved = left(); break;
+        case RIGHT: moved = right(); break;
     }
     clear_merged();
-    create_block();
+
+    if (moved) {
+        if (prev_board_) delete prev_board_;
+        prev_board_ = t_prev_;
+        create_block();
+    } else
+        delete t_prev_;
+
+    return moved;
 }
 
 std::array<Block, SIZE>& Game::operator[](int i) {

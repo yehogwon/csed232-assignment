@@ -2,6 +2,10 @@
 #define __GAME__
 
 #include <array>
+#include <vector>
+#include <utility>
+#include <ctime>
+#include <cstdlib>
 #include "block.hpp"
 #include "board.hpp"
 
