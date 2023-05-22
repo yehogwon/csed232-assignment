@@ -71,7 +71,7 @@ bool Game::pull_left() {
                 zero_index = j;
             if (zero_index >= 0 && (*board_)[i][j] != 0) {
                 is_shifted = true;
-                for (int k = zero_index; k < j; k++) {
+                for (int k = zero_index; k <= j; k++) {
                     if (k + j - zero_index >= SIZE) break;
                     (*board_)[i][k] = (*board_)[i][k + j - zero_index];
                     (*board_)[i][k + j - zero_index] = 0;
@@ -97,7 +97,7 @@ bool Game::pull_up() {
                 zero_index = j;
             if (zero_index >= 0 && (*board_)[j][i] != 0) {
                 is_shifted = true;
-                for (int k = zero_index; k < j; k++) {
+                for (int k = zero_index; k <= j; k++) {
                     if (k + j - zero_index >= SIZE) break;
                     (*board_)[k][i] = (*board_)[k + j - zero_index][i];
                     (*board_)[k + j - zero_index][i] = 0;
