@@ -1,6 +1,10 @@
 #include "block.hpp"
+#include <cstdlib>
 
-Block::Block() : value_(0) { }
+Block::Block() : value_(4) {
+    if (rand() % 10 < 3)
+        value_ = 0;
+}
 
 int Block::value() const {
     return value_;

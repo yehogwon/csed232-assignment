@@ -13,7 +13,6 @@ private:
     Board *board_;
     std::vector<callback_> callback_v_;
 
-    bool is_game_over();
     bool create_block();
 public: 
     Game();
@@ -24,10 +23,12 @@ public:
     const Board& prev() const;
     const Board& cur() const;
 
-    void left();
-    void right();
-    void up();
-    void down();
+    bool left();
+    bool right();
+    bool up();
+    bool down();
+    
+    bool is_game_over();
 
     std::array<Block, SIZE>& operator[](int i);
     const std::array<Block, SIZE>& operator[](int i) const;    

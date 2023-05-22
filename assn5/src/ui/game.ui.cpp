@@ -75,4 +75,7 @@ void GameUi::move(Key key) {
     for (int i = 0; i < SIZE; i++)
         for (int j = 0; j < SIZE; j++)
             blocks_[i][j]->update_value();
+    if (game_.is_game_over()) {
+        // TODO: do something
+    }
 }
