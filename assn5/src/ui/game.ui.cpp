@@ -39,6 +39,8 @@ GameUi::GameUi(Game &game_) : game_(game_) {
     for (int i = 0; i < SIZE; i++)
         for (int j = 0; j < SIZE; j++)
             board_->addWidget(blocks_[i][j] = new BlockUi(game_[i][j]), i, j);
+    
+    connect(restore_button_, &QPushButton::clicked, this, &GameUi::restore);
 }
 
 GameUi::~GameUi() {
@@ -63,13 +65,23 @@ void GameUi::keyPressEvent(QKeyEvent *event) {
     }
 }
 
-void GameUi::move(Key key) {
-    game_.move(key);
-    
+void GameUi::refresh() {
     for (int i = 0; i < SIZE; i++)
         for (int j = 0; j < SIZE; j++)
             blocks_[i][j]->update_value();
+}
+
+void GameUi::move(Key key) {
+    game_.move(key);
+    refresh();
     if (game_.is_game_over()) {
         // TODO: do something
+    }
+}
+
+void GameUi::restore() {
+    // TODO: Show a dialog box
+    if (game_.restore()) {
+        refresh();
     }
 }

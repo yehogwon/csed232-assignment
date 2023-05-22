@@ -37,14 +37,16 @@ private: QHBoxLayout *root_;
     Game &game_;
     std::array<std::array<BlockUi*, SIZE>, SIZE> blocks_;
 
+    void refresh();
+    void move(Key key);
+    void restore();
+
 protected: 
     void keyPressEvent(QKeyEvent *event) override;
 
 public: 
     GameUi(Game &game_);
     ~GameUi();
-
-    void move(Key key);
 };
 
 #endif // __GAME__UI__

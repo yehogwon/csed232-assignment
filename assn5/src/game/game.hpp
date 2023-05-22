@@ -37,6 +37,8 @@ public:
     bool is_game_win() const;
     bool is_game_over() const;
 
+    bool restore();
+
     std::array<Block, SIZE>& operator[](int i);
     const std::array<Block, SIZE>& operator[](int i) const;    
 };

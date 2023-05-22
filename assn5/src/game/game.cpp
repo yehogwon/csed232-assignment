@@ -1,5 +1,4 @@
 #include "game.hpp"
-#include <iostream>
 
 Game::Game() : prev_board_(nullptr), board_(new Board()) {
     std::srand(std::time(nullptr));
@@ -64,7 +63,6 @@ const Board& Game::cur() const {
 }
 
 bool Game::left() {
-    std::cout << "Move to left" << std::endl;
     bool is_moved = false;
     for (int i = 0; i < SIZE; i++) {
         // for each row
@@ -90,7 +88,6 @@ bool Game::left() {
             bool is_merged = false;
             for (int j = 0; j < SIZE - 1; j++) {
                 if ((*board_)[i][j] == (*board_)[i][j + 1] && !(*board_)[i][j].merged && !(*board_)[i][j + 1].merged) {
-                    std::cout << "merge: (" << i << ", " << j << ") and (" << i << ", " << j + 1 << ")" << std::endl;
                     (*board_)[i][j] *= 2;
                     (*board_)[i][j].merged = true;
                     (*board_)[i][j + 1] = 0;
@@ -106,7 +103,6 @@ bool Game::left() {
 }
 
 bool Game::right() {
-    std::cout << "Move to right" << std::endl;
     bool is_moved = false;
     for (int i = 0; i < SIZE; i++) {
         // for each row
@@ -132,7 +128,6 @@ bool Game::right() {
             bool is_merged = false;
             for (int j = 0; j < SIZE - 1; j++) {
                 if ((*board_)[i][j] == (*board_)[i][j + 1] && !(*board_)[i][j].merged && !(*board_)[i][j + 1].merged) {
-                    std::cout << "merge: (" << i << ", " << j << ") and (" << i << ", " << j + 1 << ")" << std::endl;
                     (*board_)[i][j + 1] *= 2;
                     (*board_)[i][j + 1].merged = true;
                     (*board_)[i][j] = 0;
@@ -179,6 +174,15 @@ bool Game::move(Key key) {
     }
 
     return moved;
+}
+
+bool Game::restore() {
+    // FIXME: it does not work properly
+    if (!prev_board_) return false;
+    delete board_;
+    board_ = prev_board_;
+    prev_board_ = nullptr;
+    return true;
 }
 
 std::array<Block, SIZE>& Game::operator[](int i) {
