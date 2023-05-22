@@ -6,6 +6,7 @@
 #include <utility>
 #include <ctime>
 #include <cstdlib>
+#include <queue>
 #include "block.hpp"
 #include "board.hpp"
 
@@ -19,6 +20,17 @@ private:
     Board *board_;
 
     bool create_block(bool only_two = false);
+
+    // TODO: Use template / functor to simplify these four functions below
+    bool pull_left();
+    bool pull_right();
+    bool pull_up();
+    bool pull_down();
+
+    bool merge_left();
+    bool merge_right();
+    bool merge_up();
+    bool merge_down();
 
     bool left();
     bool right();
