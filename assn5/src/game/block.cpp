@@ -34,6 +34,7 @@ void Block::operator=(int value__) {
 
 void Block::operator=(const Block& _block) {
     value_ = _block.value_;
+    merged = _block.merged;
 }
 
 bool Block::operator==(const Block& _block) const {
