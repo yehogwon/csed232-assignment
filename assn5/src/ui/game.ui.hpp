@@ -8,6 +8,7 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QMessageBox>
+#include <QKeyEvent>
 
 #include <array>
 
@@ -35,7 +36,10 @@ private:
     QPushButton *exit_button_;
 
     Game &game_;
-    std::array<std::array<BlockUi*, 4>, 4> blocks_;
+    std::array<std::array<BlockUi*, SIZE>, SIZE> blocks_;
+
+protected: 
+    void keyPressEvent(QKeyEvent *event) override;
 
 public: 
     GameUi(Game &game_);

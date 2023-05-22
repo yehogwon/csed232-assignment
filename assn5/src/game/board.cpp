@@ -2,10 +2,10 @@
 
 Board::Board() { }
 
-std::array<Block, 4>& Board::operator[](int i) {
+std::array<Block, SIZE>& Board::operator[](int i) {
     return board_[i];
 }
 
-const std::array<Block, 4>& Board::operator[](int i) const {
+const std::array<Block, SIZE>& Board::operator[](int i) const {
     return board_[i];
 }

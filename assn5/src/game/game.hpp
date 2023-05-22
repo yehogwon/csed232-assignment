@@ -9,15 +9,28 @@
 class Game {
     using callback_ = void (*)();
 private: 
-    Board board_;
+    Board *prev_board_;
+    Board *board_;
     std::vector<callback_> callback_v_;
 
     bool is_game_over();
+    bool create_block();
 public: 
+    Game();
+    ~Game();
+
     void add_update_callback(callback_ callback);
 
-    std::array<Block, 4>& operator[](int i);
-    const std::array<Block, 4>& operator[](int i) const;    
+    const Board& prev() const;
+    const Board& cur() const;
+
+    void left();
+    void right();
+    void up();
+    void down();
+
+    std::array<Block, SIZE>& operator[](int i);
+    const std::array<Block, SIZE>& operator[](int i) const;    
 };
 
 #endif // __GAME__
