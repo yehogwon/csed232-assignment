@@ -34,8 +34,8 @@ public:
     const Board& cur() const;
 
     bool move(Key key);
-    bool is_game_win();
-    bool is_game_over();
+    bool is_game_win() const;
+    bool is_game_over() const;
 
     std::array<Block, SIZE>& operator[](int i);
     const std::array<Block, SIZE>& operator[](int i) const;    
