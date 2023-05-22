@@ -18,7 +18,7 @@ private:
     Board *prev_board_;
     Board *board_;
 
-    bool create_block();
+    bool create_block(bool only_two = false);
 
     bool left();
     bool right();
