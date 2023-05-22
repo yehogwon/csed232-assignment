@@ -15,6 +15,8 @@ private:
     void update_style();
 public: 
     BlockUi(Block &block_);
+
+    void update_value();
 };
 
 #endif // __BLOCK_UI__
