@@ -28,14 +28,16 @@ Block& Block::operator*=(int x) {
     return *this;
 }
 
-void Block::operator=(int value__) {
+Block& Block::operator=(int value__) {
     value_ = value__;
     merged = false;
+    return *this;
 }
 
-void Block::operator=(const Block& _block) {
+Block& Block::operator=(const Block& _block) {
     value_ = _block.value_;
     merged = _block.merged;
+    return *this;
 }
 
 bool Block::operator==(const Block& _block) const {

@@ -15,8 +15,8 @@ public:
     std::string color() const;
 
     Block& operator*=(int x);
-    void operator=(int value__);
-    void operator=(const Block& _block);
+    Block& operator=(int value__);
+    Block& operator=(const Block& _block);
     bool operator==(const Block& _block) const;
     operator int() const;
 };
