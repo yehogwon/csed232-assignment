@@ -89,7 +89,25 @@ bool Game::pull_right() {
 }
 
 bool Game::pull_up() {
-    return true;
+    bool is_shifted = false;
+    for (int i = 0; i < SIZE; i++) {
+        int zero_index = -1;
+        for (int j = 0; j < SIZE; j++) {
+            if (zero_index < 0 && (*board_)[j][i] == 0)
+                zero_index = j;
+            if (zero_index >= 0 && (*board_)[j][i] != 0) {
+                is_shifted = true;
+                for (int k = zero_index; k < j; k++) {
+                    if (k + j - zero_index >= SIZE) break;
+                    (*board_)[k][i] = (*board_)[k + j - zero_index][i];
+                    (*board_)[k + j - zero_index][i] = 0;
+                }
+                j = zero_index;
+                zero_index = -1;
+            }
+        }
+    }
+    return is_shifted;
 }
 
 bool Game::pull_down() {
@@ -117,7 +135,19 @@ bool Game::merge_right() {
 }
 
 bool Game::merge_up() {
-    return true;
+    bool is_merged = false;
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE - 1; j++) {
+            if ((*board_)[j][i] == (*board_)[j + 1][i] && !(*board_)[j][i].merged && !(*board_)[j + 1][i].merged) {
+                (*board_)[j][i] *= 2;
+                (*board_)[j][i].merged = true;
+                (*board_)[j + 1][i] = 0;
+                is_merged = true;
+                break;
+            }
+        }
+    }
+    return is_merged;
 }
 
 bool Game::merge_down() {
@@ -138,8 +168,11 @@ bool Game::right() {
 }
 
 bool Game::up() {
-    // TODO: to be implemented
-    return true;
+    bool updated = false;
+    updated = pull_up() || updated;
+    updated = merge_up() || updated;
+    updated = pull_up() || updated;
+    return updated;
 }
 
 bool Game::down() {
