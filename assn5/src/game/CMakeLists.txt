@@ -15,4 +15,3 @@ target_link_libraries(
     PRIVATE
     Qt6::Widgets
 )
-
