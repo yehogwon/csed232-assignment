@@ -45,7 +45,7 @@ void Block::operator=(const Block& _block) {
 }
 
 bool Block::operator==(const Block& _block) const {
-    return value_ == _block.value_;
+    return value_ == _block.value_ && value_ != 0;
 }
 
 Block::operator int() const {
