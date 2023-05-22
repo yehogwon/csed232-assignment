@@ -1,3 +1,5 @@
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../ui)
+
 add_library(
     game.lib
     block.cpp
