@@ -2,7 +2,7 @@
 #define __BLOCK_UI__
 
 #include <QLabel>
-#include <block.hpp>
+#include "block.hpp"
 
 const int BLOCK_WIDTH = 250;
 const int BLOCK_HEIGHT = 250;

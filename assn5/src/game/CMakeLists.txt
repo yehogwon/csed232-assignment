@@ -1,4 +1,5 @@
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../ui)
+get_filename_component(PARENT_DIR ../ ABSOLUTE)
+include_directories(${PARENT_DIR}/ui)
 
 add_library(
     game.lib

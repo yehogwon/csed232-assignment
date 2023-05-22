@@ -28,6 +28,8 @@ const int BUTTON_HEIGHT = 200;
 class GameUi : public QWidget {
     Q_OBJECT
 private: 
+    enum Key { UP, DOWN, LEFT, RIGHT };
+
     QHBoxLayout *root_;
     QGridLayout *board_;
     QVBoxLayout *pane_;
@@ -44,6 +46,8 @@ protected:
 public: 
     GameUi(Game &game_);
     ~GameUi();
+
+    void move(Key key);
 };
 
 #endif // __GAME__UI__

@@ -56,9 +56,23 @@ GameUi::~GameUi() {
 
 void GameUi::keyPressEvent(QKeyEvent *event) {
     switch (event->key()) {
-        case Qt::Key_Left: game_.left(); break;
-        case Qt::Key_Right: game_.right(); break;
-        case Qt::Key_Up: game_.up(); break;
-        case Qt::Key_Down: game_.down(); break;
+        case Qt::Key_Left: move(LEFT); break;
+        case Qt::Key_Right: move(RIGHT); break;
+        case Qt::Key_Up: move(UP); break;
+        case Qt::Key_Down: move(DOWN); break;
     }
+}
+
+void GameUi::move(Key key) {
+    switch (key) {
+        case UP: game_.up(); break;
+        case DOWN: game_.down(); break;
+        case LEFT: game_.left(); break;
+        case RIGHT: game_.right(); break;
+        default: return;
+    }
+
+    for (int i = 0; i < SIZE; i++)
+        for (int j = 0; j < SIZE; j++)
+            blocks_[i][j]->update_value();
 }
