@@ -159,7 +159,6 @@ bool Game::merge_left() {
                 (*board_)[i][j].merged = true;
                 (*board_)[i][j + 1] = 0;
                 is_merged = true;
-                break;
             }
         }
     }
@@ -175,7 +174,6 @@ bool Game::merge_right() {
                 (*board_)[i][j].merged = true;
                 (*board_)[i][j - 1] = 0;
                 is_merged = true;
-                break;
             }
         }
     }
@@ -191,7 +189,6 @@ bool Game::merge_up() {
                 (*board_)[j][i].merged = true;
                 (*board_)[j + 1][i] = 0;
                 is_merged = true;
-                break;
             }
         }
     }
@@ -207,7 +204,6 @@ bool Game::merge_down() {
                 (*board_)[j][i].merged = true;
                 (*board_)[j - 1][i] = 0;
                 is_merged = true;
-                break;
             }
         }
     }
