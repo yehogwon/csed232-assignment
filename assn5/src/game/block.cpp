@@ -23,6 +23,19 @@ std::string Block::color() const {
     }
 }
 
+Block& Block::operator*=(int x) {
+    value_ *= x;
+    return *this;
+}
+
+void Block::operator=(int value__) {
+    value_ = value__;
+}
+
+void Block::operator=(const Block& _block) {
+    value_ = _block.value_;
+}
+
 bool Block::operator==(const Block& _block) const {
     return value_ == _block.value_;
 }
