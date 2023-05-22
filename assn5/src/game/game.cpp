@@ -86,7 +86,7 @@ bool Game::left() {
             // merge
             bool is_merged = false;
             for (int j = 0; j < SIZE - 1; j++) {
-                if ((*board_)[i][j] == (*board_)[i][j + 1]) {
+                if ((*board_)[i][j] == (*board_)[i][j + 1] && !(*board_)[i][j].merged() && !(*board_)[i][j + 1].merged()) {
                     (*board_)[i][j] *= 2;
                     (*board_)[i][j + 1] = 0;
                     is_merged = true;
