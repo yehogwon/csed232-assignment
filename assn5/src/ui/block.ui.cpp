@@ -2,6 +2,7 @@
 
 BlockUi::BlockUi(Block &block_) : block_(block_) {
     setFixedSize(BLOCK_WIDTH, BLOCK_HEIGHT);
+    setStyleSheet("QLabel { background-color : gray; }");
     setAlignment(Qt::AlignCenter);
     setText(QString::number(block_.get_value()));
     update_style();

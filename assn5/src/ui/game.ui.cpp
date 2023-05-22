@@ -2,13 +2,39 @@
 
 GameUi::GameUi(Game &game_) : game_(game_) {
     setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-    // game_.add_update_callback(update_game);
-    board_ = new QGridLayout(this);
+    setStyleSheet("QWidget { background-color : gray; }");
+    
+    root_ = new QHBoxLayout(this);
+    board_ = new QGridLayout();
+    pane_ = new QVBoxLayout();
     score_label_ = new QLabel(this);
     restore_button_ = new QPushButton("Restore", this);
     exit_button_ = new QPushButton("Exit", this);
 
+    root_->addLayout(board_);
+    root_->addLayout(pane_);
+    root_->setSpacing(0);
+    root_->setContentsMargins(0, 0, 0, 0);
+
     board_->setSpacing(0);
+    board_->setAlignment(Qt::AlignLeft | Qt::AlignTop);
+    board_->setContentsMargins(0, 0, 0, 0);
+
+    pane_->setAlignment(Qt::AlignRight | Qt::AlignTop);
+    pane_->addWidget(score_label_);
+    pane_->addWidget(restore_button_);
+    pane_->addWidget(exit_button_);
+
+    score_label_->setText("Score !!");
+
+    restore_button_->setText("Restore");
+    restore_button_->setFixedSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+
+    exit_button_->setText("Exit");
+    exit_button_->setFixedSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+
+    // move restore_button_ and exit_button_ to the bottom
+    pane_->addStretch(5);
 
     for (int i = 0; i < 4; i++)
         for (int j = 0; j < 4; j++)
