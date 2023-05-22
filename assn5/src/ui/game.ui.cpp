@@ -64,14 +64,8 @@ void GameUi::keyPressEvent(QKeyEvent *event) {
 }
 
 void GameUi::move(Key key) {
-    switch (key) {
-        case UP: game_.up(); break;
-        case DOWN: game_.down(); break;
-        case LEFT: game_.left(); break;
-        case RIGHT: game_.right(); break;
-        default: return;
-    }
-
+    game_.move(key);
+    
     for (int i = 0; i < SIZE; i++)
         for (int j = 0; j < SIZE; j++)
             blocks_[i][j]->update_value();

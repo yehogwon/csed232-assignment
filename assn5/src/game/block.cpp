@@ -27,6 +27,10 @@ bool Block::merged() const {
     return merged_;
 }
 
+void Block::clear_merged() {
+    merged_ = false;
+}
+
 Block& Block::operator*=(int x) {
     value_ *= x;
     return *this;

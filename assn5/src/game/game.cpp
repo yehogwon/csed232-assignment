@@ -21,6 +21,12 @@ bool Game::create_block() {
     return true;
 }
 
+void Game::clear_merged() {
+    for (int i = 0; i < SIZE; i++)
+        for (int j = 0; j < SIZE; j++)
+            (*board_)[i][j].clear_merged();
+}
+
 const Board& Game::prev() const {
     return *prev_board_;
 }
@@ -65,26 +71,33 @@ bool Game::left() {
             if (!is_merged) break;
         }
     }
-    create_block();
     return is_moved;
 }
 
 bool Game::right() {
     // TODO: to be implemented
-    create_block();
     return true;
 }
 
 bool Game::up() {
     // TODO: to be implemented
-    create_block();
     return true;
 }
 
 bool Game::down() {
     // TODO: to be implemented
-    create_block();
     return true;
+}
+
+bool Game::move(Key key) {
+    switch (key) {
+        case UP: up(); break;
+        case DOWN: down(); break;
+        case LEFT: left(); break;
+        case RIGHT: right(); break;
+    }
+    clear_merged();
+    create_block();
 }
 
 std::array<Block, SIZE>& Game::operator[](int i) {

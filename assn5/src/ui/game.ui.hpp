@@ -27,10 +27,7 @@ const int BUTTON_HEIGHT = 200;
 // TODO: Work on GUI (enhance slightly)
 class GameUi : public QWidget {
     Q_OBJECT
-private: 
-    enum Key { UP, DOWN, LEFT, RIGHT };
-
-    QHBoxLayout *root_;
+private: QHBoxLayout *root_;
     QGridLayout *board_;
     QVBoxLayout *pane_;
     QLabel *score_label_;

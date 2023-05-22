@@ -14,6 +14,8 @@ public:
     std::string color() const;
     bool merged() const;
 
+    void clear_merged();
+
     Block& operator*=(int x);
     void operator=(int value__);
     void operator=(const Block& _block);
