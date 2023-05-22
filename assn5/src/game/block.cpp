@@ -1,6 +1,6 @@
 #include "block.hpp"
 
-Block::Block() : value_(1024) { }
+Block::Block() : value_(0) { }
 
 int Block::get_value() const {
     return value_;

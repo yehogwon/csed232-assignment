@@ -1,7 +1,6 @@
 #include "board.hpp"
 
-Board::Board() {
-}
+Board::Board() { }
 
 std::array<Block, 4>& Board::operator[](int i) {
     return board_[i];
