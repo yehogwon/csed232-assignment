@@ -2,6 +2,8 @@
 
 Block::Block() : value_(0), merged(false) { }
 
+Block::Block(const Block &block) : value_(block.value_), merged(block.merged) { }
+
 int Block::value() const {
     return value_;
 }

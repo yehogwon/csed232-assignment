@@ -10,6 +10,7 @@ public:
     bool merged;
     
     Block();
+    Block(const Block &block);
     
     int value() const;
     std::string color() const;
