@@ -110,9 +110,12 @@ bool Game::move(Key key) {
     if (moved) {
         if (prev_board_) delete prev_board_;
         prev_board_ = t_prev_;
+        // TODO: check game win
         create_block();
-    } else
+    } else {
         delete t_prev_;
+        // TODO: check game over
+    }
 
     return moved;
 }
