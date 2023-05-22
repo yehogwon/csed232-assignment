@@ -6,11 +6,13 @@
 class Block {
 private: 
     int value_;
+    bool merged_;
 public: 
     Block();
     
     int value() const;
     std::string color() const;
+    bool merged() const;
 
     Block& operator*=(int x);
     void operator=(int value__);

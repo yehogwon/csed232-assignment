@@ -1,10 +1,6 @@
 #include "block.hpp"
-#include <cstdlib>
 
-Block::Block() : value_(4) {
-    if (rand() % 10 < 3)
-        value_ = 0;
-}
+Block::Block() : value_(0), merged_(false) { }
 
 int Block::value() const {
     return value_;
@@ -25,6 +21,10 @@ std::string Block::color() const {
         case 2048: return "rgb(237, 194, 46)"; break;
         default: return "rgb(255, 255, 255)"; break;
     }
+}
+
+bool Block::merged() const {
+    return merged_;
 }
 
 Block& Block::operator*=(int x) {
