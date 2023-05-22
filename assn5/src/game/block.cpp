@@ -30,6 +30,7 @@ Block& Block::operator*=(int x) {
 
 void Block::operator=(int value__) {
     value_ = value__;
+    merged = false;
 }
 
 void Block::operator=(const Block& _block) {
