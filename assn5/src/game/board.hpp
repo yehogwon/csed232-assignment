@@ -12,6 +12,7 @@ private:
 
 public: 
     Board();
+    Board(const Board& board);
     
     std::array<Block, SIZE>& operator[](int i);
     const std::array<Block, SIZE>& operator[](int i) const;
