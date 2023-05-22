@@ -12,7 +12,7 @@ class BlockUi : public QLabel {
 private: 
     Block &block_;
 
-    void set_background_color();
+    void update_style();
 public: 
     BlockUi(Block &block_);
 };

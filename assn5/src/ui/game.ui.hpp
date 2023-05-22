@@ -12,6 +12,9 @@
 #include "game.hpp"
 #include "block.ui.hpp"
 
+const int WINDOW_WIDTH = 1300;
+const int WINDOW_HEIGHT = 1000;
+
 class GameUi : public QWidget {
     Q_OBJECT
 private: 

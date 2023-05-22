@@ -1,7 +1,7 @@
 #include "game.ui.hpp"
 
 GameUi::GameUi(Game &game_) : game_(game_) {
-    setFixedSize(1300, 1000);
+    setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
     // game_.add_update_callback(update_game);
     board_ = new QGridLayout(this);
     score_label_ = new QLabel(this);
