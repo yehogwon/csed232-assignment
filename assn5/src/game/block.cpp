@@ -2,11 +2,11 @@
 
 Block::Block() : value_(0) { }
 
-int Block::get_value() const {
+int Block::value() const {
     return value_;
 }
 
-std::string Block::get_color() const {
+std::string Block::color() const {
     switch (value_) {
         case 2: return "rgb(187, 173, 160)"; break;
         case 4: return "rgb(237, 224, 200)"; break;
@@ -21,6 +21,10 @@ std::string Block::get_color() const {
         case 2048: return "rgb(237, 194, 46)"; break;
         default: return "rgb(255, 255, 255)"; break;
     }
+}
+
+bool Block::operator==(const Block& _block) const {
+    return value_ == _block.value_;
 }
 
 Block::operator int() const {

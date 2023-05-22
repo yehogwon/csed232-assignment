@@ -9,8 +9,10 @@ private:
 public: 
     Block();
     
-    int get_value() const;
-    std::string get_color() const;
+    int value() const;
+    std::string color() const;
+
+    bool operator==(const Block& _block) const;
     operator int() const;
 };
 
