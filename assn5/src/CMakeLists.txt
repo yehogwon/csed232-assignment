@@ -9,11 +9,11 @@ add_executable(
     main.cpp
 )
 
-target_link_directories(
+target_link_libraries(
     assn5.out
     PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}/game
-    ${CMAKE_CURRENT_SOURCE_DIR}/ui
+    game.lib
+    ui.lib
 )
 
 target_link_libraries(
