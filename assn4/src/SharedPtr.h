@@ -45,18 +45,18 @@ public:
     ////////////////////////////////////////////
     
     // Constructor without arguments -> directing nullptr and setting the reference counter to 0
-    SharedPtr() : m_ref_counter(nullptr), m_object(nullptr) { }
+    SharedPtr<ObjectType, Dealloc>() : m_ref_counter(nullptr), m_object(nullptr) { }
 
     // Assuming it is the first time that m_object_ is directed by a SharedPtr
-    explicit SharedPtr(ObjectType *m_object_) : m_ref_counter(new int(1)), m_object(m_object_) { }
+    explicit SharedPtr<ObjectType, Dealloc>(ObjectType *m_object_) : m_ref_counter(new int(1)), m_object(m_object_) { }
     
     // copy constructor
-    SharedPtr(const SharedPtr &shared_ptr) : m_ref_counter(shared_ptr.m_ref_counter), m_object(shared_ptr.m_object) {
+    SharedPtr<ObjectType, Dealloc>(const SharedPtr &shared_ptr) : m_ref_counter(shared_ptr.m_ref_counter), m_object(shared_ptr.m_object) {
         if (m_object != nullptr) // If this SharedPtr is not directed to nullptr, increase the reference counter
             (*m_ref_counter)++;
     }
     
-    ~SharedPtr() {
+    ~SharedPtr<ObjectType, Dealloc>() {
         // When SharedPtr is destructed, check the reference status. i.e., if there is no reference other than this SharedPtr, deallocate the object. (simply call clear_())
         clear_();
     }
@@ -65,7 +65,7 @@ public:
     // Assignment operator
     ////////////////////////////////////////////
     
-    SharedPtr& operator=(const SharedPtr &shared_ptr) {
+    SharedPtr<ObjectType, Dealloc>& operator=(const SharedPtr<ObjectType, Dealloc> &shared_ptr) {
         clear_(); // This SharedPtr is about to be assigned to another SharedPtr, so decrease the reference counter and check if there is no reference to the object. If so, deallocate the object. 
         m_ref_counter = shared_ptr.m_ref_counter; // Copy the reference counter
         m_object = shared_ptr.m_object; // Copy the object
