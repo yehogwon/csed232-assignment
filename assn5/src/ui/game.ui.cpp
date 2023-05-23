@@ -1,7 +1,7 @@
 #include "game.ui.hpp"
 
 GameUi::GameUi(Game &game_) : game_(game_) {
-    setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+    resize(WINDOW_WIDTH, WINDOW_HEIGHT);
     setStyleSheet("QWidget { background-color : gray; }");
     
     root_ = new QHBoxLayout(this);
@@ -16,7 +16,7 @@ GameUi::GameUi(Game &game_) : game_(game_) {
     root_->setSpacing(0);
     root_->setContentsMargins(0, 0, 0, 0);
 
-    board_->setSpacing(0);
+    board_->setSpacing(10);
     board_->setAlignment(Qt::AlignLeft | Qt::AlignTop);
     board_->setContentsMargins(0, 0, 0, 0);
 

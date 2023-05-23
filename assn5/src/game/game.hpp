@@ -13,7 +13,7 @@
 
 enum Key { UP, DOWN, LEFT, RIGHT };
 
-const int GOAL = 32;
+const int GOAL = 1024;
 const int MAX_RESTORE = 3;
 
 class Game {

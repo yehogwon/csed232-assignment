@@ -19,9 +19,6 @@
 const int WINDOW_WIDTH = 1300;
 const int WINDOW_HEIGHT = 1000;
 
-const int BOARD_WIDTH = 1000;
-const int BOARD_HEIGHT = 1000;
-
 const int BUTTON_WIDTH = 300;
 const int BUTTON_HEIGHT = 200;
 
