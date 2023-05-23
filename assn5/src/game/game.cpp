@@ -256,18 +256,17 @@ bool Game::move(Key key) {
     if (moved) {
         if (prev_board_) delete prev_board_;
         prev_board_ = t_prev_;
-        // TODO: check game win
+        if (is_game_win()) throw GameWinException();
         create_block();
     } else {
         delete t_prev_;
-        // TODO: check game over
+        if (is_game_over()) throw GameOverException();
     }
 
     return moved;
 }
 
 bool Game::restore() {
-    // FIXME: it does not work properly
     if (!prev_board_) return false;
     *board_ = *prev_board_;
     delete prev_board_;

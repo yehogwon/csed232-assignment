@@ -9,6 +9,7 @@
 #include <queue>
 #include "block.hpp"
 #include "board.hpp"
+#include "status.hpp"
 
 enum Key { UP, DOWN, LEFT, RIGHT };
 

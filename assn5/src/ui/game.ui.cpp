@@ -72,11 +72,14 @@ void GameUi::refresh() {
 }
 
 void GameUi::move(Key key) {
-    game_.move(key);
-    refresh();
-    if (game_.is_game_over()) {
+    try {
+        game_.move(key);
+    } catch (GameWinException &e) {
+        // TODO: do something
+    } catch (GameOverException &e) {
         // TODO: do something
     }
+    refresh();
 }
 
 void GameUi::restore() {

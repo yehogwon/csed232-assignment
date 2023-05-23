@@ -14,6 +14,7 @@
 
 #include "game.hpp"
 #include "block.ui.hpp"
+#include "status.hpp"
 
 const int WINDOW_WIDTH = 1300;
 const int WINDOW_HEIGHT = 1000;
