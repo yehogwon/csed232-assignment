@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: jurplel/install-qt-action@v3
+      # TODO: install qt6
     - uses: actions/checkout@v3
     - name: build
       run: |
