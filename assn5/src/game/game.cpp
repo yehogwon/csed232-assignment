@@ -1,6 +1,6 @@
 #include "game.hpp"
 
-Game::Game() : prev_board_(nullptr), board_(new Board()), score_(0) {
+Game::Game() : prev_board_(nullptr), board_(new Board()), score_(0), restore_count_(0) {
     std::srand(std::time(nullptr));
     create_block(true); create_block(true);
 }
@@ -279,7 +279,16 @@ bool Game::restore() {
     *board_ = *prev_board_;
     delete prev_board_;
     prev_board_ = nullptr;
+    restore_count_++;
     return true;
+}
+
+bool Game::restorable() const {
+    return prev_board_ != nullptr;
+}
+
+int Game::restore_remain() const {
+    return MAX_RESTORE - restore_count_;
 }
 
 std::array<Block, SIZE>& Game::operator[](int i) {

@@ -86,9 +86,25 @@ void GameUi::move(Key key) {
 }
 
 void GameUi::restore() {
-    // TODO: Show a dialog box
-    if (game_.restore()) {
+    // no buffer
+    if (!game_.restorable()) {
+        QMessageBox::warning(this, "Restore", "There is no previously saved board in the buffer.");
+        return;
+    }
+
+    // no more restore
+    int restore_remain = game_.restore_remain();
+    if (restore_remain == 0) {
+        QMessageBox::warning(this, "Restore", "No more chance to restore the board to its previous state.");
+        return;
+    }
+
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Restore", QString("Restore the game board to its previous state?\n\nRemaining chances: ") + QString::number(game_.restore_remain()), QMessageBox::Yes | QMessageBox::No);
+    if (reply == QMessageBox::Yes) {
+        game_.restore();
         refresh();
+        QMessageBox::information(this, "Restore", "The game board has been restored to its previous state! ");
     }
 }
 

@@ -14,6 +14,7 @@
 enum Key { UP, DOWN, LEFT, RIGHT };
 
 const int GOAL = 2048;
+const int MAX_RESTORE = 3;
 
 class Game {
 private: 
@@ -22,6 +23,7 @@ private:
     Board *board_;
 
     int score_;
+    int restore_count_;
 
     bool create_block(bool only_two = false);
 
@@ -55,6 +57,8 @@ public:
     bool is_game_over() const;
 
     bool restore();
+    bool restorable() const;
+    int restore_remain() const;
 
     std::array<Block, SIZE>& operator[](int i);
     const std::array<Block, SIZE>& operator[](int i) const;    
