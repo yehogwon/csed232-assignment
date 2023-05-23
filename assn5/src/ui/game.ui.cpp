@@ -41,6 +41,7 @@ GameUi::GameUi(Game &game_) : game_(game_) {
             board_->addWidget(blocks_[i][j] = new BlockUi(game_[i][j]), i, j);
     
     connect(restore_button_, &QPushButton::clicked, this, &GameUi::restore);
+    connect(exit_button_, &QPushButton::clicked, this, &GameUi::exit);
     refresh();
 }
 
@@ -88,5 +89,13 @@ void GameUi::restore() {
     // TODO: Show a dialog box
     if (game_.restore()) {
         refresh();
+    }
+}
+
+void GameUi::exit() {
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Exit", "Are you sure to quit?", QMessageBox::Yes | QMessageBox::No);
+    if (reply == QMessageBox::Yes) {
+        QApplication::quit();
     }
 }

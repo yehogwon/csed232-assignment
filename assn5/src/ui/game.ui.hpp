@@ -41,6 +41,7 @@ private: QHBoxLayout *root_;
     void refresh();
     void move(Key key);
     void restore();
+    void exit();
 
 protected: 
     void keyPressEvent(QKeyEvent *event) override;
