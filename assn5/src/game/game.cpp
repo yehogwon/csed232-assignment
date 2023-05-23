@@ -269,8 +269,8 @@ bool Game::move(Key key) {
 bool Game::restore() {
     // FIXME: it does not work properly
     if (!prev_board_) return false;
-    delete board_;
-    board_ = prev_board_;
+    *board_ = *prev_board_;
+    delete prev_board_;
     prev_board_ = nullptr;
     return true;
 }

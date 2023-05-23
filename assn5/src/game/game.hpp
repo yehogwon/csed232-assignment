@@ -16,6 +16,7 @@ const int GOAL = 2048;
 
 class Game {
 private: 
+    // TODO: Should it be pointer?
     Board *prev_board_;
     Board *board_;
 
