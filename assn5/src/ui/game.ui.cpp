@@ -29,9 +29,11 @@ GameUi::GameUi(Game &game_) : game_(game_) {
 
     restore_button_->setText("Restore");
     restore_button_->setFixedSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+    restore_button_->setStyleSheet("QPushButton { font-size: 20pt }");
 
     exit_button_->setText("Exit");
     exit_button_->setFixedSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+    exit_button_->setStyleSheet("QPushButton { font-size: 20pt }");
 
     // move restore_button_ and exit_button_ to the bottom
     pane_->addStretch(5);
