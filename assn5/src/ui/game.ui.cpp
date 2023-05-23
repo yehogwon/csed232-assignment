@@ -76,13 +76,16 @@ void GameUi::refresh() {
 
 void GameUi::move(Key key) {
     try {
-        game_.move(key);
+        if (game_.move(key)) refresh();
     } catch (GameWinException &e) {
-        // TODO: do something
+        refresh();
+        // TODO: wait for 1 second
+        QMessageBox::information(this, "Win", QString("Congratulations!\n\nScore: ") + QString::number(game_.score()));
+        QApplication::quit();
     } catch (GameOverException &e) {
-        // TODO: do something
+        QMessageBox::information(this, "Lose", QString("You lose...\n\nScore: ") + QString::number(game_.score()));
+        QApplication::quit();
     }
-    refresh();
 }
 
 void GameUi::restore() {
