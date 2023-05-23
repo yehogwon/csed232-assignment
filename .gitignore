@@ -54,3 +54,4 @@ build/
 DartConfiguration.tcl
 
 /*.log
+.qt

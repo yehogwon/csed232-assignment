@@ -31,3 +31,8 @@ add_subdirectory(
     assn4
     build/assn4
 )
+
+add_subdirectory(
+    assn5
+    build/assn5
+)
