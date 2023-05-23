@@ -25,7 +25,7 @@ GameUi::GameUi(Game &game_) : game_(game_) {
     pane_->addWidget(restore_button_);
     pane_->addWidget(exit_button_);
 
-    score_label_->setText("Score !!");
+    score_label_->setText("Score: 0");
 
     restore_button_->setText("Restore");
     restore_button_->setFixedSize(BUTTON_WIDTH, BUTTON_HEIGHT);
@@ -41,6 +41,7 @@ GameUi::GameUi(Game &game_) : game_(game_) {
             board_->addWidget(blocks_[i][j] = new BlockUi(game_[i][j]), i, j);
     
     connect(restore_button_, &QPushButton::clicked, this, &GameUi::restore);
+    refresh();
 }
 
 GameUi::~GameUi() {
@@ -66,6 +67,7 @@ void GameUi::keyPressEvent(QKeyEvent *event) {
 }
 
 void GameUi::refresh() {
+    score_label_->setText("Score: " + QString::number(game_.score()));
     for (int i = 0; i < SIZE; i++)
         for (int j = 0; j < SIZE; j++)
             blocks_[i][j]->update_value();

@@ -21,6 +21,8 @@ private:
     Board *prev_board_;
     Board *board_;
 
+    int score_;
+
     bool create_block(bool only_two = false);
 
     // TODO: Use template / functor to simplify these four functions below
@@ -46,6 +48,7 @@ public:
 
     const Board& prev() const;
     const Board& cur() const;
+    int score() const;
 
     bool move(Key key);
     bool is_game_win() const;

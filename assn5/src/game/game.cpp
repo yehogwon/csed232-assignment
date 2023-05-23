@@ -1,6 +1,6 @@
 #include "game.hpp"
 
-Game::Game() : prev_board_(nullptr), board_(new Board()) {
+Game::Game() : prev_board_(nullptr), board_(new Board()), score_(0) {
     std::srand(std::time(nullptr));
     create_block(true); create_block(true);
 }
@@ -60,6 +60,10 @@ const Board& Game::prev() const {
 
 const Board& Game::cur() const {
     return *board_;
+}
+
+int Game::score() const {
+    return score_;
 }
 
 bool Game::pull_left() {
@@ -159,6 +163,7 @@ bool Game::merge_left() {
                 (*board_)[i][j].merged = true;
                 (*board_)[i][j + 1] = 0;
                 is_merged = true;
+                score_ += (*board_)[i][j];
             }
         }
     }
@@ -174,6 +179,7 @@ bool Game::merge_right() {
                 (*board_)[i][j].merged = true;
                 (*board_)[i][j - 1] = 0;
                 is_merged = true;
+                score_ += (*board_)[i][j];
             }
         }
     }
@@ -189,6 +195,7 @@ bool Game::merge_up() {
                 (*board_)[j][i].merged = true;
                 (*board_)[j + 1][i] = 0;
                 is_merged = true;
+                score_ += (*board_)[j][i];
             }
         }
     }
@@ -204,6 +211,7 @@ bool Game::merge_down() {
                 (*board_)[j][i].merged = true;
                 (*board_)[j - 1][i] = 0;
                 is_merged = true;
+                score_ += (*board_)[j][i];
             }
         }
     }
