@@ -9,6 +9,7 @@ BlockUi::BlockUi(Block &block_) : block_(block_) {
 void BlockUi::update_style() {
     // TODO: check border color
     setStyleSheet((std::string("QLabel { border-style: outset; border-width: 5px; border-color: green; font: 70pt; font: bold; color: black; ") + "background-color: " + block_.color() + ";}").c_str());
+    // setStyleSheet((std::string("QLabel { ") + "background: " + block_.color() + "; border-style: solid; font: 70pt; font: bold; }").c_str());
 }
 
 void BlockUi::update_value() {

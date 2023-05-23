@@ -2,6 +2,7 @@
 #define __BLOCK_UI__
 
 #include <QLabel>
+#include <string>
 #include "block.hpp"
 
 const int BLOCK_WIDTH = 250;
