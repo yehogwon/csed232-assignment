@@ -10,6 +10,7 @@
 #include <QMessageBox>
 #include <QKeyEvent>
 
+#include <iostream>
 #include <array>
 
 #include "game.hpp"

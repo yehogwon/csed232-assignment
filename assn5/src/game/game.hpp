@@ -1,8 +1,10 @@
 #ifndef __GAME__
 #define __GAME__
 
+#include <iostream>
 #include <array>
 #include <vector>
+#include <set>
 #include <utility>
 #include <ctime>
 #include <cstdlib>
@@ -25,7 +27,7 @@ private:
     int score_;
     int restore_count_;
 
-    bool create_block(bool only_two = false);
+    bool create_block(int n = 1, bool only_two = false);
 
     // TODO: Use template / functor to simplify these four functions below
     bool pull_left();

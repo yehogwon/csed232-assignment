@@ -2,7 +2,7 @@
 
 Game::Game() : prev_board_(nullptr), board_(new Board()), score_(0), restore_count_(0) {
     std::srand(std::time(nullptr));
-    create_block(true); create_block(true);
+    create_block(2, true);
 }
 
 Game::~Game() {
@@ -35,17 +35,27 @@ bool Game::is_game_over() const {
     return !can_move;
 }
 
-bool Game::create_block(bool only_two) {
+bool Game::create_block(int n, bool only_two) {
     std::vector<std::pair<int, int>> empty_blocks;
     for (int i = 0; i < SIZE; i++)
         for (int j = 0; j < SIZE; j++)
             if ((*board_)[i][j] == 0)
                 empty_blocks.push_back(std::make_pair(i, j));
     if (empty_blocks.size() == 0) return false;
-    int index = std::rand() % empty_blocks.size();
-    int value = std::rand() % 5 == 0 && !only_two ? 4 : 2;
-    (*board_)[empty_blocks[index].first][empty_blocks[index].second] = value;
-    return true;
+    
+    int initial_size = empty_blocks.size(), n_ = n;
+    std::cout << (only_two ? "INITIAL " : "GENERATE ");
+    while (n_-- && empty_blocks.size() > 0) {
+        int index = std::rand() % empty_blocks.size();
+        empty_blocks.erase(empty_blocks.begin() + index);
+        int value = std::rand() % 5 == 0 && !only_two ? 4 : 2;
+        int row = empty_blocks[index].first, col = empty_blocks[index].second;
+        std::cout << row + 1 << " " << col + 1 << " ";
+        if (!only_two) std::cout << value << " ";
+        (*board_)[row][col] = value;
+    }
+    std::cout << std::endl;
+    return initial_size >= n;
 }
 
 void Game::clear_merged() {
@@ -164,6 +174,7 @@ bool Game::merge_left() {
                 (*board_)[i][j + 1] = 0;
                 is_merged = true;
                 score_ += (*board_)[i][j];
+                std::cout << "MERGE " << i + 1 << " " << j + 1 << " " << (*board_)[i][j] << std::endl;
             }
         }
     }
@@ -180,6 +191,7 @@ bool Game::merge_right() {
                 (*board_)[i][j - 1] = 0;
                 is_merged = true;
                 score_ += (*board_)[i][j];
+                std::cout << "MERGE " << i + 1 << " " << j + 1 << " " << (*board_)[i][j] << std::endl;
             }
         }
     }
@@ -196,6 +208,7 @@ bool Game::merge_up() {
                 (*board_)[j + 1][i] = 0;
                 is_merged = true;
                 score_ += (*board_)[j][i];
+                std::cout << "MERGE " << j + 1 << " " << i + 1 << " " << (*board_)[j][i] << std::endl;
             }
         }
     }
@@ -212,6 +225,7 @@ bool Game::merge_down() {
                 (*board_)[j - 1][i] = 0;
                 is_merged = true;
                 score_ += (*board_)[j][i];
+                std::cout << "MERGE " << j + 1 << " " << i + 1 << " " << (*board_)[j][i] << std::endl;
             }
         }
     }
@@ -219,6 +233,7 @@ bool Game::merge_down() {
 }
 
 bool Game::left() {
+    std::cout << "LEFT" << std::endl;
     bool updated = false;
     updated = pull_left() || updated;
     updated = merge_left() || updated;
@@ -227,6 +242,7 @@ bool Game::left() {
 }
 
 bool Game::right() {
+    std::cout << "RIGHT" << std::endl;
     bool updated = false;
     updated = pull_right() || updated;
     updated = merge_right() || updated;
@@ -235,6 +251,7 @@ bool Game::right() {
 }
 
 bool Game::up() {
+    std::cout << "UP" << std::endl;
     bool updated = false;
     updated = pull_up() || updated;
     updated = merge_up() || updated;
@@ -243,6 +260,7 @@ bool Game::up() {
 }
 
 bool Game::down() {
+    std::cout << "DOWN" << std::endl;
     bool updated = false;
     updated = pull_down() || updated;
     updated = merge_down() || updated;
@@ -264,6 +282,7 @@ bool Game::move(Key key) {
     if (moved) {
         if (prev_board_) delete prev_board_;
         prev_board_ = t_prev_;
+        std::cout << "SCORE " << score_ << std::endl;
         if (is_game_win()) throw GameWinException();
         create_block();
     } else {
