@@ -1,5 +1,15 @@
 #include "game.hpp"
 
+const char* to_string(Key key) {
+    switch (key) {
+        case UP: return "UP";
+        case DOWN: return "DOWN";
+        case LEFT: return "LEFT";
+        case RIGHT: return "RIGHT";
+        default: return "";
+    }
+}
+
 Game::Game() : prev_board_(nullptr), board_(new Board()), score_(0), restore_count_(0) {
     std::srand(std::time(nullptr));
     create_block(2, true);
@@ -76,206 +86,15 @@ int Game::score() const {
     return score_;
 }
 
-bool Game::pull_left() {
-    bool is_shifted = false;
-    for (int i = 0; i < SIZE; i++) {
-        int zero_index = -1;
-        for (int j = 0; j < SIZE; j++) {
-            if (zero_index < 0 && (*board_)[i][j] == 0)
-                zero_index = j;
-            if (zero_index >= 0 && (*board_)[i][j] != 0) {
-                is_shifted = true;
-                for (int k = zero_index; k <= j; k++) {
-                    if (k + j - zero_index >= SIZE) break;
-                    (*board_)[i][k] = (*board_)[i][k + j - zero_index];
-                    (*board_)[i][k + j - zero_index] = 0;
-                }
-                j = zero_index;
-                zero_index = -1;
-            }
-        }
-    }
-    return is_shifted;
-}
-
-bool Game::pull_right() {
-    bool is_shifted = false;
-    for (int i = 0; i < SIZE; i++) {
-        int zero_index = -1;
-        for (int j = SIZE - 1; j >= 0; j--) {
-            if (zero_index < 0 && (*board_)[i][j] == 0)
-                zero_index = j;
-            if (zero_index >= 0 && (*board_)[i][j] != 0) {
-                is_shifted = true;
-                for (int k = zero_index; k >= j; k--) {
-                    if (k + j - zero_index < 0) break;
-                    (*board_)[i][k] = (*board_)[i][k + j - zero_index];
-                    (*board_)[i][k + j - zero_index] = 0;
-                }
-                j = zero_index;
-                zero_index = -1;
-            }
-        }
-    }
-    return is_shifted;
-}
-
-bool Game::pull_up() {
-    bool is_shifted = false;
-    for (int i = 0; i < SIZE; i++) {
-        int zero_index = -1;
-        for (int j = 0; j < SIZE; j++) {
-            if (zero_index < 0 && (*board_)[j][i] == 0)
-                zero_index = j;
-            if (zero_index >= 0 && (*board_)[j][i] != 0) {
-                is_shifted = true;
-                for (int k = zero_index; k <= j; k++) {
-                    if (k + j - zero_index >= SIZE) break;
-                    (*board_)[k][i] = (*board_)[k + j - zero_index][i];
-                    (*board_)[k + j - zero_index][i] = 0;
-                }
-                j = zero_index;
-                zero_index = -1;
-            }
-        }
-    }
-    return is_shifted;
-}
-
-bool Game::pull_down() {
-    bool is_shifted = false;
-    for (int i = 0; i < SIZE; i++) {
-        int zero_index = -1;
-        for (int j = SIZE - 1; j >= 0; j--) {
-            if (zero_index < 0 && (*board_)[j][i] == 0)
-                zero_index = j;
-            if (zero_index >= 0 && (*board_)[j][i] != 0) {
-                is_shifted = true;
-                for (int k = zero_index; k >= j; k--) {
-                    if (k + j - zero_index < 0) break;
-                    (*board_)[k][i] = (*board_)[k + j - zero_index][i];
-                    (*board_)[k + j - zero_index][i] = 0;
-                }
-                j = zero_index;
-                zero_index = -1;
-            }
-        }
-    }
-    return is_shifted;
-}
-
-bool Game::merge_left() {
-    bool is_merged = false;
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE - 1; j++) {
-            if ((*board_)[i][j] == (*board_)[i][j + 1] && !(*board_)[i][j].merged && !(*board_)[i][j + 1].merged) {
-                (*board_)[i][j] *= 2;
-                (*board_)[i][j].merged = true;
-                (*board_)[i][j + 1] = 0;
-                is_merged = true;
-                score_ += (*board_)[i][j];
-                std::cout << "MERGE " << i + 1 << " " << j + 1 << " " << (*board_)[i][j] << std::endl;
-            }
-        }
-    }
-    return is_merged;
-}
-
-bool Game::merge_right() {
-    bool is_merged = false;
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = SIZE - 1; j > 0; j--) {
-            if ((*board_)[i][j] == (*board_)[i][j - 1] && !(*board_)[i][j].merged && !(*board_)[i][j - 1].merged) {
-                (*board_)[i][j] *= 2;
-                (*board_)[i][j].merged = true;
-                (*board_)[i][j - 1] = 0;
-                is_merged = true;
-                score_ += (*board_)[i][j];
-                std::cout << "MERGE " << i + 1 << " " << j + 1 << " " << (*board_)[i][j] << std::endl;
-            }
-        }
-    }
-    return is_merged;
-}
-
-bool Game::merge_up() {
-    bool is_merged = false;
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE - 1; j++) {
-            if ((*board_)[j][i] == (*board_)[j + 1][i] && !(*board_)[j][i].merged && !(*board_)[j + 1][i].merged) {
-                (*board_)[j][i] *= 2;
-                (*board_)[j][i].merged = true;
-                (*board_)[j + 1][i] = 0;
-                is_merged = true;
-                score_ += (*board_)[j][i];
-                std::cout << "MERGE " << j + 1 << " " << i + 1 << " " << (*board_)[j][i] << std::endl;
-            }
-        }
-    }
-    return is_merged;
-}
-
-bool Game::merge_down() {
-    bool is_merged = false;
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = SIZE - 1; j > 0; j--) {
-            if ((*board_)[j][i] == (*board_)[j - 1][i] && !(*board_)[j][i].merged && !(*board_)[j - 1][i].merged) {
-                (*board_)[j][i] *= 2;
-                (*board_)[j][i].merged = true;
-                (*board_)[j - 1][i] = 0;
-                is_merged = true;
-                score_ += (*board_)[j][i];
-                std::cout << "MERGE " << j + 1 << " " << i + 1 << " " << (*board_)[j][i] << std::endl;
-            }
-        }
-    }
-    return is_merged;
-}
-
-bool Game::left() {
-    std::cout << "LEFT" << std::endl;
-    bool updated = false;
-    updated = pull_left() || updated;
-    updated = merge_left() || updated;
-    updated = pull_left() || updated;
-    return updated;
-}
-
-bool Game::right() {
-    std::cout << "RIGHT" << std::endl;
-    bool updated = false;
-    updated = pull_right() || updated;
-    updated = merge_right() || updated;
-    updated = pull_right() || updated;
-    return updated;
-}
-
-bool Game::up() {
-    std::cout << "UP" << std::endl;
-    bool updated = false;
-    updated = pull_up() || updated;
-    updated = merge_up() || updated;
-    updated = pull_up() || updated;
-    return updated;
-}
-
-bool Game::down() {
-    std::cout << "DOWN" << std::endl;
-    bool updated = false;
-    updated = pull_down() || updated;
-    updated = merge_down() || updated;
-    updated = pull_down() || updated;
-    return updated;
-}
-
 bool Game::move(Key key) {
     Board *t_prev_ = new Board(*board_);
     bool moved = false;
+    std::cout << to_string(key) << std::endl;
     switch (key) {
-        case UP: moved = up(); break;
-        case DOWN: moved = down(); break;
-        case LEFT: moved = left(); break;
-        case RIGHT: moved = right(); break;
+        case UP: moved = move_<Up>(); break;
+        case DOWN: moved = move_<Down>(); break;
+        case LEFT: moved = move_<Left>(); break;
+        case RIGHT: moved = move_<Right>(); break;
     }
     clear_merged();
 
