@@ -20,7 +20,6 @@ const int MAX_RESTORE = 3;
 
 class Game {
 private: 
-    // TODO: Should it be pointer?
     Board *prev_board_;
     Board *board_;
 
