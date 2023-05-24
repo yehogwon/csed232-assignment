@@ -76,94 +76,6 @@ int Game::score() const {
     return score_;
 }
 
-bool Game::pull_left() {
-    bool is_shifted = false;
-    for (int i = 0; i < SIZE; i++) {
-        int zero_index = -1;
-        for (int j = 0; j < SIZE; j++) {
-            if (zero_index < 0 && (*board_)[i][j] == 0)
-                zero_index = j;
-            if (zero_index >= 0 && (*board_)[i][j] != 0) {
-                is_shifted = true;
-                for (int k = zero_index; k <= j; k++) {
-                    if (k + j - zero_index >= SIZE) break;
-                    (*board_)[i][k] = (*board_)[i][k + j - zero_index];
-                    (*board_)[i][k + j - zero_index] = 0;
-                }
-                j = zero_index;
-                zero_index = -1;
-            }
-        }
-    }
-    return is_shifted;
-}
-
-bool Game::pull_right() {
-    bool is_shifted = false;
-    for (int i = 0; i < SIZE; i++) {
-        int zero_index = -1;
-        for (int j = SIZE - 1; j >= 0; j--) {
-            if (zero_index < 0 && (*board_)[i][j] == 0)
-                zero_index = j;
-            if (zero_index >= 0 && (*board_)[i][j] != 0) {
-                is_shifted = true;
-                for (int k = zero_index; k >= j; k--) {
-                    if (k + j - zero_index < 0) break;
-                    (*board_)[i][k] = (*board_)[i][k + j - zero_index];
-                    (*board_)[i][k + j - zero_index] = 0;
-                }
-                j = zero_index;
-                zero_index = -1;
-            }
-        }
-    }
-    return is_shifted;
-}
-
-bool Game::pull_up() {
-    bool is_shifted = false;
-    for (int i = 0; i < SIZE; i++) {
-        int zero_index = -1;
-        for (int j = 0; j < SIZE; j++) {
-            if (zero_index < 0 && (*board_)[j][i] == 0)
-                zero_index = j;
-            if (zero_index >= 0 && (*board_)[j][i] != 0) {
-                is_shifted = true;
-                for (int k = zero_index; k <= j; k++) {
-                    if (k + j - zero_index >= SIZE) break;
-                    (*board_)[k][i] = (*board_)[k + j - zero_index][i];
-                    (*board_)[k + j - zero_index][i] = 0;
-                }
-                j = zero_index;
-                zero_index = -1;
-            }
-        }
-    }
-    return is_shifted;
-}
-
-bool Game::pull_down() {
-    bool is_shifted = false;
-    for (int i = 0; i < SIZE; i++) {
-        int zero_index = -1;
-        for (int j = SIZE - 1; j >= 0; j--) {
-            if (zero_index < 0 && (*board_)[j][i] == 0)
-                zero_index = j;
-            if (zero_index >= 0 && (*board_)[j][i] != 0) {
-                is_shifted = true;
-                for (int k = zero_index; k >= j; k--) {
-                    if (k + j - zero_index < 0) break;
-                    (*board_)[k][i] = (*board_)[k + j - zero_index][i];
-                    (*board_)[k + j - zero_index][i] = 0;
-                }
-                j = zero_index;
-                zero_index = -1;
-            }
-        }
-    }
-    return is_shifted;
-}
-
 bool Game::merge_left() {
     bool is_merged = false;
     for (int i = 0; i < SIZE; i++) {
@@ -235,36 +147,36 @@ bool Game::merge_down() {
 bool Game::left() {
     std::cout << "LEFT" << std::endl;
     bool updated = false;
-    updated = pull_left() || updated;
+    updated = pull<Left>() || updated;
     updated = merge_left() || updated;
-    updated = pull_left() || updated;
+    updated = pull<Left>() || updated;
     return updated;
 }
 
 bool Game::right() {
     std::cout << "RIGHT" << std::endl;
     bool updated = false;
-    updated = pull_right() || updated;
+    updated = pull<Right>() || updated;
     updated = merge_right() || updated;
-    updated = pull_right() || updated;
+    updated = pull<Right>() || updated;
     return updated;
 }
 
 bool Game::up() {
     std::cout << "UP" << std::endl;
     bool updated = false;
-    updated = pull_up() || updated;
+    updated = pull<Up>() || updated;
     updated = merge_up() || updated;
-    updated = pull_up() || updated;
+    updated = pull<Up>() || updated;
     return updated;
 }
 
 bool Game::down() {
     std::cout << "DOWN" << std::endl;
     bool updated = false;
-    updated = pull_down() || updated;
+    updated = pull<Down>() || updated;
     updated = merge_down() || updated;
-    updated = pull_down() || updated;
+    updated = pull<Down>() || updated;
     return updated;
 }
 
