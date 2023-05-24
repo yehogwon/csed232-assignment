@@ -32,6 +32,7 @@ function(image_test test_name)
     )
 endfunction(image_test)
 
+sharedptr_test(SharedPtrManual)
 sharedptr_test(SharedPtr)
 
 image_test(Image)
