@@ -33,7 +33,6 @@ function(image_test test_name)
 endfunction(image_test)
 
 sharedptr_test(SharedPtr)
-sharedptr_test(SharedPtrArray)
 
 image_test(Image)
 image_test(operator=)

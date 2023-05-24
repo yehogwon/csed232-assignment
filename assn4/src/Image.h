@@ -164,6 +164,7 @@ public:
     ////////////////////////////////////////////
     
     Image<PixelType>& operator=(const Image<PixelType> &img) {
+        if (*this == img) return *this; // if the source image is the same as the destination image (assigning itself), return right away
         m_width = img.width(), m_height = img.height(); // copy width and height
         if (m_width * m_height == 0) return *this; // if the image is empty, return right away
         m_buff = PixelArray(new PixelType[m_width * m_height]); // allocate memory for the image
@@ -196,6 +197,10 @@ public:
     */
     size_t height() const {
         return m_height;
+    }
+
+    bool operator==(const Image<PixelType> &img) {
+        return m_width == img.width() && m_height == img.height() && m_buff == img.m_buff; // compare width, height, and pixel values
     }
 
     void rotate(int deg) { // rotate hue

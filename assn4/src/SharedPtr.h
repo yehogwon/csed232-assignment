@@ -66,6 +66,7 @@ public:
     ////////////////////////////////////////////
     
     SharedPtr<ObjectType, Dealloc>& operator=(const SharedPtr<ObjectType, Dealloc> &shared_ptr) {
+        if (*this == shared_ptr) return *this; // If this SharedPtr is already directed to the same object (assigning itself), do nothing and return this SharedPtr
         clear_(); // This SharedPtr is about to be assigned to another SharedPtr, so decrease the reference counter and check if there is no reference to the object. If so, deallocate the object. 
         m_ref_counter = shared_ptr.m_ref_counter; // Copy the reference counter
         m_object = shared_ptr.m_object; // Copy the object
@@ -125,6 +126,10 @@ public:
 
     operator const ObjectType*() const {
         return m_object; // casting to ObjectType* (const version)
+    }
+
+    bool operator==(const SharedPtr<ObjectType, Dealloc> &shared_ptr) const {
+        return m_object == shared_ptr.m_object; // compare the address of the object
     }
 };
 
