@@ -25,6 +25,7 @@ public:
     }
 };
 
+// legacy
 bool __sharedptr_test() {
     std::vector<std::string> ans_set = {
         // test case (1)
@@ -177,6 +178,15 @@ std::string sharedptr_test_() {
         T_sharedptr ptr1;
         ptr1 = T_sharedptr(new MyClass(1));
     }
+    {
+        T_sharedptr ptr1(new MyClass(123));
+        T_sharedptr ptr2(ptr1);
+        T_sharedptr ptr3;
+        ptr1 = ptr1;
+        ptr2 = ptr2;
+        ptr3 = ptr3;
+        ptr3 = ptr2;
+    }
     STOP_TEST_COUT__
 
     std::string cur_, ret;
@@ -194,17 +204,12 @@ bool sharedptr_test() {
     return my == stl;
 }
 
-bool array_test() {
-    // TODO: to be implemented
-    return true;
-}
-
 int main(int argc, char **argv) {
     if (argc != 2) return 1; // invalid arguments (requires test name)
 
     std::vector<std::pair<std::string, fp>> tests {
-        std::make_pair("SharedPtr::SharedPtr", sharedptr_test), 
-        std::make_pair("SharedPtr::SharedPtrArray", array_test)
+        std::make_pair("SharedPtr::SharedPtrManual", __sharedptr_test), 
+        std::make_pair("SharedPtr::SharedPtr", sharedptr_test)
     };
     return test(argv[1], tests);
 }
