@@ -11,6 +11,6 @@ void BlockUi::update_style() {
 }
 
 void BlockUi::update_value() {
-    setText(QString::number(block_.value()));
+    setText(block_.value() != 0 ? QString::number(block_.value()) : "");
     update_style();
 }

@@ -23,7 +23,6 @@ const int WINDOW_HEIGHT = 1000;
 const int BUTTON_WIDTH = 300;
 const int BUTTON_HEIGHT = 200;
 
-// TODO: Work on GUI (enhance slightly)
 class GameUi : public QWidget {
     Q_OBJECT
 private: QHBoxLayout *root_;
