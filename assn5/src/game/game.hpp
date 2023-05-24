@@ -107,11 +107,6 @@ private:
     template <typename T_>
     bool move_();
 
-    bool left();
-    bool right();
-    bool up();
-    bool down();
-
     void clear_merged();
 public: 
     Game();
