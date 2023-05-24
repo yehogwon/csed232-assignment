@@ -48,6 +48,7 @@ GameUi::GameUi(Game &game_) : game_(game_) {
     refresh();
 }
 
+// TODO: is it necessary?
 GameUi::~GameUi() {
     delete board_;
     delete score_label_;
@@ -74,7 +75,7 @@ void GameUi::refresh() {
     score_label_->setText("Score: " + QString::number(game_.score()));
     for (int i = 0; i < SIZE; i++)
         for (int j = 0; j < SIZE; j++)
-            blocks_[i][j]->update_value();
+            blocks_[i][j]->update();
 }
 
 void GameUi::move(Key key) {

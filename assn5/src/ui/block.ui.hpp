@@ -13,11 +13,10 @@ class BlockUi : public QLabel {
 private: 
     Block &block_;
 
-    void update_style();
 public: 
     BlockUi(Block &block_);
 
-    void update_value();
+    void update();
 };
 
 #endif // __BLOCK_UI__
