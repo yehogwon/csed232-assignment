@@ -35,6 +35,10 @@ class Game {
             if (row_start_ <= row_end_) i_++;
             else i_--;
         }
+
+        static int row_next() {
+            return row_start_ <= row_end_ ? 1 : -1;
+        }
         
         static bool row_comp(int a, int b) {
             return row_start_ <= row_end_ ? a <= b : a >= b;
@@ -55,6 +59,10 @@ class Game {
         static void column_next(int &j_) {
             if (column_start_ <= column_end_) j_++;
             else j_--;
+        }
+
+        static int column_next() {
+            return column_start_ <= column_end_ ? 1 : -1;
         }
         
         static bool column_comp(int a, int b) {
@@ -88,14 +96,11 @@ private:
 
     bool create_block(int n = 1, bool only_two = false);
 
-    // TODO: Use template / functor to simplify these four functions below
     template <typename T_>
     bool pull();
 
-    bool merge_left();
-    bool merge_right();
-    bool merge_up();
-    bool merge_down();
+    template <typename T_>
+    bool merge();
 
     bool left();
     bool right();
@@ -144,6 +149,25 @@ bool Game::pull() {
         }
     }
     return is_shifted;
+}
+
+template <typename T_>
+bool Game::merge() {
+    bool is_merged = false;
+    for (int i = T_::row_start(); T_::row_comp(i, T_::row_end()); T_::row_next(i)) {
+        for (int j = T_::column_start(); T_::column_comp(j, T_::column_end()); T_::column_next(j)) {
+            pos cur = T_::get(i, j), next = T_::get(i, j + T_::column_next());
+            if ((*board_)[cur.first][cur.second] == (*board_)[next.first][next.second] && !(*board_)[cur.first][cur.second].merged && !(*board_)[next.first][next.second].merged) {
+                (*board_)[cur.first][cur.second] *= 2;
+                (*board_)[cur.first][cur.second].merged = true;
+                (*board_)[next.first][next.second] = 0;
+                is_merged = true;
+                score_ += (*board_)[cur.first][cur.second];
+                std::cout << "MERGE " << i + 1 << " " << j + 1 << " " << (*board_)[cur.first][cur.second] << std::endl;
+            }
+        }
+    }
+    return is_merged;
 }
 
 #endif // __GAME__

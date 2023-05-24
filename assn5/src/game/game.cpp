@@ -76,79 +76,11 @@ int Game::score() const {
     return score_;
 }
 
-bool Game::merge_left() {
-    bool is_merged = false;
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE - 1; j++) {
-            if ((*board_)[i][j] == (*board_)[i][j + 1] && !(*board_)[i][j].merged && !(*board_)[i][j + 1].merged) {
-                (*board_)[i][j] *= 2;
-                (*board_)[i][j].merged = true;
-                (*board_)[i][j + 1] = 0;
-                is_merged = true;
-                score_ += (*board_)[i][j];
-                std::cout << "MERGE " << i + 1 << " " << j + 1 << " " << (*board_)[i][j] << std::endl;
-            }
-        }
-    }
-    return is_merged;
-}
-
-bool Game::merge_right() {
-    bool is_merged = false;
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = SIZE - 1; j > 0; j--) {
-            if ((*board_)[i][j] == (*board_)[i][j - 1] && !(*board_)[i][j].merged && !(*board_)[i][j - 1].merged) {
-                (*board_)[i][j] *= 2;
-                (*board_)[i][j].merged = true;
-                (*board_)[i][j - 1] = 0;
-                is_merged = true;
-                score_ += (*board_)[i][j];
-                std::cout << "MERGE " << i + 1 << " " << j + 1 << " " << (*board_)[i][j] << std::endl;
-            }
-        }
-    }
-    return is_merged;
-}
-
-bool Game::merge_up() {
-    bool is_merged = false;
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE - 1; j++) {
-            if ((*board_)[j][i] == (*board_)[j + 1][i] && !(*board_)[j][i].merged && !(*board_)[j + 1][i].merged) {
-                (*board_)[j][i] *= 2;
-                (*board_)[j][i].merged = true;
-                (*board_)[j + 1][i] = 0;
-                is_merged = true;
-                score_ += (*board_)[j][i];
-                std::cout << "MERGE " << j + 1 << " " << i + 1 << " " << (*board_)[j][i] << std::endl;
-            }
-        }
-    }
-    return is_merged;
-}
-
-bool Game::merge_down() {
-    bool is_merged = false;
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = SIZE - 1; j > 0; j--) {
-            if ((*board_)[j][i] == (*board_)[j - 1][i] && !(*board_)[j][i].merged && !(*board_)[j - 1][i].merged) {
-                (*board_)[j][i] *= 2;
-                (*board_)[j][i].merged = true;
-                (*board_)[j - 1][i] = 0;
-                is_merged = true;
-                score_ += (*board_)[j][i];
-                std::cout << "MERGE " << j + 1 << " " << i + 1 << " " << (*board_)[j][i] << std::endl;
-            }
-        }
-    }
-    return is_merged;
-}
-
 bool Game::left() {
     std::cout << "LEFT" << std::endl;
     bool updated = false;
     updated = pull<Left>() || updated;
-    updated = merge_left() || updated;
+    updated = merge<Left>() || updated;
     updated = pull<Left>() || updated;
     return updated;
 }
@@ -157,7 +89,7 @@ bool Game::right() {
     std::cout << "RIGHT" << std::endl;
     bool updated = false;
     updated = pull<Right>() || updated;
-    updated = merge_right() || updated;
+    updated = merge<Right>() || updated;
     updated = pull<Right>() || updated;
     return updated;
 }
@@ -166,7 +98,7 @@ bool Game::up() {
     std::cout << "UP" << std::endl;
     bool updated = false;
     updated = pull<Up>() || updated;
-    updated = merge_up() || updated;
+    updated = merge<Up>() || updated;
     updated = pull<Up>() || updated;
     return updated;
 }
@@ -175,7 +107,7 @@ bool Game::down() {
     std::cout << "DOWN" << std::endl;
     bool updated = false;
     updated = pull<Down>() || updated;
-    updated = merge_down() || updated;
+    updated = merge<Down>() || updated;
     updated = pull<Down>() || updated;
     return updated;
 }
