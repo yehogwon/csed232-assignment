@@ -1,5 +1,15 @@
 #include "game.hpp"
 
+const char* to_string(Key key) {
+    switch (key) {
+        case UP: return "UP";
+        case DOWN: return "DOWN";
+        case LEFT: return "LEFT";
+        case RIGHT: return "RIGHT";
+        default: return "";
+    }
+}
+
 Game::Game() : prev_board_(nullptr), board_(new Board()), score_(0), restore_count_(0) {
     std::srand(std::time(nullptr));
     create_block(2, true);
@@ -76,50 +86,15 @@ int Game::score() const {
     return score_;
 }
 
-bool Game::left() {
-    std::cout << "LEFT" << std::endl;
-    bool updated = false;
-    updated = pull<Left>() || updated;
-    updated = merge<Left>() || updated;
-    updated = pull<Left>() || updated;
-    return updated;
-}
-
-bool Game::right() {
-    std::cout << "RIGHT" << std::endl;
-    bool updated = false;
-    updated = pull<Right>() || updated;
-    updated = merge<Right>() || updated;
-    updated = pull<Right>() || updated;
-    return updated;
-}
-
-bool Game::up() {
-    std::cout << "UP" << std::endl;
-    bool updated = false;
-    updated = pull<Up>() || updated;
-    updated = merge<Up>() || updated;
-    updated = pull<Up>() || updated;
-    return updated;
-}
-
-bool Game::down() {
-    std::cout << "DOWN" << std::endl;
-    bool updated = false;
-    updated = pull<Down>() || updated;
-    updated = merge<Down>() || updated;
-    updated = pull<Down>() || updated;
-    return updated;
-}
-
 bool Game::move(Key key) {
     Board *t_prev_ = new Board(*board_);
     bool moved = false;
+    std::cout << to_string(key) << std::endl;
     switch (key) {
-        case UP: moved = up(); break;
-        case DOWN: moved = down(); break;
-        case LEFT: moved = left(); break;
-        case RIGHT: moved = right(); break;
+        case UP: moved = move_<Up>(); break;
+        case DOWN: moved = move_<Down>(); break;
+        case LEFT: moved = move_<Left>(); break;
+        case RIGHT: moved = move_<Right>(); break;
     }
     clear_merged();
 

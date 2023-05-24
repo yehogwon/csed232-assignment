@@ -13,10 +13,12 @@
 #include "board.hpp"
 #include "status.hpp"
 
-enum Key { UP, DOWN, LEFT, RIGHT };
-
 const int GOAL = 1024;
 const int MAX_RESTORE = 3;
+
+enum Key { UP, DOWN, LEFT, RIGHT };
+
+const char* to_string(Key key);
 
 class Game {
     using pos = std::pair<int, int>;
@@ -102,6 +104,9 @@ private:
     template <typename T_>
     bool merge();
 
+    template <typename T_>
+    bool move_();
+
     bool left();
     bool right();
     bool up();
@@ -168,6 +173,15 @@ bool Game::merge() {
         }
     }
     return is_merged;
+}
+
+template <typename T_>
+bool Game::move_() {
+    bool updated = false;
+    updated = pull<T_>() || updated;
+    updated = merge<T_>() || updated;
+    updated = pull<T_>() || updated;
+    return updated;
 }
 
 #endif // __GAME__
