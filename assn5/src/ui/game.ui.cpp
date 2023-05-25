@@ -2,7 +2,7 @@
 
 GameUi::GameUi(Game &game_) : game_(game_) {
     resize(WINDOW_WIDTH, WINDOW_HEIGHT);
-    setStyleSheet("QWidget { background-color : gray; }");
+    setStyleSheet("QWidget { background-color : #d9d9d9; }");
     
     root_ = new QHBoxLayout(this);
     board_ = new QGridLayout();
@@ -21,23 +21,24 @@ GameUi::GameUi(Game &game_) : game_(game_) {
     board_->setContentsMargins(0, 0, 0, 0);
 
     pane_->setAlignment(Qt::AlignRight | Qt::AlignTop);
+    pane_->setSpacing(20);
     pane_->addWidget(score_label_);
+    pane_->addStretch(1);
     pane_->addWidget(restore_button_);
     pane_->addWidget(exit_button_);
 
     score_label_->setText("Score: 0");
+    score_label_->setAlignment(Qt::AlignCenter);
+    score_label_->setStyleSheet("QLabel { font-size: 35pt; color: black; font: italic bold; }");
 
     restore_button_->setText("Restore");
     restore_button_->setFixedSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-    restore_button_->setStyleSheet("QPushButton { font-size: 20pt }");
+    restore_button_->setStyleSheet("QPushButton { background-color: #b3b3b3; font-size: 20pt; color: black; font: italic bold; }");
 
     exit_button_->setText("Exit");
     exit_button_->setFixedSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-    exit_button_->setStyleSheet("QPushButton { font-size: 20pt }");
-
-    // move restore_button_ and exit_button_ to the bottom
-    pane_->addStretch(5);
-
+    exit_button_->setStyleSheet("QPushButton { background-color: #b3b3b3; font-size: 20pt; color: black; font: italic bold; }");
+    
     for (int i = 0; i < SIZE; i++)
         for (int j = 0; j < SIZE; j++)
             board_->addWidget(blocks_[i][j] = new BlockUi(game_[i][j]), i, j);
@@ -47,6 +48,7 @@ GameUi::GameUi(Game &game_) : game_(game_) {
     refresh();
 }
 
+// TODO: is it necessary?
 GameUi::~GameUi() {
     delete board_;
     delete score_label_;
@@ -73,7 +75,7 @@ void GameUi::refresh() {
     score_label_->setText("Score: " + QString::number(game_.score()));
     for (int i = 0; i < SIZE; i++)
         for (int j = 0; j < SIZE; j++)
-            blocks_[i][j]->update_value();
+            blocks_[i][j]->update();
 }
 
 void GameUi::move(Key key) {
