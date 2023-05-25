@@ -28,7 +28,6 @@ class GameUi : public QWidget {
 private: QHBoxLayout *root_;
     QGridLayout *board_;
     QVBoxLayout *pane_;
-    QHBoxLayout *save_load_;
     QLabel *score_label_;
     QPushButton *save_button_;
     QPushButton *load_button_;
