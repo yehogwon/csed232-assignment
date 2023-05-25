@@ -7,7 +7,10 @@ GameUi::GameUi(Game &game_) : game_(game_) {
     root_ = new QHBoxLayout(this);
     board_ = new QGridLayout();
     pane_ = new QVBoxLayout();
+    save_load_ = new QHBoxLayout();
     score_label_ = new QLabel(this);
+    save_button_ = new QPushButton("Save", this);
+    load_button_ = new QPushButton("Load", this);
     restore_button_ = new QPushButton("Restore", this);
     exit_button_ = new QPushButton("Exit", this);
 
@@ -24,18 +27,27 @@ GameUi::GameUi(Game &game_) : game_(game_) {
     pane_->setSpacing(20);
     pane_->addWidget(score_label_);
     pane_->addStretch(1);
+    pane_->addLayout(save_load_);
     pane_->addWidget(restore_button_);
     pane_->addWidget(exit_button_);
+
+    // save_load_->setContentsMargins(20, 0, 0, 0);
+    save_load_->addWidget(save_button_);
+    save_load_->addWidget(load_button_);
 
     score_label_->setText("Score: 0");
     score_label_->setAlignment(Qt::AlignCenter);
     score_label_->setStyleSheet("QLabel { font-size: 35pt; color: black; font: italic bold; }");
+    
+    save_button_->setFixedSize(BUTTON_WIDTH / 2, BUTTON_HEIGHT);
+    save_button_->setStyleSheet("QPushButton { background-color: #b3b3b3; font-size: 20pt; color: black; font: italic bold; }");
 
-    restore_button_->setText("Restore");
+    load_button_->setFixedSize(BUTTON_WIDTH / 2, BUTTON_HEIGHT);
+    load_button_->setStyleSheet("QPushButton { background-color: #b3b3b3; font-size: 20pt; color: black; font: italic bold; }");
+
     restore_button_->setFixedSize(BUTTON_WIDTH, BUTTON_HEIGHT);
     restore_button_->setStyleSheet("QPushButton { background-color: #b3b3b3; font-size: 20pt; color: black; font: italic bold; }");
 
-    exit_button_->setText("Exit");
     exit_button_->setFixedSize(BUTTON_WIDTH, BUTTON_HEIGHT);
     exit_button_->setStyleSheet("QPushButton { background-color: #b3b3b3; font-size: 20pt; color: black; font: italic bold; }");
     
@@ -43,6 +55,8 @@ GameUi::GameUi(Game &game_) : game_(game_) {
         for (int j = 0; j < SIZE; j++)
             board_->addWidget(blocks_[i][j] = new BlockUi(game_[i][j]), i, j);
     
+    connect(save_button_, &QPushButton::clicked, this, &GameUi::save);
+    connect(load_button_, &QPushButton::clicked, this, &GameUi::load);
     connect(restore_button_, &QPushButton::clicked, this, &GameUi::restore);
     connect(exit_button_, &QPushButton::clicked, this, &GameUi::exit);
     refresh();
@@ -90,6 +104,19 @@ void GameUi::move(Key key) {
         QMessageBox::information(this, "Lose", QString("You lose...\n\nScore: ") + QString::number(game_.score()));
         QApplication::quit();
     }
+}
+
+// TODO: dialog style
+// TODO: store / load previous board
+void GameUi::save() {
+    if (!game_.save(QInputDialog::getText(this, "Save", "file name").toStdString().c_str()))
+        QMessageBox::warning(this, "Save", "Cannot be stored.");
+}
+
+void GameUi::load() {
+    if (!game_.load(QInputDialog::getText(this, "Load", "file name").toStdString().c_str()))
+        QMessageBox::warning(this, "Load", "File not found.");
+    refresh();
 }
 
 void GameUi::restore() {
