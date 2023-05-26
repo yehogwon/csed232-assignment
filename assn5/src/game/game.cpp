@@ -137,13 +137,13 @@ bool Game::save(const char *path) const {
     for (int i = 0; i < SIZE; i++)
         for (int j = 0; j < SIZE - 1; j++)
             fout << (*board_)[i][j].value() << std::endl;
-    if (!prev_board_) {
-        fout << "NOTNULL" << std::endl;
+    if (prev_board_) {
+        fout << "EXIST" << std::endl;
         for (int i = 0; i < SIZE; i++)
             for (int j = 0; j < SIZE - 1; j++)
                 fout << (*prev_board_)[i][j].value() << std::endl;
     } else
-        fout << "NULL" << std::endl;
+        fout << "NONE" << std::endl;
     fout.close();
     return true;
 }
@@ -158,7 +158,7 @@ bool Game::load(const char *path) {
             fin >> (*board_)[i][j].value();
     std::string prev_check_;
     fin >> prev_check_;
-    if (prev_check_ == "NOTNULL") {
+    if (prev_check_ == "EXIST") {
         if (!prev_board_) prev_board_ = new Board();
         for (int i = 0; i < SIZE; i++)
             for (int j = 0; j < SIZE - 1; j++)
