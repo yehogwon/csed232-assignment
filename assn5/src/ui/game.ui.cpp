@@ -107,7 +107,7 @@ void GameUi::save() {
     QString text_;
     QInputDialog::getText(this, "Save", "file name", QLineEdit::Normal, text_, &ok_);
     if (ok_ && !game_.save(text_.toStdString().c_str()))
-        QMessageBox::warning(this, "Save", "Cannot be stored.");
+        QMessageBox::about(this, "Save", "Cannot be stored.");
 }
 
 void GameUi::load() {
@@ -115,7 +115,7 @@ void GameUi::load() {
     QString text_;
     QInputDialog::getText(this, "Load", "file name", QLineEdit::Normal, text_, &ok_);
     if (ok_ && !game_.load(text_.toStdString().c_str()))
-        QMessageBox::warning(this, "Load", "File not found.");
+        QMessageBox::about(this, "Load", "File not found.");
     refresh();
 }
 
