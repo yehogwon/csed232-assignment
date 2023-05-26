@@ -13,7 +13,7 @@
 #include "board.hpp"
 #include "status.hpp"
 
-const int GOAL = 1024;
+const int GOAL = 2048;
 const int MAX_RESTORE = 3;
 
 enum Key { UP, DOWN, LEFT, RIGHT };
