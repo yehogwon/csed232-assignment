@@ -58,20 +58,6 @@ GameUi::GameUi(Game &game_) : game_(game_) {
     refresh();
 }
 
-// TODO: is it necessary?
-GameUi::~GameUi() {
-    delete board_;
-    delete score_label_;
-    delete restore_button_;
-    delete exit_button_;
-
-    for (auto &row : blocks_) {
-        for (auto &block : row) {
-            delete block;
-        }
-    }
-}
-
 void GameUi::keyPressEvent(QKeyEvent *event) {
     switch (event->key()) {
         case Qt::Key_Left: move(LEFT); break;

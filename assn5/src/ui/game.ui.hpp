@@ -25,7 +25,9 @@ const int BUTTON_HEIGHT = 200;
 
 class GameUi : public QWidget {
     Q_OBJECT
-private: QHBoxLayout *root_;
+private: 
+    // TODO: memory management (destructor?)
+    QHBoxLayout *root_;
     QGridLayout *board_;
     QVBoxLayout *pane_;
     QLabel *score_label_;
@@ -49,7 +51,6 @@ protected:
 
 public: 
     GameUi(Game &game_);
-    ~GameUi();
 };
 
 #endif // __GAME__UI__
