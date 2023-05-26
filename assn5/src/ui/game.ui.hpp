@@ -34,6 +34,8 @@ private: QHBoxLayout *root_;
     QPushButton *restore_button_;
     QPushButton *exit_button_;
 
+    QInputDialog *text_dialog_;
+
     Game &game_;
     std::array<std::array<BlockUi*, SIZE>, SIZE> blocks_;
 

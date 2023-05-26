@@ -12,6 +12,7 @@ GameUi::GameUi(Game &game_) : game_(game_) {
     load_button_ = new QPushButton("Load", this);
     restore_button_ = new QPushButton("Restore", this);
     exit_button_ = new QPushButton("Exit", this);
+    text_dialog_ = new QInputDialog(this);
 
     root_->addLayout(board_);
     root_->addLayout(pane_);
@@ -46,6 +47,9 @@ GameUi::GameUi(Game &game_) : game_(game_) {
 
     exit_button_->setFixedSize(BUTTON_WIDTH, BUTTON_HEIGHT);
     exit_button_->setStyleSheet("QPushButton { background-color: #b3b3b3; font-size: 20pt; color: black; font: italic bold; }");
+
+    setStyleSheet("QInputDialog { background-color: red; }");
+    // text_dialog_->setStyleSheet("QInputDialog { background-color: red; }");
     
     for (int i = 0; i < SIZE; i++)
         for (int j = 0; j < SIZE; j++)
@@ -103,15 +107,20 @@ void GameUi::move(Key key) {
 }
 
 // TODO: dialog style
-// TODO: store / load previous board
-// TODO: What if choose cancel?
+// TODO: warning dialog disappears
 void GameUi::save() {
-    if (!game_.save(QInputDialog::getText(this, "Save", "file name").toStdString().c_str()))
+    bool ok_;
+    QString text_;
+    text_dialog_->getText(this, "Save", "file name", QLineEdit::Normal, text_, &ok_);
+    if (ok_ && !game_.save(text_.toStdString().c_str()))
         QMessageBox::warning(this, "Save", "Cannot be stored.");
 }
 
 void GameUi::load() {
-    if (!game_.load(QInputDialog::getText(this, "Load", "file name").toStdString().c_str()))
+    bool ok_;
+    QString text_;
+    text_dialog_->getText(this, "Load", "file name", QLineEdit::Normal, text_, &ok_);
+    if (ok_ && !game_.load(text_.toStdString().c_str()))
         QMessageBox::warning(this, "Load", "File not found.");
     refresh();
 }
