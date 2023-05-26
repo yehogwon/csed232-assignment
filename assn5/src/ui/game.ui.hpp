@@ -29,6 +29,8 @@ private: QHBoxLayout *root_;
     QGridLayout *board_;
     QVBoxLayout *pane_;
     QLabel *score_label_;
+    QPushButton *save_button_;
+    QPushButton *load_button_;
     QPushButton *restore_button_;
     QPushButton *exit_button_;
 
@@ -37,6 +39,8 @@ private: QHBoxLayout *root_;
 
     void refresh();
     void move(Key key);
+    void save();
+    void load();
     void restore();
     void exit();
 

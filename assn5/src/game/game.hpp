@@ -2,6 +2,7 @@
 #define __GAME__
 
 #include <iostream>
+#include <fstream>
 #include <array>
 #include <vector>
 #include <set>
@@ -123,6 +124,9 @@ public:
     bool restore();
     bool restorable() const;
     int restore_remain() const;
+
+    bool save(const char *path) const;
+    bool load(const char *path);
 
     std::array<Block, SIZE>& operator[](int i);
     const std::array<Block, SIZE>& operator[](int i) const;    
