@@ -54,17 +54,17 @@ bool Game::create_block(int n, bool only_two) {
     if (empty_blocks.size() == 0) return false;
     
     int initial_size = empty_blocks.size(), n_ = n;
-    std::cout << (only_two ? "INITIAL " : "GENERATE ");
+    std::cout << (only_two ? "INITIAL " : "GENERATE "); // FIRE: log
     while (n_-- && empty_blocks.size() > 0) {
         int index = std::rand() % empty_blocks.size();
         empty_blocks.erase(empty_blocks.begin() + index);
         int value = std::rand() % 5 == 0 && !only_two ? 4 : 2;
         int row = empty_blocks[index].first, col = empty_blocks[index].second;
-        std::cout << row + 1 << " " << col + 1 << " ";
-        if (!only_two) std::cout << value << " ";
+        std::cout << row + 1 << " " << col + 1 << " "; // FIRE: log
+        if (!only_two) std::cout << value << " "; // FIRE: log
         (*board_)[row][col] = value;
     }
-    std::cout << std::endl;
+    std::cout << std::endl; // FIRE: log
     return initial_size >= n;
 }
 
@@ -89,7 +89,7 @@ int Game::score() const {
 bool Game::move(Key key) {
     Board *t_prev_ = new Board(*board_);
     bool moved = false;
-    std::cout << to_string(key) << std::endl;
+    std::cout << to_string(key) << std::endl; // FIRE: log
     switch (key) {
         case UP: moved = move_<Up>(); break;
         case DOWN: moved = move_<Down>(); break;
@@ -101,7 +101,7 @@ bool Game::move(Key key) {
     if (moved) {
         if (prev_board_) delete prev_board_;
         prev_board_ = t_prev_;
-        std::cout << "SCORE " << score_ << std::endl;
+        std::cout << "SCORE " << score_ << std::endl; // FIRE: log
         if (is_game_win()) throw GameWinException();
         create_block();
     } else {

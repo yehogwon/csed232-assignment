@@ -167,7 +167,7 @@ bool Game::merge() {
                 (*board_)[next.first][next.second] = 0;
                 is_merged = true;
                 score_ += (*board_)[cur.first][cur.second];
-                std::cout << "MERGE " << i + 1 << " " << j + 1 << " " << (*board_)[cur.first][cur.second] << std::endl;
+                std::cout << "MERGE " << i + 1 << " " << j + 1 << " " << (*board_)[cur.first][cur.second] << std::endl; // FIRE: log
             }
         }
     }

@@ -127,7 +127,7 @@ void GameUi::restore() {
         QMessageBox::information(this, "Restore", "The game board has been restored to its previous state! ");
     }
 
-    std::cout << "RESTORE " << game_.restore_remain() << std::endl;
+    std::cout << "RESTORE " << game_.restore_remain() << std::endl; // FIRE: log
 }
 
 void GameUi::exit() {
