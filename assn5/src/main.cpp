@@ -1,14 +1,11 @@
 #include <QApplication>
 #include <iostream>
 #include <fstream>
-#include <string>
-#include <sstream>
+#include "logger.hpp"
 #include "game.ui.hpp"
 
 int main(int argc, char **argv) {
-    std::stringstream cout_;
-    std::streambuf *sbuf__ = std::cout.rdbuf();
-    std::cout.rdbuf(cout_.rdbuf());
+    START_COUT(cout_) // start recording std::cout
 
     QApplication app(argc, argv);
     Game game;
@@ -16,7 +13,8 @@ int main(int argc, char **argv) {
     game_ui.show();
     int exit_code = app.exec();
     
-    std::cout.rdbuf(sbuf__);
+    STOP_COUT // stop recording std::cout
+
     std::ofstream logger("progress.txt");
     logger << cout_.rdbuf();
     logger.close();

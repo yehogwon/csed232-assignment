@@ -4,7 +4,16 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
+#include <sstream>
 #include "status.hpp"
+
+#define START_COUT(BUFFER) \
+    std::stringstream BUFFER; \
+    std::streambuf *__sbuf__ = std::cout.rdbuf(); \
+    std::cout.rdbuf(BUFFER.rdbuf());
+
+#define STOP_COUT \
+    std::cout.rdbuf(__sbuf__);
 
 std::ostream& operator<<(std::ostream &os, const key &k);
 std::ostream& operator<<(std::ostream &os, const pos &p);
