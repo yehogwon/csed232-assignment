@@ -2,11 +2,11 @@
 
 std::ostream& operator<<(std::ostream &os, const key &k) {
     switch (k) {
-        case UP: os << "UP";
-        case DOWN: os << "DOWN";
-        case LEFT: os << "LEFT";
-        case RIGHT: os << "RIGHT";
-        default: os << "";
+        case UP: os << "UP"; break;
+        case DOWN: os << "DOWN"; break;
+        case LEFT: os << "LEFT"; break;
+        case RIGHT: os << "RIGHT"; break;
+        default: os << ""; break;
     }
     return os;
 }
