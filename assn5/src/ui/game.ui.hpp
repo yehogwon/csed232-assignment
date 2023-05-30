@@ -10,6 +10,7 @@
 #include <QMessageBox>
 #include <QKeyEvent>
 
+#include <iostream>
 #include <array>
 
 #include "game.hpp"
@@ -19,19 +20,19 @@
 const int WINDOW_WIDTH = 1300;
 const int WINDOW_HEIGHT = 1000;
 
-const int BOARD_WIDTH = 1000;
-const int BOARD_HEIGHT = 1000;
-
 const int BUTTON_WIDTH = 300;
 const int BUTTON_HEIGHT = 200;
 
-// TODO: Work on GUI (enhance slightly)
 class GameUi : public QWidget {
     Q_OBJECT
-private: QHBoxLayout *root_;
+private: 
+    // TODO: memory management (destructor?)
+    QHBoxLayout *root_;
     QGridLayout *board_;
     QVBoxLayout *pane_;
     QLabel *score_label_;
+    QPushButton *save_button_;
+    QPushButton *load_button_;
     QPushButton *restore_button_;
     QPushButton *exit_button_;
 
@@ -39,7 +40,9 @@ private: QHBoxLayout *root_;
     std::array<std::array<BlockUi*, SIZE>, SIZE> blocks_;
 
     void refresh();
-    void move(Key key);
+    void move(key key);
+    void save();
+    void load();
     void restore();
     void exit();
 
@@ -48,7 +51,6 @@ protected:
 
 public: 
     GameUi(Game &game_);
-    ~GameUi();
 };
 
 #endif // __GAME__UI__

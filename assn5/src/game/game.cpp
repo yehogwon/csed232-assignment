@@ -2,7 +2,8 @@
 
 Game::Game() : prev_board_(nullptr), board_(new Board()), score_(0), restore_count_(0) {
     std::srand(std::time(nullptr));
-    create_block(true); create_block(true);
+    const std::vector<std::pair<pos, int>> &&blocks__ = create_block(2, true);
+    Logger::initial(blocks__[0].first, blocks__[1].first);
 }
 
 Game::~Game() {
@@ -35,17 +36,24 @@ bool Game::is_game_over() const {
     return !can_move;
 }
 
-bool Game::create_block(bool only_two) {
+std::vector<std::pair<pos, int>> Game::create_block(int n, bool only_two) {
     std::vector<std::pair<int, int>> empty_blocks;
     for (int i = 0; i < SIZE; i++)
         for (int j = 0; j < SIZE; j++)
             if ((*board_)[i][j] == 0)
                 empty_blocks.push_back(std::make_pair(i, j));
-    if (empty_blocks.size() == 0) return false;
-    int index = std::rand() % empty_blocks.size();
-    int value = std::rand() % 5 == 0 && !only_two ? 4 : 2;
-    (*board_)[empty_blocks[index].first][empty_blocks[index].second] = value;
-    return true;
+    if (empty_blocks.size() == 0) return {};
+    
+    std::vector<std::pair<pos, int>> blocks;
+    while (n-- && empty_blocks.size() > 0) {
+        int index = std::rand() % empty_blocks.size();
+        empty_blocks.erase(empty_blocks.begin() + index);
+        int value = std::rand() % 5 == 0 && !only_two ? 4 : 2;
+        int row = empty_blocks[index].first, col = empty_blocks[index].second;
+        blocks.push_back(std::make_pair(std::make_pair(row + 1, col + 1), value));
+        (*board_)[row][col] = value;
+    }
+    return blocks;
 }
 
 void Game::clear_merged() {
@@ -66,206 +74,25 @@ int Game::score() const {
     return score_;
 }
 
-bool Game::pull_left() {
-    bool is_shifted = false;
-    for (int i = 0; i < SIZE; i++) {
-        int zero_index = -1;
-        for (int j = 0; j < SIZE; j++) {
-            if (zero_index < 0 && (*board_)[i][j] == 0)
-                zero_index = j;
-            if (zero_index >= 0 && (*board_)[i][j] != 0) {
-                is_shifted = true;
-                for (int k = zero_index; k <= j; k++) {
-                    if (k + j - zero_index >= SIZE) break;
-                    (*board_)[i][k] = (*board_)[i][k + j - zero_index];
-                    (*board_)[i][k + j - zero_index] = 0;
-                }
-                j = zero_index;
-                zero_index = -1;
-            }
-        }
-    }
-    return is_shifted;
-}
-
-bool Game::pull_right() {
-    bool is_shifted = false;
-    for (int i = 0; i < SIZE; i++) {
-        int zero_index = -1;
-        for (int j = SIZE - 1; j >= 0; j--) {
-            if (zero_index < 0 && (*board_)[i][j] == 0)
-                zero_index = j;
-            if (zero_index >= 0 && (*board_)[i][j] != 0) {
-                is_shifted = true;
-                for (int k = zero_index; k >= j; k--) {
-                    if (k + j - zero_index < 0) break;
-                    (*board_)[i][k] = (*board_)[i][k + j - zero_index];
-                    (*board_)[i][k + j - zero_index] = 0;
-                }
-                j = zero_index;
-                zero_index = -1;
-            }
-        }
-    }
-    return is_shifted;
-}
-
-bool Game::pull_up() {
-    bool is_shifted = false;
-    for (int i = 0; i < SIZE; i++) {
-        int zero_index = -1;
-        for (int j = 0; j < SIZE; j++) {
-            if (zero_index < 0 && (*board_)[j][i] == 0)
-                zero_index = j;
-            if (zero_index >= 0 && (*board_)[j][i] != 0) {
-                is_shifted = true;
-                for (int k = zero_index; k <= j; k++) {
-                    if (k + j - zero_index >= SIZE) break;
-                    (*board_)[k][i] = (*board_)[k + j - zero_index][i];
-                    (*board_)[k + j - zero_index][i] = 0;
-                }
-                j = zero_index;
-                zero_index = -1;
-            }
-        }
-    }
-    return is_shifted;
-}
-
-bool Game::pull_down() {
-    bool is_shifted = false;
-    for (int i = 0; i < SIZE; i++) {
-        int zero_index = -1;
-        for (int j = SIZE - 1; j >= 0; j--) {
-            if (zero_index < 0 && (*board_)[j][i] == 0)
-                zero_index = j;
-            if (zero_index >= 0 && (*board_)[j][i] != 0) {
-                is_shifted = true;
-                for (int k = zero_index; k >= j; k--) {
-                    if (k + j - zero_index < 0) break;
-                    (*board_)[k][i] = (*board_)[k + j - zero_index][i];
-                    (*board_)[k + j - zero_index][i] = 0;
-                }
-                j = zero_index;
-                zero_index = -1;
-            }
-        }
-    }
-    return is_shifted;
-}
-
-bool Game::merge_left() {
-    bool is_merged = false;
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE - 1; j++) {
-            if ((*board_)[i][j] == (*board_)[i][j + 1] && !(*board_)[i][j].merged && !(*board_)[i][j + 1].merged) {
-                (*board_)[i][j] *= 2;
-                (*board_)[i][j].merged = true;
-                (*board_)[i][j + 1] = 0;
-                is_merged = true;
-                score_ += (*board_)[i][j];
-            }
-        }
-    }
-    return is_merged;
-}
-
-bool Game::merge_right() {
-    bool is_merged = false;
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = SIZE - 1; j > 0; j--) {
-            if ((*board_)[i][j] == (*board_)[i][j - 1] && !(*board_)[i][j].merged && !(*board_)[i][j - 1].merged) {
-                (*board_)[i][j] *= 2;
-                (*board_)[i][j].merged = true;
-                (*board_)[i][j - 1] = 0;
-                is_merged = true;
-                score_ += (*board_)[i][j];
-            }
-        }
-    }
-    return is_merged;
-}
-
-bool Game::merge_up() {
-    bool is_merged = false;
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE - 1; j++) {
-            if ((*board_)[j][i] == (*board_)[j + 1][i] && !(*board_)[j][i].merged && !(*board_)[j + 1][i].merged) {
-                (*board_)[j][i] *= 2;
-                (*board_)[j][i].merged = true;
-                (*board_)[j + 1][i] = 0;
-                is_merged = true;
-                score_ += (*board_)[j][i];
-            }
-        }
-    }
-    return is_merged;
-}
-
-bool Game::merge_down() {
-    bool is_merged = false;
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = SIZE - 1; j > 0; j--) {
-            if ((*board_)[j][i] == (*board_)[j - 1][i] && !(*board_)[j][i].merged && !(*board_)[j - 1][i].merged) {
-                (*board_)[j][i] *= 2;
-                (*board_)[j][i].merged = true;
-                (*board_)[j - 1][i] = 0;
-                is_merged = true;
-                score_ += (*board_)[j][i];
-            }
-        }
-    }
-    return is_merged;
-}
-
-bool Game::left() {
-    bool updated = false;
-    updated = pull_left() || updated;
-    updated = merge_left() || updated;
-    updated = pull_left() || updated;
-    return updated;
-}
-
-bool Game::right() {
-    bool updated = false;
-    updated = pull_right() || updated;
-    updated = merge_right() || updated;
-    updated = pull_right() || updated;
-    return updated;
-}
-
-bool Game::up() {
-    bool updated = false;
-    updated = pull_up() || updated;
-    updated = merge_up() || updated;
-    updated = pull_up() || updated;
-    return updated;
-}
-
-bool Game::down() {
-    bool updated = false;
-    updated = pull_down() || updated;
-    updated = merge_down() || updated;
-    updated = pull_down() || updated;
-    return updated;
-}
-
-bool Game::move(Key key) {
+bool Game::move(key key) {
     Board *t_prev_ = new Board(*board_);
     bool moved = false;
+    Logger::move(key);
     switch (key) {
-        case UP: moved = up(); break;
-        case DOWN: moved = down(); break;
-        case LEFT: moved = left(); break;
-        case RIGHT: moved = right(); break;
+        case UP: moved = move_<Up>(); break;
+        case DOWN: moved = move_<Down>(); break;
+        case LEFT: moved = move_<Left>(); break;
+        case RIGHT: moved = move_<Right>(); break;
     }
     clear_merged();
 
     if (moved) {
         if (prev_board_) delete prev_board_;
         prev_board_ = t_prev_;
+        Logger::score(score_);
         if (is_game_win()) throw GameWinException();
-        create_block();
+        const std::vector<std::pair<pos, int>> &&blocks__ = create_block();
+        Logger::generate(blocks__[0].first, blocks__[0].second);
     } else {
         delete t_prev_;
         if (is_game_over()) throw GameOverException();
@@ -280,6 +107,7 @@ bool Game::restore() {
     delete prev_board_;
     prev_board_ = nullptr;
     restore_count_++;
+    Logger::restore(restore_remain());
     return true;
 }
 
@@ -289,6 +117,48 @@ bool Game::restorable() const {
 
 int Game::restore_remain() const {
     return MAX_RESTORE - restore_count_;
+}
+
+bool Game::save(const char *path) const {
+    std::ofstream fout(path);
+    if (!fout.is_open()) return false;
+    fout << score_ << std::endl;
+    fout << restore_count_ << std::endl;
+    for (int i = 0; i < SIZE; i++)
+        for (int j = 0; j < SIZE - 1; j++)
+            fout << (*board_)[i][j].value() << std::endl;
+    if (prev_board_) {
+        fout << "EXIST" << std::endl;
+        for (int i = 0; i < SIZE; i++)
+            for (int j = 0; j < SIZE - 1; j++)
+                fout << (*prev_board_)[i][j].value() << std::endl;
+    } else
+        fout << "NONE" << std::endl;
+    fout.close();
+    return true;
+}
+
+bool Game::load(const char *path) {
+    std::ifstream fin(path);
+    if (!fin.is_open()) return false;
+    fin >> score_;
+    fin >> restore_count_;
+    for (int i = 0; i < SIZE; i++)
+        for (int j = 0; j < SIZE - 1; j++)
+            fin >> (*board_)[i][j].value();
+    std::string prev_check_;
+    fin >> prev_check_;
+    if (prev_check_ == "EXIST") {
+        if (!prev_board_) prev_board_ = new Board();
+        for (int i = 0; i < SIZE; i++)
+            for (int j = 0; j < SIZE - 1; j++)
+                fin >> (*prev_board_)[i][j].value();
+    } else {
+        if (prev_board_) delete prev_board_;
+        prev_board_ = nullptr;
+    }
+    fin.close();
+    return true;
 }
 
 std::array<Block, SIZE>& Game::operator[](int i) {

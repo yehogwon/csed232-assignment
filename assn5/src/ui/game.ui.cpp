@@ -1,13 +1,15 @@
 #include "game.ui.hpp"
 
 GameUi::GameUi(Game &game_) : game_(game_) {
-    setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-    setStyleSheet("QWidget { background-color : gray; }");
+    resize(WINDOW_WIDTH, WINDOW_HEIGHT);
+    setStyleSheet("QWidget { background-color : #d9d9d9; } QInputDialog QWidget { color : black; }");
     
     root_ = new QHBoxLayout(this);
     board_ = new QGridLayout();
     pane_ = new QVBoxLayout();
     score_label_ = new QLabel(this);
+    save_button_ = new QPushButton("Save", this);
+    load_button_ = new QPushButton("Load", this);
     restore_button_ = new QPushButton("Restore", this);
     exit_button_ = new QPushButton("Exit", this);
 
@@ -16,46 +18,44 @@ GameUi::GameUi(Game &game_) : game_(game_) {
     root_->setSpacing(0);
     root_->setContentsMargins(0, 0, 0, 0);
 
-    board_->setSpacing(0);
+    board_->setSpacing(10);
     board_->setAlignment(Qt::AlignLeft | Qt::AlignTop);
     board_->setContentsMargins(0, 0, 0, 0);
 
     pane_->setAlignment(Qt::AlignRight | Qt::AlignTop);
+    pane_->setSpacing(20);
     pane_->addWidget(score_label_);
+    pane_->addStretch(1);
+    pane_->addWidget(save_button_);
+    pane_->addWidget(load_button_);
     pane_->addWidget(restore_button_);
     pane_->addWidget(exit_button_);
 
     score_label_->setText("Score: 0");
+    score_label_->setAlignment(Qt::AlignCenter);
+    score_label_->setStyleSheet("QLabel { font-size: 35pt; color: black; font: italic bold; }");
+    
+    save_button_->setFixedSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+    save_button_->setStyleSheet("QPushButton { background-color: #b3b3b3; font-size: 20pt; color: black; font: italic bold; }");
 
-    restore_button_->setText("Restore");
+    load_button_->setFixedSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+    load_button_->setStyleSheet("QPushButton { background-color: #b3b3b3; font-size: 20pt; color: black; font: italic bold; }");
+
     restore_button_->setFixedSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+    restore_button_->setStyleSheet("QPushButton { background-color: #b3b3b3; font-size: 20pt; color: black; font: italic bold; }");
 
-    exit_button_->setText("Exit");
     exit_button_->setFixedSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-
-    // move restore_button_ and exit_button_ to the bottom
-    pane_->addStretch(5);
-
+    exit_button_->setStyleSheet("QPushButton { background-color: #b3b3b3; font-size: 20pt; color: black; font: italic bold; }");
+    
     for (int i = 0; i < SIZE; i++)
         for (int j = 0; j < SIZE; j++)
             board_->addWidget(blocks_[i][j] = new BlockUi(game_[i][j]), i, j);
     
+    connect(save_button_, &QPushButton::clicked, this, &GameUi::save);
+    connect(load_button_, &QPushButton::clicked, this, &GameUi::load);
     connect(restore_button_, &QPushButton::clicked, this, &GameUi::restore);
     connect(exit_button_, &QPushButton::clicked, this, &GameUi::exit);
     refresh();
-}
-
-GameUi::~GameUi() {
-    delete board_;
-    delete score_label_;
-    delete restore_button_;
-    delete exit_button_;
-
-    for (auto &row : blocks_) {
-        for (auto &block : row) {
-            delete block;
-        }
-    }
 }
 
 void GameUi::keyPressEvent(QKeyEvent *event) {
@@ -71,10 +71,10 @@ void GameUi::refresh() {
     score_label_->setText("Score: " + QString::number(game_.score()));
     for (int i = 0; i < SIZE; i++)
         for (int j = 0; j < SIZE; j++)
-            blocks_[i][j]->update_value();
+            blocks_[i][j]->update();
 }
 
-void GameUi::move(Key key) {
+void GameUi::move(key key) {
     try {
         if (game_.move(key)) refresh();
     } catch (GameWinException &e) {
@@ -86,6 +86,23 @@ void GameUi::move(Key key) {
         QMessageBox::information(this, "Lose", QString("You lose...\n\nScore: ") + QString::number(game_.score()));
         QApplication::quit();
     }
+}
+
+void GameUi::save() {
+    bool ok_;
+    QString text_;
+    QInputDialog::getText(this, "Save", "file name", QLineEdit::Normal, text_, &ok_);
+    if (ok_ && !game_.save(text_.toStdString().c_str()))
+        QMessageBox::about(this, "Save", "Cannot be stored.");
+}
+
+void GameUi::load() {
+    bool ok_;
+    QString text_;
+    QInputDialog::getText(this, "Load", "file name", QLineEdit::Normal, text_, &ok_);
+    if (ok_ && !game_.load(text_.toStdString().c_str()))
+        QMessageBox::about(this, "Load", "File not found.");
+    refresh();
 }
 
 void GameUi::restore() {

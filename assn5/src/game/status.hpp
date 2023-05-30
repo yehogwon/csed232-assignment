@@ -2,6 +2,10 @@
 #define __STATUS__
 
 #include <exception>
+#include <utility>
+
+enum key { UP, DOWN, LEFT, RIGHT };
+using pos = std::pair<int, int>;
 
 class GameWinException : public std::exception { };
 class GameOverException : public std::exception { };
