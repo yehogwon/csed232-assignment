@@ -6,6 +6,7 @@ project("ASSN5")
 cmake_minimum_required(VERSION 3.10)
 
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
+qt_standard_project_setup()
 
 add_subdirectory(
     src
