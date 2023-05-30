@@ -9,6 +9,10 @@ add_library(
     board.hpp
     game.cpp
     game.hpp
+    logger.cpp
+    logger.hpp
+    status.cpp
+    status.hpp
 )
 
 target_link_libraries(

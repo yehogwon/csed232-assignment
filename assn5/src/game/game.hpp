@@ -17,13 +17,7 @@
 const int GOAL = 2048;
 const int MAX_RESTORE = 3;
 
-enum Key { UP, DOWN, LEFT, RIGHT };
-
-const char* to_string(Key key);
-
 class Game {
-    using pos = std::pair<int, int>;
-
     template <int row_start_, int row_end_, int column_start_, int column_end_, bool transpose_>
     struct Direction {
         static int row_start() {
