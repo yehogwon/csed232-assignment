@@ -92,7 +92,7 @@ private:
     int score_;
     int restore_count_;
 
-    bool create_block(int n = 1, bool only_two = false);
+    std::vector<std::pair<pos, int>> create_block(int n = 1, bool only_two = false);
 
     template <typename T_>
     bool pull();

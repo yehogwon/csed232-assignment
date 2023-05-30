@@ -35,27 +35,24 @@ bool Game::is_game_over() const {
     return !can_move;
 }
 
-bool Game::create_block(int n, bool only_two) {
+std::vector<std::pair<pos, int>> Game::create_block(int n, bool only_two) {
     std::vector<std::pair<int, int>> empty_blocks;
     for (int i = 0; i < SIZE; i++)
         for (int j = 0; j < SIZE; j++)
             if ((*board_)[i][j] == 0)
                 empty_blocks.push_back(std::make_pair(i, j));
-    if (empty_blocks.size() == 0) return false;
+    if (empty_blocks.size() == 0) return {};
     
-    int initial_size = empty_blocks.size(), n_ = n;
-    std::cout << (only_two ? "INITIAL " : "GENERATE "); // FIRE: log
-    while (n_-- && empty_blocks.size() > 0) {
+    std::vector<std::pair<pos, int>> blocks;
+    while (n-- && empty_blocks.size() > 0) {
         int index = std::rand() % empty_blocks.size();
         empty_blocks.erase(empty_blocks.begin() + index);
         int value = std::rand() % 5 == 0 && !only_two ? 4 : 2;
         int row = empty_blocks[index].first, col = empty_blocks[index].second;
-        std::cout << row + 1 << " " << col + 1 << " "; // FIRE: log
-        if (!only_two) std::cout << value << " "; // FIRE: log
+        blocks.push_back(std::make_pair(std::make_pair(row + 1, col + 1), value));
         (*board_)[row][col] = value;
     }
-    std::cout << std::endl; // FIRE: log
-    return initial_size >= n;
+    return blocks;
 }
 
 void Game::clear_merged() {
