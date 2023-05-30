@@ -163,7 +163,6 @@ bool Game::merge() {
                 (*board_)[next.first][next.second] = 0;
                 is_merged = true;
                 score_ += (*board_)[cur.first][cur.second];
-                // TODO: check if it works for transposed
                 merged_blocks.push_back(std::make_pair(std::make_pair(cur.first + 1, cur.second + 1), (*board_)[cur.first][cur.second]));
             }
         }
