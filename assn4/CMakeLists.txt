@@ -37,6 +37,5 @@ sharedptr_test(SharedPtr)
 
 image_test(Image)
 image_test(operator=)
-image_test(Memory)
 image_test(Conversion)
 image_test(Rotate)

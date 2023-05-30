@@ -127,11 +127,6 @@ bool assign_test() {
     return assign_test_<RGB8b>() && assign_test_<RGBf>();
 }
 
-bool memory_test() {
-    // TODO: to be implemented
-    return true;
-}
-
 template <typename T>
 bool conv_test_() {
     T val(30, 60, 90);
@@ -173,7 +168,6 @@ int main(int argc, char **argv) {
     std::vector<std::pair<std::string, fp>> tests {
         std::make_pair("Image::Image", construct_test), 
         std::make_pair("Image::operator=", assign_test), 
-        std::make_pair("Image::Memory", memory_test), 
         std::make_pair("Image::Conversion", conv_test), 
         std::make_pair("Image::Rotate", rotation_test)
     };
