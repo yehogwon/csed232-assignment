@@ -4,7 +4,7 @@
 #include <exception>
 #include <utility>
 
-enum Key { UP, DOWN, LEFT, RIGHT };
+enum key { UP, DOWN, LEFT, RIGHT };
 using pos = std::pair<int, int>;
 
 class GameWinException : public std::exception { };

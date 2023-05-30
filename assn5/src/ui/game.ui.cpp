@@ -74,7 +74,7 @@ void GameUi::refresh() {
             blocks_[i][j]->update();
 }
 
-void GameUi::move(Key key) {
+void GameUi::move(key key) {
     try {
         if (game_.move(key)) refresh();
     } catch (GameWinException &e) {

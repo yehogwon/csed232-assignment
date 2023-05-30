@@ -76,10 +76,10 @@ int Game::score() const {
     return score_;
 }
 
-bool Game::move(Key key) {
+bool Game::move(key key) {
     Board *t_prev_ = new Board(*board_);
     bool moved = false;
-    std::cout << to_string(key) << std::endl; // FIRE: log
+    std::cout << key << std::endl; // FIRE: log
     switch (key) {
         case UP: moved = move_<Up>(); break;
         case DOWN: moved = move_<Down>(); break;

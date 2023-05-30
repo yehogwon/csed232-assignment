@@ -1,6 +1,6 @@
 #include "logger.hpp"
 
-std::ostream& operator<<(std::ostream &os, const Key &k) {
+std::ostream& operator<<(std::ostream &os, const key &k) {
     switch (k) {
         case UP: os << "UP";
         case DOWN: os << "DOWN";
@@ -24,7 +24,7 @@ void static generate(const pos &&p, int n) {
     std::cout << "GENERATE" << p.first << " " << p.second << " " << n << std::endl;
 }
 
-void static move(Key key) {
+void static move(key key) {
     std::cout << key << std::endl;
 }
 

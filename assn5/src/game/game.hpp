@@ -13,6 +13,7 @@
 #include "block.hpp"
 #include "board.hpp"
 #include "status.hpp"
+#include "logger.hpp"
 
 const int GOAL = 2048;
 const int MAX_RESTORE = 3;
@@ -111,7 +112,7 @@ public:
     const Board& cur() const;
     int score() const;
 
-    bool move(Key key);
+    bool move(key key);
     bool is_game_win() const;
     bool is_game_over() const;
 
