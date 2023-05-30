@@ -79,7 +79,7 @@ int Game::score() const {
 bool Game::move(key key) {
     Board *t_prev_ = new Board(*board_);
     bool moved = false;
-    std::cout << key << std::endl; // FIRE: log
+    Logger::move(key);
     switch (key) {
         case UP: moved = move_<Up>(); break;
         case DOWN: moved = move_<Down>(); break;
@@ -91,7 +91,7 @@ bool Game::move(key key) {
     if (moved) {
         if (prev_board_) delete prev_board_;
         prev_board_ = t_prev_;
-        std::cout << "SCORE " << score_ << std::endl; // FIRE: log
+        Logger::score(score_);
         if (is_game_win()) throw GameWinException();
         create_block();
     } else {
@@ -108,7 +108,7 @@ bool Game::restore() {
     delete prev_board_;
     prev_board_ = nullptr;
     restore_count_++;
-    std::cout << "RESTORE " << restore_remain() << std::endl; // FIRE: log
+    Logger::restore(restore_remain());
     return true;
 }
 
