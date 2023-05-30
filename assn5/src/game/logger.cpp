@@ -16,24 +16,26 @@ std::ostream& operator<<(std::ostream &os, const pos &p) {
     return os;
 }
 
-void static initial(const pos &&p1, const pos &&p2) {
-    std::cout << "INITIAL" << p1.first << " " << p1.second << " " << p2.first << " " << p2.second << std::endl;
+void Logger::initial(const pos &&p1, const pos &&p2) {
+    std::cout << "INITIAL" << p1 << " " << p2 << std::endl;
 }
 
-void static generate(const pos &&p, int n) {
-    std::cout << "GENERATE" << p.first << " " << p.second << " " << n << std::endl;
+void Logger::generate(const pos &&p, int n) {
+    std::cout << "GENERATE" << p << " " << n << std::endl;
 }
 
-void static move(key key) {
+void Logger::move(key key) {
     std::cout << key << std::endl;
 }
 
-void static merge(const pos &&p, int n) {
-    std::cout << "MERGE" << p.first << " " << p.second << " " << n << std::endl;
+void Logger::merge(const pos &&p, int n) {
+    std::cout << "MERGE" << p << std::endl;
 }
 
-void static restore(int n) {
+void Logger::restore(int n) {
+    std::cout << "RESTORE " << n << std::endl;
 }
 
-void static score(int n) {
+void Logger::score(int n) {
+    std::cout << "SCORE " << n << std::endl;
 }
