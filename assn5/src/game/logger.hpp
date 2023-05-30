@@ -2,6 +2,8 @@
 #define __LOGGER__
 
 #include <iostream>
+#include <algorithm>
+#include <vector>
 #include "status.hpp"
 
 std::ostream& operator<<(std::ostream &os, const key &k);
@@ -12,7 +14,7 @@ public:
     void static initial(const pos &p1, const pos &p2);
     void static generate(const pos &p, int n);
     void static move(key key);
-    void static merge(const std::vector<std::pair<pos, int>> blocks);
+    void static merge(std::vector<std::pair<pos, int>> &blocks);
     void static restore(int n);
     void static score(int n);
 };

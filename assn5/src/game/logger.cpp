@@ -28,8 +28,10 @@ void Logger::move(key key) {
     std::cout << key << std::endl;
 }
 
-void Logger::merge(const std::vector<std::pair<pos, int>> blocks) {
-    // TODO: sort the vector by its row and column index
+void Logger::merge(std::vector<std::pair<pos, int>> &blocks) {
+    std::sort(blocks.begin(), blocks.end(), [](const std::pair<pos, int> &p1, const std::pair<pos, int> &p2) {
+        return p1.first.first < p2.first.first || p1.first.second < p2.first.second;
+    });
     for (auto block_ : blocks)
         std::cout << "MERGE" << block_.first << " " << block_.second << std::endl;
 }
