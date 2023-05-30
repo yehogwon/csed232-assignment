@@ -7,11 +7,11 @@ GameUi::GameUi(Game &game_) : game_(game_) {
     root_ = new QHBoxLayout(this);
     board_ = new QGridLayout();
     pane_ = new QVBoxLayout();
-    score_label_ = new QLabel(this);
-    save_button_ = new QPushButton("Save", this);
-    load_button_ = new QPushButton("Load", this);
-    restore_button_ = new QPushButton("Restore", this);
-    exit_button_ = new QPushButton("Exit", this);
+    score_label_ = new QLabel();
+    save_button_ = new QPushButton("Save");
+    load_button_ = new QPushButton("Load");
+    restore_button_ = new QPushButton("Restore");
+    exit_button_ = new QPushButton("Exit");
 
     root_->addLayout(board_);
     root_->addLayout(pane_);
