@@ -1,18 +1,9 @@
 #include "game.hpp"
 
-const char* to_string(Key key) {
-    switch (key) {
-        case UP: return "UP";
-        case DOWN: return "DOWN";
-        case LEFT: return "LEFT";
-        case RIGHT: return "RIGHT";
-        default: return "";
-    }
-}
-
 Game::Game() : prev_board_(nullptr), board_(new Board()), score_(0), restore_count_(0) {
     std::srand(std::time(nullptr));
-    create_block(2, true);
+    const std::vector<std::pair<pos, int>> &&blocks__ = create_block(2, true);
+    Logger::initial(blocks__[0].first, blocks__[1].first);
 }
 
 Game::~Game() {
@@ -45,27 +36,24 @@ bool Game::is_game_over() const {
     return !can_move;
 }
 
-bool Game::create_block(int n, bool only_two) {
+std::vector<std::pair<pos, int>> Game::create_block(int n, bool only_two) {
     std::vector<std::pair<int, int>> empty_blocks;
     for (int i = 0; i < SIZE; i++)
         for (int j = 0; j < SIZE; j++)
             if ((*board_)[i][j] == 0)
                 empty_blocks.push_back(std::make_pair(i, j));
-    if (empty_blocks.size() == 0) return false;
+    if (empty_blocks.size() == 0) return {};
     
-    int initial_size = empty_blocks.size(), n_ = n;
-    std::cout << (only_two ? "INITIAL " : "GENERATE ");
-    while (n_-- && empty_blocks.size() > 0) {
+    std::vector<std::pair<pos, int>> blocks;
+    while (n-- && empty_blocks.size() > 0) {
         int index = std::rand() % empty_blocks.size();
         empty_blocks.erase(empty_blocks.begin() + index);
         int value = std::rand() % 5 == 0 && !only_two ? 4 : 2;
         int row = empty_blocks[index].first, col = empty_blocks[index].second;
-        std::cout << row + 1 << " " << col + 1 << " ";
-        if (!only_two) std::cout << value << " ";
+        blocks.push_back(std::make_pair(std::make_pair(row + 1, col + 1), value));
         (*board_)[row][col] = value;
     }
-    std::cout << std::endl;
-    return initial_size >= n;
+    return blocks;
 }
 
 void Game::clear_merged() {
@@ -86,10 +74,10 @@ int Game::score() const {
     return score_;
 }
 
-bool Game::move(Key key) {
+bool Game::move(key key) {
     Board *t_prev_ = new Board(*board_);
     bool moved = false;
-    std::cout << to_string(key) << std::endl;
+    Logger::move(key);
     switch (key) {
         case UP: moved = move_<Up>(); break;
         case DOWN: moved = move_<Down>(); break;
@@ -101,9 +89,10 @@ bool Game::move(Key key) {
     if (moved) {
         if (prev_board_) delete prev_board_;
         prev_board_ = t_prev_;
-        std::cout << "SCORE " << score_ << std::endl;
+        Logger::score(score_);
         if (is_game_win()) throw GameWinException();
-        create_block();
+        const std::vector<std::pair<pos, int>> &&blocks__ = create_block();
+        Logger::generate(blocks__[0].first, blocks__[0].second);
     } else {
         delete t_prev_;
         if (is_game_over()) throw GameOverException();
@@ -118,6 +107,7 @@ bool Game::restore() {
     delete prev_board_;
     prev_board_ = nullptr;
     restore_count_++;
+    Logger::restore(restore_remain());
     return true;
 }
 

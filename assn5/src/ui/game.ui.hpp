@@ -40,7 +40,7 @@ private:
     std::array<std::array<BlockUi*, SIZE>, SIZE> blocks_;
 
     void refresh();
-    void move(Key key);
+    void move(key key);
     void save();
     void load();
     void restore();

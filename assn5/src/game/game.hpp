@@ -13,17 +13,12 @@
 #include "block.hpp"
 #include "board.hpp"
 #include "status.hpp"
+#include "logger.hpp"
 
 const int GOAL = 2048;
 const int MAX_RESTORE = 3;
 
-enum Key { UP, DOWN, LEFT, RIGHT };
-
-const char* to_string(Key key);
-
 class Game {
-    using pos = std::pair<int, int>;
-
     template <int row_start_, int row_end_, int column_start_, int column_end_, bool transpose_>
     struct Direction {
         static int row_start() {
@@ -97,7 +92,7 @@ private:
     int score_;
     int restore_count_;
 
-    bool create_block(int n = 1, bool only_two = false);
+    std::vector<std::pair<pos, int>> create_block(int n = 1, bool only_two = false);
 
     template <typename T_>
     bool pull();
@@ -117,7 +112,7 @@ public:
     const Board& cur() const;
     int score() const;
 
-    bool move(Key key);
+    bool move(key key);
     bool is_game_win() const;
     bool is_game_over() const;
 
@@ -158,6 +153,7 @@ bool Game::pull() {
 template <typename T_>
 bool Game::merge() {
     bool is_merged = false;
+    std::vector<std::pair<pos, int>> merged_blocks;
     for (int i = T_::row_start(); T_::row_comp(i, T_::row_end()); T_::row_next(i)) {
         for (int j = T_::column_start(); T_::column_comp(j, T_::column_end()); T_::column_next(j)) {
             pos cur = T_::get(i, j), next = T_::get(i, j + T_::column_next());
@@ -167,10 +163,11 @@ bool Game::merge() {
                 (*board_)[next.first][next.second] = 0;
                 is_merged = true;
                 score_ += (*board_)[cur.first][cur.second];
-                std::cout << "MERGE " << i + 1 << " " << j + 1 << " " << (*board_)[cur.first][cur.second] << std::endl;
+                merged_blocks.push_back(std::make_pair(std::make_pair(cur.first + 1, cur.second + 1), (*board_)[cur.first][cur.second]));
             }
         }
     }
+    Logger::merge(merged_blocks);
     return is_merged;
 }
 
