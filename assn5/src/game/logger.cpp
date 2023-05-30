@@ -17,11 +17,11 @@ std::ostream& operator<<(std::ostream &os, const pos &p) {
 }
 
 void Logger::initial(const pos &p1, const pos &p2) {
-    std::cout << "INITIAL" << p1 << " " << p2 << std::endl;
+    std::cout << "INITIAL " << p1 << " " << p2 << std::endl;
 }
 
 void Logger::generate(const pos &p, int n) {
-    std::cout << "GENERATE" << p << " " << n << std::endl;
+    std::cout << "GENERATE " << p << " " << n << std::endl;
 }
 
 void Logger::move(key key) {
@@ -33,7 +33,7 @@ void Logger::merge(std::vector<std::pair<pos, int>> &blocks) {
         return p1.first.first < p2.first.first || p1.first.second < p2.first.second;
     });
     for (auto block_ : blocks)
-        std::cout << "MERGE" << block_.first << " " << block_.second << std::endl;
+        std::cout << "MERGE " << block_.first << " " << block_.second << std::endl;
 }
 
 void Logger::restore(int n) {
