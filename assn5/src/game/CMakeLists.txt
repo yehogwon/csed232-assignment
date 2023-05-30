@@ -11,7 +11,6 @@ add_library(
     game.hpp
     logger.cpp
     logger.hpp
-    status.cpp
     status.hpp
 )
 

@@ -7,8 +7,6 @@
 enum Key { UP, DOWN, LEFT, RIGHT };
 using pos = std::pair<int, int>;
 
-const char* to_string(Key key);
-
 class GameWinException : public std::exception { };
 class GameOverException : public std::exception { };
 
