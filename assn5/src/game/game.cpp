@@ -118,6 +118,7 @@ bool Game::restore() {
     delete prev_board_;
     prev_board_ = nullptr;
     restore_count_++;
+    std::cout << "RESTORE " << restore_remain() << std::endl; // FIRE: log
     return true;
 }
 
