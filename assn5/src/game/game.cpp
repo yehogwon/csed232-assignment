@@ -2,7 +2,8 @@
 
 Game::Game() : prev_board_(nullptr), board_(new Board()), score_(0), restore_count_(0) {
     std::srand(std::time(nullptr));
-    create_block(2, true);
+    const std::vector<std::pair<pos, int>> &&blocks__ = create_block(2, true);
+    Logger::initial(blocks__[0].first, blocks__[1].first);
 }
 
 Game::~Game() {

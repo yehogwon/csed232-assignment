@@ -9,10 +9,10 @@ std::ostream& operator<<(std::ostream &os, const pos &p);
 
 class Logger {
 public: 
-    void static initial(const pos &&p1, const pos &&p2);
-    void static generate(const pos &&p, int n);
+    void static initial(const pos &p1, const pos &p2);
+    void static generate(const pos &p, int n);
     void static move(key key);
-    void static merge(const pos &&p, int n);
+    void static merge(const pos &p, int n);
     void static restore(int n);
     void static score(int n);
 };
