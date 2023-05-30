@@ -153,6 +153,7 @@ bool Game::pull() {
 template <typename T_>
 bool Game::merge() {
     bool is_merged = false;
+    std::vector<std::pair<pos, int>> merged_blocks;
     for (int i = T_::row_start(); T_::row_comp(i, T_::row_end()); T_::row_next(i)) {
         for (int j = T_::column_start(); T_::column_comp(j, T_::column_end()); T_::column_next(j)) {
             pos cur = T_::get(i, j), next = T_::get(i, j + T_::column_next());
@@ -162,10 +163,12 @@ bool Game::merge() {
                 (*board_)[next.first][next.second] = 0;
                 is_merged = true;
                 score_ += (*board_)[cur.first][cur.second];
-                std::cout << "MERGE " << i + 1 << " " << j + 1 << " " << (*board_)[cur.first][cur.second] << std::endl; // FIRE: log
+                // TODO: check if it works for transposed
+                merged_blocks.push_back(std::make_pair(std::make_pair(cur.first + 1, cur.second + 1), (*board_)[cur.first][cur.second]));
             }
         }
     }
+    Logger::merge(merged_blocks);
     return is_merged;
 }
 

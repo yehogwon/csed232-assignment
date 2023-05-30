@@ -28,8 +28,10 @@ void Logger::move(key key) {
     std::cout << key << std::endl;
 }
 
-void Logger::merge(const pos &p, int n) {
-    std::cout << "MERGE" << p << std::endl;
+void Logger::merge(const std::vector<std::pair<pos, int>> blocks) {
+    // TODO: sort the vector by its row and column index
+    for (auto block_ : blocks)
+        std::cout << "MERGE" << block_.first << " " << block_.second << std::endl;
 }
 
 void Logger::restore(int n) {
