@@ -25,8 +25,6 @@ const int BUTTON_WIDTH = 300;
 const int BUTTON_HEIGHT = 200;
 
 class GameUi : public QWidget {
-    // TODO: Remove it?
-    Q_OBJECT
 private: 
     QHBoxLayout *root_;
     QGridLayout *board_;
