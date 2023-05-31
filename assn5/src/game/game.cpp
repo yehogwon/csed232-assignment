@@ -119,48 +119,6 @@ int Game::restore_remain() const {
     return MAX_RESTORE - restore_count_;
 }
 
-bool Game::save(const char *path) const {
-    std::ofstream fout(path);
-    if (!fout.is_open()) return false;
-    fout << score_ << std::endl;
-    fout << restore_count_ << std::endl;
-    for (int i = 0; i < SIZE; i++)
-        for (int j = 0; j < SIZE - 1; j++)
-            fout << (*board_)[i][j].value() << std::endl;
-    if (prev_board_) {
-        fout << "EXIST" << std::endl;
-        for (int i = 0; i < SIZE; i++)
-            for (int j = 0; j < SIZE - 1; j++)
-                fout << (*prev_board_)[i][j].value() << std::endl;
-    } else
-        fout << "NONE" << std::endl;
-    fout.close();
-    return true;
-}
-
-bool Game::load(const char *path) {
-    std::ifstream fin(path);
-    if (!fin.is_open()) return false;
-    fin >> score_;
-    fin >> restore_count_;
-    for (int i = 0; i < SIZE; i++)
-        for (int j = 0; j < SIZE - 1; j++)
-            fin >> (*board_)[i][j].value();
-    std::string prev_check_;
-    fin >> prev_check_;
-    if (prev_check_ == "EXIST") {
-        if (!prev_board_) prev_board_ = new Board();
-        for (int i = 0; i < SIZE; i++)
-            for (int j = 0; j < SIZE - 1; j++)
-                fin >> (*prev_board_)[i][j].value();
-    } else {
-        if (prev_board_) delete prev_board_;
-        prev_board_ = nullptr;
-    }
-    fin.close();
-    return true;
-}
-
 std::array<Block, SIZE>& Game::operator[](int i) {
     return (*board_)[i];
 }
