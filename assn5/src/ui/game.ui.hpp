@@ -9,6 +9,7 @@
 #include <QPushButton>
 #include <QMessageBox>
 #include <QKeyEvent>
+#include <QThread>
 
 #include <iostream>
 #include <array>
@@ -24,6 +25,7 @@ const int BUTTON_WIDTH = 300;
 const int BUTTON_HEIGHT = 200;
 
 class GameUi : public QWidget {
+    // TODO: Remove it?
     Q_OBJECT
 private: 
     QHBoxLayout *root_;

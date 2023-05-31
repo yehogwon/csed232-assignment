@@ -68,6 +68,7 @@ void GameUi::move(key key) {
     } catch (GameWinException &e) {
         refresh();
         // TODO: wait for 1 second
+        // thread()->wait(1000);
         QMessageBox::information(this, "Win", QString("Congratulations!\n\nScore: ") + QString::number(game_.score()));
         QApplication::quit();
     } catch (GameOverException &e) {

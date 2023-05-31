@@ -9,6 +9,7 @@ const int BLOCK_WIDTH = 250;
 const int BLOCK_HEIGHT = 250;
 
 class BlockUi : public QLabel {
+    // TODO: Remove it?
     Q_OBJECT
 private: 
     Block &block_;
