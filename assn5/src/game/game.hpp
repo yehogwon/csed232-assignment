@@ -15,8 +15,8 @@
 #include "status.hpp"
 #include "logger.hpp"
 
-const int GOAL = 2048;
-const int MAX_RESTORE = 3;
+const int GOAL = 2048; // goal of the game
+const int MAX_RESTORE = 3; // maximum number of restore
 
 class Game {
     template <int row_start_, int row_end_, int column_start_, int column_end_, bool transpose_>
@@ -81,10 +81,10 @@ class Game {
         }
     };
 
-    using Left = Direction<0, SIZE - 1, 0, SIZE - 1, false>;
-    using Right = Direction<0, SIZE - 1, SIZE - 1, 0, false>;
-    using Up = Direction<0, SIZE - 1, 0, SIZE - 1, true>;
-    using Down = Direction<0, SIZE - 1, SIZE - 1, 0, true>;
+    using Left = Direction<0, SIZE - 1, 0, SIZE - 1, false>; // row: 0 -> SIZE - 1, column: 0 -> SIZE - 1
+    using Right = Direction<0, SIZE - 1, SIZE - 1, 0, false>; // row: 0 -> SIZE - 1, column: SIZE - 1 -> 0
+    using Up = Direction<0, SIZE - 1, 0, SIZE - 1, true>; // row: 0 -> SIZE - 1, column: 0 -> SIZE - 1 (transposed)
+    using Down = Direction<0, SIZE - 1, SIZE - 1, 0, true>; // row: 0 -> SIZE - 1, column: SIZE - 1 -> 0 (transposed)
 private: 
     Board *prev_board_;
     Board *board_;
@@ -170,11 +170,12 @@ bool Game::merge() {
 
 template <typename T_>
 bool Game::move_() {
-    bool updated = false;
+    bool updated = false; // check if board is updated (either pulled or merged, or both)
+    // pull, merge, and pull again
     updated = pull<T_>() || updated;
     updated = merge<T_>() || updated;
     updated = pull<T_>() || updated;
-    return updated;
+    return updated; // return true if board is updated
 }
 
 #endif // __GAME__
