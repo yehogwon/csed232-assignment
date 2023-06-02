@@ -30,7 +30,8 @@ void Logger::move(key key) {
 
 void Logger::merge(std::vector<std::pair<pos, int>> &blocks) {
     std::sort(blocks.begin(), blocks.end(), [](const std::pair<pos, int> &p1, const std::pair<pos, int> &p2) {
-        return p1.first.first < p2.first.first || p1.first.second < p2.first.second;
+        if (p1.first.first == p2.first.first) return p1.first.second < p2.first.second;
+        else return p1.first.first < p2.first.first;
     });
     for (auto block_ : blocks)
         std::cout << "MERGE " << block_.first << " " << block_.second << std::endl;
