@@ -9,7 +9,7 @@
 #include <QPushButton>
 #include <QMessageBox>
 #include <QKeyEvent>
-#include <QThread>
+#include <QTimer>
 
 #include <iostream>
 #include <array>
@@ -25,6 +25,7 @@ const int BUTTON_WIDTH = 300;
 const int BUTTON_HEIGHT = 200;
 
 class GameUi : public QWidget {
+    Q_OBJECT
 private: 
     QHBoxLayout *root_;
     QGridLayout *board_;
@@ -32,14 +33,20 @@ private:
     QLabel *score_label_;
     QPushButton *restore_button_;
     QPushButton *exit_button_;
+    QTimer *win_timer_;
 
     Game &game_;
     std::array<std::array<BlockUi*, SIZE>, SIZE> blocks_;
+
+    bool block_;
 
     void refresh();
     void move(key key);
     void restore();
     void exit();
+
+private slots: 
+    void win();
 
 protected: 
     void keyPressEvent(QKeyEvent *event) override;

@@ -1,6 +1,6 @@
 #include "game.ui.hpp"
 
-GameUi::GameUi(Game &game_) : game_(game_) {
+GameUi::GameUi(Game &game_) : game_(game_), block_(false) {
     resize(WINDOW_WIDTH, WINDOW_HEIGHT);
     setStyleSheet("QWidget { background-color : #d9d9d9; }");
     
@@ -10,6 +10,7 @@ GameUi::GameUi(Game &game_) : game_(game_) {
     score_label_ = new QLabel();
     restore_button_ = new QPushButton("Restore");
     exit_button_ = new QPushButton("Exit");
+    win_timer_ = new QTimer(this);
 
     root_->addLayout(board_);
     root_->addLayout(pane_);
@@ -43,6 +44,7 @@ GameUi::GameUi(Game &game_) : game_(game_) {
     
     connect(restore_button_, &QPushButton::clicked, this, &GameUi::restore);
     connect(exit_button_, &QPushButton::clicked, this, &GameUi::exit);
+    connect(win_timer_, SIGNAL(timeout()), this, SLOT(win()));
     refresh();
 }
 
@@ -63,18 +65,22 @@ void GameUi::refresh() {
 }
 
 void GameUi::move(key key) {
+    if (block_) return;
     try {
         if (game_.move(key)) refresh();
     } catch (GameWinException &e) {
+        block_ = true;
         refresh();
-        // TODO: wait for 1 second
-        // thread()->wait(1000);
-        QMessageBox::information(this, "Win", QString("Congratulations!\n\nScore: ") + QString::number(game_.score()));
-        QApplication::quit();
+        win_timer_->start(1000);
     } catch (GameOverException &e) {
         QMessageBox::information(this, "Lose", QString("You lose...\n\nScore: ") + QString::number(game_.score()));
         QApplication::quit();
     }
+}
+
+void GameUi::win() {
+    QMessageBox::information(this, "Win", QString("Congratulations!\n\nScore: ") + QString::number(game_.score()));
+    QApplication::quit();
 }
 
 void GameUi::restore() {
