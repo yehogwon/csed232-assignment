@@ -8,8 +8,8 @@ GameUi::GameUi(Game &game_) : game_(game_), block_(false) {
     board_ = new QGridLayout();
     pane_ = new QVBoxLayout();
     score_label_ = new QLabel();
-    restore_button_ = new QPushButton("Restore");
-    exit_button_ = new QPushButton("Exit");
+    restore_button_ = new QPushButton();
+    exit_button_ = new QPushButton();
     win_timer_ = new QTimer(this);
 
     root_->addLayout(board_);
@@ -32,9 +32,11 @@ GameUi::GameUi(Game &game_) : game_(game_), block_(false) {
     score_label_->setAlignment(Qt::AlignCenter);
     score_label_->setStyleSheet("QLabel { font-size: 35pt; color: black; font: italic bold; }");
 
+    restore_button_->setText("Restore");
     restore_button_->setFixedSize(BUTTON_WIDTH, BUTTON_HEIGHT);
     restore_button_->setStyleSheet("QPushButton { background-color: #b3b3b3; font-size: 20pt; color: black; font: italic bold; }");
 
+    exit_button_->setText("Exit");
     exit_button_->setFixedSize(BUTTON_WIDTH, BUTTON_HEIGHT);
     exit_button_->setStyleSheet("QPushButton { background-color: #b3b3b3; font-size: 20pt; color: black; font: italic bold; }");
     
