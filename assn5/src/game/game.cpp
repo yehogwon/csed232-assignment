@@ -86,9 +86,9 @@ bool Game::move(key key) {
         if (prev_board_) delete prev_board_;
         prev_board_ = t_prev_;
         Logger::score(score_);
-        if (is_game_win()) throw GameWinException();
         const std::vector<std::pair<pos, int>> &&blocks__ = create_block();
         Logger::generate(blocks__[0].first, blocks__[0].second);
+        if (is_game_win()) throw GameWinException();
     } else {
         delete t_prev_;
         if (is_game_over()) throw GameOverException();
