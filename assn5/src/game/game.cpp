@@ -20,20 +20,16 @@ bool Game::is_game_win() const {
 }
 
 bool Game::is_game_over() const {
-    bool can_move = false;
-    for (int i = 0; i < SIZE && !can_move; i++)
-        for (int j = 0; j < SIZE && !can_move; j++)
-            if ((*board_)[i][j] == 0) can_move = true;
-    
-    for (int i = 0; i < SIZE && !can_move; i++)
-        for (int j = 0; j < SIZE - 1 && !can_move; j++)
-            if ((*board_)[i][j] == (*board_)[i][j + 1]) can_move = true;
-    
-    for (int i = 0; i < SIZE - 1 && !can_move; i++)
-        for (int j = 0; j < SIZE && !can_move; j++)
-            if ((*board_)[i][j] == (*board_)[i + 1][j]) can_move = true;
-
-    return !can_move;
+    for (int i = 0; i < SIZE; i++)
+        for (int j = 0; j < SIZE; j++)
+            if ((*board_)[i][j] == 0) return false;
+    for (int i = 0; i < SIZE; i++)
+        for (int j = 0; j < SIZE - 1; j++)
+            if ((*board_)[i][j] == (*board_)[i][j + 1]) return false;
+    for (int i = 0; i < SIZE - 1; i++)
+        for (int j = 0; j < SIZE; j++)
+            if ((*board_)[i][j] == (*board_)[i + 1][j]) return false;
+    return true;
 }
 
 std::vector<std::pair<pos, int>> Game::create_block(int n, bool only_two) {
