@@ -31,8 +31,7 @@ class Game {
         }
 
         static void row_next(int &i_) { // move the cursor (index) to the next
-            if (row_start_ <= row_end_) i_++;
-            else i_--;
+            i_ += row_next();
         }
 
         static int row_next() { // +1 if the index is increasing (start <= end), -1 if the index is decreasing (otherwise)
@@ -61,8 +60,7 @@ class Game {
         }
 
         static void column_next(int &j_) { // move the cursor (index) to the next
-            if (column_start_ <= column_end_) j_++;
-            else j_--;
+            j_ += column_next();
         }
 
         static int column_next() { // +1 if the index is increasing (start <= end), -1 if the index is decreasing (otherwise)
@@ -141,6 +139,7 @@ public:
     const std::array<Block, SIZE>& operator[](int i) const; // indexing; return the ith row of the current board (const version)
 };
 
+// TODO: use out_of_range function for iteration?
 template <typename T_>
 bool Game::pull() {
     bool is_shifted = false; // if any block is shifted
