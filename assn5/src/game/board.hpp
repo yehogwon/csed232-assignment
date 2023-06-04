@@ -3,23 +3,20 @@
 
 #include <array>
 #include <ostream>
-#include <iomanip>
 #include "block.hpp"
 
-const int SIZE = 4;
+const int SIZE = 4; // size of the board (the number of cells in a row/column)
 
 class Board {
 private: 
-    std::array<std::array<Block, SIZE>, SIZE> board_;
+    std::array<std::array<Block, SIZE>, SIZE> board_; // std::array to store the blocks (4x4 = 16)
 
 public: 
-    Board();
-    Board(const Board& board);
+    Board(); // constructor without arguments (do nothing)
+    Board(const Board& board); // copy constructor
     
-    std::array<Block, SIZE>& operator[](int i);
-    const std::array<Block, SIZE>& operator[](int i) const;
+    std::array<Block, SIZE>& operator[](int i); // overload operator[] to access the blocks (ith row)
+    const std::array<Block, SIZE>& operator[](int i) const; // overload operator[] to access the blocks (ith row) (const version)
 };
-
-std::ostream& operator<<(std::ostream& os, const Board& board);
 
 #endif // __BOARD__

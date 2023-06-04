@@ -13,6 +13,7 @@ int Block::value() const {
 }
 
 std::string Block::color() const {
+    // get the color code accordingly
     switch (value_) {
         case 2: return "rgb(187, 173, 160)"; break;
         case 4: return "rgb(237, 224, 200)"; break;
@@ -25,28 +26,30 @@ std::string Block::color() const {
         case 512: return "rgb(237, 200, 80)"; break;
         case 1024: return "rgb(237, 197, 63)"; break;
         case 2048: return "rgb(237, 194, 46)"; break;
-        default: return "rgb(255, 255, 255)"; break;
+        default: return "rgb(255, 255, 255)"; break; // white (empty)
     }
 }
 
 Block& Block::operator*=(int x) {
-    value_ *= x;
+    value_ *= x; // scale the value_
     return *this;
 }
 
 Block& Block::operator=(int value__) {
-    value_ = value__;
-    merged = false;
+    value_ = value__; // assign the value_
+    merged = false; // reset the merged flag
     return *this;
 }
 
 Block& Block::operator=(const Block& _block) {
+    // assign both the value_ and merged flag
     value_ = _block.value_;
     merged = _block.merged;
     return *this;
 }
 
 bool Block::operator==(const Block& _block) const {
+    // if the value_ is zero, it means the block is empty
     return value_ == _block.value_ && value_ != 0;
 }
 
