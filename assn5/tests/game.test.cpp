@@ -1,5 +1,5 @@
 #include "test.h"
-#define private public // to access private members of Game
+// #define private public // FIXME: it does not work for system header files
 #include "game/game.hpp"
 #undef private
 
