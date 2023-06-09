@@ -2,12 +2,29 @@
 #include "game/board.hpp"
 
 bool constructor_test() {
-    // TODO: To be implemented
+    Board board_;
+    for (int i = 0; i < 4; i++)
+        for (int j = 0; j < 4; j++) 
+            if (board_[i][j].value() != 0) return false;
+
     return true;
 }
 
 bool index_test() {
-    // TODO: To be implemented
+    Board board_;
+    for (int i = 0; i < 4; i++)
+        for (int j = 0; j < 4; j++) 
+            board_[i][j].value() = i + j * 3;
+    
+    for (int i = 0; i < 4; i++)
+        for (int j = 0; j < 4; j++) 
+            if (board_[i][j].value() != i + j * 3) return false;
+    
+    Board board__ = board_;
+    for (int i = 0; i < 4; i++)
+        for (int j = 0; j < 4; j++) 
+            if (board__[i][j].value() != i + j * 3) return false;
+    
     return true;
 }
 
