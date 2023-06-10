@@ -52,9 +52,27 @@ bool merge_test() {
         "MERGE 2 2 16",
         "MERGE 2 3 16",
         "MERGE 2 2 16",
-        "MERGE 2 3 16", // done by here
-        // "MERGE 1 2 16",
-        // "MERGE 1 2 16",
+        "MERGE 2 3 16", 
+        "MERGE 2 2 16", 
+        "MERGE 2 3 16",
+        "MERGE 4 1 16",
+        "MERGE 4 3 16",
+        "MERGE 2 2 16", 
+        "MERGE 2 3 16",
+        "MERGE 4 1 16",
+        "MERGE 4 3 16",
+        "MERGE 2 2 16", 
+        "MERGE 2 3 16",
+        "MERGE 4 1 16",
+        "MERGE 4 3 16",
+        "MERGE 2 2 16", 
+        "MERGE 2 3 16",
+        "MERGE 4 1 16",
+        "MERGE 4 3 16",
+        "MERGE 2 2 16", 
+        "MERGE 2 3 16",
+        "MERGE 4 1 16",
+        "MERGE 4 3 16"
     }, []() {
         std::vector<std::pair<pos, int>> merged_blocks;
         merged_blocks = {std::make_pair(pos(1, 2), 16)}; Logger::merge(merged_blocks);
@@ -64,6 +82,11 @@ bool merge_test() {
         merged_blocks = {std::make_pair(pos(2, 3), 32), std::make_pair(pos(2, 2), 16)}; Logger::merge(merged_blocks);
         merged_blocks = {std::make_pair(pos(2, 2), 16), std::make_pair(pos(2, 3), 16)}; Logger::merge(merged_blocks);
         merged_blocks = {std::make_pair(pos(2, 3), 16), std::make_pair(pos(2, 2), 16)}; Logger::merge(merged_blocks);
+        merged_blocks = {std::make_pair(pos(2, 2), 16), std::make_pair(pos(2, 3), 16), std::make_pair(pos(4, 1), 16), std::make_pair(pos(4, 3), 16)}; Logger::merge(merged_blocks);
+        merged_blocks = {std::make_pair(pos(2, 3), 16), std::make_pair(pos(2, 2), 16), std::make_pair(pos(4, 1), 16), std::make_pair(pos(4, 3), 16)}; Logger::merge(merged_blocks);
+        merged_blocks = {std::make_pair(pos(4, 1), 16), std::make_pair(pos(2, 2), 16), std::make_pair(pos(2, 3), 16), std::make_pair(pos(4, 3), 16)}; Logger::merge(merged_blocks);
+        merged_blocks = {std::make_pair(pos(4, 3), 16), std::make_pair(pos(2, 2), 16), std::make_pair(pos(2, 3), 16), std::make_pair(pos(4, 1), 16)}; Logger::merge(merged_blocks);
+        merged_blocks = {std::make_pair(pos(4, 1), 16), std::make_pair(pos(4, 3), 16), std::make_pair(pos(2, 2), 16), std::make_pair(pos(2, 3), 16)}; Logger::merge(merged_blocks);
     });
 }
 
