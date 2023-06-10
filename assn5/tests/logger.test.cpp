@@ -140,13 +140,13 @@ int main(int argc, char **argv) {
     if (argc != 2) return 1; // invalid arguments (requires test name)
 
     std::vector<std::pair<std::string, fp>> tests {
-        std::make_pair("Logger::InitialTest", initial_test), 
-        std::make_pair("Logger::GenerateTest", generate_test), 
-        std::make_pair("Logger::MoveTest", move_test), 
-        std::make_pair("Logger::MergeTest", merge_test), 
-        std::make_pair("Logger::RestoreTest", restore_test), 
-        std::make_pair("Logger::ScoreTest", score_test),
-        std::make_pair("Logger::operator<<", print_test)
+        unittest("Logger::InitialTest", initial_test), 
+        unittest("Logger::GenerateTest", generate_test), 
+        unittest("Logger::MoveTest", move_test), 
+        unittest("Logger::MergeTest", merge_test), 
+        unittest("Logger::RestoreTest", restore_test), 
+        unittest("Logger::ScoreTest", score_test),
+        unittest("Logger::operator<<", print_test)
     };
     return test(argv[1], tests);
 }
