@@ -119,7 +119,21 @@ bool score_test() {
 }
 
 bool print_test() {
-    return true;
+    return cout_test({
+        "LEFT", 
+        "UP", 
+        "RIGHT", 
+        "DOWN", 
+        "1 2", 
+        "2 2"
+    }, []() {
+        std::cout << LEFT << std::endl;
+        std::cout << UP << std::endl;
+        std::cout << RIGHT << std::endl;
+        std::cout << DOWN << std::endl;
+        std::cout << pos(1, 2) << std::endl;
+        std::cout << pos(2, 2) << std::endl;
+    });
 }
 
 int main(int argc, char **argv) {
