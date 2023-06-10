@@ -41,8 +41,30 @@ bool move_test() {
 }
 
 bool merge_test() {
-    // TODO: To be implemented
-    return true;
+    return cout_test({
+        "MERGE 1 2 16",
+        "MERGE 3 4 1024",
+        "MERGE 2 2 2048",
+        "MERGE 2 2 16",
+        "MERGE 2 3 32",
+        "MERGE 2 2 16",
+        "MERGE 2 3 32",
+        "MERGE 2 2 16",
+        "MERGE 2 3 16",
+        "MERGE 2 2 16",
+        "MERGE 2 3 16", // done by here
+        // "MERGE 1 2 16",
+        // "MERGE 1 2 16",
+    }, []() {
+        std::vector<std::pair<pos, int>> merged_blocks;
+        merged_blocks = {std::make_pair(pos(1, 2), 16)}; Logger::merge(merged_blocks);
+        merged_blocks = {std::make_pair(pos(3, 4), 1024)}; Logger::merge(merged_blocks);
+        merged_blocks = {std::make_pair(pos(2, 2), 2048)}; Logger::merge(merged_blocks);
+        merged_blocks = {std::make_pair(pos(2, 2), 16), std::make_pair(pos(2, 3), 32)}; Logger::merge(merged_blocks);
+        merged_blocks = {std::make_pair(pos(2, 3), 32), std::make_pair(pos(2, 2), 16)}; Logger::merge(merged_blocks);
+        merged_blocks = {std::make_pair(pos(2, 2), 16), std::make_pair(pos(2, 3), 16)}; Logger::merge(merged_blocks);
+        merged_blocks = {std::make_pair(pos(2, 3), 16), std::make_pair(pos(2, 2), 16)}; Logger::merge(merged_blocks);
+    });
 }
 
 bool restore_test() {

@@ -32,7 +32,11 @@ bool cout_test(std::vector <std::string> answer_, std::function<void(void)> perf
 
     std::string answer__;
     for (const auto &s : answer_) answer__ += s + "\n";
-    return cout_.str() == answer__;
+    if (cout_.str() != answer__) {
+        std::cout << "ANSWER {\n" << answer__ << "\n} but GOT {\n" << cout_.str() << "\n}";
+        return false;
+    } else
+        return true;
 }
 
 int test(char *test_name, const std::vector<std::pair<std::string, fp>> &tests) {
