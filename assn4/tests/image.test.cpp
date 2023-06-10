@@ -166,10 +166,10 @@ int main(int argc, char **argv) {
     if (argc != 2) return 1; // invalid arguments (requires test name)
 
     std::vector<std::pair<std::string, fp>> tests {
-        std::make_pair("Image::Image", construct_test), 
-        std::make_pair("Image::operator=", assign_test), 
-        std::make_pair("Image::Conversion", conv_test), 
-        std::make_pair("Image::Rotate", rotation_test)
+        unittest("Image::Image", construct_test), 
+        unittest("Image::operator=", assign_test), 
+        unittest("Image::Conversion", conv_test), 
+        unittest("Image::Rotate", rotation_test)
     };
     return test(argv[1], tests);
 }

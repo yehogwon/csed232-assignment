@@ -264,14 +264,14 @@ int main(int argc, char **argv) {
     if (argc != 2) return 1; // invalid arguments (requires test name)
 
     std::vector<std::pair<std::string, fp>> tests {
-        std::make_pair("List::Add", add_test), 
-        std::make_pair("List::Remove", remove_test),
-        std::make_pair("List::In", in_test), 
-        std::make_pair("List::Sort", sort_test), 
-        std::make_pair("List::PivotTable", pivot_table_test),
-        std::make_pair("List::to_string", to_string_test), 
-        std::make_pair("List::max", max_test), 
-        std::make_pair("List::min", min_test), 
+        unittest("List::Add", add_test), 
+        unittest("List::Remove", remove_test),
+        unittest("List::In", in_test), 
+        unittest("List::Sort", sort_test), 
+        unittest("List::PivotTable", pivot_table_test),
+        unittest("List::to_string", to_string_test), 
+        unittest("List::max", max_test), 
+        unittest("List::min", min_test), 
     };
     return test(argv[1], tests);
 }

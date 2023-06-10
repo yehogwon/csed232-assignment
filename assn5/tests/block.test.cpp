@@ -69,12 +69,12 @@ int main(int argc, char **argv) {
     if (argc != 2) return 1; // invalid arguments (requires test name)
 
     std::vector<std::pair<std::string, fp>> tests {
-        std::make_pair("Block::ConstructorTest", constructor_test), 
-        std::make_pair("Block::ValueTest", value_test), 
-        std::make_pair("Block::ColorTest", color_test), 
-        std::make_pair("Block::MultiplicationTest", multiplication_test), 
-        std::make_pair("Block::AssignmentTest", assign_test), 
-        std::make_pair("Block::ComparisonTest", comparison_test)
+        unittest("Block::ConstructorTest", constructor_test), 
+        unittest("Block::ValueTest", value_test), 
+        unittest("Block::ColorTest", color_test), 
+        unittest("Block::MultiplicationTest", multiplication_test), 
+        unittest("Block::AssignmentTest", assign_test), 
+        unittest("Block::ComparisonTest", comparison_test)
     };
     return test(argv[1], tests);
 }
