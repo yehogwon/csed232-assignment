@@ -1,19 +1,43 @@
+#define _TEST_COUT__
 #include "test.h"
 #include "game/logger.hpp"
 
 bool initial_test() {
-    // TODO: To be implemented
-    return true;
+    return cout_test({
+        "INITIAL 1 2 3 4",
+        "INITIAL 1 2 1 2",
+        "INITIAL 0 0 0 0"
+    }, []() {
+        Logger::initial(pos(1, 2), pos(3, 4));
+        Logger::initial(pos(1, 2), pos(1, 2));
+        Logger::initial(pos(0, 0), pos(0, 0));
+    });
 }
 
 bool generate_test() {
-    // TODO: To be implemented
-    return true;
+    return cout_test({
+        "GENERATE 1 2 2",
+        "GENERATE 1 2 2",
+        "GENERATE 1 4 4"
+    }, []() {
+        Logger::generate(pos(1, 2), 2);
+        Logger::generate(pos(1, 2), 2);
+        Logger::generate(pos(1, 4), 4);
+    });
 }
 
 bool move_test() {
-    // TODO: To be implemented
-    return true;
+    return cout_test({
+        "LEFT", 
+        "UP", 
+        "RIGHT",
+        "DOWN"
+    }, []() {
+        Logger::move(LEFT);
+        Logger::move(UP);
+        Logger::move(RIGHT);
+        Logger::move(DOWN);
+    });
 }
 
 bool merge_test() {
@@ -22,12 +46,34 @@ bool merge_test() {
 }
 
 bool restore_test() {
-    // TODO: To be implemented
-    return true;
+    return cout_test({
+        "RESTORE 1", 
+        "RESTORE 2", 
+        "RESTORE 3",
+        "RESTORE 0"
+    }, []() {
+        Logger::restore(1);
+        Logger::restore(2);
+        Logger::restore(3);
+        Logger::restore(0);
+    });
 }
 
 bool score_test() {
-    // TODO: To be implemented
+    return cout_test({
+        "SCORE 72", 
+        "SCORE 39", 
+        "SCORE 10399",
+        "SCORE 20000048"
+    }, []() {
+        Logger::score(72);
+        Logger::score(39);
+        Logger::score(10399);
+        Logger::score(20000048);
+    });
+}
+
+bool print_test() {
     return true;
 }
 
@@ -40,7 +86,8 @@ int main(int argc, char **argv) {
         std::make_pair("Logger::MoveTest", move_test), 
         std::make_pair("Logger::MergeTest", merge_test), 
         std::make_pair("Logger::RestoreTest", restore_test), 
-        std::make_pair("Logger::ScoreTest", score_test)
+        std::make_pair("Logger::ScoreTest", score_test),
+        std::make_pair("Logger::operator<<", print_test)
     };
     return test(argv[1], tests);
 }
