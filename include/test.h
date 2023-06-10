@@ -3,11 +3,9 @@
 
 #include <string>
 #include <vector>
-
-#ifdef _TEST_COUT__
+#include <functional>
 #include <iostream>
-#define __IOSTREAM_INCLUDED__
-#endif
+#include <sstream>
 
 #define START_TEST_COUT__(BUFFER) \
     std::stringstream BUFFER; \
@@ -18,15 +16,23 @@
 
 using fp = bool (*)();
 
-#ifdef __IOSTREAM_INCLUDED__ // To use this test function, define TEST_COUT__ first
 void show_case(std::string res, std::string ans) {
     std::cout << "Got: '''\n" << res << "\n'''\nExpected: '''\n" << ans << "\n'''" << std::endl;
 }
-#endif
 
 template <typename T>
 std::string typecheck(T const& t) {
     return __PRETTY_FUNCTION__;
+}
+
+bool cout_test(std::vector <std::string> answer_, std::function<void(void)> perform_) {
+    START_TEST_COUT__(cout_)
+    perform_();
+    STOP_TEST_COUT__
+
+    std::string answer__;
+    for (const auto &s : answer_) answer__ += s + "\n";
+    return cout_.str() == answer__;
 }
 
 int test(char *test_name, const std::vector<std::pair<std::string, fp>> &tests) {
@@ -37,5 +43,6 @@ int test(char *test_name, const std::vector<std::pair<std::string, fp>> &tests) 
 
     return 1; // invalid test name
 }
+
 
 #endif // __TEST_H__
