@@ -15,6 +15,7 @@
     std::cout.rdbuf(sbuf__);
 
 using fp = bool (*)();
+using unittest = std::pair<std::string, fp>;
 
 void show_case(std::string res, std::string ans) {
     std::cout << "Got: '''\n" << res << "\n'''\nExpected: '''\n" << ans << "\n'''" << std::endl;
@@ -39,7 +40,7 @@ bool cout_test(std::vector <std::string> answer_, std::function<void(void)> perf
         return true;
 }
 
-int test(char *test_name, const std::vector<std::pair<std::string, fp>> &tests) {
+int test(char *test_name, const std::vector<unittest> &tests) {
     for (const auto &test : tests) {
         if (test.first != test_name) continue;
         return !test.second();
