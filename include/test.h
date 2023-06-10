@@ -3,11 +3,9 @@
 
 #include <string>
 #include <vector>
-
-#ifdef _TEST_COUT__
+#include <functional>
 #include <iostream>
-#define __IOSTREAM_INCLUDED__
-#endif
+#include <sstream>
 
 #define START_TEST_COUT__(BUFFER) \
     std::stringstream BUFFER; \
@@ -17,19 +15,32 @@
     std::cout.rdbuf(sbuf__);
 
 using fp = bool (*)();
+using unittest = std::pair<std::string, fp>;
 
-#ifdef __IOSTREAM_INCLUDED__ // To use this test function, define TEST_COUT__ first
 void show_case(std::string res, std::string ans) {
     std::cout << "Got: '''\n" << res << "\n'''\nExpected: '''\n" << ans << "\n'''" << std::endl;
 }
-#endif
 
 template <typename T>
 std::string typecheck(T const& t) {
     return __PRETTY_FUNCTION__;
 }
 
-int test(char *test_name, const std::vector<std::pair<std::string, fp>> &tests) {
+bool cout_test(std::vector <std::string> answer_, std::function<void(void)> perform_) {
+    START_TEST_COUT__(cout_)
+    perform_();
+    STOP_TEST_COUT__
+
+    std::string answer__;
+    for (const auto &s : answer_) answer__ += s + "\n";
+    if (cout_.str() != answer__) {
+        std::cout << "ANSWER {\n" << answer__ << "\n} but GOT {\n" << cout_.str() << "\n}";
+        return false;
+    } else
+        return true;
+}
+
+int test(char *test_name, const std::vector<unittest> &tests) {
     for (const auto &test : tests) {
         if (test.first != test_name) continue;
         return !test.second();
@@ -37,5 +48,6 @@ int test(char *test_name, const std::vector<std::pair<std::string, fp>> &tests) 
 
     return 1; // invalid test name
 }
+
 
 #endif // __TEST_H__

@@ -37,7 +37,7 @@ std::vector<std::pair<pos, int>> Game::create_block(int n, bool only_two) {
     for (int i = 0; i < SIZE; i++)
         for (int j = 0; j < SIZE; j++)
             if ((*board_)[i][j] == 0)
-                empty_blocks.push_back(std::make_pair(i, j)); // block with value 0 (empty) is pushed to empty_blocks (coord.)
+                empty_blocks.push_back(pos(i, j)); // block with value 0 (empty) is pushed to empty_blocks (coord.)
     if (empty_blocks.size() == 0) return {}; // cannot be created
     
     std::vector<std::pair<pos, int>> blocks; // added blocks
@@ -46,7 +46,7 @@ std::vector<std::pair<pos, int>> Game::create_block(int n, bool only_two) {
         empty_blocks.erase(empty_blocks.begin() + index); // erase the chosen coordinate from empty_blocks
         int value = std::rand() % 5 == 0 && !only_two ? 4 : 2; // 1/5 chance to be 4, otherwise 2
         int row = empty_blocks[index].first, col = empty_blocks[index].second; // get row and col
-        blocks.push_back(std::make_pair(std::make_pair(row + 1, col + 1), value)); // push to blocks (record those added ones)
+        blocks.push_back(std::make_pair(pos(row + 1, col + 1), value)); // push to blocks (record those added ones)
         (*board_)[row][col] = value; // set value to board
     }
     return blocks;

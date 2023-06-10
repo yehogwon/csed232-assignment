@@ -83,7 +83,7 @@ class Game {
         // if the cursor moves up <-> down, the row and column are transposed. in the case, it works exactly
         // the same as left <-> right, but transpose_ = true. 
         static pos get(int row_, int column_) {
-            return transpose_ ? std::make_pair(column_, row_) : std::make_pair(row_, column_);
+            return transpose_ ? pos(column_, row_) : pos(row_, column_);
         }
 
         // expand the range outwards i.e., 
@@ -176,7 +176,7 @@ bool Game::merge() {
                 (*board_)[next.first][next.second] = 0; // set the other block to zero (the block is removed after being merged)
                 is_merged = true; // set merged flag
                 score_ += (*board_)[cur.first][cur.second]; // update score
-                merged_blocks.push_back(std::make_pair(std::make_pair(cur.first + 1, cur.second + 1), (*board_)[cur.first][cur.second])); // record the merged block
+                merged_blocks.push_back(std::make_pair(pos(cur.first + 1, cur.second + 1), (*board_)[cur.first][cur.second])); // record the merged block
             }
         }
     }

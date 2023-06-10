@@ -56,6 +56,7 @@ logger_test(MoveTest)
 logger_test(MergeTest)
 logger_test(RestoreTest)
 logger_test(ScoreTest)
+logger_test(operator<<)
 
 block_test(ConstructorTest)
 block_test(ValueTest)

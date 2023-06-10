@@ -135,10 +135,10 @@ int main(int argc, char **argv) {
     if (argc != 2) return 1; // invalid arguments (requires test name)
 
     std::vector<std::pair<std::string, fp>> tests {
-        std::make_pair("Student::Student", input_test), 
-        std::make_pair("Student::operator<<", output_test), 
-        std::make_pair("Student::Equality", equal_test), 
-        std::make_pair("Student::LTGT", comp_test)
+        unittest("Student::Student", input_test), 
+        unittest("Student::operator<<", output_test), 
+        unittest("Student::Equality", equal_test), 
+        unittest("Student::LTGT", comp_test)
     };
     return test(argv[1], tests);
 }
