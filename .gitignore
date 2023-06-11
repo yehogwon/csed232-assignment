@@ -56,3 +56,5 @@ DartConfiguration.tcl
 /*.log
 .qt
 progress.txt
+
+assn5/src/assn5.pro
