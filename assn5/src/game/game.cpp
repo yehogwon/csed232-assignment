@@ -51,12 +51,6 @@ std::vector<std::pair<pos, int>> Game::create_block(int n, bool only_two) {
     return blocks;
 }
 
-void Game::clear_merged() {
-    for (int i = 0; i < SIZE; i++)
-        for (int j = 0; j < SIZE; j++)
-            (*board_)[i][j].merged = false; // set merged to false (clear merged flag)
-}
-
 const Board& Game::prev() const {
     return *prev_board_; // return reference to prev_board_
 }
@@ -71,17 +65,19 @@ int Game::score() const {
 
 bool Game::move(key key) {
     Board *t_prev_ = new Board(*board_); // store current board temporarily
+    int score_updated_ = -1;
     bool moved = false; // flag to check if it has moved
     Logger::move(key); // log that it has moved (at least, tried to move)
     // call move_<>() according to key (direction)
     switch (key) {
-        case UP: moved = move_<Up>(); break;
-        case DOWN: moved = move_<Down>(); break;
-        case LEFT: moved = move_<Left>(); break;
-        case RIGHT: moved = move_<Right>(); break;
+        case UP: score_updated_ = board_->move<Up>(); break;
+        case DOWN: score_updated_ = board_->move<Down>(); break;
+        case LEFT: score_updated_ = board_->move<Left>(); break;
+        case RIGHT: score_updated_ = board_->move<Right>(); break;
     }
-    clear_merged(); // clear merged flag
 
+    score_ += score_updated_; // update score
+    moved = score_updated_ >= 0;
     if (moved) { // if it has been moved
         // remove previous board and update it to the temporary board
         delete prev_board_;

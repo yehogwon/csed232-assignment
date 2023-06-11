@@ -6,6 +6,12 @@ Board::Board(const Board& board) {
     board_ = board.board_; // copy constructor; copy the 2d array of blocks
 }
 
+void Board::clear_merged() {
+    for (int i = 0; i < SIZE; i++)
+        for (int j = 0; j < SIZE; j++)
+            (board_)[i][j].merged = false; // set merged to false (clear merged flag)
+}
+
 Board& Board::operator=(const Board& board) {
     board_ = board.board_; // copy assignment operator; copy the 2d array of blocks
     return *this;
