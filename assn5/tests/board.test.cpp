@@ -28,12 +28,20 @@ bool index_test() {
     return true;
 }
 
+bool move_test() {
+    // TODO: To be implemented
+    return true;
+}
+
+// TODO: test pull(), merge() : they are private methods
+
 int main(int argc, char **argv) {
     if (argc != 2) return 1; // invalid arguments (requires test name)
 
     std::vector<std::pair<std::string, fp>> tests {
         unittest("Board::Constructor", constructor_test), 
-        unittest("Board::Indexing", index_test)
+        unittest("Board::Indexing", index_test), 
+        unittest("Board::Move", move_test)
     };
     return test(argv[1], tests);
 }
