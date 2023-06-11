@@ -7,8 +7,7 @@ Game::Game() : prev_board_(nullptr), board_(new Board()), score_(0), restore_cou
 }
 
 Game::~Game() {
-    if (prev_board_) // if prev_board_ is not nullptr
-        delete prev_board_;
+    delete prev_board_;
     delete board_;
 }
 
@@ -85,7 +84,7 @@ bool Game::move(key key) {
 
     if (moved) { // if it has been moved
         // remove previous board and update it to the temporary board
-        if (prev_board_) delete prev_board_;
+        delete prev_board_;
         prev_board_ = t_prev_;
         Logger::score(score_); // log score
         const std::vector<std::pair<pos, int>> &&blocks__ = create_block();
