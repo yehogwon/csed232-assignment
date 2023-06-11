@@ -29,7 +29,161 @@ bool index_test() {
 }
 
 bool move_test() {
-    // TODO: To be implemented
+    std::vector<std::pair<BoardArray, BoardArray>> test_cases = { // before, after
+        std::make_pair<BoardArray, BoardArray>({{ // LEFT
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(2), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}
+        }}, {{
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(2), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}
+        }}), 
+        std::make_pair<BoardArray, BoardArray>({{ // UP
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(4), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(8), Block(32)}}, 
+            {{Block(4), Block(0), Block(4), Block(0)}}
+        }}, {{
+            {{Block(4), Block(4), Block(8), Block(32)}}, 
+            {{Block(0), Block(0), Block(4), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}
+        }}), 
+        std::make_pair<BoardArray, BoardArray>({{ // RIGHT
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(4), Block(0), Block(0)}}, 
+            {{Block(2), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}
+        }}, {{
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(4)}}, 
+            {{Block(0), Block(0), Block(0), Block(2)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}
+        }}), 
+        std::make_pair<BoardArray, BoardArray>({{ // DOWN
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(8)}}, 
+            {{Block(0), Block(32), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}
+        }}, {{
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(32), Block(0), Block(8)}}
+        }}), 
+        std::make_pair<BoardArray, BoardArray>({{ // LEFT
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}
+        }}, {{
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}
+        }}), 
+        std::make_pair<BoardArray, BoardArray>({{ // UP
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}
+        }}, {{
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}
+        }}), 
+        std::make_pair<BoardArray, BoardArray>({{ // RIGHT
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}
+        }}, {{
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}
+        }}), 
+        std::make_pair<BoardArray, BoardArray>({{ // DOWN
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}
+        }}, {{
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}
+        }}), 
+        std::make_pair<BoardArray, BoardArray>({{ // LEFT
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}
+        }}, {{
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}
+        }}), 
+        std::make_pair<BoardArray, BoardArray>({{ // UP
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}
+        }}, {{
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}
+        }}), 
+        std::make_pair<BoardArray, BoardArray>({{ // RIGHT
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}
+        }}, {{
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}
+        }}), 
+        std::make_pair<BoardArray, BoardArray>({{ // DOWN
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}
+        }}, {{
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}, 
+            {{Block(0), Block(0), Block(0), Block(0)}}
+        }}), 
+    };
+
+    Board board_;
+    for (int i = 0; i < test_cases.size(); i++) {
+        BoardArray bef = test_cases[i].first, after = test_cases[i].second;
+        for (int j = 0; j < SIZE; j++)
+            for (int k = 0; k < SIZE; k++)
+                board_[j][k] = bef[j][k];
+        switch (i % 4) {
+            case 0: board_.move<Left>(); break;
+            case 1: board_.move<Up>(); break;
+            case 2: board_.move<Right>(); break;
+            case 3: board_.move<Down>(); break;
+        }
+        for (int j = 0; j < SIZE; j++)
+            for (int k = 0; k < SIZE; k++)
+                if (board_[j][k] != after[j][k]) {
+                    std::cout << "Failed at " << i << "th test case :: (row: " << j + 1 << ", col: " << k + 1 << ")" << std::endl;
+                    return false;
+                }
+    }
+    
     return true;
 }
 
