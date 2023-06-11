@@ -50,6 +50,8 @@ GameUi::GameUi(Game &game_) : game_(game_), block_(false) {
     refresh(); // initially refresh the board
 }
 
+GameUi::~GameUi() { }
+
 void GameUi::keyPressEvent(QKeyEvent *event) {
     switch (event->key()) {
         case Qt::Key_Left: move(LEFT); break;

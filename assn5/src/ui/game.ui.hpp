@@ -55,6 +55,7 @@ protected:
 
 public: 
     GameUi(Game &game_); // constructor of the class
+    ~GameUi(); // do nothing
 };
 
 #endif // __GAME__UI__

@@ -14,6 +14,7 @@ private:
 
 public: 
     BlockUi(Block &block_); // constructor; it gets block_ reference
+    ~BlockUi();
 
     void update(); // update the text and color of the block according to the block_ value
 };
