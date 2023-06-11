@@ -139,7 +139,6 @@ public:
     const std::array<Block, SIZE>& operator[](int i) const; // indexing; return the ith row of the current board (const version)
 };
 
-// TODO: use out_of_range function for iteration?
 template <typename T_>
 bool Game::pull() {
     bool is_shifted = false; // if any block is shifted

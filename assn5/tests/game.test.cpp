@@ -1,20 +1,20 @@
 #include "test.h"
 // #define private public // FIXME: it does not work for system header files
 #include "game/game.hpp"
-#undef private
+// #undef private
 
 bool create_test() {
-    // TODO: To be implemented
+    // TODO: First off access to the private members
     return true;
 }
 
 bool pull_test() {
-    // TODO: To be implemented
+    // TODO: First off access to the private members
     return true;
 }
 
 bool merge_test() {
-    // TODO: To be implemented
+    // TODO: First off access to the private members
     return true;
 }
 
