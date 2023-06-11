@@ -90,9 +90,11 @@ using Right = Direction<0, SIZE - 1, SIZE - 1, 0, false>; // row: 0 -> SIZE - 1,
 using Up = Direction<0, SIZE - 1, 0, SIZE - 1, true>; // row: 0 -> SIZE - 1, column: 0 -> SIZE - 1 (transposed)
 using Down = Direction<0, SIZE - 1, SIZE - 1, 0, true>; // row: 0 -> SIZE - 1, column: SIZE - 1 -> 0 (transposed)
 
+using BoardArray = std::array<std::array<Block, SIZE>, SIZE>; // std::array to store the blocks (4x4 = 16)
+
 class Board {
 private: 
-    std::array<std::array<Block, SIZE>, SIZE> board_; // std::array to store the blocks (4x4 = 16)
+    BoardArray board_; // array to store the blocks (4x4 = 16)
     
     template <typename T_>
     bool pull();
