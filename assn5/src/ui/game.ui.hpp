@@ -14,9 +14,9 @@
 #include <iostream>
 #include <array>
 
-#include "game.hpp"
+#include "../game/game.hpp"
 #include "block.ui.hpp"
-#include "status.hpp"
+#include "../game/status.hpp"
 
 // window size
 const int WINDOW_WIDTH = 1300;

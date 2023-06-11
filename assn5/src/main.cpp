@@ -1,8 +1,8 @@
 #include <QApplication>
 #include <iostream>
 #include <fstream>
-#include "logger.hpp"
-#include "game.ui.hpp"
+#include "game/logger.hpp"
+#include "ui/game.ui.hpp"
 
 int main(int argc, char **argv) {
     START_COUT(cout_) // start recording std::cout

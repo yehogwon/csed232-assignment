@@ -3,7 +3,7 @@
 
 #include <QLabel>
 #include <string>
-#include "block.hpp"
+#include "../game/block.hpp"
 
 const int BLOCK_WIDTH = 250;
 const int BLOCK_HEIGHT = 250;
