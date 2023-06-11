@@ -14,6 +14,8 @@ private:
 public: 
     Board(); // constructor without arguments (do nothing)
     Board(const Board& board); // copy constructor
+
+    Board& operator=(const Board& board); // copy assignment operator
     
     std::array<Block, SIZE>& operator[](int i); // overload operator[] to access the blocks (ith row)
     const std::array<Block, SIZE>& operator[](int i) const; // overload operator[] to access the blocks (ith row) (const version)
