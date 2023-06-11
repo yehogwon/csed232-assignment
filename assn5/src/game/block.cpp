@@ -4,6 +4,8 @@ Block::Block() : value_(0), merged(false) { }
 
 Block::Block(const Block &block) : value_(block.value_), merged(block.merged) { }
 
+Block::Block(int value__) : value_(value__), merged(false) { }
+
 int& Block::value() {
     return value_;
 }

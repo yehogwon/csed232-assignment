@@ -6,6 +6,8 @@ BlockUi::BlockUi(Block &block_) : block_(block_) {
     update(); // update the value & color of the block
 }
 
+BlockUi::~BlockUi() { }
+
 void BlockUi::update() {
     setText(block_.value() != 0 ? QString::number(block_.value()) : ""); // if the value is zero (empty), show nothing but otherwise, show the text
     setStyleSheet((std::string("QLabel { ") + "background: " + block_.color() + "; color: black; border-style: solid; font: 70pt; font: bold; }").c_str()); // set the background color of the block accordingly to the value

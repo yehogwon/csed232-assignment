@@ -3,7 +3,7 @@
 
 #include <QLabel>
 #include <string>
-#include "block.hpp"
+#include "../game/block.hpp"
 
 const int BLOCK_WIDTH = 250;
 const int BLOCK_HEIGHT = 250;
@@ -14,6 +14,7 @@ private:
 
 public: 
     BlockUi(Block &block_); // constructor; it gets block_ reference
+    ~BlockUi(); // do nothing
 
     void update(); // update the text and color of the block according to the block_ value
 };

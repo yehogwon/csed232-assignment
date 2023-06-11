@@ -11,6 +11,7 @@ public:
     
     Block(); // constructor without argument
     Block(const Block &block); // copy constructor
+    explicit Block(int value__); // constructor with value__
     
     int& value(); // get the value of the block
     int value() const; // get the value of the block (const)

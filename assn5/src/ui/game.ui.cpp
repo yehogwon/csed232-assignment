@@ -50,6 +50,8 @@ GameUi::GameUi(Game &game_) : game_(game_), block_(false) {
     refresh(); // initially refresh the board
 }
 
+GameUi::~GameUi() { }
+
 void GameUi::keyPressEvent(QKeyEvent *event) {
     switch (event->key()) {
         case Qt::Key_Left: move(LEFT); break;
@@ -86,14 +88,14 @@ void GameUi::win() {
 }
 
 void GameUi::restore() {
-    if (!game_.restorable()) { // cannot be restored (no previous state in the buffer)
-        QMessageBox::warning(this, "Restore", "There is no previously saved board in the buffer.");
-        return;
-    }
-
     int restore_remain = game_.restore_remain();
     if (restore_remain == 0) { // no more chance to restore
         QMessageBox::warning(this, "Restore", "No more chance to restore the board to its previous state.");
+        return;
+    }
+
+    if (!game_.restorable()) { // cannot be restored (no previous state in the buffer)
+        QMessageBox::warning(this, "Restore", "There is no previously saved board in the buffer.");
         return;
     }
 

@@ -7,19 +7,6 @@
 #include <sstream>
 #include "status.hpp"
 
-// #define for catching std::cout
-// log is printed to the console so we should catch it
-// this #define declares a std::stringstream and redirects std::cout to the stringstream
-#define START_COUT(BUFFER) \
-    std::stringstream BUFFER; \
-    std::streambuf *__sbuf__ = std::cout.rdbuf(); \
-    std::cout.rdbuf(BUFFER.rdbuf());
-
-// this #define restores std::cout
-// reconnect std::cout to the original buffer
-#define STOP_COUT \
-    std::cout.rdbuf(__sbuf__);
-
 std::ostream& operator<<(std::ostream &os, const key &k); // print key
 std::ostream& operator<<(std::ostream &os, const pos &p); // print position (coordinate)
 

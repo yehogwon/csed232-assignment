@@ -67,10 +67,8 @@ block_test(ComparisonTest)
 
 board_test(Constructor)
 board_test(Indexing)
+board_test(Move)
 
-game_test(Create)
-game_test(Pull)
-game_test(Merge)
 game_test(Move)
 game_test(PreviousBoard)
 game_test(WinOver)
