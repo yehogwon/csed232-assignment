@@ -24,6 +24,6 @@ jobs:
         cache-from: type=gha
         cache-to: type=gha,mode=max
     - name: Check Build Success
-      run: docker run -it --rm assn-ci test .successful && echo "BUILD DONE SUCCESSFULLY"
+      run: docker run --rm assn-ci test .successful && echo "BUILD DONE SUCCESSFULLY"
     - name: Test
-      run: docker run -it --rm assn-ci ctest
+      run: docker run --rm assn-ci ctest
