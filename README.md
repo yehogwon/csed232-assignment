@@ -1,8 +1,7 @@
 <div align="center">
   <h1>CSED232 on 2023 Spring</h1>
 
-[![build](https://github.com/yehogwon/csed232-assignment/actions/workflows/build.yml/badge.svg)](https://github.com/yehogwon/csed232-assignment/actions/workflows/build.yml)
-[![test](https://github.com/yehogwon/csed232-assignment/actions/workflows/test.yml/badge.svg)](https://github.com/yehogwon/csed232-assignment/actions/workflows/test.yml)
+[![Build and Test](https://github.com/yehogwon/csed232-assignment/actions/workflows/build.yml/badge.svg)](https://github.com/yehogwon/csed232-assignment/actions/workflows/cmake-ci.yml)
 
 </div>
 
