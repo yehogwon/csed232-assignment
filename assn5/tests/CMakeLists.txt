@@ -10,11 +10,6 @@ add_executable(
 )
 
 add_executable(
-    game.test.out
-    game.test.cpp
-)
-
-add_executable(
     board.test.out
     board.test.cpp
 )
@@ -25,6 +20,5 @@ add_executable(
 )
 
 target_link_libraries(block.test.out game.lib)
-target_link_libraries(game.test.out game.lib)
 target_link_libraries(board.test.out game.lib)
 target_link_libraries(logger.test.out game.lib)

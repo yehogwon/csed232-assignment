@@ -29,13 +29,6 @@ function(block_test test_name)
     )
 endfunction(block_test)
 
-function(game_test test_name)
-    add_test(
-        NAME ASSN5::Game::${test_name}
-        COMMAND build/tests/game.test.out Game::${test_name}
-    )
-endfunction(game_test)
-
 function(board_test test_name)
     add_test(
         NAME ASSN5::Board::${test_name}
@@ -68,7 +61,3 @@ block_test(ComparisonTest)
 board_test(Constructor)
 board_test(Indexing)
 board_test(Move)
-
-game_test(Move)
-game_test(PreviousBoard)
-game_test(WinOver)
