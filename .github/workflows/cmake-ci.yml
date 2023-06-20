@@ -15,7 +15,7 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
     - name: Docker Image Build
-      run: docker buildx build --platform linux/amd64 -t assn-ci:github --cache-to type=gha --cache-from type=gha .
+      run: docker buildx build --platform linux/amd64 -t assn-ci:github --cache-to type=gha --cache-from type=gha --push .
     - name: Check Build Success
       run: docker run --rm assn-ci:github test .successful && echo "BUILD DONE SUCCESSFULLY"
     - name: Test
