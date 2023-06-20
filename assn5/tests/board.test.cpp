@@ -187,8 +187,6 @@ bool move_test() {
     return true;
 }
 
-// TODO: test pull(), merge() : they are private methods
-
 int main(int argc, char **argv) {
     if (argc != 2) return 1; // invalid arguments (requires test name)
 
