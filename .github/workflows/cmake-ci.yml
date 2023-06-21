@@ -27,8 +27,8 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: localhost:5000/assn-ci:latest
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
+        cache-from: type=registry,ref=localhost:5000/assn-ci:latest
+        cache-to: type=registry,ref=localhost:5000/assn-ci:latest,mode=max
     - name: Check Build Success
       uses: addnab/docker-run-action@v3
       with: 
