@@ -20,14 +20,16 @@ jobs:
         context: .
         file: ./Dockerfile
         push: false
-        tags: assn-ci:latest
+        tags: reg/assn-ci:latest
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
     - name: Check Build Success
       uses: addnab/docker-run-action@v3
       with: 
-        image: assn-ci:latest
+        image: reg/assn-ci:latest
         run: test .successful && echo "BUILD DONE SUCCESSFULLY"
     - name: Test
       uses: addnab/docker-run-action@v3
       with: 
-        image: assn-ci:latest
+        image: reg/assn-ci:latest
         run: ctest
