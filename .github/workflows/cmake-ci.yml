@@ -22,9 +22,7 @@ jobs:
         tags: assn-ci:latest
         cache-from: type=gha
         cache-to: type=gha,mode=max
-    - name: Show Image List on Docker
-      run: docker image ls
     - name: Check Build Success
       run: docker run --rm assn-ci:latest test .successful && echo "BUILD DONE SUCCESSFULLY"
-    - name: Test
+    - name: Perform CTest
       run: docker run --rm assn-ci:latest ctest
