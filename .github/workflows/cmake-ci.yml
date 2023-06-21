@@ -18,14 +18,13 @@ jobs:
       with: 
         context: .
         file: ./Dockerfile
-        # push: true
         load: true
         tags: assn-ci:latest
         cache-from: type=gha
         cache-to: type=gha,mode=max
     - name: Show Image List on Docker
       run: docker image ls
-    # # - name: Check Build Success
-    # #   run: docker run --rm localhost:5000/assn-ci:latest test .successful && echo "BUILD DONE SUCCESSFULLY"
-    # # - name: Test
-    #   run: docker run --rm localhost:5000/assn-ci:latest ctest
+    - name: Check Build Success
+      run: docker run --rm assn-ci:latest test .successful && echo "BUILD DONE SUCCESSFULLY"
+    - name: Test
+      run: docker run --rm assn-ci:latest ctest
